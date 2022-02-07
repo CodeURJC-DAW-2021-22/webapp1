@@ -1,22 +1,13 @@
 # Advice.me 
 
 ## Members 
-| Name | e-mail | GitHub username |
-| --- | --- | --- |
-
-| María Esteban Sánchez | m.esteban.2019@alumnos.urjc.es | Maria-ES | 
-| --- | --- | --- |
-
-| Miguel Regato Herrero | m.regato.2019@alumnos.urjc.es | MiguelRegato | 
-| --- | --- | --- |
-
-| Juan Carlos Moreno García | jc.moreno.2019@alumnos.urjc.es | JuanCarlos-URJC |  
-| --- | --- | --- |
-
-| Héctor Fernández Martínez | h.fernandezm.2019@alumnos.urjc.es | HectorURJC | 
-| --- | --- | --- |
-
-| Vanesa Reina Hernández | v.reina.2019@alumnos.urjc.es | vanesa-rh | 
+| Name                      | e-mail                            | GitHub username |
+| ------------------------- | --------------------------------- | --------------- |
+| María Esteban Sánchez     | m.esteban.2019@alumnos.urjc.es    | Maria-ES        | 
+| Miguel Regato Herrero     | m.regato.2019@alumnos.urjc.es     | MiguelRegato    | 
+| Juan Carlos Moreno García | jc.moreno.2019@alumnos.urjc.es    | JuanCarlos-URJC |  
+| Héctor Fernández Martínez | h.fernandezm.2019@alumnos.urjc.es | HectorURJC      | 
+| Vanesa Reina Hernández    | v.reina.2019@alumnos.urjc.es      | vanesa-rh       | 
 
  
 
