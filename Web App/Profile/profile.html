@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styleProfile.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="Ratings/jquery.rateyo.min.css"/>
+        <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+        <title>account</title>
+    </head>
+    <body>
+        <header>
+            <div class="AdviceMeLogo">
+                <a id="logo" href="../Menu Registered/menuRegistered.html#home"><img src="../Images/AdviceMe Logo.png" alt="Logo Image"></a>
+            </div>      
+            <nav id="navPrincipal" class="main-nav">                
+                <a href="../Menu Registered/menuRegistered.html#home">Home</a>
+                <a href="../Menu Registered/menuRegistered.html#action">Action</a>
+                <a href="../Menu Registered/menuRegistered.html#adventure">Adventure</a>
+                <a href="../Menu Registered/menuRegistered.html#comedy">Comedy</a>
+                <a href="../Menu Registered/menuRegistered.html#drama">Drama</a>
+                <a href="../Menu Registered/menuRegistered.html#horror">Horror</a>
+                <a href="../Menu Registered/menuRegistered.html#scienceFiction">Science Fiction</a>  
+            </nav>
+            <nav class="sub-nav">
+                <input type="text" placeholder="Search...">
+                <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
+                <a href="profile.html">Account</a>        
+            </nav>      
+        </header>
+
+        <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                            <div class="file btn btn-lg btn-primary">
+                                    Change Photo
+                                <input type="file" name="file"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                            <h1>Profile</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="profile-edit-btn"><a href="../Edit Profile/editProfile.html">Edit Profile</a></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <a href="../adviceMe.html">Sing Out</a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row seccion">
+                                    <label>About</label>
+                                </div>
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>User Id</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Mia123</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Mia</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>mia@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <div class="row seccion">
+                            <p>Comments</p>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <div class="col comment">
+                                    <p>The Mitchel vs the machines</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p>This film is awesome</p>
+                                    <div id="rateYo"></div><p></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Comment"/>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn"><img src="delete.png" width="20px"/></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+
+        <script type="text/javascript" src="Ratings/jquery.min.js"></script>
+        <script type="text/javascript" src="Ratings/jquery.rateyo.js"></script>
+        <script src="Ratings/rating.js"></script>
+    </body>
+</html>

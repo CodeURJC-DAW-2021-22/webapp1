@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Advice.me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="../chart.js"></script>
+  <link rel="stylesheet" href="../styles.css" type="text/css">
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <header>
+      <div class="AdviceMeLogo">
+        <a id="logo" href="#home"><img src="../Images/AdviceMe Logo.png" alt="Logo Image"></a>
+      </div>      
+      <nav class="main-nav">                
+        <a href="#home">Home</a>
+        <a href="#action">Action</a>
+        <a href="#adventure">Adventure</a>
+        <a href="#comedy">Comedy</a>
+        <a href="#drama">Drama</a>
+        <a href="#horror">Horror</a>
+        <a href="#scienceFiction">Science Fiction</a>  
+      </nav>
+      <nav class="sub-nav">
+        <input type="text" placeholder="Search...">
+        <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
+        <a href="../Profile/profile.html">Account</a>        
+      </nav>      
+    </header>
+    <!-- END OF HEADER -->
+    
+    <!-- MAIN CONTAINER -->
+    <section class="main-container" >
+      <h1 id="home">Best Movie Genres</h1>
+      <div id="piechart"></div>
+
+      <h1 id="recommendations">Recommendations for you</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film1.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film2.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film3.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film4.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film5.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film6.jpg" alt=""></a>
+      </div>
+      
+      <h1 id="trending">Trending Now</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film7.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film8.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film9.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film10.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film11.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film12.jpg" alt=""></a>                  
+      </div>
+      
+      <h1 id="action">Action</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film1.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film2.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film3.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film4.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film5.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film6.jpg" alt=""></a>            
+      </div>
+
+      <h1 id="adventure">Adventure</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film7.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film8.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film9.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film10.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film11.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film12.jpg" alt=""></a>              
+      </div>
+
+      <h1 id="comedy">Comedy</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film1.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film2.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film3.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film4.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film5.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film6.jpg" alt=""></a>                
+      </div>
+
+      <h1 id="drama">Drama</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film7.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film8.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film9.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film10.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film11.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film12.jpg" alt=""></a>                 
+      </div>
+
+      <h1 id="horror">Horror</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film1.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film2.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film3.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film4.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film5.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film6.jpg" alt=""></a>                
+      </div>
+
+      <h1 id="scienceFiction">Science Fiction</h1>
+      <div class="box">
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film7.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film8.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film9.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film10.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film11.jpg" alt=""></a>
+        <a href="../Film Registered/filmRegistered.html"><img src="../Films Pictures/film12.jpg" alt=""></a>                
+      </div>
+    </section> 
+    <!-- END OF MAIN CONTAINER -->
+  </div>
+</body>
+</html>

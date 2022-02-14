@@ -1,0 +1,502 @@
+:root {
+  --dark: grey;
+  --light:  black;
+}
+
+/* line 1, src/assets/scss/theme.scss */
+body {
+  padding-top: 70px; }
+
+/* line 2, src/assets/scss/theme.scss */
+img {
+  max-width: 100%; }
+
+/* line 5, src/assets/scss/theme.scss */
+a, .a:hover {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s; }
+
+/* line 8, src/assets/scss/theme.scss */
+.container-fluid {
+  background: white;
+  width: 94%;
+  max-width: 94%; }
+
+.stars {
+  z-index: 0;
+}
+
+.AdviceMeLogo {
+  grid-area: nt;
+  object-fit: cover;
+  width: 100px;
+  max-height: 100%;
+  
+  padding-left: 30px;
+  padding-top: 0px;  
+}
+
+.AdviceMeLogo img {  
+  height: 70px;
+  width: 130px;    
+}
+
+.form 
+{
+    margin-top: 5%;
+    border-radius: 30px;
+    box-shadow: 0 0 2em #e6e9f9;
+}
+
+.form-group
+{
+    margin-top: 2%;
+}
+
+.button{
+  padding: 1em;
+  background: #3e4684;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer; }
+
+#logo {
+  color: #E50914;  
+  margin: 0; 
+  padding: 0; 
+}
+
+.box {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
+
+.box a {
+  transition: transform .3s;  
+}
+
+.box a:hover {
+  transition: transform .3s;
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);  
+  transform: scale(1.2);
+}
+
+.box img {
+  border-radius: 2px;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 13, src/assets/scss/theme.scss */
+.border-round-0 {
+  border-radius: 0; }
+
+/* line 16, src/assets/scss/theme.scss */
+.mt-neg100 {
+  margin-top: -100px; }
+
+/* line 19, src/assets/scss/theme.scss */
+.min-50vh {
+  min-height: 50vh; }
+
+/* line 22, src/assets/scss/theme.scss */
+.dropdown-header {
+  font-size: 1.5rem; }
+
+/* line 25, src/assets/scss/theme.scss */
+.fixed-top {
+  border-bottom: 1px solid #f1f1f1; }
+
+/* line 28, src/assets/scss/theme.scss */
+footer.footer {
+  border-top: 1px solid #f1f1f1; }
+
+/* line 31, src/assets/scss/theme.scss */
+.nav-link, .dropdown-item {
+  font-weight: 700; }
+
+/* line 32, src/assets/scss/theme.scss */
+.navbar {
+  padding: 0.5rem 2rem; }
+
+/* line 34, src/assets/scss/theme.scss */
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+  background-color: #008CBA; }
+
+/* line 46, src/assets/scss/theme.scss */
+.card {
+  border: 0;
+  border-radius: 30px;
+  box-shadow: 0 0 2em #e6e9f9; }
+
+/* line 47, src/assets/scss/theme.scss */
+.card-pin:hover .overlay {
+  opacity: .5;
+  border: 5px solid #f3f3f3;
+  -webkit-transition: ease .2s;
+  transition: ease .2s;
+  background-color: #000000;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in; }
+
+/* line 55, src/assets/scss/theme.scss */
+.more {
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-transform: uppercase;
+  -webkit-transform: translate(-20%, -20%);
+          transform: translate(-20%, -20%);
+  -ms-transform: translate(-50%, -50%); }
+
+/* line 66, src/assets/scss/theme.scss */
+.card-pin:hover .card-title {
+  color: #ffffff;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 1.2em; }
+
+/* line 73, src/assets/scss/theme.scss */
+.card-pin:hover .more a {
+  text-decoration: none;
+  color: #ffffff; }
+
+/* line 78, src/assets/scss/theme.scss */
+.card-pin:hover .download a {
+  text-decoration: none;
+  color: #ffffff; }
+
+/* line 83, src/assets/scss/theme.scss */
+.social {
+  position: relative;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%); }
+
+/* line 88, src/assets/scss/theme.scss */
+.social .fa {
+  margin: 0 3px; }
+
+* {
+  box-sizing: border-box;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Columns side by side */
+.column {
+  margin: auto;
+  float: right;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+/* MEDIA QUERIES */
+
+@media(max-width: 900px) {
+
+  header {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "nt nt nt  .  .  . sb . . . "
+    "mn mn mn mn mn mn  mn mn mn mn";
+  }
+
+  .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+  }
+}
+
+@media(max-width: 700px) {
+
+  header {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "nt nt nt  .  .  . sb . . . "
+    "mn mn mn mn mn mn  mn mn mn mn";
+  }
+
+  .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  } 
+}
+
+@media(max-width: 500px) {
+
+  .wrapper {
+    font-size: 15px;
+  }
+
+  header {
+    margin: 0;
+    padding: 20px 0 0 0;
+    position: static;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: 
+    "nt"    
+    "mn"
+    "sb";
+    text-align: center;
+  }
+
+  .AdviceMeLogo {
+    max-width: 100%;
+    margin: auto;
+    padding-right: 20px;
+  }
+
+  .main-nav {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;    
+  }
+
+  .box a:hover {
+    transition: transform .3s;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);  
+    transform: scale(1.1);
+  }
+}
+/* HEADER */
+header {
+  padding: 20px 20px 0 20px;
+  position: fixed;
+  top: 0;
+  display: grid;  
+  grid-gap:5px;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-areas: 
+   "nt mn mn sb . . . "; 
+  background-color: white;
+  width: 100%;
+  margin-bottom: 0px;  
+  z-index: 1;
+}
+
+.AdviceMeLogo {
+  grid-area: nt;
+  object-fit: cover;
+  width: 100px;
+  max-height: 100%;
+  margin-bottom: 6px;
+  padding-left: 30px;
+  padding-top: 0px;  
+}
+
+.AdviceMeLogo img {  
+  height: 58px;
+  width: 100px;    
+}
+
+#logo {
+  color: #E50914;  
+  margin: 0; 
+  padding: 0; 
+}
+
+.main-nav {
+  grid-area: mn;
+  padding: 0 30px 0 20px;
+  text-align: center;
+}
+
+.main-nav a {
+  color: var(--light);
+  text-decoration: none;
+  margin: 5px;  
+}
+
+.main-nav a:hover {
+  color: var(--dark);
+}
+
+.sub-nav {
+  grid-area: sb;
+  padding: 0 40px 0 40px;
+}
+
+.sub-nav a {
+  color: var(--light);
+  text-decoration: none;
+  margin: 5px;
+}
+
+.sub-nav a:hover {
+  color: var(--dark);
+}
+
+/* MEDIA QUERIES */
+
+@media(max-width: 900px) {
+
+  header {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "nt nt nt  .  .  . sb . . . "
+    "mn mn mn mn mn mn  mn mn mn mn";
+  }
+
+}
+
+@media(max-width: 700px) {
+
+  header {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "nt nt nt  .  .  . sb . . . "
+    "mn mn mn mn mn mn  mn mn mn mn";
+  }
+
+}
+
+@media(max-width: 500px) {
+
+  .wrapper {
+    font-size: 15px;
+  }
+
+  header {
+    margin: 0;
+    padding: 20px 0 0 0;
+    position: static;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: 
+    "nt"    
+    "mn"
+    "sb";
+    text-align: center;
+  }
+
+  .AdviceMeLogo {
+    max-width: 100%;
+    margin: auto;
+    padding-right: 20px;
+  }
+
+  .main-nav {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+  }
+
+}
