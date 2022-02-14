@@ -79,7 +79,7 @@ Search by filter and sort by ratings from highest to lowest. Furthermore, the ap
 **Initial menu:**
 First screen of the webpage that contains a list of films splitted by genre and a pie chart that informs the most famous film genres of Advice.me.
 
-![avatar](/Images phase 1/AdviseMe.png)
+![avatar](Images phase 1/AdviseMe.png)
 
 **Login:**
 Screen that will allow registered users to log in giving their email and password. All users have access to this screen even though only registered users will be able to end this process.
