@@ -75,4 +75,4 @@ Search by filter and sort by ratings from highest to lowest. Furthermore, the ap
 
 ## Web pages layout using HTML and CSS
 
-![avatar](C:\Users\Usuario\OneDrive - Universidad Rey Juan Carlos\Mis Archivos\Documentos\Universidad\3-Tercer Año (2021-2022)\Desarrollo de Aplicaciones Web\Maquetación Páginas\AdviseMe.png)
+![avatar](/Maquetación Páginas/AdviseMe.png)
