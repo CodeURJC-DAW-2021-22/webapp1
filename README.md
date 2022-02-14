@@ -114,4 +114,4 @@ Screen that will allow admins to add films to the database.
 Screen that will display information, images and assessments about the film. Admins can eliminate the film and its assesments.
 
 ## Navigation Diagram
-
+![diagram](Diagrama.png)
