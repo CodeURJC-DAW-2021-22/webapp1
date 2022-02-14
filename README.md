@@ -84,55 +84,55 @@ First screen of the webpage that contains a list of films splitted by genre and 
 **Login:**
 Screen that will allow registered users to log in giving their email and password. All users have access to this screen even though only registered users will be able to end this process.
 
-![avatar](Login.png)
+![avatar](ImagesPhase1/Login.png)
 
 **Sign up:**
 Screen that will allow new users to sing up in Advice.me and access exclusive content and services.
 
-![avatar](Register.png)
+![avatar](ImagesPhase1/Register.png)
 
 **Film description:**
 Screen that will display information, images and assessments about the film. Also, at the bottom of the page related films will appear.
 
-![avatar](FilmUnregistered.png)
+![avatar](ImagesPhase1/FilmUnregistered.png)
 
 ### Registered users
 **Initial menu:**
 First screen of the webpage that contains a list of films splitted by genre and a circle graph that informs the most famous film genres of Advice.me. Moreover, this screen will have personaliced recomendations for the user and access to their account.
 
-![avatar](MenuRegistered.png)
+![avatar](ImagesPhase1/MenuRegistered.png)
 
 **Profile:**
 Screen that will display the users information and profile picture. Also they will be able to access the modification profile information and change their profile picture.
 
-![avatar](Profile.png)
+![avatar](ImagesPhase1/Profile.png)
 
 **Modify profile:**
 Screen that will allow the user to  modify their information but not their profile picture.
 
-![avatar](EditProfile.png)
+![avatar](ImagesPhase1/EditProfile.png)
 
 **Film description:**
 Screen that will display information, images and assessments about the film. Also, at the bottom of the page related films will appear. Registered users can add an assessment to the film if they did not do it before.
 
-![avatar](FilmRegistered.png)
+![avatar](ImagesPhase1/FilmRegistered.png)
 
 ### Admin
 **Initial menu:**
 First screen of the webpage that contains a list of films splitted by genre and a circle graph that informs the most famous film genres of Advice.me. Admins will have access to the "Post film" button.
 
-![avatar](MenuAdmin.png)
+![avatar](ImagesPhase1/MenuAdmin.png)
 
 **Post film:**
 Screen that will allow admins to add films to the database.
 
-![avatar](PostFilm.png)
+![avatar](ImagesPhase1/PostFilm.png)
 
 **Film description:**
 Screen that will display information, images and assessments about the film. Admins can eliminate the film and its assesments.
 
-![avatar](FilmAdmin.png)
+![avatar](ImagesPhase1/FilmAdmin.png)
 
 ## Navigation Diagram
 
-![diagram](Diagrama.png)
+![diagram](ImagesPhase1/Diagrama.png)
