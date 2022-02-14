@@ -75,4 +75,43 @@ Search by filter and sort by ratings from highest to lowest. Furthermore, the ap
 
 ## Web pages layout using HTML and CSS
 
+### Unregistered users
+**Initial menu:**
+First screen of the webpage that contains a list of films splitted by genre and a pie chart that informs the most famous film genres of Advice.me.
+
 ![avatar](AdviseMe.png)
+
+**Login:**
+Screen that will allow registered users to log in giving their email and password. All users have access to this screen even though only registered users will be able to end this process.
+
+**Sing up:**
+Screen that will allow new users to sing up in Advice.me and access exclusive content and services.
+
+**Film description:**
+Screen that will display information, images and assessments about the film. Also, at the bottom of the page related films will appear.
+
+### Registered users
+**Initial menu:**
+First screen of the webpage that contains a list of films splitted by genre and a circle graph that informs the most famous film genres of Advice.me. Moreover, this screen will have personaliced recomendations for the user and access to their account.
+
+**Profile:**
+Screen that will display the users information and profile picture. Also they will be able to access the modification profile information and change their profile picture.
+
+**Modify profile:**
+Screen that will allow the user to  modify their information but not their profile picture.
+
+**Film description:**
+Screen that will display information, images and assessments about the film. Also, at the bottom of the page related films will appear. Registered users can add an assessment to the film if they did not do it before.
+
+### Admin
+**Initial menu:**
+First screen of the webpage that contains a list of films splitted by genre and a circle graph that informs the most famous film genres of Advice.me. Admins will have access to the "Post film" button.
+
+**Post film:**
+Screen that will allow admins to add films to the database.
+
+**Film description:**
+Screen that will display information, images and assessments about the film. Admins can eliminate the film and its assesments.
+
+## Navigation Diagram
+
