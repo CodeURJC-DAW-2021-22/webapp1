@@ -1,5 +1,7 @@
 # Advice.me 
 
+# Phase 0
+
 ## Members 
 | Name                      | e-mail                            | GitHub username |
 | ------------------------- | --------------------------------- | --------------- |
@@ -19,7 +21,7 @@
 
 * **Registered**: They will be able to receive recommendations and assess/rate films of the web page.  
 
-* **Admin**: They will be able to add/delete films, delete assessments and manage users of the web page. 
+* **Admin**: They will be able to add/delete films and delete assessments of the web page. 
 
  
 
@@ -68,3 +70,9 @@ The web page will send emails to users notifying them about new recommendations.
 ## Algorithm
 
 Search by filter and sort by ratings from highest to lowest. Furthermore, the application will show films suggested based on user preferences. 
+
+# Phase 1
+
+## Web pages layout using HTML and CSS
+
+![avatar](C:\Users\Usuario\OneDrive - Universidad Rey Juan Carlos\Mis Archivos\Documentos\Universidad\3-Tercer Año (2021-2022)\Desarrollo de Aplicaciones Web\Maquetación Páginas\AdviseMe.png)
