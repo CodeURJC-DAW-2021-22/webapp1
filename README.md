@@ -75,4 +75,4 @@ Search by filter and sort by ratings from highest to lowest. Furthermore, the ap
 
 ## Web pages layout using HTML and CSS
 
-![avatar](/Maquetación Páginas/AdviseMe.png)
+![avatar](AdviseMe.png)
