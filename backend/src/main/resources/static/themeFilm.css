@@ -20,6 +20,25 @@ a, .a:hover {
   z-index: 0;
 }
 
+.button{
+  padding: 1em;
+  background: #3e4684;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer; 
+  margin: auto;}
+
+.button1{
+  padding: 1em;
+  background: #3e4684;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer; }
 
 .button2{
   padding: 1em;
@@ -30,11 +49,10 @@ a, .a:hover {
   font-weight: 600;
   cursor: pointer; }
 
-
-/* line 8, src/assets/scss/theme.scss */
 .container-fluid {
   background: white;
   width: 94%;
+  margin: 0px auto;
   max-width: 94%; }
 
 .AdviceMeLogo {
@@ -93,52 +111,6 @@ a, .a:hover {
   width: 100%;
 }
 
-/* line 13, src/assets/scss/theme.scss */
-.border-round-0 {
-  border-radius: 0; }
-
-/* line 16, src/assets/scss/theme.scss */
-.mt-neg100 {
-  margin-top: -100px; }
-
-/* line 19, src/assets/scss/theme.scss */
-.min-50vh {
-  min-height: 50vh; }
-
-/* line 22, src/assets/scss/theme.scss */
-.dropdown-header {
-  font-size: 1.5rem; }
-
-/* line 25, src/assets/scss/theme.scss */
-.fixed-top {
-  border-bottom: 1px solid #f1f1f1; }
-
-/* line 28, src/assets/scss/theme.scss */
-footer.footer {
-  border-top: 1px solid #f1f1f1; }
-
-/* line 31, src/assets/scss/theme.scss */
-.nav-link, .dropdown-item {
-  font-weight: 700; }
-
-/* line 32, src/assets/scss/theme.scss */
-.navbar {
-  padding: 0.5rem 2rem; }
-
-/* line 34, src/assets/scss/theme.scss */
-.overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  -webkit-transition: .2s ease;
-  transition: .2s ease;
-  background-color: #008CBA; }
-
 /* line 46, src/assets/scss/theme.scss */
 .card {
   border: 0;
@@ -154,18 +126,6 @@ footer.footer {
   background-color: #000000;
   cursor: -webkit-zoom-in;
   cursor: zoom-in; }
-
-/* line 55, src/assets/scss/theme.scss */
-.more {
-  color: white;
-  font-size: 14px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  text-transform: uppercase;
-  -webkit-transform: translate(-20%, -20%);
-          transform: translate(-20%, -20%);
-  -ms-transform: translate(-50%, -50%); }
 
 /* line 66, src/assets/scss/theme.scss */
 .card-pin:hover .card-title {
@@ -183,16 +143,6 @@ footer.footer {
 .card-pin:hover .download a {
   text-decoration: none;
   color: #ffffff; }
-
-/* line 83, src/assets/scss/theme.scss */
-.social {
-  position: relative;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%); }
-
-/* line 88, src/assets/scss/theme.scss */
-.social .fa {
-  margin: 0 3px; }
 
 * {
   box-sizing: border-box;
@@ -223,6 +173,7 @@ footer.footer {
   padding: 16px;
   margin-top: -50px;
   color: white;
+  background-color: rgb(0, 0, 0, 0.5);
   font-weight: bold;
   font-size: 20px;
   border-radius: 0 3px 3px 0;
@@ -233,13 +184,17 @@ footer.footer {
 /* Position the "next button" to the right */
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+}
+
+/* Position the "prev button" to the left */
+.prev {
+	left: 0;
 }
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0);
 }
 
 /* Number text (1/3 etc) */
