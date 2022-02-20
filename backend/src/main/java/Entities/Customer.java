@@ -53,6 +53,10 @@ public class Customer{
 		return comments;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	
 	// Setters
 	public void setName(String name) {
 		this.name = name;
