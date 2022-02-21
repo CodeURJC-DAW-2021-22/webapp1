@@ -44,7 +44,14 @@
           
       <h1 id="home">Best Movie Genres</h1>
       <div id="piechart"></div>
-
+      
+      <!-- Peliculas de BBDD puestas feo -->
+      <ul>
+      	{{#films}}
+      		<li><a href="/filmUnregistered/{{id}}">{{title}}</a></lli>
+      	{{/films}}
+      </ul>
+      
       <h1 id="recommendations">Recommendations for you</h1>
       <div class="box">
         <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>

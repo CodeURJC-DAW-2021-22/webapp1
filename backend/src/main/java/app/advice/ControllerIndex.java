@@ -25,14 +25,9 @@ public class ControllerIndex {
 	
 	@PostConstruct
 	public void init() {
-
+		this.films.save(new Film("Lo posible", "04/01/2001", 4, Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
 		this.films.save(new Film("Lo imposible", "04/01/2001", 4, Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
 	}
-
-	@GetMapping("/film/{id}")
-	public Film getFilm(@PathVariable long id) {
-		return films.findById(id).orElseThrow();
-	}           
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
@@ -78,18 +73,24 @@ public class ControllerIndex {
 		return "editProfile";
 	}
 	
-	@GetMapping("/filmRegistered")
-	public String filmRegistered(Model model) {
+	@GetMapping("/filmUnregistered/{id}")
+	public String filmUnregistered(Model model, @PathVariable long id) {
+		Film film = films.findById(id).orElseThrow();
+		model.addAttribute("film", film);
+		return "filmUnregistered";
+	}     
+	
+	@GetMapping("/filmRegistered/{id}")
+	public String filmRegistered(Model model, @PathVariable long id) {
+		Film film = films.findById(id).orElseThrow();
+		model.addAttribute("film", film);
 		return "filmRegistered";
 	}
 	
-	@GetMapping("/filmUnregistered")
-	public String filmUnregistered(Model model) {
-		return "filmUnregistered";
-	}
-	
-	@GetMapping("/filmAdmin")
-	public String filmAdmin(Model model) {
+	@GetMapping("/filmAdmin/{id}")
+	public String filmAdmin(Model model, @PathVariable long id) {
+		Film film = films.findById(id).orElseThrow();
+		model.addAttribute("film", film);
 		return "filmAdmin";
 	}
 	

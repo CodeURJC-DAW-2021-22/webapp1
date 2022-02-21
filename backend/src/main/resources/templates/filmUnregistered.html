@@ -7,10 +7,10 @@
     <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="appFilm.css">
-    <link rel="stylesheet" href="themeFilm.css">
-    <link rel="stylesheet" href="themeFilm.js">
-    <link rel="stylesheet" href="jquery.rateyo.css">
+    <link rel="stylesheet" href="../appFilm.css">
+    <link rel="stylesheet" href="../themeFilm.css">
+    <link rel="stylesheet" href="../themeFilm.js">
+    <link rel="stylesheet" href="../jquery.rateyo.css">
     <title>film</title>
 </head>
 <body>
@@ -78,16 +78,18 @@
           </div>
           <div class="col">
             <div class="card card-body">
-               <h1 class="card-title display-4"> The Mitchel vs the machines </h1>
+			{{#film}}
+               <h1 class="card-title display-4"> {{title}} </h1>
                <div class="stars" id="rateYo"></div><p></p>
-               <p><b>Release date: </b>30/04/2021</p>
-               <p><b>Minimum age: </b>All people</p>
-               <p><b>Genre: </b>Action, adventure, comdey and science fiction</p>
-               <p><b>Running time: </b>114 minutes</p>
-               <p><b>Cast: </b>Abbi Jacobson, Danny McBride, Maya Rudolph, Mike Rianda, Eric Andre, Olivia Colman</p>
-               <p><b>Director: </b>Mike Rianda</p>
+               <p><b>Release date: </b>{{releaseDate}}</p>
+               <p><b>Minimum age: </b>{{minAge}}</p>
+               <p><b>Genre: </b>{{genre}}</p>
+               <p><b>Running time: </b>{{duration}} minutes</p>
+               <p><b>Cast: </b>{{cast}}</p>
+               <p><b>Director: </b>{{director}}</p>
                <h5>Plot:</h5>
-               <p>The Mitchell family's road trip, escorting one of their children to his first day of college, is interrupted by a technological insurrection that threatens humanity.</p>
+               <p>{{plot}}</p> 
+	  		 {{/film}}
 
                <center><h4> Asserts </h4></center>
                <h5>Mia</h5>
@@ -96,6 +98,7 @@
                <p></p>
                <h5>Nick</h5>
                <div class="stars" id="rateYo3"></div>
+	
            </div>
        </div>
    </div>
@@ -105,18 +108,18 @@
         <div class="row">
             <h3 class="font-weight-bold">More like this</h3>
             <div class="box">
-                <a href="/filmUnregistered"><img src="/Images/film2.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film3.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film4.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film5.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film6.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film7.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film8.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film9.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film10.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film11.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film12.jpg" alt=""></a>
-                <a href="/filmUnregistered"><img src="/Images/film13.jpg" alt=""></a>
+                <a><img src="/Images/film2.jpg" alt=""></a>
+                <a><img src="/Images/film3.jpg" alt=""></a>
+                <a><img src="/Images/film4.jpg" alt=""></a>
+                <a><img src="/Images/film5.jpg" alt=""></a>
+                <a><img src="/Images/film6.jpg" alt=""></a>
+                <a><img src="/Images/film7.jpg" alt=""></a>
+                <a><img src="/Images/film8.jpg" alt=""></a>
+                <a><img src="/Images/film9.jpg" alt=""></a>
+                <a><img src="/Images/film10.jpg" alt=""></a>
+                <a><img src="/Images/film11.jpg" alt=""></a>
+                <a><img src="/Images/film12.jpg" alt=""></a>
+                <a><img src="/Images/film13.jpg" alt=""></a>
             </div>
             <p></p>
         </div>
@@ -126,10 +129,10 @@
 
 </main>
 
-<script src="appFilm.js"></script>
-<script src="themeFilm.js"></script>  
+<script src="../appFilm.js"></script>
+<script src="../themeFilm.js"></script>  
 <!--Stars-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-<script src="stars.js"></script>
+<script src="../stars.js"></script>
 </body>   
 </html>

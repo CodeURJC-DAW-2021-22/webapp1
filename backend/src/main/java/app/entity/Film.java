@@ -1,7 +1,5 @@
 package app.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +24,7 @@ public class Film {
 	private String director;
 	private String plot;
 	
-	private ArrayList<Comment> comments;
+	//private ArrayList<Comment> comments;
 	// Añadir atributo de Imágenes
 	
 	public Film() {
@@ -43,7 +41,7 @@ public class Film {
         this.director = director;
         this.plot = plot;
     }
-    
+    /*
     // Comments
     public void addComment(Comment comment) {
     	this.comments.add(comment);
@@ -63,7 +61,7 @@ public class Film {
     	}
     	this.averageStars = (sum/comments.size());
     }
-    
+    */
 	// Getters
 	public String getTitle() {
         return title;
@@ -95,10 +93,6 @@ public class Film {
 
     public String getPlot() {
         return plot;
-    }
-
-    public ArrayList<Comment> getComments() {
-        return comments;
     }
     
     // Setters
@@ -134,8 +128,5 @@ public class Film {
         this.plot = plot;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
-        this.comments = comments;
-    }
 	
 }

@@ -79,21 +79,25 @@
           </div>
           <div class="col">
              <div class="card card-body">
-                <h1 class="card-title display-4"> The Mitchel vs the machines </h1>
-                <div class="row">
-                    <button class="button" id="boton">Edit film</button>
-                    <button class="button" id="boton">Eliminate</button>
-                </div>
-                <p></p>
-                <div class="stars" id="rateYo"></div><p></p>
-                <p><b>Release date: </b>30/04/2021</p>
-                <p><b>Minimum age: </b>All people</p>
-                <p><b>Genre: </b>Action, adventure, comdey and science fiction</p>
-                <p><b>Running time: </b>114 minutes</p>
-                <p><b>Cast: </b>Abbi Jacobson, Danny McBride, Maya Rudolph, Mike Rianda, Eric Andre, Olivia Colman</p>
-                <p><b>Director: </b>Mike Rianda</p>
-                <h5> Plot: </h5>
-                <p>The Mitchell family's road trip, escorting one of their children to his first day of college, is interrupted by a technological insurrection that threatens humanity.</p>
+             	{{#film}}
+	                <h1 class="card-title display-4"> {{title}} </h1>
+	                <div class="row">
+	                    <button class="button" id="boton">Edit film</button>
+	                    <button class="button" id="boton">Eliminate</button>
+	                </div>
+	                <p></p>
+				
+	               <h1 class="card-title display-4"> {{title}} </h1>
+	               <div class="stars" id="rateYo"></div><p></p>
+	               <p><b>Release date: </b>{{releaseDate}}</p>
+	               <p><b>Minimum age: </b>{{minAge}}</p>
+	               <p><b>Genre: </b>{{genre}}</p>
+	               <p><b>Running time: </b>{{duration}} minutes</p>
+	               <p><b>Cast: </b>{{cast}}</p>
+	               <p><b>Director: </b>{{director}}</p>
+	               <h5>Plot:</h5>
+	               <p>{{plot}}</p> 
+		  		 {{/film}}
 
                 <center><h4> Asserts </h4></center>
                 <h5>Mia</h5>

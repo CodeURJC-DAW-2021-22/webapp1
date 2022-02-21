@@ -40,13 +40,14 @@
       <h1 id="home">Best Movie Genres</h1>
       <div id="piechart"></div>
 
-      <h1 id="trending">Trending Now</h1>
-      <-- Peliculas de BBDD puestas feo -->
+      <!-- Peliculas de BBDD puestas feo -->
       <ul>
       	{{#films}}
-      		<li>{{title}}</li>
+      		<li><a href="/filmUnregistered/{{id}}">{{title}}</a></lli>
       	{{/films}}
       </ul>
+      
+      <h1 id="trending">Trending Now</h1>
       <div class="box">
         <a href="/filmUnregistered"><img src="Images/film7.jpg" alt=""></a>
         <a href="/filmUnregistered"><img src="Images/film8.jpg" alt=""></a>
