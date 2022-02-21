@@ -188,7 +188,7 @@ header {
 
 .button {
   border-radius: 1.5rem;
-  margin-top: 1000px;
+  margin-top: 30px;
   padding: 20px;
   font-size: 20px;
   border: none;
@@ -444,6 +444,10 @@ button a:hover {
     grid-template-columns: repeat(1, 1fr);
     text-align: center;
   }
+  
+  h1 {
+    padding-top: 60px;
+}
 
   h1 {
     text-align: center;
