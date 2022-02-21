@@ -17,7 +17,7 @@ public class Film {
 	private String title;
 	private String releaseDate;
 	private float averageStars;
-	private int minAge;
+	private String minAge;
 	private Genre genre;
 	private int duration;
 	private String cast;
@@ -31,7 +31,7 @@ public class Film {
 		
 	}
 	
-    public Film(String title, String releaseDate, int minAge, Genre genre, int duration, String cast, String director, String plot) {
+    public Film(String title, String releaseDate, String minAge, Genre genre, int duration, String cast, String director, String plot) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.minAge = minAge;
@@ -71,7 +71,7 @@ public class Film {
         return releaseDate;
     }
 
-    public int getMinAge() {
+    public String getMinAge() {
         return minAge;
     }
 
@@ -104,7 +104,7 @@ public class Film {
         this.releaseDate = releaseDate;
     }
 
-    public void setMinAge(int minAge) {
+    public void setMinAge(String minAge) {
         this.minAge = minAge;
     }
 

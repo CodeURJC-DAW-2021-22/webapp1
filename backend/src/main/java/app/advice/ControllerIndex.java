@@ -25,8 +25,9 @@ public class ControllerIndex {
 	
 	@PostConstruct
 	public void init() {
-		this.films.save(new Film("Lo posible", "04/01/2001", 4, Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
-		this.films.save(new Film("Lo imposible", "04/01/2001", 4, Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
+		// Recomiendo encarecidamente poner ejemplos de películas bien hechos 
+		this.films.save(new Film("Lo posible", "04/01/2001", "A (All people)", Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
+		this.films.save(new Film("Lo imposible", "04/01/2001", "A (All people)", Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
 	}
 	
 	@GetMapping("/")
