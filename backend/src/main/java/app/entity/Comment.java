@@ -1,16 +1,25 @@
-package Entities;
+package app.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Comment {
 	private int stars;
-	private Customer user;
 	private String note;
 	
-	public Comment(int stars, Customer user, String note) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	public Comment() {
+		
+	}
+	public Comment(int stars, String note) {
         this.stars = stars;
-        this.user = user;
+
         this.note = note;
     }
 
@@ -19,10 +28,7 @@ public class Comment {
         return stars;
     }
 
-    public Customer getUser() {
-        return user;
-    }
-
+  
     public String getNote() {
         return note;
     }
@@ -32,9 +38,7 @@ public class Comment {
         this.stars = stars;
     }
 
-    public void setUser(Customer user) {
-        this.user = user;
-    }
+
 
     public void setNote(String note) {
         this.note = note;

@@ -1,14 +1,17 @@
-package Entities;
+package app.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+
 @Entity
-public class Customer{
+public class User{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,15 +21,18 @@ public class Customer{
 	private String email;
 	private String password;
 	// Hay que tener cuidado con las peticiones de datos, lo mismo pueden acabar pidiendoselo circularmente
-	private ArrayList<Comment> comments;
+	//private List<Comment> comments;
 	// Añadir atributo de imagen
 	
-	public Customer(String name, String email, String password) {
+	public User() {
+		
+	}
+	public User(String name, String email, String password) {
 		this.name=name;
 		this.email=email;
 		this.password=password;
 	}
-	
+	/*
 	// Comments
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
@@ -35,7 +41,7 @@ public class Customer{
 	public void deleteComment(Comment comment) {
 		this.comments.remove(comment);
 	}
-	
+	*/
 	// Getters
 	public String getName() {
 		return name;
@@ -49,9 +55,7 @@ public class Customer{
 		return password;
 	}
 	
-	public ArrayList<Comment> getCommets() {
-		return comments;
-	}
+
 	
 	public Long getId() {
 		return id;

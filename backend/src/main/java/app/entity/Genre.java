@@ -1,4 +1,4 @@
-package Entities;
+package app.entity;
 
 public enum Genre {
 	ACTION,

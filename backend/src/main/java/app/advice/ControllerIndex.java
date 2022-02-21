@@ -1,23 +1,42 @@
-package AdviceMe.advice;
+package app.advice;
+
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import Entities.Customer;
+import app.entity.Film;
+import app.entity.Genre;
+import app.entity.User;
 
 
 @Controller
 public class ControllerIndex {
 	
-	//@Autowired
+	@Autowired
 	//private UsersRepository users;
+	private FilmRepository films;
+	
+	@PostConstruct
+	public void init() {
+
+		this.films.save(new Film("Lo imposible", "04/01/2001", 4, Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
+	}
+
+	@GetMapping("/film/{id}")
+	public Film getFilm(@PathVariable long id) {
+		return films.findById(id).orElseThrow();
+	}           
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
+		model.addAttribute("films", films.findAll());
 		return "adviceMe";
 	}
 	
@@ -36,7 +55,7 @@ public class ControllerIndex {
 			@RequestParam String pass, @RequestParam String passConfirm) {
 		// Insertar comprobación de que no existen usuarios iguales
 		if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) ) {
-			Customer customer = new Customer(name, email, pass);
+			User customer = new User(name, email, pass);
 			//users.save(customer);
 			return "menuRegistered";
 		}

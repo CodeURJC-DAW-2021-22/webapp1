@@ -1,6 +1,7 @@
-package Entities;
+package app.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,19 +18,22 @@ public class Film {
 	
 	private String title;
 	private String releaseDate;
-	// No sé si puede ser float o no
 	private float averageStars;
 	private int minAge;
 	private Genre genre;
 	private int duration;
-	private ArrayList<String> cast;
+	private String cast;
 	private String director;
 	private String plot;
 	
 	private ArrayList<Comment> comments;
 	// Añadir atributo de Imágenes
 	
-    public Film(String title, String releaseDate, int minAge, Genre genre, int duration, ArrayList<String> cast, String director, String plot) {
+	public Film() {
+		
+	}
+	
+    public Film(String title, String releaseDate, int minAge, Genre genre, int duration, String cast, String director, String plot) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.minAge = minAge;
@@ -81,7 +85,7 @@ public class Film {
         return duration;
     }
 
-    public ArrayList<String> getCast() {
+    public String getCast() {
         return cast;
     }
 
@@ -118,7 +122,7 @@ public class Film {
         this.duration = duration;
     }
 
-    public void setCast(ArrayList<String> cast) {
+    public void setCast(String cast) {
         this.cast = cast;
     }
 
