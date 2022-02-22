@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import app.advice.FilmRepository;
 import app.entity.Film;
+import app.entity.Genre;
 
 @Service
 public class FilmService {
@@ -17,6 +18,10 @@ public class FilmService {
 	
 	public Optional<Film> findById(long id) {
 		return repository.findById(id);
+	}
+	
+	public List<Film> findByGenre(Genre genre){		
+		return repository.findByGenre(genre);
 	}
 	
 	public boolean exist(long id) {
