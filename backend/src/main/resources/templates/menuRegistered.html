@@ -45,101 +45,68 @@
       <h1 id="home">Best Movie Genres</h1>
       <div id="piechart"></div>
       
-      <!-- Peliculas de BBDD puestas feo -->
-      <ul>
-      	{{#films}}
-      		<li><a href="/filmUnregistered/{{id}}">{{title}}</a></lli>
-      	{{/films}}
-      </ul>
       
       <h1 id="recommendations">Recommendations for you</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>  
+        {{#recomendation}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/recomendation}}
       </div>
       
       <h1 id="comments">Your Comments</h1>
       <div class="box">
-        <a href="/filmUnregistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film12.jpg" alt=""></a>                  
+        {{#commented}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/commented}}               
       </div>
       
       <h1 id="trending">Trending Now</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>                    
-      </div>
+        {{#trending}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/trending}}
+	  </div>
       
       <h1 id="action">Action</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>                   
+        {{#action}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/action}}             
       </div>
 
       <h1 id="adventure">Adventure</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>                   
+        {{#adventure}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/adventure}}                  
       </div>
 
       <h1 id="comedy">Comedy</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>                 
+        {{#comedy}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/comedy}}                  
       </div>
 
       <h1 id="drama">Drama</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>                  
+        {{#drama}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/drama}}              
       </div>
 
       <h1 id="horror">Horror</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>                  
+        {{#horror}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/horror}}                  
       </div>
 
       <h1 id="scienceFiction">Science Fiction</h1>
       <div class="box">
-        <a href="/filmRegistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmRegistered"><img src="Images/film12.jpg" alt=""></a>                   
+        {{#scifi}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	{{/scifi}}                  
       </div>
     </section> 
     <!-- END OF MAIN CONTAINER -->

@@ -1,10 +1,13 @@
 package app.entity;
 
 
+import java.sql.Blob;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 
 @Entity
@@ -25,7 +28,11 @@ public class Film {
 	private String plot;
 	
 	//private ArrayList<Comment> comments;
-	// Añadir atributo de Imágenes
+
+	@Lob
+	private Blob imageFile;
+
+	private boolean image;
 	
 	public Film() {
 		
@@ -95,6 +102,14 @@ public class Film {
         return plot;
     }
     
+	public Blob getImageFile() {
+		return imageFile;
+	}
+	
+	public boolean getImage(){
+		return this.image;
+	}
+	
     // Setters
     public void setTitle(String title) {
         this.title = title;
@@ -128,5 +143,12 @@ public class Film {
         this.plot = plot;
     }
 
+	public void setImageFile(Blob image) {
+		this.imageFile = image;
+	}
+	
+	public void setImage(boolean image){
+		this.image = image;
+	}
 	
 }
