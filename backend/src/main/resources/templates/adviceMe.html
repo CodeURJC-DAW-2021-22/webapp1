@@ -39,23 +39,13 @@
     <section class="main-container" >
       <h1 id="home">Best Movie Genres</h1>
       <div id="piechart"></div>
-
-      <!-- Peliculas de BBDD puestas feo -->
-      <ul>
-      	{{#films}}
-      		<li><a href="/filmUnregistered/{{id}}">{{title}}</a></lli>
-      	{{/films}}
-      </ul>
       
       <h1 id="trending">Trending Now</h1>
       <div class="box">
-        <a href="/filmUnregistered"><img src="Images/film7.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film8.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film9.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film10.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film11.jpg" alt=""></a>
-        <a href="/filmUnregistered"><img src="Images/film12.jpg" alt=""></a>                  
-      </div>
+        {{#films}}
+      		<a href="/filmUnregistered/{{id}}"><img src="/{id}/image" alt="pato"></a>
+      	{{/films}}
+	  </div>
       
       <h1 id="action">Action</h1>
       <div class="box">

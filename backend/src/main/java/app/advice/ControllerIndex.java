@@ -1,9 +1,14 @@
 package app.advice;
 
 
-import javax.annotation.PostConstruct;
+import java.sql.SQLException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import app.entity.Film;
-import app.entity.Genre;
 import app.entity.User;
+import app.service.FilmService;
 
 
 @Controller
@@ -21,19 +26,28 @@ public class ControllerIndex {
 	
 	@Autowired
 	//private UsersRepository users;
-	private FilmRepository films;
-	
-	@PostConstruct
-	public void init() {
-		// Recomiendo encarecidamente poner ejemplos de películas bien hechos 
-		this.films.save(new Film("Lo posible", "04/01/2001", "A (All people)", Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
-		this.films.save(new Film("Lo imposible", "04/01/2001", "A (All people)", Genre.ADVENTURE, 120, "casting asdaw", "Una patata", "Ola grande mata"));
-	}
+	private FilmService filmService;
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
-		model.addAttribute("films", films.findAll());
+		model.addAttribute("films", filmService.findAll());
 		return "adviceMe";
+	}
+	
+	@GetMapping("/{id}/image")
+	public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
+
+		Optional<Film> film = filmService.findById(id);
+		if (film.isPresent() && film.get().getImageFile() != null) {
+
+			Resource file = new InputStreamResource(film.get().getImageFile().getBinaryStream());
+
+			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+					.contentLength(film.get().getImageFile().length()).body(file);
+
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 	@GetMapping("/login")
@@ -76,21 +90,21 @@ public class ControllerIndex {
 	
 	@GetMapping("/filmUnregistered/{id}")
 	public String filmUnregistered(Model model, @PathVariable long id) {
-		Film film = films.findById(id).orElseThrow();
+		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
 		return "filmUnregistered";
 	}     
 	
 	@GetMapping("/filmRegistered/{id}")
 	public String filmRegistered(Model model, @PathVariable long id) {
-		Film film = films.findById(id).orElseThrow();
+		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
 		return "filmRegistered";
 	}
 	
 	@GetMapping("/filmAdmin/{id}")
 	public String filmAdmin(Model model, @PathVariable long id) {
-		Film film = films.findById(id).orElseThrow();
+		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
 		return "filmAdmin";
 	}
