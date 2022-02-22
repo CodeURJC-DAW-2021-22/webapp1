@@ -1,6 +1,7 @@
 package app.advice;
 
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -13,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
@@ -104,6 +107,7 @@ public class ControllerIndex {
 		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
 		
 		//model.addAttribute("recommendation", filmService.);
+		//model.addAttribute("commented", filmService.);
 		return "menuAdmin";
 	}
 	
@@ -141,6 +145,12 @@ public class ControllerIndex {
 	@GetMapping("/addFilm")
 	public String addFilm(Model model) {
 		return "addFilm";
+	}
+	
+	@PostMapping("/addFilm")
+	public String addingFilm(Model model, Film film, MultipartFile image, MultipartFile image2) {			
+		filmService.save(film);
+		return "menuAdmin";
 	}
 	
 }

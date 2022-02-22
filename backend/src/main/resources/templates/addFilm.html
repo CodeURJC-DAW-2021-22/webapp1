@@ -34,74 +34,76 @@
             <div class="note">
                 <p>Post film</p>
             </div>
-
-            <div class="form-content">
-                <div class="row">
-                    <!--FRONT PAGE-->
-                    <div class="file btn btn-primary">
-                        Upload a front page
-                        <input type="file" name="file"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Film name" value=""/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="date" class="form-control" placeholder="Release date" value=""/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Cast" value=""/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Running time" value=""/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select class="form-select" placeholder="Minimum age" value=""/>
-                                <option selected>Minimum age</option>  
-                                <option>A (All people)</option>
-                                <option>7 (Not suitable for people under 7)</option>
-                                <option>12 (Not suitable for people under 12)</option>
-                                <option>16 (Not suitable for people under 16)</option>
-                                <option>18 (Not suitable for people under 18)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-select" placeholder="Genre" value=""/>
-                                <option selected>Genre</option>  
-                                <option>Action</option>
-                                <option>Adventure</option>
-                                <option>Comedy</option>
-                                <option>Drama</option>
-                                <option>Horror</option>
-                                <option>Science Fiction</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Director" value=""/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Plot" value=""/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="file btn btn-primary" id="pictures">
-                        Add more images
-                        <input type="file" name="file"/>
-                    </div>
-                </div>
-                <div class="center">
-                    <button type="button" class="btnSubmit"><a href="/menuAdmin">Post</a></button>
-                </div>
-            </div>
+			
+			<form action="/addFilm" method="post" enctype="multipart/form-data">
+	            <div class="form-content">
+	                <div class="row">
+	                    <!--FRONT PAGE-->
+	                    <div class="file btn btn-primary">
+	                        Upload a front page
+	                        <input type="image" name="file"/>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="form-group">
+	                        <input type="text" name="title" class="form-control" placeholder="Film name" value=""/>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <div class="form-group">
+	                            <input type="date" name="releaseDate" class="form-control" placeholder="Release date" value=""/>
+	                        </div>
+	                        <div class="form-group">
+	                            <input type="text" name="cast" class="form-control" placeholder="Cast" value=""/>
+	                        </div>
+	                        <div class="form-group">
+	                            <input type="text" name="duration" class="form-control" placeholder="Running time" value=""/>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="form-group">
+	                            <select name="minAge" class="form-select" placeholder="Minimum age" value=""/>
+	                                <option selected>Minimum age</option>  
+	                                <option>A (All people)</option>
+	                                <option>7 (Not suitable for people under 7)</option>
+	                                <option>12 (Not suitable for people under 12)</option>
+	                                <option>16 (Not suitable for people under 16)</option>
+	                                <option>18 (Not suitable for people under 18)</option>
+	                            </select>
+	                        </div>
+	                        <div class="form-group">
+	                            <select name="genre" class="form-select" placeholder="Genre" value=""/>
+	                                <option selected>Genre</option>  
+	                                <option>Action</option>
+	                                <option>Adventure</option>
+	                                <option>Comedy</option>
+	                                <option>Drama</option>
+	                                <option>Horror</option>
+	                                <option>Science Fiction</option>
+	                            </select>
+	                        </div>
+	                        <div class="form-group">
+	                            <input type="text" name="director" class="form-control" placeholder="Director" value=""/>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="form-group">
+	                        <input type="text" name="plot" class="form-control" placeholder="Plot" value=""/>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="file btn btn-primary" id="pictures">
+	                        Add more images
+	                        <input type="file" name="image2"/>
+	                    </div>
+	                </div>
+	                <div class="center">
+	                    <button type="submit" class="btnSubmit"><a>Post</a></button>
+	                </div>
+            	</div>
+			</form>
         </div>
     </div>
 </body>
