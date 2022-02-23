@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
@@ -150,8 +149,20 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/addFilm")
-	public String addingFilm(Model model, Film film, MultipartFile image, MultipartFile image2) {			
+	public String addFilmProcess(Model model, Film film) {			
 		filmService.save(film);
+		model.addAttribute("trending", filmService.findAll());
+		
+		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
+		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
+		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
+		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
+		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
+		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
+		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
+		
+		//model.addAttribute("recommendation", filmService.);
+		//model.addAttribute("commented", filmService.);
 		return "menuAdmin";
 	}
 	

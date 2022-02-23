@@ -38,12 +38,12 @@ public class Film {
 		
 	}
 	
-    public Film(String title, String releaseDate, String minAge, Genre genre, int duration, String cast, String director, String plot) {
+    public Film(String title, String releaseDate, String minAge, String genre, String duration, String cast, String director, String plot) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.minAge = minAge;
-        this.genre = genre;
-        this.duration = duration;
+        this.genre = Genre.valueOf(genre.toUpperCase());
+        this.duration = Integer.parseInt(duration);
         this.cast = cast;
         this.director = director;
         this.plot = plot;
