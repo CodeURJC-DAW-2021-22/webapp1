@@ -1,7 +1,6 @@
 package app.advice;
 
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -38,6 +37,7 @@ public class ControllerIndex {
 		
 		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
+		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
 		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
 		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
 		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
@@ -82,6 +82,7 @@ public class ControllerIndex {
 			
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
+			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
 			model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
 			model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
 			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
@@ -101,6 +102,7 @@ public class ControllerIndex {
 		
 		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
+		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
 		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
 		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
 		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
