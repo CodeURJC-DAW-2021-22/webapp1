@@ -1,9 +1,11 @@
 package app.advice;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
@@ -149,8 +152,15 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/addFilm")
-	public String addFilmProcess(Model model, Film film) {			
+	public String addFilmProcess(Model model, Film film, MultipartFile imageField) throws IOException {	
+		
+		if (!imageField.isEmpty()) {
+			film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+			film.setImage(true);
+		}
+		
 		filmService.save(film);
+		
 		model.addAttribute("trending", filmService.findAll());
 		
 		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
@@ -163,6 +173,7 @@ public class ControllerIndex {
 		
 		//model.addAttribute("recommendation", filmService.);
 		//model.addAttribute("commented", filmService.);
+		
 		return "menuAdmin";
 	}
 	

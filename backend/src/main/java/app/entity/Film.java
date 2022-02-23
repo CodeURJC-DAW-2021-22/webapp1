@@ -123,8 +123,8 @@ public class Film {
         this.minAge = minAge;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenre(String genre) {
+        this.genre = Genre.valueOf(genre.toUpperCase());
     }
 
     public void setDuration(int duration) {

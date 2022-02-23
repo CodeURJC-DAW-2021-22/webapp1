@@ -35,17 +35,17 @@
                 <p>Post film</p>
             </div>
 			
+	        <form action="/addFilm" method="post" enctype="multipart/form-data">
 			
 	            <div class="form-content">
 	                <div class="row">
 	                    <!--FRONT PAGE-->
 	                    <div class="file btn btn-primary" id="pictures">
 	                        Upload a front page
-	                        <input type="file"/>
+	                        <input type="file"name=' imageField' accept=".png, .jpg, .jpeg"/>
 	                    </div>
 	                </div>
 	                
-	                <form action="/addFilm" method="post">
 	                <div class="row">
 	                    <div class="form-group">
 	                        <input type="text" name="title" class="form-control" placeholder="Film name" value=""/>
@@ -105,9 +105,9 @@
 	                <div class="center">
 	                    <button type="submit" class="btnSubmit"><a>Post</a></button>
 	                </div>
-	                </form>
+	                
             	</div>
-			
+			</form>	
         </div>
     </div>
 </body>
