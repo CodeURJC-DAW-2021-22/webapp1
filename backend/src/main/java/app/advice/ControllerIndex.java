@@ -129,13 +129,17 @@ public class ControllerIndex {
 	public String filmUnregistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
+		Genre similar = film.getGenre();
+		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmUnregistered";
-	}     
+	} 
 	
 	@GetMapping("/filmRegistered/{id}")
 	public String filmRegistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
+		Genre similar = film.getGenre();
+		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmRegistered";
 	}
 	
@@ -143,6 +147,8 @@ public class ControllerIndex {
 	public String filmAdmin(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
+		Genre similar = film.getGenre();
+		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmAdmin";
 	}
 	

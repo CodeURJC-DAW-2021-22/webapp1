@@ -38,19 +38,39 @@ public class DatabaseInitializer {
 		Film film5 = new Film("The Emperor's New Groove", "10/12/2000", "A (All people)", "ANIMATION", "78",
 				"David Spade, John Goodman, Eartha Kitt", "Mark Dindal",
 				"Emperor Kuzco was turned into a llama by his former administrator Yzma, and now he must regain his throne with the help of Pacha, a kind llama herder.");
-		 
+		Film film6 = new Film("The King's Man: The first mission", "22/12/2021", "16 (Not suitable for people under 16)", "ACTION", "131",
+				 "Daniel Brühl, Rhys Ifans, Matthew Goode, Aaron Taylor-Johnson", "Matthew Vaughn", "The criminal minds and the greatest tyrants in history plan to annihilate millions of people. A man will fight against time to avoid the worst. Thus, the first independent intelligence agency in the United Kingdom was born.");
+		Film film7 = new Film("Tenet", "03/09/2020", "12 (Not suitable for people under 12)", "ACTION", "150",
+				"John David Washington, Robert Pattinson, Elizabeth Debicki, Dimple Kapadia, Michael Caine, Kenneth Branagh", "Christopher Nolar",
+				"Armed with a single word, Tenet, and fighting for the survival of the world, the protagonist travels through the dark world of international espionage on a mission that will go beyond real time.");
+		Film film8 = new Film("Eternals", "03/11/2021", "12 (Not suitable for people under 12)", "ACTION", "157",
+				"Salma Hayek, Angelina Jolie, Gemma Chan, Richard Madden, Kumail Nanjiani, Lia McHugh, Brian Tyree Henry, Lauren Ridloff, Barry Keoghan, Don Lee, Harish Patel, Kit Harington", "Chloé Zhao", 
+				"Millions of years ago, the cosmic beings known as the Celestials decided to genetically experiment on humans, and shaped our history and civilizations.");
+		
+		/* 2 de aventura, 2 de comedia, 3 de drama, 3 de horror, 3 de ciencia ficción
+		Film film = new Film("", "", "", "", "", "", "", "");
+		Film film = new Film("", "", "", "", "", "", "", "");
+		Film film = new Film("", "", "", "", "", "", "", "");
+		*/
+		
 	
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");
 		setFilmImage(film3, "/static/Images/film3.jpg");
 		setFilmImage(film4, "/static/Images/film4.jpg");
 		setFilmImage(film5, "/static/Images/film5.jpg");
+		setFilmImage(film6, "/static/Images/film6.jpeg");
+		setFilmImage(film7, "/static/Images/film7.jpg");
+		setFilmImage(film8, "/static/Images/film8.jpg");
 		
 		filmRepository.save(film1);
 		filmRepository.save(film2);
 		filmRepository.save(film3);
 		filmRepository.save(film4);
 		filmRepository.save(film5);
+		filmRepository.save(film6);
+		filmRepository.save(film7);
+		filmRepository.save(film8);
 	}
 	
 	public void setFilmImage(Film film, String classpathResource) throws IOException {
