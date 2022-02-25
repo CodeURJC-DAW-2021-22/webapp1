@@ -19,7 +19,7 @@ public class Film {
 	
 	private String title;
 	private String releaseDate;
-	private float averageStars;
+	//private float averageStars;
 	private String minAge;
 	private Genre genre;
 	private int duration;

@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
-import app.entity.User;
+//import app.entity.User;
 import app.service.FilmService;
 
 
@@ -78,7 +78,7 @@ public class ControllerIndex {
 			@RequestParam String pass, @RequestParam String passConfirm) {
 		// Insertar comprobación de que no existen usuarios iguales
 		if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) ) {
-			User customer = new User(name, email, pass);
+			//User customer = new User(name, email, pass);
 			//users.save(customer);
 			model.addAttribute("trending", filmService.findAll());
 			

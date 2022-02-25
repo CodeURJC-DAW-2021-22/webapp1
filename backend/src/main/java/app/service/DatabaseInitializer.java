@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import app.advice.FilmRepository;
 import app.entity.Film;
-import app.entity.Genre;
+//import app.entity.Genre;
 import app.advice.UserRepository;
 import app.entity.User;
 
