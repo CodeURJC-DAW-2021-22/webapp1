@@ -69,8 +69,8 @@
              	{{#film}}
 	                <h1 class="card-title display-4"> {{title}} </h1>
 	                <div class="row">
-	                    <button class="button" id="boton">Edit film</button>
-	                    <button class="button" id="boton">Eliminate</button>
+	                    <button onclick="location.href='/editFilm/{{film.id}}'" class="button" id="boton">Edit film</button>
+	                    <button onclick="location.href='/removeFilm/{{film.id}}'" class="button" id="boton">Eliminate</button>
 	                </div>
 	                <p></p>
 				
