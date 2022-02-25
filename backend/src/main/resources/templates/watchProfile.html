@@ -8,7 +8,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <link rel="stylesheet"  href="jquery.rateyo.css"/>
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
-        <title>account</title>
+        <title>Account</title>
     </head>
     <body>
         <header>
@@ -16,13 +16,7 @@
                 <a id="logo" href="/menuRegistered#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
             </div>      
             <nav id="navPrincipal" class="main-nav">                
-                <a href="/#home">Home</a>
-                <a href="/#action">Action</a>
-                <a href="/#adventure">Adventure</a>
-                <a href="/#comedy">Comedy</a>
-                <a href="/#drama">Drama</a>
-                <a href="/#horror">Horror</a>
-                <a href="/#scienceFiction">Science Fiction</a>  
+                <a href="/#home">Home</a> 
             </nav>
             <nav class="sub-nav">
                 <input type="text" placeholder="Search...">
@@ -37,10 +31,6 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                    Change Photo
-                                <input type="file" name="file"/>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -50,54 +40,13 @@
                             </div>
                         </div>
                         <div class="row">
+                            <!-- Falta poner el href cuando tenga los otros HTML hechos -->
                             <div class="col-md-2 followers"><a href = "/followers">0 Followers</a></div>
                             <div class="col-md-2 followers"><a href = "/following">0 Following</a></div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="profile-edit-btn"><a href="/editProfile">Edit Profile</a></button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <a href="../adviceMe.html">Sing Out</a>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row seccion">
-                                    <label>About</label>
-                                </div>
-                                <div class="row">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>User Id</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Mia123</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Name</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Mia</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Email</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>mia@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </div>   
-                            </div>
-                        </div>
+                        <input type="button" class="profile-edit-btn" value="Follow" onclick="return change(this);"/>
                     </div>
                 </div>
                 <div class="row">
@@ -118,14 +67,6 @@
                                     <div id="rateYo2"></div><p></p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Comment"/>
-                                </div>
-                                <div class="col-md-1">
-                                    <button class="btn"><img src="Images/delete.png" width="20px"/></button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,5 +75,15 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
         <script src="stars.js"></script>
+
+        <script type="text/javascript">
+            function change( el )
+        {
+            if ( el.value === "Follow" )
+                el.value = "Unfollow";
+            else
+                el.value = "Follow";
+        }
+        </script>
     </body>
 </html>

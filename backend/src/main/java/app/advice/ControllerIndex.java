@@ -125,6 +125,21 @@ public class ControllerIndex {
 		return "editProfile";
 	}
 	
+	@GetMapping("/followers")
+	public String followers(Model model) {
+		return "followers";
+	}
+	
+	@GetMapping("/following")
+	public String following(Model model) {
+		return "following";
+	}
+	
+	@GetMapping("/watchProfile")
+	public String watchProfile(Model model) {
+		return "watchProfile";
+	}
+	
 	@GetMapping("/filmUnregistered/{id}")
 	public String filmUnregistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
