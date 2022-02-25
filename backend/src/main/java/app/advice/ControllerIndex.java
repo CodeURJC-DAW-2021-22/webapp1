@@ -146,6 +146,16 @@ public class ControllerIndex {
 		return "filmAdmin";
 	}
 	
+	@GetMapping("/removeFilm/{id}")
+	public String removeFilm(Model model, @PathVariable long id) {
+		Optional<Film> film = filmService.findById(id);
+		if (film.isPresent()) {
+			filmService.delete(id);
+			// Eliminar también comentarios
+		}
+		return "redirect:/menuAdmin";
+	}
+	
 	@GetMapping("/addFilm")
 	public String addFilm(Model model) {
 		return "addFilm";
@@ -161,20 +171,53 @@ public class ControllerIndex {
 		
 		filmService.save(film);
 		
-		model.addAttribute("trending", filmService.findAll());
+		return "redirect: /menuAdmin";
+	}
+	
+	@GetMapping("/editFilm/{id}")
+	public String editFilm(Model model, @PathVariable long id) {
+
+		Optional<Film> film = filmService.findById(id);
+		if (film.isPresent()) {
+			model.addAttribute("film", film.get());
+			return "editFilmPage";
+		} else {
+			return "redirect: /menuAdmin";
+		}
+	}
+	
+	@PostMapping("/editFilm")
+	public String editFilmProcess(Model model, Film film, boolean removeImage, MultipartFile imageField)
+			throws IOException, SQLException {
+
+		updateImage(film, removeImage, imageField);
+
+		filmService.save(film);
+
+		model.addAttribute("bookId", film.getId());
+
+		return "redirect:/menuAdmin";
+	}
+	
+	private void updateImage(Film film, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
 		
-		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
-		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
-		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
-		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
-		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
-		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
-		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
-		
-		//model.addAttribute("recommendation", filmService.);
-		//model.addAttribute("commented", filmService.);
-		
-		return "menuAdmin";
+		if (!imageField.isEmpty()) {
+			film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+			film.setImage(true);
+		} else {
+			if (removeImage) {
+				film.setImageFile(null);
+				film.setImage(false);
+			} else {
+				// Maintain the same image loading it before updating the book
+				Film dbFilm = filmService.findById(film.getId()).orElseThrow();
+				if (dbFilm.getImage()) {
+					film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(),
+							dbFilm.getImageFile().length()));
+					film.setImage(true);
+				}
+			}
+		}
 	}
 	
 }

@@ -150,5 +150,9 @@ public class Film {
 	public void setImage(boolean image){
 		this.image = image;
 	}
+
+	public long getId() {
+		return id;
+	}
 	
 }
