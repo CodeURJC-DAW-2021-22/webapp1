@@ -38,11 +38,13 @@
 	        <form action="/editFilm" method="post" enctype="multipart/form-data">
 			
 	            <div class="form-content">
+	             <input type="hidden" name="id" value="{{film.id}}" />
 	                <div class="row">
 	                    <!--FRONT PAGE-->
 	                    <div class="file btn btn-primary" id="pictures">
 	                        Upload a front page
-	                        <input type="file"name=' imageField' accept=".png, .jpg, .jpeg"/>
+	                        <input type="file"name='imageField' accept=".png, .jpg, .jpeg"/>
+	                        <input type="hidden" name="imageField" value="{{film.imageFile}}" />
 	                    </div>
 	                </div>
 	                
@@ -54,7 +56,8 @@
 	                <div class="row">
 	                    <div class="col-md-6">
 	                        <div class="form-group">
-	                            <input type="date" name="releaseDate" class="form-control" placeholder="Release date" value="{{film.releaseDate}}"/>
+	                            <input type="date" name="releaseDate" class="form-control" placeholder="Release date" value=""/>
+	                        	<input type="hidden" name="releaseDate" value="{{film.releaseDate}}"/>
 	                        </div>
 	                        <div class="form-group">
 	                            <input type="text" name="cast" class="form-control" placeholder="Cast" value="{{film.cast}}"/>
@@ -66,7 +69,7 @@
 	                    <div class="col-md-6">
 	                        <div class="form-group">
 	                            <select name="minAge" class="form-select" placeholder="Minimum age" value="{{film.minAge}}"/>
-	                                <option selected>Minimum age</option>  
+	                                <option selected>{{film.minAge}}</option>  
 	                                <option>A (All people)</option>
 	                                <option>7 (Not suitable for people under 7)</option>
 	                                <option>12 (Not suitable for people under 12)</option>
@@ -76,7 +79,7 @@
 	                        </div>
 	                        <div class="form-group">
 	                            <select name="genre" class="form-select" placeholder="Genre" value="{{film.genre}}"/>
-	                                <option selected>Genre</option>  
+	                                <option selected>{{film.genre}}</option>  
 	                                <option>Action</option>
 	                                <option>Animation</option>
 	                                <option>Adventure</option>

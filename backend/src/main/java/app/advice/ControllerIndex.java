@@ -208,11 +208,11 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/editFilm")
-	public String editFilmProcess(Model model, Film film, boolean removeImage, MultipartFile imageField)
+	public String editFilmProcess(Model model, Film film, MultipartFile imageField)
 			throws IOException, SQLException {
-
-		updateImage(film, removeImage, imageField);
-
+		
+		updateImage(film, imageField);
+		
 		filmService.save(film);
 
 		model.addAttribute("bookId", film.getId());
@@ -220,23 +220,17 @@ public class ControllerIndex {
 		return "redirect:/menuAdmin";
 	}
 	
-	private void updateImage(Film film, boolean removeImage, MultipartFile imageField) throws IOException, SQLException {
+	private void updateImage(Film film, MultipartFile imageField) throws IOException, SQLException {
 		
 		if (!imageField.isEmpty()) {
 			film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			film.setImage(true);
 		} else {
-			if (removeImage) {
-				film.setImageFile(null);
-				film.setImage(false);
-			} else {
-				// Maintain the same image loading it before updating the book
-				Film dbFilm = filmService.findById(film.getId()).orElseThrow();
-				if (dbFilm.getImage()) {
-					film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(),
-							dbFilm.getImageFile().length()));
-					film.setImage(true);
-				}
+			Film dbFilm = filmService.findById(film.getId()).orElseThrow();
+			if (dbFilm.getImage()) {
+				film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(),
+						dbFilm.getImageFile().length()));
+				film.setImage(true);
 			}
 		}
 	}
