@@ -110,6 +110,10 @@ public class Film {
 		return this.image;
 	}
 	
+	public long getId() {
+		return id;
+	}
+	
     // Setters
     public void setTitle(String title) {
         this.title = title;
@@ -151,8 +155,8 @@ public class Film {
 		this.image = image;
 	}
 
-	public long getId() {
-		return id;
+	public void setId(long newId) {
+		this.id = newId;	
 	}
 	
 }
