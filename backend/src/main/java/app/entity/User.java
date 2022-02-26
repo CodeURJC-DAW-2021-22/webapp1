@@ -1,5 +1,8 @@
 package app.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,8 +22,11 @@ public class User{
 	private String name;
 	private String email;
 	private String password;
+	/*
+	@OneToMany
+	private List<Comment> comments = new ArrayList<>();
+	*/
 	// Hay que tener cuidado con las peticiones de datos, lo mismo pueden acabar pidiendoselo circularmente
-	//private List<Comment> comments;
 	// Añadir atributo de imagen
 	
 	public User() {

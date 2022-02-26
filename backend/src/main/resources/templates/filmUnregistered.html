@@ -76,16 +76,15 @@
                <p><b>Director: </b>{{director}}</p>
                <h5>Plot:</h5>
                <p>{{plot}}</p> 
-	  		 {{/film}}
-
                <center><h4> Asserts </h4></center>
-               <h5>Mia</h5>
-               <p><i>This film is awesome</i></p>
-               <div class="stars" id="rateYo2"></div>
-               <p></p>
-               <h5>Nick</h5>
-               <div class="stars" id="rateYo3"></div>
-	
+               {{#comments}}
+				<p>{{note}}</p>
+				<div class="stars" id="rateYo{{stars}}"></div><p></p>
+			   {{/comments}}
+			   {{^comments}}
+			   	<p>There are no asserts yet</p>
+			   {{/comments}}
+	  		 {{/film}}
            </div>
        </div>
    </div>
@@ -107,7 +106,6 @@
 
 </main>
 
-<script src="../appFilm.js"></script>
 <script src="../themeFilm.js"></script>  
 <!--Stars-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
