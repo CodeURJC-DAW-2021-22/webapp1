@@ -78,16 +78,16 @@
 	               <p><b>Director: </b>{{director}}</p>
 	               <h5>Plot:</h5>
 	               <p>{{plot}}</p> 
+	               <center><h4> Asserts </h4></center>
+               		{{#comments}}
+						<p>{{note}}</p>
+						<div class="stars" id="rateYo{{stars}}"></div><p></p>
+			   		{{/comments}}
+			   		{{^comments}}
+			   			<p>There are no asserts yet</p>
+			   		{{/comments}}
 		  		 {{/film}}
 	
-                <center><h4> Asserts </h4></center>
-                <h5>Mia</h5>
-                <p><i>This film is awesome</i></p>
-                <div class="stars" id="rateYo2"></div>
-                <p></p>
-                <h5>Nick</h5>
-                <div class="stars" id="rateYo3"></div>
-                <p></p>
                 <button class="col-12 button2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Add coment
                 </button>

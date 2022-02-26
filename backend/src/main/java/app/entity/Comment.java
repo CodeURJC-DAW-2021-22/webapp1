@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Comment {
+	//private User user;
 	private int stars;
 	private String note;
 	
@@ -17,9 +18,8 @@ public class Comment {
 	public Comment() {
 		
 	}
-	public Comment(int stars, String note) {
-        this.stars = stars;
-
+	public Comment(String stars, String note) {
+        this.stars = Integer.parseInt(stars);
         this.note = note;
     }
 

@@ -11,15 +11,18 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
+import app.advice.CommentRepository;
 import app.advice.FilmRepository;
 import app.entity.Film;
-import app.entity.Genre;
+import app.entity.Comment;
 
 @Service
 public class DatabaseInitializer {
 	
 	@Autowired 
 	private FilmRepository filmRepository;
+	@Autowired 
+	private CommentRepository commentRepository;
 	
 	@PostConstruct
 	public void init() throws IOException, URISyntaxException {
@@ -53,6 +56,14 @@ public class DatabaseInitializer {
 		Film film = new Film("", "", "", "", "", "", "", "");
 		*/
 		
+		Comment com1 = new Comment("5", "This film is awesome");
+		Comment com2 = new Comment("4", "I liked it");
+		
+		commentRepository.save(com1);
+		commentRepository.save(com2);
+
+		film1.getComments().add(com1);
+		film1.getComments().add(com2);
 	
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");
