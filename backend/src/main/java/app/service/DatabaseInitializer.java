@@ -70,6 +70,13 @@ public class DatabaseInitializer {
 				"Vera Farmiga, Patrick Wilson, Frances O'Connor, Madison Wolfe", "James Wan", "Ed and Lorraine Warren travel to North London to help a single mother raising four children alone in a house haunted by a supernatural spirit.");
 		Film film18 = new Film("It", "08/09/2017", "16 (Not suitable for people under 16)", "HORROR", "135",
 				"Pierce Brosnan, Stefanie Scott, Anna Friel, James Frecheville, Michael Nyqvist", "Andy Muschietti", "In the summer of 1989, a group of bullied children band together to destroy a shape-shifting monster that disguises itself as a clown and preys on the children of Derry, their small town in Maine.");
+		Film film19 = new Film("The Darkest Minds", "03/08/2018", "12 (Not suitable for people under 12)", "SCIENCE_FICTION", "104",
+				"Amandla Stenberg, Harris Dickinson, Mandy Moore", "Jennifer Yuh Nelson", "Imprisoned by an adult world that now fears anyone under the age of 18, a group of teenagers form a resistance group to fight back and reclaim control over their future.");
+		Film film20 = new Film("Race to Witch Mountain", "17/04/2009", "7 (Not suitable for people under 7)", "SCIENCE_FICTION", "98",
+				"The Rock, AnnaSophia Robb, Alexander Ludwig", "Andy Fickman", "A Las Vegas taxi driver enlists the help of a UFO expert to protect two brothers with paranormal powers from the clutches of an organization that wants to use them for its nefarious plans.");
+		Film film21 = new Film("Ron's Gone Wrong", "27/10/2021", "7 (Not suitable for people under 7)", "SCIENCE_FICTION", "107",
+				"Zach Galifianakis, Jack Dylan Grazer, Olivia Colman", "Sarah Smith, Jean-Phillipe Vine, Octavio E. Rodríguez", "Barney, an awkward high school student, has an unusual friendship with Ron, his new device that walks, talks and connects digitally. Ron's malfunction launches them on a journey to learn about true friendship.");
+		
 		
 		Comment com1 = new Comment("5", "This film is awesome");
 		Comment com2 = new Comment("4", "I liked it");
@@ -98,6 +105,9 @@ public class DatabaseInitializer {
 		setFilmImage(film16, "/static/Images/film16.jpg");
 		setFilmImage(film17, "/static/Images/film17.jpg");
 		setFilmImage(film18, "/static/Images/film18.jpg");
+		setFilmImage(film19, "/static/Images/film19.jpg");
+		setFilmImage(film20, "/static/Images/film20.jpg");
+		setFilmImage(film21, "/static/Images/film21.jpg");
 
 
 		filmRepository.save(film1);
@@ -118,6 +128,9 @@ public class DatabaseInitializer {
 		filmRepository.save(film16);
 		filmRepository.save(film17);
 		filmRepository.save(film18);
+		filmRepository.save(film19);
+		filmRepository.save(film20);
+		filmRepository.save(film21);
 
 
 	}

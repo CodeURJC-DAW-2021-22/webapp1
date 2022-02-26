@@ -16,21 +16,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
 import app.entity.User;
 import app.service.FilmService;
+import app.service.UserService;
 
 
 @Controller
 public class ControllerIndex {
 	
 	@Autowired
-	//private UsersRepository users;
+	private UserService userService;
+	@Autowired
 	private FilmService filmService;
 	
 	@GetMapping("/")
@@ -73,13 +73,15 @@ public class ControllerIndex {
 		return "register";
 	}
 	
-	@RequestMapping("/menuRegistered")
-	public String menuRegistered(Model model,@RequestParam String name, @RequestParam String email,
-			@RequestParam String pass, @RequestParam String passConfirm) {
-		// Insertar comprobación de que no existen usuarios iguales
-		if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) ) {
-			User customer = new User(name, email, pass);
-			//users.save(customer);
+	@PostMapping("/registerProcess")
+	public String registerProcess(Model model, User user) {
+		userService.save(user);
+		return "menuRegistered";
+	}
+	
+	@GetMapping("/menuRegistered")
+	public String menuRegistered(Model model) {
+		
 			model.addAttribute("trending", filmService.findAll());
 			
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
@@ -90,12 +92,11 @@ public class ControllerIndex {
 			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
 			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
 			
+			model.addAttribute("users", userService.findAll());
+			
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
 			return "menuRegistered";
-		}
-				
-		return "register";
 	}
 	
 	@GetMapping("/menuAdmin")
