@@ -172,7 +172,6 @@ public class ControllerIndex {
 		Optional<Film> film = filmService.findById(id);
 		if (film.isPresent()) {
 			filmService.delete(id);
-			// Eliminar también comentarios
 		}
 		return "redirect:/menuAdmin";
 	}
