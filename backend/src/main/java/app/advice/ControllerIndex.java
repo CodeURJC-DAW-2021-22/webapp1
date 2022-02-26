@@ -192,7 +192,7 @@ public class ControllerIndex {
 		
 		filmService.save(film);
 		
-		return "redirect: /menuAdmin";
+		return "redirect:/menuAdmin";
 	}
 	
 	@GetMapping("/editFilm/{id}")
@@ -203,7 +203,7 @@ public class ControllerIndex {
 			model.addAttribute("film", film.get());
 			return "editFilmPage";
 		} else {
-			return "redirect: /menuAdmin";
+			return "redirect:/menuAdmin";
 		}
 	}
 	
