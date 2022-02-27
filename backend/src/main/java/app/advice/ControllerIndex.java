@@ -34,8 +34,6 @@ import app.service.FilmService;
 public class ControllerIndex {
 	
 	@Autowired
-	private UserRepository userRepository;
-	@Autowired
 	private FilmService filmService;
 	
 	@GetMapping("/")
