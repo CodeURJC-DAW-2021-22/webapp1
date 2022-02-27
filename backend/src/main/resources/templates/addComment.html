@@ -70,14 +70,6 @@
 				{{#film}}
 	               <h1 class="card-title display-4"> {{title}} </h1>
 	               <div class="stars" id="rateYo"></div><p></p>
-	               <p><b>Release date: </b>{{releaseDate}}</p>
-	               <p><b>Minimum age: </b>{{minAge}}</p>
-	               <p><b>Genre: </b>{{genre}}</p>
-	               <p><b>Running time: </b>{{duration}} minutes</p>
-	               <p><b>Cast: </b>{{cast}}</p>
-	               <p><b>Director: </b>{{director}}</p>
-	               <h5>Plot:</h5>
-	               <p>{{plot}}</p> 
 	               <center><h4> Asserts </h4></center>
                		{{#comments}}
 						<p>{{note}}</p>
@@ -86,24 +78,23 @@
 			   		{{^comments}}
 			   			<p>There are no asserts yet</p>
 			   		{{/comments}}
-		  		{{/film}}
-				{{#film}}
-                <a href="/addComent/{{id}}"><button class="col-12 button2" type="button">Add coment</button></a>
-            	{{/film}}
+		  		 {{/film}}
+	
+                <button class="col-12 button2" type="button">
+                    Add coment
+                </button>
+                    <div class="form">
+                        <div class="card card-body">
+                            <div id="rateYo4"></div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Coment" value=""/>
+                                </div>
+                            </div>
+                            <button class="col-12 button" type="button" >Confirm</button>
+                        </div>
+                    </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid mt-5">
-    <div class="col">
-        <div class="row">
-            <h3 class="font-weight-bold">More like this</h3>
-            <div class="box">
-              {{#similar}}
-                <a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
-              {{/similar}}
-            </div>
-            <p></p>
         </div>
     </div>
 </div>

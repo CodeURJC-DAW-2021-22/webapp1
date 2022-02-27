@@ -164,6 +164,13 @@ public class ControllerIndex {
 		return "filmRegistered";
 	}
 	
+	@GetMapping("/addComment/{id}")
+	public String addComent(Model model, @PathVariable long id) {
+		Film film = filmService.findById(id).orElseThrow();
+		model.addAttribute("film", film);
+		return"addComment";
+	}
+	
 	@GetMapping("/filmAdmin/{id}")
 	public String filmAdmin(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
