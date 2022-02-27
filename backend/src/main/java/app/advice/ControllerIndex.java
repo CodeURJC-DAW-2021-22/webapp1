@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
+//import app.entity.User;
 import app.service.FilmService;
 
 
@@ -34,6 +35,7 @@ public class ControllerIndex {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private FilmService filmService;
 	
 	@GetMapping("/")
@@ -60,20 +62,15 @@ public class ControllerIndex {
 		}
 	}
 	
-	@GetMapping("/menuRegistered")
-	public String menuRegistered(Model model, HttpServletRequest request
-	// @RequestParam String name, @RequestParam String user, @RequestParam String pass, @RequestParam String passConfirm
-	){
-		String name = request.getUserPrincipal().getName();
-		app.entity.User user = userRepository.findByName(name).orElseThrow();
-		model.addAttribute("user", user.getName());
-		model.addAttribute("admin", request.isUserInRole("ADMIN"));
+	@RequestMapping("/menuRegistered")
+	public String menuRegistered(Model model,@RequestParam String name, @RequestParam String email,
+			@RequestParam String pass, @RequestParam String passConfirm) {
 		// Insertar comprobación de que no existen usuarios iguales
-		if(//(pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) &&
-		 (!user.equals("admin"))) {
+		if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && (!email.equals("admin")) ) {
 			//User customer = new User(name, email, pass);
 			//users.save(customer);
-			model.addAttribute("trending", filmService.findAll());			
+			model.addAttribute("trending", filmService.findAll());
+			
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
 			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
@@ -81,15 +78,15 @@ public class ControllerIndex {
 			model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
 			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
 			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
+			
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
 			return "menuRegistered";
-		}	
-		else if(//(!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && 
-		(user.equals("admin"))){
-			menuAdmin(model);
-			return "menuAdmin";
 		}
+		else if ((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && (email.equals("admin"))){
+			menuAdmin(model);
+		}
+				
 		return "register";
 	}
 	

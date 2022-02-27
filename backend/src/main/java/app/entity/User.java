@@ -33,10 +33,9 @@ public class User{
 		
 	}
 
-	public User(String name, String email, String password, String encodedPassword, String... roles) {
+	public User(String name, String email, String encodedPassword, String... roles) {
 		this.name=name;
 		this.email=email;
-		this.password=password;
 		this.encodedPassword=encodedPassword;
 		this.roles=List.of(roles);
 	}

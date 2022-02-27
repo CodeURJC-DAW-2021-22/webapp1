@@ -86,8 +86,8 @@ public class DatabaseInitializer {
 		filmRepository.save(film8);
 
 		//User examples
-        userRepository.save(new User("user", "user", "pass", passwordEncoder.encode("pass"), "USER"));
-        userRepository.save(new User("admin", "admin", "adminpass", passwordEncoder.encode("adminpass"), "USER", "ADMIN"));
+        userRepository.save(new User("user", "user", passwordEncoder.encode("pass"), "USER"));
+        userRepository.save(new User("admin", "admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN"));
 	}
 
 	public void setFilmImage(Film film, String classpathResource) throws IOException {
