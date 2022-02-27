@@ -76,11 +76,11 @@ public class ControllerIndex {
 	@PostMapping("/registerProcess")
 	public String registerProcess(Model model, User user) {
 		userService.save(user);
-		return "redirect:/menuRegistered";
+		return "redirect:/menuRegistered/" + user.getId();
 	}
 	
-	@GetMapping("/menuRegistered")
-	public String menuRegistered(Model model) {
+	@GetMapping("/menuRegistered/{id}")
+	public String menuRegistered(Model model, @PathVariable long id) {
 		
 			model.addAttribute("trending", filmService.findAll());
 			
@@ -92,7 +92,7 @@ public class ControllerIndex {
 			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
 			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
 			
-			model.addAttribute("users", userService.findAll());
+			model.addAttribute("user", userService.findById(id));
 			
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
@@ -124,8 +124,10 @@ public class ControllerIndex {
 	}
 	
 	
-	@GetMapping("/editProfile")
-	public String editProfile(Model model) {
+	@GetMapping("/editProfile/{id}")
+	public String editProfile(Model model, @PathVariable long id) {
+		User user = userService.findById(id).orElseThrow();
+		model.addAttribute("user", user);
 		return "editProfile";
 	}
 	
