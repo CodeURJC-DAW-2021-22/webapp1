@@ -76,7 +76,7 @@ public class ControllerIndex {
 	@PostMapping("/registerProcess")
 	public String registerProcess(Model model, User user) {
 		userService.save(user);
-		return "menuRegistered";
+		return "redirect:/menuRegistered";
 	}
 	
 	@GetMapping("/menuRegistered")
@@ -116,10 +116,13 @@ public class ControllerIndex {
 		return "menuAdmin";
 	}
 	
-	@GetMapping("/profile")
-	public String profile(Model model) {
+	@GetMapping("/profile/{id}")
+	public String profile(Model model, @PathVariable long id) {
+		User user = userService.findById(id).orElseThrow();
+		model.addAttribute("user", user);
 		return "profile";
 	}
+	
 	
 	@GetMapping("/editProfile")
 	public String editProfile(Model model) {
