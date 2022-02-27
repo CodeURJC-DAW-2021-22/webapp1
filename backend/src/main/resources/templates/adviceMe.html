@@ -8,7 +8,10 @@
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="chartAdviceMe.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="loadButton.js"></script>
   <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="loadingButton.css" type="text/css">
 </head>
 <body>
   <div class="wrapper">
@@ -41,11 +44,21 @@
       <h1 id="home">Best Movie Genres</h1>
       <div id="piechart"></div>
       
+      <!--Prueba-->
+	<button id='getDataBtn'>More Films</button>
+	
+	<div id="moreFilms"></div>
+	
+	
+	<div id="loader" class="lds-dual-ring hidden overlay"></div>
+      
+      <!--Prueba-->
       <h1 id="trending">Trending Now</h1>
       <div class="box">
         {{#trending}}
       		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/trending}}
+      	
 	  </div>
       
       <h1 id="action">Action</h1>

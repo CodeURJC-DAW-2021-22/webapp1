@@ -9,6 +9,6 @@ import app.entity.Genre;
 
 public interface FilmRepository extends JpaRepository<Film, Long> {
 
-	public List<Film> findByGenre(Genre genre);
+	public List<Film> findByGenre(String genre);
 
 }

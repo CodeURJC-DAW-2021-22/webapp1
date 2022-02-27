@@ -5,12 +5,16 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -20,23 +24,33 @@ public class Film {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+	@Column
 	private String title;
+	@Column
 	private String releaseDate;
+	@Column
 	private float averageStars;
+	@Column
 	private String minAge;
-	private Genre genre;
-	private int duration;
+	@Column
+	private String genre;
+	@Column
+	private String duration;
+	@Column (name="gente")
 	private String cast;
+	@Column
 	private String director;
+	@Column
 	private String plot;
 	
 	@OneToMany
 	private List<Comment> comments = new ArrayList<>();
 
 	@Lob
+	@JsonIgnore
 	private Blob imageFile;
 
+	@Column
 	private boolean image;
 	
 	public Film() {
@@ -47,8 +61,8 @@ public class Film {
         this.title = title;
         this.releaseDate = releaseDate;
         this.minAge = minAge;
-        this.genre = Genre.valueOf(genre.toUpperCase());
-        this.duration = Integer.parseInt(duration);
+        this.genre = genre;
+        this.duration = duration;
         this.cast = cast;
         this.director = director;
         this.plot = plot;
@@ -87,11 +101,11 @@ public class Film {
         return minAge;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 
@@ -137,10 +151,10 @@ public class Film {
     }
 
     public void setGenre(String genre) {
-        this.genre = Genre.valueOf(genre.toUpperCase());
+        this.genre = genre;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 

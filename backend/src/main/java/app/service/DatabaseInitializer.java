@@ -79,7 +79,7 @@ public class DatabaseInitializer {
 
 		film1.getComments().add(com1);
 		film1.getComments().add(com2);
-	
+
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");
 		setFilmImage(film3, "/static/Images/film3.jpg");

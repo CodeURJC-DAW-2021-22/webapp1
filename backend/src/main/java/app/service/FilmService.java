@@ -20,7 +20,7 @@ public class FilmService {
 		return repository.findById(id);
 	}
 	
-	public List<Film> findByGenre(Genre genre){		
+	public List<Film> findByGenre(String genre){		
 		return repository.findByGenre(genre);
 	}
 	
