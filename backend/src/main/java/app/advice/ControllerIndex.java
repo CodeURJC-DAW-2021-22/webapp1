@@ -4,9 +4,13 @@ package app.advice;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.concurrent.PriorityBlockingQueue;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
-//import app.entity.User;
 import app.service.FilmService;
 
 
@@ -30,7 +33,7 @@ import app.service.FilmService;
 public class ControllerIndex {
 	
 	@Autowired
-	//private UsersRepository users;
+	private UserRepository userRepository;
 	private FilmService filmService;
 	
 	@GetMapping("/")
@@ -57,11 +60,17 @@ public class ControllerIndex {
 		}
 	}
 	
-	@RequestMapping("/menuRegistered")
-	public String menuRegistered(Model model,@RequestParam String name, @RequestParam String user,
-			@RequestParam String pass, @RequestParam String passConfirm) {
+	@GetMapping("/menuRegistered")
+	public String menuRegistered(Model model, HttpServletRequest request
+	// @RequestParam String name, @RequestParam String user, @RequestParam String pass, @RequestParam String passConfirm
+	){
+		String name = request.getUserPrincipal().getName();
+		app.entity.User user = userRepository.findByName(name).orElseThrow();
+		model.addAttribute("user", user.getName());
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		// Insertar comprobación de que no existen usuarios iguales
-		if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && (!user.equals("admin"))) {
+		if(//(pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) &&
+		 (!user.equals("admin"))) {
 			//User customer = new User(name, email, pass);
 			//users.save(customer);
 			model.addAttribute("trending", filmService.findAll());			
@@ -76,8 +85,10 @@ public class ControllerIndex {
 			//model.addAttribute("commented", filmService.);
 			return "menuRegistered";
 		}	
-		else if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && (user.equals("admin"))){
+		else if(//(!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && 
+		(user.equals("admin"))){
 			menuAdmin(model);
+			return "menuAdmin";
 		}
 		return "register";
 	}
