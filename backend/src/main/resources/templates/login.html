@@ -11,24 +11,26 @@
 <body>
   <div class="screen-1">
     <img class="logo" src="../Images/logo.png" alt="logo" width="300" height="300">
-    <div class="email">
-      <label for="email">E-mail</label>
-      <div class="sec-2">
-        <ion-icon name="mail-outline"></ion-icon>
-        <input type="email" name="email" placeholder="Username@gmail.com"/>
+    <form action="/login" method="post">
+      <div class="username">
+        <label for="username">Username</label>
+        <div class="sec-2">
+          <input type="username" name="username" placeholder="Username"/>
+        </div>
       </div>
-    </div>
 
-    <div class="password">
-      <label for="password">Password</label>
-      <div class="sec-2">
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <input class="pas" type="password" name="password" placeholder="············"/>
-        <ion-icon class="show-hide" name="eye-outline"></ion-icon>
+      <div class="password">
+        <label for="password">Password</label>
+        <div class="sec-2">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input class="pas" type="password" name="password" placeholder="············"/>
+          <ion-icon class="show-hide" name="eye-outline"></ion-icon>
+        </div>
       </div>
-    </div>
 
-    <button class="login"><a href="/menuRegistered">Log in</a></button>
+      <button class="login"><a href="/menuRegistered.html">Log in</a></button>
+      <input type="hidden" name="_csrf" value="{{token}}"/>
+    </form>
     <div class="footer"><span>You don't have an account yet? <a href="/register">Sign up</a></span></div>
   </div>
 </body>
