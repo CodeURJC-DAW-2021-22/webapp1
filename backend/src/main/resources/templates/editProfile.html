@@ -34,49 +34,50 @@
             <div class="note">
                 <p>Edit your profile</p>
             </div>
-
-            <div class="form-content">
-                <div class="row">
-                  {{#user}}
-                    <div class="col-md-6">
-                        <div class="name"><p>User name</p></div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="{{name}}" value=""/>
-                        </div>
-                        <div class="name"><p>E-mail</p></div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="{{email}}" value=""/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="name"><p>Password</p></div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="******" value=""/>
-                        </div>
-                        <div class="name"><p>Confirm password</p></div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="******" value=""/>
-                        </div>
-                    </div>
-                  {{/user}}
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="left">
-                        {{#user}}
-                            <button type="button" class="btnSubmit"><a href="/profile/{{id}}"><b>Save</b></a></button>
-                        {{/user}}
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="right">
-                        {{#user}}
-                            <button type="button" class="btnSubmit"><a href="/profile/{{id}}"><b>Cancel</b></a></button>
-                        {{/user}}
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<form action="/editProfile" method="post" enctype="multipart/form-data">
+	            <div class="form-content">
+	                <div class="row">
+	                  {{#user}}
+	                    <div class="col-md-6">
+	                        <div class="name"><p>User name</p></div>
+	                        <div class="form-group">
+	                            <input type="text" class="form-control" placeholder="Name" value="{{name}}"/>
+	                        </div>
+	                        <div class="name"><p>E-mail</p></div>
+	                        <div class="form-group">
+	                            <input type="text" class="form-control" placeholder="Email" value="{{email}}"/>
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="name"><p>Password</p></div>
+	                        <div class="form-group">
+	                            <input type="text" class="form-control" placeholder="Password" value="{{password}}"/>
+	                        </div>
+	                        <div class="name"><p>Confirm password</p></div>
+	                        <div class="form-group">
+	                            <input type="text" class="form-control" placeholder="Confirm Password" value="{{password}}"/>
+	                        </div>
+	                    </div>
+	                  {{/user}}
+	                </div>
+	                <div class="row">
+	                    <div class="col">
+	                        <div class="left">
+	                        {{#user}}
+	                            <button type="button" class="btnSubmit"><a href="/profile/{{id}}"><b>Save</b></a></button>
+	                        {{/user}}
+	                        </div>
+	                    </div>
+	                    <div class="col">
+	                        <div class="right">
+	                        {{#user}}
+	                            <button type="button" class="btnSubmit"><a href="/profile/{{id}}"><b>Cancel</b></a></button>
+	                        {{/user}}
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	         </form>   
         </div>
     </div>
 </body>

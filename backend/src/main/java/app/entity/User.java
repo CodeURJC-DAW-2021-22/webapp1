@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,7 +23,6 @@ public class User{
 	private String name;
 	private String email;
 	private String password;
-	private String passwordConfirm;
 	/*
 	@OneToMany
 	private List<Comment> comments = new ArrayList<>();
@@ -33,22 +33,20 @@ public class User{
 	public User() {
 		
 	}
-	public User(String name, String email, String password, String passwordConfirm) {
+	public User(String name, String email, String password) {
 		this.name=name;
 		this.email=email;
 		this.password=password;
-		this.passwordConfirm=passwordConfirm;
 	}
-	/*
-	// Comments
+
+	@OneToMany
+	private List<Comment> comments = new ArrayList<>();
+	
 	public void addComment(Comment comment) {
-		this.comments.add(comment);
+		comments.add(comment);
+		comment.setComment(comment);
 	}
 	
-	public void deleteComment(Comment comment) {
-		this.comments.remove(comment);
-	}
-	*/
 	// Getters
 	public String getName() {
 		return name;

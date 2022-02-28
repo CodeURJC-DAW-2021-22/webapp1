@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Comment {
@@ -22,6 +23,9 @@ public class Comment {
         this.stars = Integer.parseInt(stars);
         this.note = note;
     }
+	
+	@ManyToOne
+	private User user;
 
 	// Getters
     public int getStars() {
@@ -38,9 +42,12 @@ public class Comment {
         this.stars = stars;
     }
 
-
-
     public void setNote(String note) {
         this.note = note;
     }
+    
+    public void setComment(Comment comment) {
+		this.stars = comment.getStars();
+		this.note = comment.getNote();
+	}
 }
