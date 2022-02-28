@@ -35,6 +35,8 @@ public class ControllerIndex {
 	private UserService userService;
 	@Autowired
 	private FilmService filmService;
+	@Autowired
+	private CommentRepository commentRepository;
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
@@ -173,14 +175,16 @@ public class ControllerIndex {
 		model.addAttribute("film", film);
 		return"addComment";
 	}
-	/*
+	
 	@PostMapping("/addComment/{id}")
-	public String addComment(Model model, Comment comment, @PathVariable long id) {
+	public String addComment(Model model, @PathVariable long id, @RequestBody Comment comment) {
 		Film film = filmService.findById(id).orElseThrow();
+		comment.setFilm(film);
+		commentRepository.save(comment);
 		film.setComments(comment);
 		filmService.save(film);
-		return"addComment/" + film.getId();
-	}*/
+		return"redirect: /filmRegistered/" + film.getId();
+	}
 	
 	@GetMapping("/filmAdmin/{id}")
 	public String filmAdmin(Model model, @PathVariable long id) {

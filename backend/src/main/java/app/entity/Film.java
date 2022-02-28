@@ -32,7 +32,7 @@ public class Film {
 	private String director;
 	private String plot;
 	
-	@OneToMany //(mappedBy="film", cascade=CascadeType.ALL)
+	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Lob
@@ -54,12 +54,7 @@ public class Film {
         this.director = director;
         this.plot = plot;
     }
-    /*
-    // Comments
-    public void addComment(Comment comment) {
-    	this.comments.add(comment);
-    }
-    
+    /*    
     public void deleteComment(Comment comment) {
 		this.comments.remove(comment);
 		comment.setFilm(null);
@@ -170,6 +165,7 @@ public class Film {
 	
 	public void setComments(Comment comment) {
 		this.comments.add(comment);
+		comment.setFilm(this);
 	}
 	
 }
