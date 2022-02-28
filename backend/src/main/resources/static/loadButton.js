@@ -7,7 +7,7 @@ $( window ).on("load", function(){
             contenType: "aplication/json",
 			url: ('/more'),
 			success: function (result){
-				console.log(result);
+				$('#moreFilms').append(result);
 			}
         });
     })

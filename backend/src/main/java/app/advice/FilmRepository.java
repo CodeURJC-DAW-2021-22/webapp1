@@ -11,4 +11,5 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 
 	public List<Film> findByGenre(String genre);
 
+	public long count();
 }

@@ -49,8 +49,9 @@ public class ControllerIndex {
 	}
 	
 	@GetMapping("/more")
-	public List<Film> getFilms() {
-		return filmService.findAll();
+	public String getFilms(Model model) {
+		model.addAttribute("films", filmService.findAll());
+		return "movies";
 	}
 	
 	@GetMapping("/{id}/image")
