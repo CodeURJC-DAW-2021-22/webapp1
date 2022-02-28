@@ -177,11 +177,11 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/addComment/{id}")
-	public String addComment(Model model, @PathVariable long id, @RequestBody Comment comment) {
+	public String addComment(Model model, @PathVariable long id, Comment comment) {
 		Film film = filmService.findById(id).orElseThrow();
-		comment.setFilm(film);
-		commentRepository.save(comment);
+		
 		film.setComments(comment);
+		commentRepository.save(comment);
 		filmService.save(film);
 		return"redirect: /filmRegistered/" + film.getId();
 	}
