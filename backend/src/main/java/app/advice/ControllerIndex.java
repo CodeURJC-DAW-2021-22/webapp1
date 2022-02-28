@@ -173,14 +173,14 @@ public class ControllerIndex {
 		model.addAttribute("film", film);
 		return"addComment";
 	}
-	
+	/*
 	@PostMapping("/addComment/{id}")
 	public String addComment(Model model, Comment comment, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		film.setComments(comment);
 		filmService.save(film);
 		return"addComment/" + film.getId();
-	}
+	}*/
 	
 	@GetMapping("/filmAdmin/{id}")
 	public String filmAdmin(Model model, @PathVariable long id) {

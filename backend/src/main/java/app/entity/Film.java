@@ -32,7 +32,7 @@ public class Film {
 	private String director;
 	private String plot;
 	
-	@OneToMany(mappedBy="film", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany //(mappedBy="film", cascade=CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Lob
@@ -170,7 +170,6 @@ public class Film {
 	
 	public void setComments(Comment comment) {
 		this.comments.add(comment);
-    	comment.setFilm(this);
 	}
 	
 }

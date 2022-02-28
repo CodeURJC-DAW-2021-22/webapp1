@@ -11,9 +11,6 @@ public class Comment {
 	//private User user;
 	private int stars;
 	private String note;
-	@ManyToOne
-	private Film film;
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,8 +42,5 @@ public class Comment {
     public void setNote(String note) {
         this.note = note;
     }
-    
-	public void setFilm(Film film) {
-		this.film = film;		
-	}
+  
 }
