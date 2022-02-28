@@ -83,17 +83,21 @@
                 <button class="col-12 button2" type="button">
                     Add coment
                 </button>
+                {{#film}}
+                <form action="/addComment/{{id}}" method="post">
+                {{/film}}
                     <div class="form">
                         <div class="card card-body">
-                            <div id="rateYo4"></div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Coment" value=""/>
+                                    <input type="text" class="form-control" name="note" placeholder="Coment" value=""/>
+                                    <input type="text" class="form-control" name="stars" placeholder="Stars" value=""/>
                                 </div>
                             </div>
-                            <button class="col-12 button" type="button" >Confirm</button>
+                            <button class="col-12 button" type="submit" >Confirm</button>
                         </div>
                     </div>
+                <form>
             </div>
         </div>
     </div>

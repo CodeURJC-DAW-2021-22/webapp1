@@ -84,8 +84,8 @@ public class DatabaseInitializer {
 		commentRepository.save(com1);
 		commentRepository.save(com2);
 
-		film1.getComments().add(com1);
-		film1.getComments().add(com2);
+		film1.setComments(com1);
+		film1.setComments(com2);
 	
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");

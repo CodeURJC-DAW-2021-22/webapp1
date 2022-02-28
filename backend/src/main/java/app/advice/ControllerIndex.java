@@ -16,8 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import app.entity.Comment;
 import app.entity.Film;
 import app.entity.Genre;
 import app.entity.User;
@@ -169,6 +172,14 @@ public class ControllerIndex {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
 		return"addComment";
+	}
+	
+	@PostMapping("/addComment/{id}")
+	public String addComment(Model model, Comment comment, @PathVariable long id) {
+		Film film = filmService.findById(id).orElseThrow();
+		film.setComments(comment);
+		filmService.save(film);
+		return"addComment/" + film.getId();
 	}
 	
 	@GetMapping("/filmAdmin/{id}")

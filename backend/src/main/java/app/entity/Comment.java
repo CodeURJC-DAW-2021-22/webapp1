@@ -4,12 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Comment {
 	//private User user;
 	private int stars;
 	private String note;
+	@ManyToOne
+	private Film film;
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,9 +42,11 @@ public class Comment {
         this.stars = stars;
     }
 
-
-
     public void setNote(String note) {
         this.note = note;
     }
+    
+	public void setFilm(Film film) {
+		this.film = film;		
+	}
 }
