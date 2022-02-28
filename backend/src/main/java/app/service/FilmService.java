@@ -1,9 +1,12 @@
 package app.service;
 
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import app.advice.FilmRepository;
@@ -24,12 +27,20 @@ public class FilmService {
 		return repository.findByGenre(genre);
 	}
 	
+	public Page<Film> findByGenre(String genre, Pageable pageable){		
+		return repository.findByGenre(genre, pageable);
+	}
+	
 	public boolean exist(long id) {
 		return repository.existsById(id);
 	}
 
 	public List<Film> findAll() {
 		return repository.findAll();
+	}
+	
+	public Page<Film> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
 	}
 
 	public void save(Film film) {

@@ -43,23 +43,19 @@
     <section class="main-container" >
       <h1 id="home">Best Movie Genres</h1>
       <div id="piechart"></div>
-      
-      <!--Prueba-->
-	<button id='getDataBtn'>More Films</button>
-	
-	<div id="moreFilms"></div>
-	
-	
-	<div id="loader" class="lds-dual-ring hidden overlay"></div>
-      
-      <!--Prueba-->
+
       <h1 id="trending">Trending Now</h1>
       <div class="box">
         {{#trending}}
       		<a href="/filmUnregistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/trending}}
-      	
+			
 	  </div>
+	  <!--Hay que dejar un espacio-->
+	  <div id="moreFilms"></div>
+      <button id='getDataBtn'>More Films</button>
+      <div id="loader" class="lds-dual-ring hidden overlay"></div>
+      
       
       <h1 id="action">Action</h1>
       <div class="box">

@@ -11,6 +11,8 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,26 +33,37 @@ import app.service.FilmService;
 @Controller
 public class ControllerIndex {
 	
+	private int indexTrending;
+	
 	@Autowired
 	private FilmService filmService;
 	
+	private void valueIndex(int num) {
+		indexTrending=num;
+	}
+	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
-		model.addAttribute("trending", filmService.findAll());
+		valueIndex(0);
 		
-		model.addAttribute("action", filmService.findByGenre("ACTION"));
-		model.addAttribute("adventure", filmService.findByGenre("ADVENTURE"));
-		model.addAttribute("animation", filmService.findByGenre("ANIMATION"));
-		model.addAttribute("comedy", filmService.findByGenre("COMEDY"));
-		model.addAttribute("drama", filmService.findByGenre("DRAMA"));
-		model.addAttribute("horror", filmService.findByGenre("HORROR"));
-		model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION"));
+		model.addAttribute("trending", filmService.findAll(PageRequest.of(indexTrending,6)));
+		
+		model.addAttribute("action", filmService.findByGenre("ACTION", PageRequest.of(0,6)));
+		model.addAttribute("adventure", filmService.findByGenre("ADVENTURE", PageRequest.of(0,6)));
+		model.addAttribute("animation", filmService.findByGenre("ANIMATION", PageRequest.of(0,6)));
+		model.addAttribute("comedy", filmService.findByGenre("COMEDY", PageRequest.of(0,6)));
+		model.addAttribute("drama", filmService.findByGenre("DRAMA", PageRequest.of(0,6)));
+		model.addAttribute("horror", filmService.findByGenre("HORROR", PageRequest.of(0,6)));
+		model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION", PageRequest.of(0,6)));
+		
+		valueIndex(1);
 		return "adviceMe";
 	}
 	
 	@GetMapping("/more")
 	public String getFilms(Model model) {
-		model.addAttribute("films", filmService.findAll());
+		model.addAttribute("films", filmService.findAll(PageRequest.of(indexTrending,6)));
+		this.indexTrending += 1;
 		return "movies";
 	}
 	
@@ -87,15 +100,15 @@ public class ControllerIndex {
 		if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) ) {
 			User customer = new User(name, email, pass);
 			//users.save(customer);
-			model.addAttribute("trending", filmService.findAll());
+			model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 			
-			model.addAttribute("action", filmService.findByGenre("ACTION"));
-			model.addAttribute("adventure", filmService.findByGenre("ADVENTURE"));
-			model.addAttribute("animation", filmService.findByGenre("ANIMATION"));
-			model.addAttribute("comedy", filmService.findByGenre("COMEDY"));
-			model.addAttribute("drama", filmService.findByGenre("DRAMA"));
-			model.addAttribute("horror", filmService.findByGenre("HORROR"));
-			model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION"));
+			model.addAttribute("action", filmService.findByGenre("ACTION", PageRequest.of(0,6)));
+			model.addAttribute("adventure", filmService.findByGenre("ADVENTURE", PageRequest.of(0,6)));
+			model.addAttribute("animation", filmService.findByGenre("ANIMATION", PageRequest.of(0,6)));
+			model.addAttribute("comedy", filmService.findByGenre("COMEDY", PageRequest.of(0,6)));
+			model.addAttribute("drama", filmService.findByGenre("DRAMA", PageRequest.of(0,6)));
+			model.addAttribute("horror", filmService.findByGenre("HORROR", PageRequest.of(0,6)));
+			model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION", PageRequest.of(0,6)));
 			
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
@@ -107,15 +120,15 @@ public class ControllerIndex {
 	
 	@GetMapping("/menuAdmin")
 	public String menuAdmin(Model model) {
-		model.addAttribute("trending", filmService.findAll());
+		model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 		
-		model.addAttribute("action", filmService.findByGenre("ACTION"));
-		model.addAttribute("adventure", filmService.findByGenre("ADVENTURE"));
-		model.addAttribute("animation", filmService.findByGenre("ANIMATION"));
-		model.addAttribute("comedy", filmService.findByGenre("COMEDY"));
-		model.addAttribute("drama", filmService.findByGenre("DRAMA"));
-		model.addAttribute("horror", filmService.findByGenre("HORROR"));
-		model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION"));
+		model.addAttribute("action", filmService.findByGenre("ACTION", PageRequest.of(0,6)));
+		model.addAttribute("adventure", filmService.findByGenre("ADVENTURE", PageRequest.of(0,6)));
+		model.addAttribute("animation", filmService.findByGenre("ANIMATION", PageRequest.of(0,6)));
+		model.addAttribute("comedy", filmService.findByGenre("COMEDY", PageRequest.of(0,6)));
+		model.addAttribute("drama", filmService.findByGenre("DRAMA", PageRequest.of(0,6)));
+		model.addAttribute("horror", filmService.findByGenre("HORROR", PageRequest.of(0,6)));
+		model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION", PageRequest.of(0,6)));
 
 		//model.addAttribute("recommendation", filmService.);
 		//model.addAttribute("commented", filmService.);

@@ -6,9 +6,15 @@ $( window ).on("load", function(){
             type: "GET",
             contenType: "aplication/json",
 			url: ('/more'),
+			beforeSend: function () {
+                $('#loader').removeClass('hidden')
+            },
 			success: function (result){
 				$('#moreFilms').append(result);
-			}
+			},
+			complete: function () {
+                $('#loader').addClass('hidden')
+            },
         });
     })
 })
