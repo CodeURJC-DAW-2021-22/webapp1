@@ -1,10 +1,10 @@
 package app.entity;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 
-import java.util.List;
+//import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -25,8 +25,8 @@ public class User{
 	private String name;
 	private String email;
 
-	private String password;
-	private String passwordConfirm;
+	//private String password;
+	//private String passwordConfirm;
 	/*
 	@OneToMany
 	private List<Comment> comments = new ArrayList<>();
@@ -41,13 +41,12 @@ public class User{
 	public User() {
 		
 	}
-	public User(String name, String email, String password, String passwordConfirm) {}
 
 	public User(String name, String email, String encodedPassword, String... roles) {
 		this.name=name;
 		this.email=email;
-		this.password=password;
-		this.passwordConfirm=passwordConfirm;
+		//this.password=password;
+		//this.passwordConfirm=passwordConfirm;
 		this.encodedPassword=encodedPassword;
 		this.roles=List.of(roles);
 	}

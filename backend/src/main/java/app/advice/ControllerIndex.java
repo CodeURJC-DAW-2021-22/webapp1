@@ -28,6 +28,7 @@ import app.entity.Film;
 import app.entity.Genre;
 import app.service.FilmService;
 import app.service.UserService;
+import app.service.messageAutomatic;
 
 
 
@@ -36,6 +37,9 @@ public class ControllerIndex {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private messageAutomatic mail;
 	
 	@Autowired
 	private FilmService filmService;
@@ -90,8 +94,9 @@ public class ControllerIndex {
 		return "redirect:/menuRegistered/" + user.getId();
 	}
 	
-	@GetMapping("/menuRegistered/{id}")
-	public String menuRegistered(Model model, @PathVariable long id, HttpServletRequest request) {
+	@GetMapping("/menuRegistered")
+	public String menuRegistered(Model model, //@PathVariable long id,
+	HttpServletRequest request) {
 		// Insertar comprobación de que no existen usuarios iguales
 
 		model.addAttribute("username", request.getUserPrincipal().getName());
@@ -108,7 +113,7 @@ public class ControllerIndex {
 			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
 			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
 			
-			model.addAttribute("user", userService.findById(id));
+			//model.addAttribute("user", userService.findById(id));
 			
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
@@ -209,6 +214,7 @@ public class ControllerIndex {
 			film.setImage(true);
 		}
 		filmService.save(film);
+		mail.sendEmail(film.getTitle(), "adviceMe1111@gmail.com");
 		
 		return "redirect:/menuAdmin";
 		//model.addAttribute("recommendation", filmService.);
