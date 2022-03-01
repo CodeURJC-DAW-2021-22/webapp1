@@ -56,26 +56,16 @@ public class ControllerIndex {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
-	@GetMapping("/hola")
-	public String hola(Model model, HttpServletRequest request) {
-		model.addAttribute("user", request.getUserPrincipal());
-		return "hola";
-	}
 
 	@GetMapping("/menuRegistered")
 	public String menuRegistered(Model model, HttpServletRequest request) {
 		// Insertar comprobación de que no existen usuarios iguales
 
-		if(request.getUserPrincipal() == null){
-			System.out.println("No logueado!!!!! ---------------------------");
+		model.addAttribute("username", request.getUserPrincipal().getName());
+		if (request.isUserInRole("ADMIN")){
+			return "redirect:/menuAdmin";
 		}
-
-		//model.addAttribute("username", request.getUserPrincipal().getName());
-		//if (request.isUserInRole("ADMIN")){
-		//	return "redirect:/menuAdmin";
-		//}
-		//else{
+		else{
 			model.addAttribute("trending", filmService.findAll());
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
@@ -88,7 +78,7 @@ public class ControllerIndex {
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
 			return "menuRegistered";
-		//}
+		}
 	}
 	
 	@GetMapping("/menuAdmin")
