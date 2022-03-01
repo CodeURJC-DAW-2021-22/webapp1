@@ -23,11 +23,11 @@ public class FilmService {
 		return repository.findById(id);
 	}
 	
-	public List<Film> findByGenre(String genre){		
-		return repository.findByGenre(genre);
+	public List<Film> findByGenre(Genre similar){		
+		return repository.findByGenre(similar);
 	}
 	
-	public Page<Film> findByGenre(String genre, Pageable pageable){		
+	public Page<Film> findByGenre(Genre genre, Pageable pageable){		
 		return repository.findByGenre(genre, pageable);
 	}
 	
@@ -49,6 +49,14 @@ public class FilmService {
 
 	public void delete(long id) {
 		repository.deleteById(id);
+	}
+
+	public long count() {
+		return repository.count();
+	}
+
+	public long countByGenre(Genre genre) {
+		return repository.countByGenre(genre);
 	}
 	
 }

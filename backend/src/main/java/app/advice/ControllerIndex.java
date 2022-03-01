@@ -42,23 +42,37 @@ public class ControllerIndex {
 		
 		model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 		
-		model.addAttribute("action", filmService.findByGenre("ACTION", PageRequest.of(0,6)));
-		model.addAttribute("adventure", filmService.findByGenre("ADVENTURE", PageRequest.of(0,6)));
-		model.addAttribute("animation", filmService.findByGenre("ANIMATION", PageRequest.of(0,6)));
-		model.addAttribute("comedy", filmService.findByGenre("COMEDY", PageRequest.of(0,6)));
-		model.addAttribute("drama", filmService.findByGenre("DRAMA", PageRequest.of(0,6)));
-		model.addAttribute("horror", filmService.findByGenre("HORROR", PageRequest.of(0,6)));
-		model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION", PageRequest.of(0,6)));
+		model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
+		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
+		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));
+		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6)));
+		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6)));
+		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6)));
+		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
 		
 		return "adviceMe";
 	}
 	
-
-	
 	@GetMapping("/more/{page}")
 	public String getFilms(Model model, @PathVariable int page) {
-		model.addAttribute("films", filmService.findAll(PageRequest.of(page,6)));
-		return "movies";
+		// Before returning a page it confirms that there are more left
+		if (page <= (int)Math.ceil(filmService.count()/6)) {
+			model.addAttribute("films", filmService.findAll(PageRequest.of(page,6)));
+			return "movies";
+		}
+		return null;
+	}
+	
+	@GetMapping("/moreGenre/{genre}/{page}")
+	public String getFilmsGenre(Model model, @PathVariable String genre, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		Genre gen = Genre.valueOf(genre);
+		if (page <= (int)Math.ceil(filmService.countByGenre(gen)/6)) {
+			
+			model.addAttribute("films", filmService.findByGenre(gen, PageRequest.of(page,6)));
+			return "movies";
+		}
+		return null;
 	}
 	
 	@GetMapping("/{id}/image")
@@ -96,13 +110,13 @@ public class ControllerIndex {
 			//users.save(customer);
 			model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 			
-			model.addAttribute("action", filmService.findByGenre("ACTION", PageRequest.of(0,6)));
-			model.addAttribute("adventure", filmService.findByGenre("ADVENTURE", PageRequest.of(0,6)));
-			model.addAttribute("animation", filmService.findByGenre("ANIMATION", PageRequest.of(0,6)));
-			model.addAttribute("comedy", filmService.findByGenre("COMEDY", PageRequest.of(0,6)));
-			model.addAttribute("drama", filmService.findByGenre("DRAMA", PageRequest.of(0,6)));
-			model.addAttribute("horror", filmService.findByGenre("HORROR", PageRequest.of(0,6)));
-			model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION", PageRequest.of(0,6)));
+			model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
+			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
+			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));
+			model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6)));
+			model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6)));
+			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6)));
+			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
 			
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
@@ -116,14 +130,14 @@ public class ControllerIndex {
 	public String menuAdmin(Model model) {
 		model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 		
-		model.addAttribute("action", filmService.findByGenre("ACTION", PageRequest.of(0,6)));
-		model.addAttribute("adventure", filmService.findByGenre("ADVENTURE", PageRequest.of(0,6)));
-		model.addAttribute("animation", filmService.findByGenre("ANIMATION", PageRequest.of(0,6)));
-		model.addAttribute("comedy", filmService.findByGenre("COMEDY", PageRequest.of(0,6)));
-		model.addAttribute("drama", filmService.findByGenre("DRAMA", PageRequest.of(0,6)));
-		model.addAttribute("horror", filmService.findByGenre("HORROR", PageRequest.of(0,6)));
-		model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION", PageRequest.of(0,6)));
-
+		model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
+		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
+		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));
+		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6)));
+		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6)));
+		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6)));
+		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
+		
 		//model.addAttribute("recommendation", filmService.);
 		//model.addAttribute("commented", filmService.);
 		return "menuAdmin";
@@ -158,7 +172,7 @@ public class ControllerIndex {
 	public String filmUnregistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
-		String similar = film.getGenre();
+		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmUnregistered";
 	} 
@@ -167,7 +181,7 @@ public class ControllerIndex {
 	public String filmRegistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
-		String similar = film.getGenre();
+		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmRegistered";
 	}
@@ -176,7 +190,7 @@ public class ControllerIndex {
 	public String filmAdmin(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
-		String similar = film.getGenre();
+		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmAdmin";
 	}

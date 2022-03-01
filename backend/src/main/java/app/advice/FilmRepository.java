@@ -11,9 +11,11 @@ import app.entity.Genre;
 
 public interface FilmRepository extends JpaRepository<Film, Long> {
 
-	public List<Film> findByGenre(String genre);
+	public List<Film> findByGenre(Genre similar);
 
-	public Page<Film> findByGenre(String genre, Pageable pageable);
+	public Page<Film> findByGenre(Genre genre, Pageable pageable);
 	
 	public long count();
+	
+	public long countByGenre(Genre genre);
 }

@@ -33,10 +33,10 @@ public class Film {
 	@Column
 	private String minAge;
 	@Column
-	private String genre;
+	private Genre genre;
 	@Column
 	private String duration;
-	@Column (name="gente")
+	@Column (name="casting")
 	private String cast;
 	@Column
 	private String director;
@@ -61,7 +61,7 @@ public class Film {
         this.title = title;
         this.releaseDate = releaseDate;
         this.minAge = minAge;
-        this.genre = genre;
+        this.genre = Genre.valueOf(genre);
         this.duration = duration;
         this.cast = cast;
         this.director = director;
@@ -101,7 +101,7 @@ public class Film {
         return minAge;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
@@ -150,7 +150,7 @@ public class Film {
         this.minAge = minAge;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
