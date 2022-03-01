@@ -110,6 +110,8 @@ header {
 
 .box {
   display: grid;
+  margin-top: 10px;
+  margin-bottom: 10px;
   grid-gap: 20px;
   grid-template-columns: repeat(6, minmax(100px, 1fr));
 }

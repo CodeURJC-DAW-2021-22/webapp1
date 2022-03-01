@@ -11,6 +11,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -33,20 +34,13 @@ import app.service.FilmService;
 @Controller
 public class ControllerIndex {
 	
-	private int indexTrending;
-	
 	@Autowired
 	private FilmService filmService;
 	
-	private void valueIndex(int num) {
-		indexTrending=num;
-	}
-	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
-		valueIndex(0);
 		
-		model.addAttribute("trending", filmService.findAll(PageRequest.of(indexTrending,6)));
+		model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 		
 		model.addAttribute("action", filmService.findByGenre("ACTION", PageRequest.of(0,6)));
 		model.addAttribute("adventure", filmService.findByGenre("ADVENTURE", PageRequest.of(0,6)));
@@ -56,14 +50,14 @@ public class ControllerIndex {
 		model.addAttribute("horror", filmService.findByGenre("HORROR", PageRequest.of(0,6)));
 		model.addAttribute("scifi", filmService.findByGenre("SCIENCE_FICTION", PageRequest.of(0,6)));
 		
-		valueIndex(1);
 		return "adviceMe";
 	}
 	
-	@GetMapping("/more")
-	public String getFilms(Model model) {
-		model.addAttribute("films", filmService.findAll(PageRequest.of(indexTrending,6)));
-		this.indexTrending += 1;
+
+	
+	@GetMapping("/more/{page}")
+	public String getFilms(Model model, @PathVariable Pageable page) {
+		model.addAttribute("films", filmService.findAll(page));
 		return "movies";
 	}
 	

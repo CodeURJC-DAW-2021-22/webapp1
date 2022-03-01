@@ -1,11 +1,21 @@
 // Define our button click listener
 $( window ).on("load", function(){
-    $('#getDataBtn').on("click",function () {
-        // On click, execute the ajax call.
+	valueIndex(1);
+    $('#btnTrending').on("click",()=>functionCall("btnTrending"))
+   
+})
+
+var indexTrending;
+
+function functionCall(index){
+	 // On click, execute the ajax call.
+	 
+	 value = searchIndex(index);
+
         $.ajax({
             type: "GET",
             contenType: "aplication/json",
-			url: ('/more'),
+			url: ('/more/' + value),
 			beforeSend: function () {
                 $('#loader').removeClass('hidden')
             },
@@ -16,5 +26,17 @@ $( window ).on("load", function(){
                 $('#loader').addClass('hidden')
             },
         });
-    })
-})
+}
+
+function searchIndex(index) {
+	value = 0;
+	if (index == "btnTrending") {
+		value=indexTrending;
+		this.indexTrending += 1;
+	}
+	return value;
+}
+
+function valueIndex(num) {
+	this.indexTrending=num;
+}
