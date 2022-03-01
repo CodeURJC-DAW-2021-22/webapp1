@@ -13,5 +13,6 @@ public class NoSuchElementExceptionCA {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(NoSuchElementException.class)
 	public void handleNoTFound() {
+		
 	}
 }

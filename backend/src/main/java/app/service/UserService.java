@@ -6,13 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.advice.UsersRepository;
+import app.advice.UserRepository;
 import app.entity.User;
 @Service
 public class UserService {
 	
 	@Autowired
-	private UsersRepository repository;
+	private UserRepository repository;
 	
 	public Optional<User> findById(long id) {
 		return repository.findById(id);

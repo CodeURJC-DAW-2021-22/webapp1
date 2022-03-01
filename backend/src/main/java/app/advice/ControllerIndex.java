@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -16,27 +18,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import app.entity.User;
 import app.entity.Film;
 import app.entity.Genre;
-import app.entity.User;
 import app.service.FilmService;
 import app.service.UserService;
 
 
+
 @Controller
 public class ControllerIndex {
-	
+
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private FilmService filmService;
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
 		model.addAttribute("trending", filmService.findAll());
-		
 		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
 		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
@@ -49,28 +55,33 @@ public class ControllerIndex {
 	
 	@GetMapping("/{id}/image")
 	public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
-
 		Optional<Film> film = filmService.findById(id);
 		if (film.isPresent() && film.get().getImageFile() != null) {
-
 			Resource file = new InputStreamResource(film.get().getImageFile().getBinaryStream());
-
-			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-					.contentLength(film.get().getImageFile().length()).body(file);
-
+			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").contentLength(film.get().getImageFile().length()).body(file);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
 	
-	@GetMapping("/login")
-	public String login(Model model) {
+    @RequestMapping("/login")
+	public String login() {
 		return "login";
 	}
 	
+	@RequestMapping("/loginerror")
+	public String loginerror() {
+		return "loginerror";
+	}
+
 	@GetMapping("/register")
-	public String register(Model model) {
+	public String register() {
 		return "register";
+	}
+
+	@GetMapping("/admin")
+	public String admin() {
+		return "admin";
 	}
 	
 	@PostMapping("/registerProcess")
@@ -80,10 +91,15 @@ public class ControllerIndex {
 	}
 	
 	@GetMapping("/menuRegistered/{id}")
-	public String menuRegistered(Model model, @PathVariable long id) {
-		
+	public String menuRegistered(Model model, @PathVariable long id, HttpServletRequest request) {
+		// Insertar comprobación de que no existen usuarios iguales
+
+		model.addAttribute("username", request.getUserPrincipal().getName());
+		if (request.isUserInRole("ADMIN")){
+			return "redirect:/menuAdmin";
+		}
+		else{
 			model.addAttribute("trending", filmService.findAll());
-			
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
 			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
@@ -97,20 +113,19 @@ public class ControllerIndex {
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
 			return "menuRegistered";
+		}
 	}
 	
 	@GetMapping("/menuAdmin")
 	public String menuAdmin(Model model) {
 		model.addAttribute("trending", filmService.findAll());
-		
 		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
 		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
 		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
 		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
 		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
-		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
-		
+		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));	
 		//model.addAttribute("recommendation", filmService.);
 		//model.addAttribute("commented", filmService.);
 		return "menuAdmin";
@@ -188,16 +203,17 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/addFilm")
-	public String addFilmProcess(Model model, Film film, MultipartFile imageField) throws IOException {	
-		
+	public String addFilmProcess(Model model, Film film, MultipartFile imageField) throws IOException {			
 		if (!imageField.isEmpty()) {
 			film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			film.setImage(true);
 		}
-		
 		filmService.save(film);
 		
 		return "redirect:/menuAdmin";
+		//model.addAttribute("recommendation", filmService.);
+		//model.addAttribute("commented", filmService.);
+
 	}
 	
 	@GetMapping("/editFilm/{id}")
