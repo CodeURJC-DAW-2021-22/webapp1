@@ -11,19 +11,13 @@ public class Comment {
 	private int stars;
 	private String note;
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	public Comment() {
-		
-	}
 	public Comment(String stars, String note) {
         this.stars = Integer.parseInt(stars);
-	}
-
-	public Comment(int stars, String note) {
-        this.stars = stars;
         this.note = note;
     }
 

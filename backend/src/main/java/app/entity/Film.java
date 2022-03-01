@@ -168,8 +168,9 @@ public class Film {
 		this.id = newId;	
 	}
 	
-	public void setComments(Comment comments) {
+	public void addComments(Comment comments) {
 		this.comments.add(comments);
+		//comments.setFilm(this);
 	}
 	
 }

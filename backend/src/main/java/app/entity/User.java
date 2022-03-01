@@ -35,10 +35,6 @@ public class User{
 	private List<String> roles;
 	// Hay que tener cuidado con las peticiones de datos, lo mismo pueden acabar pidiendoselo circularmente
 	// Añadir atributo de imagen
-	
-	public User() {
-		
-	}
 
 	public User(String name, String email, String encodedPassword, String... roles) {
 		this.name=name;
