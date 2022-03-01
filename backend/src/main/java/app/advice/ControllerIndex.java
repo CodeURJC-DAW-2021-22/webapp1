@@ -56,8 +56,8 @@ public class ControllerIndex {
 
 	
 	@GetMapping("/more/{page}")
-	public String getFilms(Model model, @PathVariable Pageable page) {
-		model.addAttribute("films", filmService.findAll(page));
+	public String getFilms(Model model, @PathVariable int page) {
+		model.addAttribute("films", filmService.findAll(PageRequest.of(page,6)));
 		return "movies";
 	}
 	
