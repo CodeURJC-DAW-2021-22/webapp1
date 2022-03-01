@@ -20,7 +20,6 @@ public class User{
 	
 	private String name;
 	private String email;
-	private String password;
 	private String encodedPassword;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -60,10 +59,6 @@ public class User{
 		return email;
 	}
 	
-	public String getPassword() {
-		return password;
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -83,10 +78,6 @@ public class User{
 	
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public void setRoles(List<String> roles){

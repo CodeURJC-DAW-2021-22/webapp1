@@ -4,13 +4,11 @@ package app.advice;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
-import java.util.concurrent.PriorityBlockingQueue;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -21,18 +19,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.Film;
 import app.entity.Genre;
-//import app.entity.User;
 import app.service.FilmService;
-
+//import app.entity.User;
 
 @Controller
 public class ControllerIndex {
-	
+
 	@Autowired
 	private FilmService filmService;
 	
@@ -60,15 +57,26 @@ public class ControllerIndex {
 		}
 	}
 	
-	@RequestMapping("/menuRegistered")
-	public String menuRegistered(Model model,@RequestParam String name, @RequestParam String email,
-			@RequestParam String pass, @RequestParam String passConfirm) {
+	@GetMapping("/hola")
+	public String hola(Model model, HttpServletRequest request) {
+		model.addAttribute("user", request.getUserPrincipal());
+		return "hola";
+	}
+
+	@GetMapping("/menuRegistered")
+	public String menuRegistered(Model model, HttpServletRequest request) {
 		// Insertar comprobación de que no existen usuarios iguales
-		if((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && (!email.equals("admin")) ) {
-			//User customer = new User(name, email, pass);
-			//users.save(customer);
+
+		if(request.getUserPrincipal() == null){
+			System.out.println("No logueado!!!!! ---------------------------");
+		}
+
+		//model.addAttribute("username", request.getUserPrincipal().getName());
+		//if (request.isUserInRole("ADMIN")){
+		//	return "redirect:/menuAdmin";
+		//}
+		//else{
 			model.addAttribute("trending", filmService.findAll());
-			
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
 			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
@@ -80,12 +88,7 @@ public class ControllerIndex {
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
 			return "menuRegistered";
-		}
-		else if ((!pass.equals(passConfirm)) && (!pass.isBlank()) && (!passConfirm.isBlank()) && (email.equals("admin"))){
-			menuAdmin(model);
-		}
-				
-		return "register";
+		//}
 	}
 	
 	@GetMapping("/menuAdmin")
