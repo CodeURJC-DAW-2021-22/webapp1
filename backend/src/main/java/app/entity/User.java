@@ -25,8 +25,6 @@ public class User{
 	private String name;
 	private String email;
 
-	//private String password;
-	//private String passwordConfirm;
 	/*
 	@OneToMany
 	private List<Comment> comments = new ArrayList<>();
@@ -45,8 +43,6 @@ public class User{
 	public User(String name, String email, String encodedPassword, String... roles) {
 		this.name=name;
 		this.email=email;
-		//this.password=password;
-		//this.passwordConfirm=passwordConfirm;
 		this.encodedPassword=encodedPassword;
 		this.roles=List.of(roles);
 	}
