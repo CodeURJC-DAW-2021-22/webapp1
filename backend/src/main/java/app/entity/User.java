@@ -41,13 +41,10 @@ public class User{
 	public User() {
 		
 	}
-	public User(String name, String email, String password, String passwordConfirm) {}
 
 	public User(String name, String email, String encodedPassword, String... roles) {
 		this.name=name;
 		this.email=email;
-		this.password=password;
-		this.passwordConfirm=passwordConfirm;
 		this.encodedPassword=encodedPassword;
 		this.roles=List.of(roles);
 	}
