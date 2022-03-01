@@ -33,7 +33,7 @@
         <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
         {{#user}}
         <a href="/profile/{{id}}">Account</a>
-        {{/user}}
+        {{/user}}    
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -42,8 +42,10 @@
     <section class="main-container" >
     	
       <!--Hay que añadir el enlace a la otra pantalla y el gráfico-->
-      <a href="/menuRegistered"><button class="button">For you</button></a>
-      <a href="/menuFollowing"><button class="button">Following</button></a>
+      {{#user}}
+      <a href="/menuRegistered/{{id}}"><button class="button">For you</button></a>
+      <a href="/menuFollowing/{{id}}"><button class="button">Following</button></a>
+      {{/user}}
           
       <h1 id="home">Best Movie Genres</h1>
       <div id="piechart"></div>      

@@ -24,7 +24,7 @@ body {
   margin-top: -3em;
 }
 
-.screen-1 .email {
+.screen-1 .username {
   background: white;
   box-shadow: 0 0 2em #e6e9f9;
   padding: 1em;
@@ -36,22 +36,22 @@ body {
   margin-top: -3em;
 }
 
-.screen-1 .email input {
+.screen-1 .username input {
   outline: none;
   border: none;
 }
 
-.screen-1 .email input::-moz-placeholder {
+.screen-1 .username input::-moz-placeholder {
   color: black;
   font-size: 0.9em;
 }
 
-.screen-1 .email input:-ms-input-placeholder {
+.screen-1 .username input:-ms-input-placeholder {
   color: black;
   font-size: 0.9em;
 }
 
-.screen-1 .email input::placeholder {
+.screen-1 .username input::placeholder {
   color: black;
   font-size: 0.9em;
 }
@@ -124,9 +124,6 @@ body {
 
 button {
   cursor: pointer;
-}
-
-button a {
   color: white;
   text-decoration: none;
 }

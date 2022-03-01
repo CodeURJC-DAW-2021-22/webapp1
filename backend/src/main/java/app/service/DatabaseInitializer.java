@@ -10,17 +10,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import app.advice.FilmRepository;
 import app.entity.Film;
+
 import app.entity.Comment;
+//import app.entity.Genre;
+import app.advice.UserRepository;
+import app.entity.User;
+
 
 @Service
 public class DatabaseInitializer {
-	
-	@Autowired 
+
+	@Autowired
 	private FilmRepository filmRepository;
-	
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+
 	@PostConstruct
 	public void init() throws IOException, URISyntaxException {
 		Film film1 = new Film("The mitchell vs the machines", "30/04/2021", "A (All people)", "COMEDY", "114",
@@ -38,13 +51,17 @@ public class DatabaseInitializer {
 		Film film5 = new Film("The Emperor's New Groove", "10/12/2000", "A (All people)", "ANIMATION", "78",
 				"David Spade, John Goodman, Eartha Kitt", "Mark Dindal",
 				"Emperor Kuzco was turned into a llama by his former administrator Yzma, and now he must regain his throne with the help of Pacha, a kind llama herder.");
-		Film film6 = new Film("The King's Man: The first mission", "22/12/2021", "16 (Not suitable for people under 16)", "ACTION", "131",
-				 "Daniel Brühl, Rhys Ifans, Matthew Goode, Aaron Taylor-Johnson", "Matthew Vaughn", "The criminal minds and the greatest tyrants in history plan to annihilate millions of people. A man will fight against time to avoid the worst. Thus, the first independent intelligence agency in the United Kingdom was born.");
+		Film film6 = new Film("The King's Man: The first mission", "22/12/2021",
+				"16 (Not suitable for people under 16)", "ACTION", "131",
+				"Daniel Brühl, Rhys Ifans, Matthew Goode, Aaron Taylor-Johnson", "Matthew Vaughn",
+				"The criminal minds and the greatest tyrants in history plan to annihilate millions of people. A man will fight against time to avoid the worst. Thus, the first independent intelligence agency in the United Kingdom was born.");
 		Film film7 = new Film("Tenet", "03/09/2020", "12 (Not suitable for people under 12)", "ACTION", "150",
-				"John David Washington, Robert Pattinson, Elizabeth Debicki, Dimple Kapadia, Michael Caine, Kenneth Branagh", "Christopher Nolar",
+				"John David Washington, Robert Pattinson, Elizabeth Debicki, Dimple Kapadia, Michael Caine, Kenneth Branagh",
+				"Christopher Nolar",
 				"Armed with a single word, Tenet, and fighting for the survival of the world, the protagonist travels through the dark world of international espionage on a mission that will go beyond real time.");
 		Film film8 = new Film("Eternals", "03/11/2021", "12 (Not suitable for people under 12)", "ACTION", "157",
-				"Salma Hayek, Angelina Jolie, Gemma Chan, Richard Madden, Kumail Nanjiani, Lia McHugh, Brian Tyree Henry, Lauren Ridloff, Barry Keoghan, Don Lee, Harish Patel, Kit Harington", "Chloé Zhao", 
+				"Salma Hayek, Angelina Jolie, Gemma Chan, Richard Madden, Kumail Nanjiani, Lia McHugh, Brian Tyree Henry, Lauren Ridloff, Barry Keoghan, Don Lee, Harish Patel, Kit Harington",
+				"Chloé Zhao",
 				"Millions of years ago, the cosmic beings known as the Celestials decided to genetically experiment on humans, and shaped our history and civilizations.");
 		Film film9 = new Film("Journey to the Center of the Earth", "05/09/2008", "A (All people)", "ADVENTURE", "93",
 				"Brendan Fraser, Josh Hutcherson, Anita Briem", "Eric Brevig", "On a quest to find out what happened to his missing brother, a scientist, his nephew, and their mountain guide discover a fantastical and dangerous world lost in the center of the Earth.");
@@ -77,9 +94,9 @@ public class DatabaseInitializer {
 		
 		Comment com1 = new Comment("5", "This film is awesome");
 		Comment com2 = new Comment("4", "I liked it");
-		
+
 		film1.addComments(com1);
-		film1.addComments(com2);
+		film2.addComments(com2);
 		
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");
@@ -102,7 +119,6 @@ public class DatabaseInitializer {
 		setFilmImage(film19, "/static/Images/film19.jpg");
 		setFilmImage(film20, "/static/Images/film20.jpg");
 		setFilmImage(film21, "/static/Images/film21.jpg");
-
 
 		filmRepository.save(film1);
 		filmRepository.save(film2);
@@ -127,12 +143,16 @@ public class DatabaseInitializer {
 		filmRepository.save(film21);
 
 
+		//User examples
+        userRepository.save(new User("user", "user", passwordEncoder.encode("pass"), "USER"));
+        userRepository.save(new User("admin", "admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN"));
+
 	}
-	
+
 	public void setFilmImage(Film film, String classpathResource) throws IOException {
 		film.setImage(true);
 		Resource image = new ClassPathResource(classpathResource);
 		film.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
 	}
-	
+
 }

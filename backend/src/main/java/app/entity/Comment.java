@@ -26,6 +26,7 @@ public class Comment {
 	public Comment() {
 		
 	}
+	
 	public Comment(String stars, String note) {
         this.stars = Integer.parseInt(stars);
         this.note = note;
@@ -36,7 +37,6 @@ public class Comment {
         return stars;
     }
 
-  
     public String getNote() {
         return note;
     }
