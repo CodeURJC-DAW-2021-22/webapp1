@@ -96,10 +96,11 @@ public class ControllerIndex {
 	
 	@GetMapping("/menuRegistered")
 	public String menuRegistered(Model model, //@PathVariable long id,
-	 HttpServletRequest request) {
+			HttpServletRequest request) {
 		// Insertar comprobación de que no existen usuarios iguales
 
 		model.addAttribute("username", request.getUserPrincipal().getName());
+		//User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		if (request.isUserInRole("ADMIN")){
 			return "redirect:/menuAdmin";
 		}
