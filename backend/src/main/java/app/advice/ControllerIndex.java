@@ -179,11 +179,11 @@ public class ControllerIndex {
 	@PostMapping("/addComment/{id}")
 	public String addComment(Model model, @PathVariable long id, Comment comment) {
 		Film film = filmService.findById(id).orElseThrow();
+		film.addComments(comment);
 		
-		film.setComments(comment);
 		commentRepository.save(comment);
 		filmService.save(film);
-		return"redirect: /filmRegistered/" + film.getId();
+		return"redirect:/filmRegistered/" + film.getId();
 	}
 	
 	@GetMapping("/filmAdmin/{id}")

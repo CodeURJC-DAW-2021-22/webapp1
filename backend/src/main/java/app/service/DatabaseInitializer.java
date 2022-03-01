@@ -81,11 +81,8 @@ public class DatabaseInitializer {
 		Comment com1 = new Comment("5", "This film is awesome");
 		Comment com2 = new Comment("4", "I liked it");
 		
-		film1.setComments(com1);
-		film1.setComments(com2);
-		
-		commentRepository.save(com1);
-		commentRepository.save(com2);
+		film1.addComments(com1);
+		film1.addComments(com2);
 		
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");

@@ -5,7 +5,7 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.persistence.CascadeType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +32,7 @@ public class Film {
 	private String director;
 	private String plot;
 	
-	@OneToMany //(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Lob
@@ -163,9 +163,9 @@ public class Film {
 		this.id = newId;	
 	}
 	
-	public void setComments(Comment comment) {
+	public void addComments(Comment comment) {
 		this.comments.add(comment);
-		//comment.setFilm(this);
+		comment.setFilm(this);
 	}
 	
 }
