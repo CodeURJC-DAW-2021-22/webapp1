@@ -3,10 +3,12 @@ package app.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -22,22 +24,20 @@ public class User{
 	private String name;
 	private String email;
 	private String password;
-	private String passwordConfirm;
-	/*
-	@OneToMany
+	
+	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
-	*/
+	
 	// Hay que tener cuidado con las peticiones de datos, lo mismo pueden acabar pidiendoselo circularmente
 	// Añadir atributo de imagen
 	
 	public User() {
 		
 	}
-	public User(String name, String email, String password, String passwordConfirm) {
+	public User(String name, String email, String password) {
 		this.name=name;
 		this.email=email;
 		this.password=password;
-		this.passwordConfirm=passwordConfirm;
 	}
 	/*
 	// Comments

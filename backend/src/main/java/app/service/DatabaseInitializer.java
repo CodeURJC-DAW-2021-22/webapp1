@@ -11,7 +11,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import app.advice.CommentRepository;
 import app.advice.FilmRepository;
 import app.entity.Film;
 import app.entity.Comment;
@@ -21,8 +20,6 @@ public class DatabaseInitializer {
 	
 	@Autowired 
 	private FilmRepository filmRepository;
-	@Autowired 
-	private CommentRepository commentRepository;
 	
 	@PostConstruct
 	public void init() throws IOException, URISyntaxException {
