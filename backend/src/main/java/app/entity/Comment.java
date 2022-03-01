@@ -20,10 +20,6 @@ public class Comment {
 	}
 	public Comment(String stars, String note) {
         this.stars = Integer.parseInt(stars);
-	}
-
-	public Comment(int stars, String note) {
-        this.stars = stars;
         this.note = note;
     }
 
