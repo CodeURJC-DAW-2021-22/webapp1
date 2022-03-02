@@ -22,6 +22,10 @@ public class Comment {
 	@ManyToOne
 	@JsonIgnore
 	private Film film;
+	/*
+	@ManyToOne
+	@JsonIgnore
+	private User user;*/
 	
 	public Comment() {
 		
@@ -57,4 +61,8 @@ public class Comment {
 	public void setFilm(Film film) {
 		this.film = film;		
 	}
+	/*
+	public void setUser(User user) {
+		this.user = user;		
+	}*/
 }

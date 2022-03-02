@@ -23,8 +23,8 @@ public class User{
 	private String name;
 	private String email;
 	
-	/*@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Comment> comments = new ArrayList<>();*/
+	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Comment> comments = new ArrayList<>();
 
 	private String encodedPassword;
 
@@ -47,6 +47,7 @@ public class User{
 	// Comments
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
+		comment.setUser(this);
 	}
 	
 	public void deleteComment(Comment comment) {

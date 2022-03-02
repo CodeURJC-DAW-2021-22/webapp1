@@ -19,14 +19,14 @@
         <a id="logo" href="#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
       </div>      
       <nav class="main-nav">                
-        <a href="#home">Home</a>
-        <a href="#action">Action</a>
-        <a href="#adventure">Adventure</a>
-        <a href="#animation">Animation</a>
-        <a href="#comedy">Comedy</a>
-        <a href="#drama">Drama</a>
-        <a href="#horror">Horror</a>
-        <a href="#scienceFiction">Science Fiction</a>  
+        <a href="/menuRegistered/#home">Home</a>
+        <a href="/menuRegistered/#action">Action</a>
+        <a href="/menuRegistered/#adventure">Adventure</a>
+        <a href="/menuRegistered/#animation">Animation</a>
+        <a href="/menuRegistered/#comedy">Comedy</a>
+        <a href="/menuRegistered/#drama">Drama</a>
+        <a href="/menuRegistered/#horror">Horror</a>
+        <a href="/menuRegistered/#scienceFiction">Science Fiction</a>  
       </nav>
       <nav class="sub-nav">
         <input type="text" placeholder="Search...">
@@ -34,7 +34,6 @@
         {{#user}}
         <a href="/profile/{{id}}">Account</a>
         {{/user}}    
-        <a href="/profile">Account</a>
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -44,7 +43,7 @@
     	
       <!--Hay que añadir el enlace a la otra pantalla y el gráfico-->
       {{#user}}
-      <a href="/menuRegistered/{{id}}"><button class="button">For you</button></a>
+      <a href="/menuRegistered"><button class="button">For you</button></a>
       <a href="/menuFollowing/{{id}}"><button class="button">Following</button></a>
       {{/user}}
           

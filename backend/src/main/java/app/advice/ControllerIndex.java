@@ -95,12 +95,13 @@ public class ControllerIndex {
 	}
 	
 	@GetMapping("/menuRegistered")
-	public String menuRegistered(Model model, //@PathVariable long id,
-			HttpServletRequest request) {
+	public String menuRegistered(Model model, HttpServletRequest request) {
 		// Insertar comprobación de que no existen usuarios iguales
 
 		model.addAttribute("username", request.getUserPrincipal().getName());
-		//User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+
+    	User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+    	
 		if (request.isUserInRole("ADMIN")){
 			return "redirect:/menuAdmin";
 		}
@@ -114,12 +115,17 @@ public class ControllerIndex {
 			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
 			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
 			
-			//model.addAttribute("user", userService.findById(id));
+			model.addAttribute("user", user);
 			
 			//model.addAttribute("recommendation", filmService.);
 			//model.addAttribute("commented", filmService.);
 			return "menuRegistered";
 		}
+	}
+	
+	@GetMapping("/menuFollowing/{id}")
+	public String menuFollowing() {
+		return "menuFollowing";
 	}
 	
 	@GetMapping("/menuAdmin")
@@ -196,7 +202,6 @@ public class ControllerIndex {
 	public String addComment(Model model, @PathVariable long id, Comment comment) {
 		Film film = filmService.findById(id).orElseThrow();
 		film.addComments(comment);
-		
 		commentRepository.save(comment);
 		filmService.save(film);
 		return"redirect:/filmRegistered/" + film.getId();
