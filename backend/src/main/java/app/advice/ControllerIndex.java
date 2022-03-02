@@ -41,6 +41,7 @@ public class ControllerIndex {
 	
 	@Autowired
 	private FilmService filmService;
+
 	@Autowired
 	private CommentRepository commentRepository;
 	
@@ -91,6 +92,7 @@ public class ControllerIndex {
 	@PostMapping("/registerProcess")
 	public String registerProcess(Model model, User user) {
 		userService.save(user);
+		System.out.println(user.getRoles());
 		return "redirect:/menuRegistered";
 	}
 	
