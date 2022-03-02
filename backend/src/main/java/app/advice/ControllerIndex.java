@@ -26,7 +26,7 @@ import app.entity.Film;
 import app.entity.Genre;
 import app.service.FilmService;
 import app.service.UserService;
-import app.service.messageAutomatic;
+import app.service.MessageAutomatic;
 
 
 
@@ -37,13 +37,15 @@ public class ControllerIndex {
 	private UserService userService;
 
 	@Autowired
-	private messageAutomatic mail;
+	private MessageAutomatic mail;
 	
 	@Autowired
 	private FilmService filmService;
 
 	@Autowired
 	private CommentRepository commentRepository;
+
+	private User user;
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
@@ -102,7 +104,7 @@ public class ControllerIndex {
 
 		model.addAttribute("username", request.getUserPrincipal().getName());
 
-    	User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+    	user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
     	
 		if (request.isUserInRole("ADMIN")){
 			return "redirect:/menuAdmin";
@@ -146,8 +148,8 @@ public class ControllerIndex {
 	}
 	
 	@GetMapping("/profile/{id}")
-	public String profile(Model model, @PathVariable long id) {
-		User user = userService.findById(id).orElseThrow();
+	public String profile(Model model) {
+		model.addAttribute("id", user.getId());
 		model.addAttribute("user", user);
 		return "profile";
 	}
@@ -243,7 +245,6 @@ public class ControllerIndex {
 		return "redirect:/menuAdmin";
 		//model.addAttribute("recommendation", filmService.);
 		//model.addAttribute("commented", filmService.);
-
 	}
 	
 	@GetMapping("/editFilm/{id}")

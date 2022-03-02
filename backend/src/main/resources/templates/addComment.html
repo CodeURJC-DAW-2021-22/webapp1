@@ -70,7 +70,7 @@
 				{{#film}}
 	               <h1 class="card-title display-4"> {{title}} </h1>
 	               <div class="stars" id="rateYo"></div><p></p>
-	               <center><h4> Asserts </h4></center>
+	               <div class="center"><h4> Asserts </h4></div class="center">
                		{{#comments}}
 						<p>{{note}}</p>
 						<div class="stars" id="rateYo{{stars}}"></div><p></p>
@@ -90,19 +90,20 @@
                         <div class="card card-body">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="note" placeholder="Coment" value=""/>
-                                    <select name="stars" class="form-select" placeholder="Stars" value=""/>
-	                                <option selected>Stars</option>  
-	                                <option>0</option>
-	                                <option>1</option>
-	                                <option>2</option>
-	                                <option>3</option>
-	                                <option>4</option>
-	                                <option>5</option>
-	                            </select>
+                                    <input type="text" class="form-control" name="note" placeholder="Comment" value=""/>
+                                    <select name="stars" class="form-select" placeholder="Stars" value="">
+                                        <option selected>Stars</option>  
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+	                                </select>
                                 </div>
                             </div>
-                            <button class="col-12 button" type="submit" >Confirm</button>
+                            <button class="col-12 button" type="submit">Confirm</button>
+                            <input type="hidden" name="_csrf" value="{{token}}"/>
                         </div>
                     </div>
                 <form>
