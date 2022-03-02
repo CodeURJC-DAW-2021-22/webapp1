@@ -17,25 +17,21 @@
             <div class="form-content">
 				<form action="/registerProcess" method="post">
 	                <div class="row">
-	                    <div class="col-md-6">
+	                    <div class="col-md-12">
 	                        <div class="form-group">
 	                            <input type="text" name="name" class="form-control" placeholder="User name" value=""/>
 	                        </div>
 	                        <div class="form-group">
 	                            <input type="text" name="email" class="form-control" placeholder="E-mail" value=""/>
 	                        </div>
-	                    </div>
-	                    <div class="col-md-6">
 	                        <div class="form-group">
-	                            <input type="text" name="password" class="form-control" placeholder="Password" value=""/>
-	                        </div>
-	                        <div class="form-group">
-	                            <input type="text" name="passwordConfirm" class="form-control" placeholder="Confirm password" value=""/>
+	                            <input type="text" name="encodedPassword" class="form-control" placeholder="Password" value=""/>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="center">
-	                    	<button type="submit" class="btnSubmit"><a>Check in</a></button>
+	                	<button type="submit" class="btnSubmit"><a>Check in</a></button>
+	                	<input type="hidden" name="roles" value="USER"/>
 	                </div>
 				</form>
             </div>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import app.advice.UserRepository;
 import app.entity.User;
+
 @Service
 public class UserService {
 	
@@ -32,6 +33,10 @@ public class UserService {
 
 	public void delete(long id) {
 		repository.deleteById(id);
+	}
+	
+	public Optional<User> findByName(String name){
+		return repository.findByName(name);
 	}
 	
 }

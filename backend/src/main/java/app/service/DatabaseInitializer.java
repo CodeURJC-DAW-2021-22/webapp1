@@ -12,7 +12,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import app.advice.CommentRepository;
 import app.advice.FilmRepository;
 import app.entity.Film;
 
@@ -27,10 +26,6 @@ public class DatabaseInitializer {
 
 	@Autowired
 	private FilmRepository filmRepository;
-
-	@Autowired 
-	private CommentRepository commentRepository;
-	
 
 	@Autowired
 	private UserRepository userRepository;
@@ -96,17 +91,18 @@ public class DatabaseInitializer {
 		Film film21 = new Film("Ron's Gone Wrong", "27/10/2021", "7 (Not suitable for people under 7)", "SCIENCE_FICTION", "107",
 				"Zach Galifianakis, Jack Dylan Grazer, Olivia Colman", "Sarah Smith, Jean-Phillipe Vine, Octavio E. Rodríguez", "Barney, an awkward high school student, has an unusual friendship with Ron, his new device that walks, talks and connects digitally. Ron's malfunction launches them on a journey to learn about true friendship.");
 		
+		User user = new User("user", "user", passwordEncoder.encode("pass"), "USER");
+		User admin = new User("admin", "admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN");
 		
 		Comment com1 = new Comment("5", "This film is awesome");
 		Comment com2 = new Comment("4", "I liked it");
+
+		film1.addComments(com1);
+		film2.addComments(com2);
 		
-		commentRepository.save(com1);
-		commentRepository.save(com2);
-
-		film1.getComments().add(com1);
-		film1.getComments().add(com2);
-	
-
+		//user.addComment(com1);
+		//user.addComment(com2);
+		
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");
 		setFilmImage(film3, "/static/Images/film3.jpg");
@@ -136,6 +132,7 @@ public class DatabaseInitializer {
 		filmRepository.save(film5);
 		filmRepository.save(film6);
 		filmRepository.save(film7);
+		filmRepository.save(film8);
 		filmRepository.save(film9);
 		filmRepository.save(film10);
 		filmRepository.save(film11);
@@ -150,10 +147,9 @@ public class DatabaseInitializer {
 		filmRepository.save(film20);
 		filmRepository.save(film21);
 
-
 		//User examples
-        userRepository.save(new User("user", "user", passwordEncoder.encode("pass"), "USER"));
-        userRepository.save(new User("admin", "admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN"));
+        userRepository.save(user);
+        userRepository.save(admin);
 
 	}
 
