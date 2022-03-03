@@ -1,0 +1,24 @@
+<header>
+	<div class="AdviceMeLogo">
+		<a id="logo" href="../Menu Registered/menuRegistered.html#home"><img src="../Images/AdviceMe Logo.png"
+				alt="Logo Image"></a>
+	</div>
+	<nav id="navPrincipal" class="main-nav">
+		{{#user}}
+		<a href="/menuRegistered/{{id}}#home">Home</a>
+		<a href="/menuRegistered/{{id}}#action">Action</a>
+		<a href="/menuRegistered/{{id}}#adventure">Adventure</a>
+		<a href="/menuRegistered/{{id}}#comedy">Comedy</a>
+		<a href="/menuRegistered/{{id}}#drama">Drama</a>
+		<a href="/menuRegistered/{{id}}#horror">Horror</a>
+		<a href="/menuRegistered/{{id}}#scienceFiction">Science Fiction</a>
+		{{/user}}
+	</nav>
+	<nav class="sub-nav">
+		<input type="text" placeholder="Search...">
+		<a href=""><i class="fas fa-search sub-nav-logo"></i></a>
+		{{#user}}
+		<a href="/profile/{{id}}">Account</a>
+		{{/user}}
+	</nav>
+</header>
