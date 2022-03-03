@@ -13,7 +13,7 @@ public class messageAutomatic{
 	@Autowired
 	private JavaMailSender mailSender;
 
-	private String destinatario = "hec20tor0@gmail.com";
+	private String destinatario = "exampleapp35@gmail.com";
  
 	public String sendEmail(String nameFilm, String from){
 
