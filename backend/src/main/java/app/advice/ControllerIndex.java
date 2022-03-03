@@ -149,12 +149,21 @@ public class ControllerIndex {
 		return "profile";
 	}
 	
-	
 	@GetMapping("/editProfile/{id}")
 	public String editProfile(Model model, @PathVariable long id) {
 		User user = userService.findById(id).orElseThrow();
 		model.addAttribute("user", user);
 		return "editProfile";
+	}
+	
+	@PostMapping("/editProfile")
+	public String editProfileProcess(Model model, User user)
+			throws IOException, SQLException {
+		
+		userService.save(user);
+
+
+		return "redirect:/profile/" + user.getId();
 	}
 	
 	@GetMapping("/followers")
@@ -267,8 +276,6 @@ public class ControllerIndex {
 		updateImage(film, imageField);
 		
 		filmService.save(film);
-
-		model.addAttribute("bookId", film.getId());
 
 		return "redirect:/menuAdmin";
 	}

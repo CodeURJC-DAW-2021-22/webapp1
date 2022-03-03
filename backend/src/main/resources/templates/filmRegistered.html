@@ -14,31 +14,10 @@
     <title>film</title>
 </head>
 <body>
-    <header>
-        <div class="AdviceMeLogo">
-            <a id="logo" href="#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-        </div>      
-        <nav id="navPrincipal" class="main-nav">                
-            <a href="/menuRegistered/#home">Home</a>
-            <a href="/menuRegistered/#action">Action</a>
-            <a href="/menuRegistered/#adventure">Adventure</a>
-            <a href="/menuRegistered/#comedy">Comedy</a>
-            <a href="/menuRegistered/#drama">Drama</a>
-            <a href="/menuRegistered/#horror">Horror</a>
-            <a href="/menuRegistered/#scienceFiction">Science Fiction</a>  
-        </nav>
-        <nav class="sub-nav">
-            <input type="text" placeholder="Search...">
-            <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-            {{#user}}
-            <a href="/profile/{{id}}">Account</a>  
-            {{/user}}      
-        </nav>      
-    </header>
+
+    {{>headerRegistered}}
 
     <main role="main">
-
-
         <section class="bg-gray200 pt-5 pb-5">
             <div class="container">
                <div class="row justify-content-center">

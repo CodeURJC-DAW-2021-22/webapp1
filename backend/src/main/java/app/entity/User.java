@@ -22,10 +22,11 @@ public class User{
 	
 	private String name;
 	private String email;
+
 	
 	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
-
+	
 	private String encodedPassword;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -39,7 +40,7 @@ public class User{
 	// Añadir atributo de imagen
 
 	public User() {}
-	
+
 	public User(String name, String email, String encodedPassword, String... roles) {
 		this.name=name;
 		this.email=email;
@@ -47,10 +48,13 @@ public class User{
 		this.roles=List.of(roles);
 	}
 
+
 	
 	// Comments
+
 	public void addComment(Comment comment) {
-		this.comments.add(comment);
+		comments.add(comment);
+		comment.setComment(comment);
 	}
 	/*
 	public void deleteComment(Comment comment) {

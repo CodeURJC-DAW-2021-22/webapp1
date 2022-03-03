@@ -13,31 +13,7 @@
 <body>
   <div class="wrapper">
 
-    <!-- HEADER -->
-    <header>
-      <div class="AdviceMeLogo">
-        <a id="logo" href="#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-      </div>      
-      <nav class="main-nav">                
-        <a href="/menuRegistered/#home">Home</a>
-        <a href="/menuRegistered/#action">Action</a>
-        <a href="/menuRegistered/#adventure">Adventure</a>
-        <a href="/menuRegistered/#animation">Animation</a>
-        <a href="/menuRegistered/#comedy">Comedy</a>
-        <a href="/menuRegistered/#drama">Drama</a>
-        <a href="/menuRegistered/#horror">Horror</a>
-        <a href="/menuRegistered/#scienceFiction">Science Fiction</a>  
-      </nav>
-      <nav class="sub-nav">
-        <input type="text" placeholder="Search...">
-        <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-        {{#user}}
-        <a href="/profile/{{id}}">Account</a>
-        {{/user}}
-      </nav>      
-    </header>
-    <!-- END OF HEADER -->
-    
+    {{>headerRegistered}}
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
     	

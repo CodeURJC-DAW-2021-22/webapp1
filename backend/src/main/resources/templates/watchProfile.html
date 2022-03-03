@@ -11,19 +11,7 @@
         <title>Account</title>
     </head>
     <body>
-        <header>
-            <div class="AdviceMeLogo">
-                <a id="logo" href="/menuRegistered#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-            </div>      
-            <nav id="navPrincipal" class="main-nav">                
-                <a href="/#home">Home</a> 
-            </nav>
-            <nav class="sub-nav">
-                <input type="text" placeholder="Search...">
-                <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-                <a href="profile.html">Account</a>        
-            </nav>      
-        </header>
+        {{>headerRegistered}}
 
         <div class="container emp-profile">
             <form method="post">
@@ -40,7 +28,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!-- Falta poner el href cuando tenga los otros HTML hechos -->
                             <div class="col-md-2 followers"><a href = "/followers">0 Followers</a></div>
                             <div class="col-md-2 followers"><a href = "/following">0 Following</a></div>
                         </div>

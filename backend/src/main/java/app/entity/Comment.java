@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
 public class Comment {
 	
@@ -58,6 +59,7 @@ public class Comment {
         this.note = note;
     }
     
+
 	public void setFilm(Film film) {
 		this.film = film;		
 	}
@@ -65,5 +67,10 @@ public class Comment {
 	public void setUser(User user) {
 		this.user = user;		
 		user.addComment(this);
+	}
+    public void setComment(Comment comment) {
+		this.stars = comment.getStars();
+		this.note = comment.getNote();
+
 	}
 }
