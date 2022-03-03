@@ -78,6 +78,9 @@
                <p>{{plot}}</p> 
                <center><h4> Asserts </h4></center>
                {{#comments}}
+                {{#user}}
+                 <p>User name: <b>{{name}}</b></p>
+                {{/user}}
 				<p>{{note}}</p>
 				<div class="stars" id="rateYo{{stars}}"></div><p></p>
 			   {{/comments}}

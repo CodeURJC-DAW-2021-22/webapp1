@@ -37,9 +37,6 @@ public class ControllerIndex {
 	@Autowired
 	private FilmService filmService;
 
-	@Autowired
-	private CommentRepository commentRepository;
-
 	private User user;
 
 	@Autowired
@@ -185,25 +182,31 @@ public class ControllerIndex {
 	} 
 	
 	@GetMapping("/filmRegistered/{id}")
-	public String filmRegistered(Model model, @PathVariable long id) {
+	public String filmRegistered(Model model, @PathVariable long id, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		model.addAttribute("film", film);
+		model.addAttribute("user", user);
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmRegistered";
 	}
 	
+	
 	@GetMapping("/addComment/{id}")
-	public String addComent(Model model, @PathVariable long id) {
+	public String addComent(Model model, @PathVariable long id, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		model.addAttribute("film", film);
+		model.addAttribute("user", user);
 		return"addComment";
 	}
 	
 	@PostMapping("/addComment/{id}")
-	public String addComment(Model model, @PathVariable long id, Comment comment) {
+	public String addComment(Model model, @PathVariable long id, Comment comment, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
-		film.addComments(comment);
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		film.addComments(comment, user);
 		filmService.save(film);
 		return"redirect:/filmRegistered/" + film.getId();
 	}

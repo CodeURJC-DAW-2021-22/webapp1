@@ -30,6 +30,10 @@ public class User{
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
+	/*
+	 * Listas de usuarios 
+	 * seguidos y seguidores 
+	 */
 	
 	// Hay que tener cuidado con las peticiones de datos, lo mismo pueden acabar pidiendoselo circularmente
 	// Añadir atributo de imagen
@@ -43,13 +47,12 @@ public class User{
 		this.roles=List.of(roles);
 	}
 
-	/*
+	
 	// Comments
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
-		comment.setUser(this);
 	}
-	
+	/*
 	public void deleteComment(Comment comment) {
 		this.comments.remove(comment);
 	}

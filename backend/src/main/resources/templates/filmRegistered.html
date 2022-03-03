@@ -31,7 +31,7 @@
             <input type="text" placeholder="Search...">
             <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
             {{#user}}
-            <a href="/profile{{id}}">Account</a>  
+            <a href="/profile/{{id}}">Account</a>  
             {{/user}}      
         </nav>      
     </header>
@@ -82,6 +82,9 @@
 	               <p>{{plot}}</p> 
 	               <center><h4> Asserts </h4></center>
                		{{#comments}}
+                		{{#user}}
+                 		 <p>User name: <b>{{name}}</b></p>
+                		{{/user}}
 						<p>{{note}}</p>
 						<div class="stars" id="rateYo{{stars}}"></div><p></p>
 			   		{{/comments}}

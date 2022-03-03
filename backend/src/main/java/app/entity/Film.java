@@ -163,9 +163,10 @@ public class Film {
 		this.id = newId;	
 	}
 	
-	public void addComments(Comment comment) {
-		this.comments.add(comment);
+	public void addComments(Comment comment, User user) {
+		comment.setUser(user);
 		comment.setFilm(this);
+		this.comments.add(comment);
 	}
 	
 }

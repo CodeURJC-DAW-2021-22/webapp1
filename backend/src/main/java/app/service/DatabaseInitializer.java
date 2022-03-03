@@ -93,15 +93,16 @@ public class DatabaseInitializer {
 		
 		User user = new User("user", "user", passwordEncoder.encode("pass"), "USER");
 		User admin = new User("admin", "admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN");
+
+		//User examples
+        userRepository.save(user);
+        userRepository.save(admin);
 		
 		Comment com1 = new Comment("5", "This film is awesome");
 		Comment com2 = new Comment("4", "I liked it");
-
-		film1.addComments(com1);
-		film2.addComments(com2);
 		
-		//user.addComment(com1);
-		//user.addComment(com2);
+		film1.addComments(com1, user);
+		film2.addComments(com2, user);
 		
 		setFilmImage(film1, "/static/Images/film1.jpg");
 		setFilmImage(film2, "/static/Images/film2.jpg");
@@ -147,9 +148,8 @@ public class DatabaseInitializer {
 		filmRepository.save(film20);
 		filmRepository.save(film21);
 
-		//User examples
-        userRepository.save(user);
-        userRepository.save(admin);
+		//user.addComment(com1);
+		//user.addComment(com2);
 
 	}
 
