@@ -1,8 +1,10 @@
 package app.service;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
  
 @Service
@@ -11,16 +13,22 @@ public class MessageAutomatic{
 	@Autowired
 	private JavaMailSender mailSender;
 
-	private String destinatario = "exampleapp35@gmail.com";
+	private String destinatario = "hec20tor0@gmail.com";
  
-	public void sendEmail(String nameFilm, String from){
+	public String sendEmail(String nameFilm, String from){
 
-		SimpleMailMessage email = new SimpleMailMessage();
-		email.setFrom(from);
-		email.setTo(destinatario);
-		email.setSubject("New film");
-		email.setText(nameFilm);
-		mailSender.send(email);
+		MimeMessage msg = mailSender.createMimeMessage();
+		try{
+			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+			helper.setFrom(from);
+			helper.setTo(destinatario);
+			helper.setSubject("New film");
+			helper.setText(nameFilm);
+			mailSender.send(msg);
+		}catch(Exception e){
+			return "correo fallido"+e.getMessage();
+		}
+		return "correo enviado";
 	}
  
 }

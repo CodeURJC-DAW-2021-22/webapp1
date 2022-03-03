@@ -26,8 +26,6 @@ import app.entity.Film;
 import app.entity.Genre;
 import app.service.FilmService;
 import app.service.UserService;
-import app.service.MessageAutomatic;
-
 
 
 @Controller
@@ -35,9 +33,6 @@ public class ControllerIndex {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private MessageAutomatic mail;
 	
 	@Autowired
 	private FilmService filmService;
@@ -46,6 +41,9 @@ public class ControllerIndex {
 	private CommentRepository commentRepository;
 
 	private User user;
+
+	@Autowired
+	private SendMailController mailController;
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {
@@ -240,7 +238,7 @@ public class ControllerIndex {
 			film.setImage(true);
 		}
 		filmService.save(film);
-		mail.sendEmail(film.getTitle(), "adviceMe1111@gmail.com");
+		mailController.sendMail(film.getTitle(), "adviceme1111@gmail.com");
 		
 		return "redirect:/menuAdmin";
 		//model.addAttribute("recommendation", filmService.);
