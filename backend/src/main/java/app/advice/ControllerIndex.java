@@ -169,13 +169,13 @@ public class ControllerIndex {
 	
 	@GetMapping("/profile/{id}")
 	public String profile(Model model, @PathVariable long id) {
-		model.addAttribute("user", userService.findById(id));
+		model.addAttribute("user", userService.findById(id).orElseThrow());
 		return "profile";
 	}
 	
 	@GetMapping("/editProfile/{id}")
 	public String editProfile(Model model, @PathVariable long id) {
-		model.addAttribute("user", userService.findById(id));
+		model.addAttribute("user", userService.findById(id).orElseThrow());
 		return "editProfile";
 	}
 	

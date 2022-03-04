@@ -3,6 +3,7 @@ package app.entity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,13 +21,16 @@ public class User{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@Column
 	private String name;
+	@Column
 	private String email;
 
 	
 	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
 	
+	@Column
 	private String encodedPassword;
 
 	@ElementCollection(fetch = FetchType.EAGER)
