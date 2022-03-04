@@ -131,14 +131,15 @@ public class ControllerIndex {
 		}
 		else{
 			model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
-			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
-			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
-			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
-			model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
-			model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
-			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
-			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
 			
+			model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
+			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
+			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));
+			model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6)));
+			model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6)));
+			model.addAttribute("horror", filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6)));
+			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
+
 			model.addAttribute("user", user);
 			
 			//model.addAttribute("recommendation", filmService.);
