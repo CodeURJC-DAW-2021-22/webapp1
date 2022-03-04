@@ -8,6 +8,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -128,7 +130,7 @@ public class ControllerIndex {
 			return "redirect:/menuAdmin";
 		}
 		else{
-			model.addAttribute("trending", filmService.findAll());
+			model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
 			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
