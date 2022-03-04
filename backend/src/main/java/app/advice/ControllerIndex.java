@@ -11,6 +11,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,22 +38,45 @@ public class ControllerIndex {
 	@Autowired
 	private FilmService filmService;
 
-	private User user;
 
 	@Autowired
 	private SendMailController mailController;
 	
 	@GetMapping("/")
-	public String adviceMe(Model model) {
-		model.addAttribute("trending", filmService.findAll());
-		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
-		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
-		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
-		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
-		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
-		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
-		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));
+	public String adviceMe(Model model) {	
+		model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
+		
+		model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
+		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
+		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));
+		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6)));
+		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6)));
+		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6)));
+		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
+
 		return "adviceMe";
+	}
+	
+	@GetMapping("/more/{page}")
+	public String getFilms(Model model, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		if (page <= (int)Math.ceil(filmService.count()/6)) {
+			model.addAttribute("films", filmService.findAll(PageRequest.of(page,6)));
+			return "movies";
+		}
+		return null;
+	}
+	
+	@GetMapping("/moreGenre/{genre}/{page}")
+	public String getFilmsGenre(Model model, @PathVariable String genre, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		Genre gen = Genre.valueOf(genre);
+		if (page <= (int)Math.ceil(filmService.countByGenre(gen)/6)) {
+			
+			model.addAttribute("films", filmService.findByGenre(gen, PageRequest.of(page,6)));
+			return "movies";
+		}
+		return null;
 	}
 	
 	@GetMapping("/{id}/image")
@@ -95,11 +119,10 @@ public class ControllerIndex {
 	
 	@GetMapping("/menuRegistered")
 	public String menuRegistered(Model model, HttpServletRequest request) {
-		// Insertar comprobación de que no existen usuarios iguales
 
 		model.addAttribute("username", request.getUserPrincipal().getName());
 
-    	user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+    	User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
     	
 		if (request.isUserInRole("ADMIN")){
 			return "redirect:/menuAdmin";
@@ -129,30 +152,30 @@ public class ControllerIndex {
 	
 	@GetMapping("/menuAdmin")
 	public String menuAdmin(Model model) {
-		model.addAttribute("trending", filmService.findAll());
-		model.addAttribute("action", filmService.findByGenre(Genre.ACTION));
-		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE));
-		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION));
-		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY));
-		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA));
-		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR));
-		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION));	
+		model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
+		
+		model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
+		model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
+		model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));
+		model.addAttribute("comedy", filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6)));
+		model.addAttribute("drama", filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6)));
+		model.addAttribute("horror", filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6)));
+		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
+
 		//model.addAttribute("recommendation", filmService.);
 		//model.addAttribute("commented", filmService.);
 		return "menuAdmin";
 	}
 	
 	@GetMapping("/profile/{id}")
-	public String profile(Model model) {
-		model.addAttribute("id", user.getId());
-		model.addAttribute("user", user);
+	public String profile(Model model, @PathVariable long id) {
+		model.addAttribute("user", userService.findById(id));
 		return "profile";
 	}
 	
 	@GetMapping("/editProfile/{id}")
 	public String editProfile(Model model, @PathVariable long id) {
-		User user = userService.findById(id).orElseThrow();
-		model.addAttribute("user", user);
+		model.addAttribute("user", userService.findById(id));
 		return "editProfile";
 	}
 	

@@ -8,7 +8,11 @@
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript" src="chartAdviceMe"></script>
-  <link rel="stylesheet" href="../style.css" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="loadButton.js"></script>
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="loadingButton.css" type="text/css">
+
 </head>
 <body>
   <div class="wrapper">
@@ -33,6 +37,8 @@
       	{{/recomendation}}
       </div>
       
+      <!--Hay que añadir botón más según esta seccion de arriba-->
+      
       <h1 id="comments">Your Comments</h1>
       <div class="box">
         {{#commented}}
@@ -40,12 +46,19 @@
       	{{/commented}}               
       </div>
       
+      <!--Hay que añadir botón más según esta seccion de arriba-->
+      
       <h1 id="trending">Trending Now</h1>
       <div class="box">
         {{#trending}}
       		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/trending}}
+
 	  </div>
+	 
+	  <div id="moreFilmsTrending"></div>
+      <button id='btnTrending' class='btnSubmit'>More Films</button>
+      <div id="loaderTrending" class="lds-dual-ring hidden overlay"></div>
       
       <h1 id="action">Action</h1>
       <div class="box">
@@ -53,6 +66,10 @@
       		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/action}}             
       </div>
+      
+      <div id="moreFilmsAction"></div>
+      <button id='btnAction' class='btnSubmit'>More Films</button>
+      <div id="loaderAction" class="lds-dual-ring hidden overlay"></div>
 
       <h1 id="adventure">Adventure</h1>
       <div class="box">
@@ -60,6 +77,11 @@
       		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/adventure}}                  
       </div>
+
+      <div id="moreFilmsAdventure"></div>
+      <button id='btnAdventure' class='btnSubmit'>More Films</button>
+      <div id="loaderAdventure" class="lds-dual-ring hidden overlay"></div>
+
       
       <h1 id="animation">Animation</h1>
       <div class="box">
@@ -68,12 +90,22 @@
       	{{/animation}}                  
       </div>
 
+      <div id="moreFilmsAnimation"></div>
+      <button id='btnAnimation' class='btnSubmit'>More Films</button>
+      <div id="loaderAnimation" class="lds-dual-ring hidden overlay"></div>
+
+
       <h1 id="comedy">Comedy</h1>
       <div class="box">
         {{#comedy}}
       		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/comedy}}                  
       </div>
+
+      <div id="moreFilmsComedy"></div>
+      <button id='btnComedy' class='btnSubmit'>More Films</button>
+      <div id="loaderComedy" class="lds-dual-ring hidden overlay"></div>
+
 
       <h1 id="drama">Drama</h1>
       <div class="box">
@@ -82,6 +114,11 @@
       	{{/drama}}              
       </div>
 
+      <div id="moreFilmsDrama"></div>
+      <button id='btnDrama' class='btnSubmit'>More Films</button>
+      <div id="loaderDrama" class="lds-dual-ring hidden overlay"></div>
+
+
       <h1 id="horror">Horror</h1>
       <div class="box">
         {{#horror}}
@@ -89,11 +126,22 @@
       	{{/horror}}                  
       </div>
 
+      <div id="moreFilmsHorror"></div>
+      <button id='btnHorror' class='btnSubmit'>More Films</button>
+      <div id="loaderHorror" class="lds-dual-ring hidden overlay"></div>
+
+
       <h1 id="scienceFiction">Science Fiction</h1>
       <div class="box">
         {{#scifi}}
       		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/scifi}}                  
+      </div>
+      
+      <div id="moreFilmsScifi"></div>
+      <button id='btnScifi' class='btnSubmit'>More Films</button>
+      <div id="loaderScifi" class="lds-dual-ring hidden overlay"></div>
+
       </div>
     </section> 
     <!-- END OF MAIN CONTAINER -->

@@ -32,14 +32,9 @@
 	                    <div class="col-md-6">
 	                        <div class="name"><p>Password</p></div>
 	                        <div class="form-group">
-	                            <input type="text" name="password" class="form-control" placeholder="Password" value="{{password}}"/>
+	                            <input type="text" name="encodedPassword" class="form-control" placeholder="Password" value="{{encodedPassword}}"/>
 	                        </div>
-	                        <!--
-	                        <div class="name"><p>Confirm password</p></div>
-	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="Confirm Password" value="{{password}}"/>
-	                        </div>
-	                        -->
+	              
 	                    </div>
 	                  {{/user}}
 	                </div>
@@ -48,6 +43,7 @@
 	                        <div class="left">
 	                        {{#user}}
 	                            <button type="submit" class="btnSubmit"><b>Save</b></button>
+	                       		<input type="hidden" name="_csrf" value="{{token}}"/>
 	                        {{/user}}
 	                        </div>
 	                    </div>
@@ -55,6 +51,7 @@
 	                        <div class="right">
 	                        {{#user}}
 	                            <button type="button" class="btnSubmit"><a href="/profile/{{id}}"><b>Cancel</b></a></button>
+	                        	<input type="hidden" name="_csrf" value="{{token}}"/>
 	                        {{/user}}
 	                        </div>
 	                    </div>

@@ -42,7 +42,8 @@
 				</div>
 				<div class="col-md-2">
 					{{#user}}
-					<button class="profile-edit-btn"><a href="/editProfile/{{id}}">Edit Profile</a></button>
+						<button class="profile-edit-btn"><a href="/editProfile/{{id}}">Edit Profile</a></button>
+						<input type="hidden" name="_csrf" value="{{token}}"/>
 					{{/user}}
 				</div>
 			</div>

@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -21,23 +24,33 @@ public class Film {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+	@Column
 	private String title;
+	@Column
 	private String releaseDate;
-	//private float averageStars;
+	@Column
+	private float averageStars;
+	@Column
 	private String minAge;
+	@Column
 	private Genre genre;
-	private int duration;
+	@Column
+	private String duration;
+	@Column (name="casting")
 	private String cast;
+	@Column
 	private String director;
+	@Column
 	private String plot;
 	
 	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Lob
+	@JsonIgnore
 	private Blob imageFile;
 
+	@Column
 	private boolean image;
 	
 	public Film() {
@@ -48,8 +61,8 @@ public class Film {
         this.title = title;
         this.releaseDate = releaseDate;
         this.minAge = minAge;
-        this.genre = Genre.valueOf(genre.toUpperCase());
-        this.duration = Integer.parseInt(duration);
+        this.genre = Genre.valueOf(genre);
+        this.duration = duration;
         this.cast = cast;
         this.director = director;
         this.plot = plot;
@@ -86,7 +99,7 @@ public class Film {
         return genre;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 
@@ -131,11 +144,11 @@ public class Film {
         this.minAge = minAge;
     }
 
-    public void setGenre(String genre) {
-        this.genre = Genre.valueOf(genre.toUpperCase());
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
