@@ -58,7 +58,6 @@ public class User{
 
 	public void addComment(Comment comment) {
 		comments.add(comment);
-		comment.setComment(comment);
 	}
 	/*
 	public void deleteComment(Comment comment) {

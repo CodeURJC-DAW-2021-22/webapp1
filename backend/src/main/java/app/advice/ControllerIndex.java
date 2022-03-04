@@ -241,7 +241,10 @@ public class ControllerIndex {
 	public String addComment(Model model, @PathVariable long id, Comment comment, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		film.addComments(comment, user);
+		comment.setUser(user);
+		comment.setFilm(film);
+		user.addComment(comment);
+		film.addComment(comment);
 		filmService.save(film);
 		return"redirect:/filmRegistered/" + film.getId();
 	}

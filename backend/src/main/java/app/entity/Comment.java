@@ -66,11 +66,6 @@ public class Comment {
 	
 	public void setUser(User user) {
 		this.user = user;		
-		user.addComment(this);
 	}
-    public void setComment(Comment comment) {
-		this.stars = comment.getStars();
-		this.note = comment.getNote();
-
-	}
+	
 }

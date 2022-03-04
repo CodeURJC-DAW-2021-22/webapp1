@@ -99,8 +99,14 @@ public class DatabaseInitializer {
 			Comment com1 = new Comment("5", "This film is awesome");
 			Comment com2 = new Comment("4", "I liked it");
 			
-			film1.addComments(com1, user);
-			film2.addComments(com2, user);
+			com1.setUser(user);
+			com2.setUser(user);
+			
+			com1.setFilm(film1);
+			com2.setFilm(film2);
+			
+			film1.addComment(com1);
+			film2.addComment(com2);
 
 			setFilmImage(film1, "/static/Images/film1.jpg");
 			setFilmImage(film2, "/static/Images/film2.jpg");
