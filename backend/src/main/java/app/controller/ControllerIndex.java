@@ -139,7 +139,6 @@ public class ControllerIndex {
 			model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
 
 			model.addAttribute("user", user);
-
 			return "menuRegistered";
 		}
 	}
@@ -162,7 +161,6 @@ public class ControllerIndex {
 		model.addAttribute("scifi", filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6)));
 		
 		model.addAttribute("user", userService.findByName(request.getUserPrincipal().getName()).orElseThrow());
-
 		return "menuAdmin";
 	}
 	
