@@ -16,7 +16,7 @@
             <div class="note">
                 <p>Edit your profile</p>
             </div>
-			<form action="/editProfile" method="post">
+			<form action="/editProfile" method="post" enctype="multipart/form-data">
 	            <div class="form-content">
 	                <div class="row">
 	                	{{#user}}
@@ -24,6 +24,11 @@
 	                	    <input type="hidden" name="encodedPassword" value="{{encodedPassword}}"/>
 	                	    <input type="hidden" name="roles" value="USER"/>
 		                    <div class="col-md-6">
+		                    	<div class="file btn btn-lg btn-primary">
+									Change Photo
+									<input type="file" name="imageField" accept=".png, .jpg, .jpeg"/>
+									<input type="hidden" name="imageField" value="{{imageFile}}"/>
+								</div>
 		                        <div class="name"><p><b>User name</b></p></div>
 		                        <div class="form-group">
 		                            <input type="text" name="name" class="form-control" placeholder="Name" value="{{name}}" required/>

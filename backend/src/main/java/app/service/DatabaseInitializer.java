@@ -111,6 +111,8 @@ public class DatabaseInitializer {
 			User user = new User("user", "user", passwordEncoder.encode("pass"), "USER");
 			User admin = new User("admin", "admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN");
 			
+			setProfileImage(user, "/static/Images/defaultImage.png");
+			
 			userRepository.save(user);
 	        userRepository.save(admin);
 			
@@ -151,5 +153,11 @@ public class DatabaseInitializer {
 		film.setImage(true);
 		Resource image = new ClassPathResource(classpathResource);
 		film.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+	}
+	
+	public void setProfileImage(User user, String classpathResource) throws IOException {
+		user.setImage(true);
+		Resource image = new ClassPathResource(classpathResource);
+		user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
 	}
 }

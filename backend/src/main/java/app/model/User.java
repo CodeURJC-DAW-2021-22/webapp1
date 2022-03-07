@@ -1,5 +1,6 @@
 package app.model;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,7 +33,10 @@ public class User{
 	@ElementCollection(fetch=FetchType.EAGER)
 	private List<String> roles;
 	
-	// Image
+	@Lob
+	private Blob imageFile;
+
+	private boolean image;
 	// Followers
 	// Following
 
@@ -70,6 +75,14 @@ public class User{
 	public List<String> getRoles() {
 		return roles;
 	}
+	
+	public Blob getImageFile() {
+		return imageFile;
+	}
+	
+	public boolean getImage(){
+		return image;
+	}
 
 	// Setters
 	public void setId(Long id) {
@@ -90,6 +103,14 @@ public class User{
 	
 	public void setRoles(List<String> roles){
 		this.roles = roles;
+	}
+	
+	public void setImageFile(Blob image) {
+		this.imageFile = image;
+	}
+	
+	public void setImage(boolean image){
+		this.image = image;
 	}
 
 	public void addComment(Comment comment) {

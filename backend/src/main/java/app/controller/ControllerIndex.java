@@ -112,6 +112,18 @@ public class ControllerIndex {
 		}
 	}
 	
+	@GetMapping("/{id}/imageProfile")
+	public ResponseEntity<Object> downloadImageProfile(@PathVariable long id) throws SQLException {
+		Optional<User> user = userService.findById(id);
+		
+		if (user.isPresent() && user.get().getImageFile() != null) {
+			Resource file = new InputStreamResource(user.get().getImageFile().getBinaryStream());
+			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").contentLength(user.get().getImageFile().length()).body(file);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
 	@GetMapping("/searchFilms")
 	public String searchFilms(Model model, String query) {
 		model.addAttribute("result", filmService.findLikeName(query.toLowerCase()));
@@ -198,7 +210,8 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/editProfile")
-	public String editProfileProcess(Model model, User user) throws IOException, SQLException {
+	public String editProfileProcess(Model model, User user, MultipartFile imageField) throws IOException, SQLException {
+		updateImageProfile(user, imageField);
 		userService.save(user);
 		return "redirect:/profile/" + user.getId();
 	}
@@ -338,6 +351,21 @@ public class ControllerIndex {
 				film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(),
 						dbFilm.getImageFile().length()));
 				film.setImage(true);
+			}
+		}
+	}
+	
+	private void updateImageProfile(User user, MultipartFile imageField) throws IOException, SQLException {
+		if (!imageField.isEmpty()) {
+			user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+			user.setImage(true);
+		} else {
+			Film dbFilm = filmService.findById(user.getId()).orElseThrow();
+			
+			if (dbFilm.getImage()) {
+				user.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(),
+						dbFilm.getImageFile().length()));
+				user.setImage(true);
 			}
 		}
 	}
