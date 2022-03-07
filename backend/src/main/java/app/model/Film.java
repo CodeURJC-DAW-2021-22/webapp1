@@ -23,7 +23,7 @@ public class Film {
 	
 	private String title;
 	private Date releaseDate;
-	private float averageStars;
+	private int averageStars;
 	private String minAge;
 	private Genre genre;
 	private int duration;
@@ -57,14 +57,16 @@ public class Film {
         this.plot = plot;
     }
 	
-    private void calculateAverage() {
-    	int sum = 0;
-    	
-    	for (Comment comment: comments) {
-    		sum += comment.getStars();
+    public void calculateAverage() {
+    	if (comments.size() != 0) {
+    		int sum = 0;
+        	
+        	for (Comment comment: comments) {
+        		sum += comment.getStars();
+        	}
+        	
+        	averageStars = Math.round(sum / comments.size());
     	}
-    	
-    	averageStars = sum / comments.size();
     }
     
 	// Getters
@@ -80,7 +82,8 @@ public class Film {
         return releaseDate;
     }
     
-    public float getAverageStars() {
+    public int getAverageStars() {
+    	calculateAverage();
     	return averageStars;
     }
 
