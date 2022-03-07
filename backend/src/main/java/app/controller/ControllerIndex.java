@@ -2,6 +2,7 @@ package app.controller;
 
 
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +49,18 @@ public class ControllerIndex {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@ModelAttribute
+	public void addAttributes(Model model, HttpServletRequest request) {
+		Principal principal = request.getUserPrincipal();
+
+		if (principal != null) {
+			model.addAttribute("logged", true);
+			model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		} else {
+			model.addAttribute("logged", false);
+		}
+	}
 	
 	@GetMapping("/")
 	public String adviceMe(Model model) {	
@@ -96,6 +110,12 @@ public class ControllerIndex {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	@GetMapping("/searchFilms")
+	public String searchFilms(Model model, String query) {
+		model.addAttribute("result", filmService.findLikeName(query.toLowerCase()));
+		return "searchFilms";
 	}
 	
     @RequestMapping("/login")

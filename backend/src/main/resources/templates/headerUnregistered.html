@@ -13,8 +13,12 @@
 		<a href="/#scienceFiction">Science Fiction</a>
 	</nav>
 	<nav class="sub-nav">
-		<input type="text" placeholder="Search...">
-		<a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-		<a href="/login">Login</a>
+		<form action="/searchFilms">
+        	<input type="text" name="query" placeholder="Search...">
+        	<button type="submit">
+        		<i class="fas fa-search sub-nav-logo"></i>
+        	</button>
+        	<a href="/login">Login</a>
+        </form>
 	</nav>
 </header>

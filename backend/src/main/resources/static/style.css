@@ -102,6 +102,14 @@ header {
   color: var(--dark);
 }
 
+.sub-nav-logo {
+  color: var(--light);
+}
+
+.sub-nav-logo:hover {
+  color: var(--dark);
+}
+
 
 /* MAIN CONTIANER */
 .main-container {

@@ -30,6 +30,10 @@ public class FilmService {
 		return repository.findByGenre(genre, pageable);
 	}
 	
+	public List<Film> findLikeName(String name) {
+		return repository.findLikeName(name);
+	}
+	
 	public boolean exist(long id) {
 		return repository.existsById(id);
 	}

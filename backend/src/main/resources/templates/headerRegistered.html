@@ -12,10 +12,14 @@
 		<a href="/menuRegistered#scienceFiction">Science Fiction</a>
 	</nav>
 	<nav class="sub-nav">
-		<input type="text" placeholder="Search...">
-		<a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-		{{#user}}
-			<a href="/profile/{{id}}">Account</a>
-		{{/user}}
+		<form action="/searchFilms">
+        	<input type="text" name="query" placeholder="Search...">
+        	<button type="submit">
+        		<i class="fas fa-search sub-nav-logo"></i>
+        	</button>
+        	{{#user}}
+				<a href="/profile/{{id}}">Account</a>
+			{{/user}}
+        </form>
 	</nav>
 </header>
