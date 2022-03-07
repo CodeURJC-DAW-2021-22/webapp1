@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import app.advice.UserRepository;
-import app.entity.User;
+import app.model.User;
+import app.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -38,5 +38,4 @@ public class UserService {
 	public Optional<User> findByName(String name){
 		return repository.findByName(name);
 	}
-	
 }

@@ -6,8 +6,6 @@
  */
 
 /* line 57, node_modules/bootstrap/scss/_reboot.scss */
-
- 
 body{
   font-family: Arial;}
 
@@ -28,6 +26,11 @@ h4, .h4 {
 
 h5, .h5 {
   font-size: 1.25rem; }
+  
+.center {
+  position: relative;
+  text-align: center;
+}
 
 .container {
   width: 100%;
@@ -114,8 +117,7 @@ h5, .h5 {
   /* line 28, node_modules/bootstrap/scss/_card.scss */
   .card > .list-group:last-child .list-group-item:last-child {
     border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem; }
-    
+    border-bottom-left-radius: 0.25rem; }    
     
 /* line 34, node_modules/bootstrap/scss/_card.scss */
 .card-body {
@@ -138,8 +140,6 @@ h5, .h5 {
 
 .pb-5 {
   padding-bottom: 3rem !important; }
-
-
 
 .collapse {
   position: relative;

@@ -13,7 +13,6 @@
   <script type="text/javascript" src="loadButton.js"></script>
   <link rel="stylesheet" href="style.css" type="text/css">
   <link rel="stylesheet" href="loadingButton.css" type="text/css">
-
 </head>
 <body>
   <div class="wrapper">
@@ -21,22 +20,28 @@
     <!-- HEADER -->
     <header>
       <div class="AdviceMeLogo">
-        <a id="logo" href="#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+        <a id="logo" href="/menuAdmin#home"><img src="Images/AdviceMe Logo.png" alt="Logo Image"></a>
       </div>      
       <nav class="main-nav">                
-        <a href="/menuAdmin/#home">Home</a>
-        <a href="/menuAdmin/#action">Action</a>
-        <a href="/menuAdmin/#adventure">Adventure</a>
-        <a href="/menuAdmin/#animation">Animation</a>
-        <a href="/menuAdmin/#comedy">Comedy</a>
-        <a href="/menuAdmin/#drama">Drama</a>
-        <a href="/menuAdmin/#horror">Horror</a>
-        <a href="/menuAdmin/#scienceFiction">Science Fiction</a>  
+        <a href="/menuAdmin#home">Home</a>
+        <a href="/menuAdmin#action">Action</a>
+        <a href="/menuAdmin#adventure">Adventure</a>
+        <a href="/menuAdmin#animation">Animation</a>
+        <a href="/menuAdmin#comedy">Comedy</a>
+        <a href="/menuAdmin#drama">Drama</a>
+        <a href="/menuAdmin#horror">Horror</a>
+        <a href="/menuAdmin#scienceFiction">Science Fiction</a>  
       </nav>
       <nav class="sub-nav">
         <input type="text" placeholder="Search...">
         <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-        <a href="/addFilm">Post Film</a>        
+        <a href="/addFilm">Post Film</a>  
+        <form action="/logout" method="post">  
+			{{#user}}
+				<input type="submit" value="Sign out"/>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
+			{{/user}}
+        </form>
       </nav>      
     </header>
     <!-- END OF HEADER -->
@@ -44,15 +49,13 @@
     <!-- MAIN CONTAINER -->
     <section class="main-container">
       <h1 id="home">Best Movie Genres</h1>
-
       <div id="piechart"></div>      
 
       <h1 id="trending">Trending Now</h1>
       <div class="box">
         {{#trending}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/trending}}
-
 	  </div>
 	 
 	  <div id="moreFilmsTrending"></div>
@@ -62,7 +65,7 @@
       <h1 id="action">Action</h1>
       <div class="box">
         {{#action}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/action}}             
       </div>
       
@@ -73,19 +76,18 @@
       <h1 id="adventure">Adventure</h1>
       <div class="box">
         {{#adventure}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/adventure}}                  
       </div>
 
       <div id="moreFilmsAdventure"></div>
       <button id='btnAdventure' class='btnSubmit'>More Films</button>
       <div id="loaderAdventure" class="lds-dual-ring hidden overlay"></div>
-
       
       <h1 id="animation">Animation</h1>
       <div class="box">
         {{#animation}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/animation}}                  
       </div>
 
@@ -93,11 +95,10 @@
       <button id='btnAnimation' class='btnSubmit'>More Films</button>
       <div id="loaderAnimation" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="comedy">Comedy</h1>
       <div class="box">
         {{#comedy}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/comedy}}                  
       </div>
 
@@ -105,11 +106,10 @@
       <button id='btnComedy' class='btnSubmit'>More Films</button>
       <div id="loaderComedy" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="drama">Drama</h1>
       <div class="box">
         {{#drama}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/drama}}              
       </div>
 
@@ -117,11 +117,10 @@
       <button id='btnDrama' class='btnSubmit'>More Films</button>
       <div id="loaderDrama" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="horror">Horror</h1>
       <div class="box">
         {{#horror}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/horror}}                  
       </div>
 
@@ -129,19 +128,16 @@
       <button id='btnHorror' class='btnSubmit'>More Films</button>
       <div id="loaderHorror" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="scienceFiction">Science Fiction</h1>
       <div class="box">
         {{#scifi}}
-      		<a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmAdmin/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/scifi}}                  
       </div>
       
       <div id="moreFilmsScifi"></div>
       <button id='btnScifi' class='btnSubmit'>More Films</button>
       <div id="loaderScifi" class="lds-dual-ring hidden overlay"></div>
-              
-      </div>
     </section>
   </div>
 </body>

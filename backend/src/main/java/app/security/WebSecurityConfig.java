@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -30,21 +29,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         // Public pages
         http.authorizeRequests().antMatchers("/").permitAll();
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/register").permitAll();
-        http.authorizeRequests().antMatchers("/registerProcess").permitAll();
+        http.authorizeRequests().antMatchers("/filmUnregistered/*").permitAll();
 
         // Private pages
         http.authorizeRequests().antMatchers("/menuRegistered").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/menuFollowing/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/profile/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/editProfile/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/followers").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/following").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/watchProfile").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/filmRegistered/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/addComment/*").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/addFilm").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/menuAdmin").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/filmAdmin/*").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/addFilm").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/removeFilm/*").hasAnyRole("ADMIN");
+        http.authorizeRequests().antMatchers("/editFilm/*").hasAnyRole("ADMIN");
 
         // Login form
         http.formLogin().loginPage("/login");

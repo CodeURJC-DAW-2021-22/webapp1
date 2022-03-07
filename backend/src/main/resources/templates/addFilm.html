@@ -14,18 +14,24 @@
             <a id="logo" href="/menuAdmin#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
         </div>      
         <nav id="navPrincipal" class="main-nav">                
-            <a href="/menuAdmin/#home">Home</a>
-            <a href="/menuAdmin/#action">Action</a>
-            <a href="/menuAdmin/#adventure">Adventure</a>
-            <a href="/menuAdmin/#comedy">Comedy</a>
-            <a href="/menuAdmin/#drama">Drama</a>
-            <a href="/menuAdmin/#horror">Horror</a>
-            <a href="/menuAdmin/#scienceFiction">Science Fiction</a>  
+            <a href="/menuAdmin#home">Home</a>
+            <a href="/menuAdmin#action">Action</a>
+            <a href="/menuAdmin#adventure">Adventure</a>
+            <a href="/menuAdmin#comedy">Comedy</a>
+            <a href="/menuAdmin#drama">Drama</a>
+            <a href="/menuAdmin#horror">Horror</a>
+            <a href="/menuAdmin#scienceFiction">Science Fiction</a>  
         </nav>
         <nav class="sub-nav">
             <input type="text" placeholder="Search...">
             <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-            <a href="addFilm.html">Post Film</a>        
+            <a href="/addFilm">Post Film</a>
+            <form action="/logout" method="post">  
+				{{#user}}
+					<input type="submit" value="Sign out"/>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
+				{{/user}}
+        	</form>      
         </nav>      
     </header>
 
@@ -42,31 +48,31 @@
 	                    <!--FRONT PAGE-->
 	                    <div class="file btn btn-primary" id="pictures">
 	                        Upload a front page
-	                        <input type="file"name=' imageField' accept=".png, .jpg, .jpeg"/>
+	                        <input type="file" name="imageField" accept=".png, .jpg, .jpeg" required>
 	                    </div>
 	                </div>
 	                
 	                <div class="row">
 	                    <div class="form-group">
-	                        <input type="text" name="title" class="form-control" placeholder="Film name" value=""/>
+	                        <input type="text" name="title" class="form-control" placeholder="Film name" required>
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="col-md-6">
 	                        <div class="form-group">
-	                            <input type="date" name="releaseDate" class="form-control" placeholder="Release date" value=""/>
+	                            <input type="date" name="releaseDate" class="form-control" placeholder="Release date" required>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" name="cast" class="form-control" placeholder="Cast" value=""/>
+	                            <input type="text" name="cast" class="form-control" placeholder="Cast" required>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" name="duration" class="form-control" placeholder="Running time" value=""/>
+	                            <input type="number" name="duration" class="form-control" placeholder="Running time" required>
 	                        </div>
 	                    </div>
 	                    <div class="col-md-6">
 	                        <div class="form-group">
-	                            <select name="minAge" class="form-select" placeholder="Minimum age" value="">
-	                                <option selected>Minimum age</option>  
+	                            <select name="minAge" class="form-select"required>
+	                                <option selected>Minimum age</option> 
 	                                <option>A (All people)</option>
 	                                <option>7 (Not suitable for people under 7)</option>
 	                                <option>12 (Not suitable for people under 12)</option>
@@ -75,7 +81,7 @@
 	                            </select>
 	                        </div>
 	                        <div class="form-group">
-	                            <select name="genre" class="form-select" placeholder="Genre" value="">
+	                            <select name="genre" class="form-select" required>
 	                                <option selected>Genre</option>  
 	                                <option>ACTION</option>
 	                                <option>ANIMATION</option>
@@ -87,26 +93,19 @@
 	                            </select>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" name="director" class="form-control" placeholder="Director" value=""/>
+	                            <input type="text" name="director" class="form-control" placeholder="Director" required>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="form-group">
-	                        <input type="text" name="plot" class="form-control" placeholder="Plot" value=""/>
+	                        <textarea name="plot" placeholder="Plot" rows=5 cols=143 required></textarea>
 	                    </div>
 	                </div>
-	                <!--<div class="row">
-	                    <div class="file btn btn-primary" id="pictures">
-	                        Add more images
-	                        <input type="file"/>
-	                    </div>
-	                </div>-->
 	                <div class="center">
-	                    <button type="submit" class="btnSubmit"><a>Post</a></button>
+	                    <button type="submit" class="btnSubmit">Post</button>
 						<input type="hidden" name="_csrf" value="{{token}}"/>
 	                </div>
-	                
             	</div>
 			</form>	
         </div>

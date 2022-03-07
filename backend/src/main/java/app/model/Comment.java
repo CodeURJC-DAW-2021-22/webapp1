@@ -1,4 +1,4 @@
-package app.entity;
+package app.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,15 +8,13 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 public class Comment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	//private User user;
 	private int stars;
 	private String note;
 	
@@ -38,6 +36,10 @@ public class Comment {
     }
 
 	// Getters
+	public long getId() {
+		return id;
+	}
+	
     public int getStars() {
         return stars;
     }
@@ -49,8 +51,16 @@ public class Comment {
     public Film getFilm() {
         return film;
     }
+    
+    public User getUser() {
+    	return user;
+    }
 
     // Setters
+    public void setId(Long id) {
+		this.id = id;
+	}
+    
     public void setStars(int stars) {
         this.stars = stars;
     }
@@ -59,7 +69,6 @@ public class Comment {
         this.note = note;
     }
     
-
 	public void setFilm(Film film) {
 		this.film = film;		
 	}
@@ -67,5 +76,4 @@ public class Comment {
 	public void setUser(User user) {
 		this.user = user;		
 	}
-	
 }

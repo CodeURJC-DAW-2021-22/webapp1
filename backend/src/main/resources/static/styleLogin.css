@@ -10,6 +10,11 @@ body {
   background-image: url(../Images/background.png);
 }
 
+.center {
+  position: relative;
+  text-align: center;
+}
+
 .screen-1 {
   background: #f1f7fe;
   padding: 2em;
@@ -108,6 +113,7 @@ body {
   border: none;
   border-radius: 30px;
   font-weight: 600;
+  justify-content: center;
 }
 
 .screen-1 .footer {

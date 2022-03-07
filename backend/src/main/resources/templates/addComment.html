@@ -9,116 +9,62 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../appFilm.css">
     <link rel="stylesheet" href="../themeFilm.css">
-    <link rel="stylesheet" href="../themeFilm.js">
     <link rel="stylesheet" href="../jquery.rateyo.css"/>
     <title>film</title>
 </head>
 <body>
-    <header>
-        <div class="AdviceMeLogo">
-            <a id="logo" href="#home"><img src="/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-        </div>      
-        <nav id="navPrincipal" class="main-nav">                
-            <a href="/menuRegistered/#home">Home</a>
-            <a href="/menuRegistered/#action">Action</a>
-            <a href="/menuRegistered/#adventure">Adventure</a>
-            <a href="/menuRegistered/#comedy">Comedy</a>
-            <a href="/menuRegistered/#drama">Drama</a>
-            <a href="/menuRegistered/#horror">Horror</a>
-            <a href="/menuRegistered/#scienceFiction">Science Fiction</a>  
-        </nav>
-        <nav class="sub-nav">
-            <input type="text" placeholder="Search...">
-            <a href=""><i class="fas fa-search sub-nav-logo"></i></a>
-            <a href="/profile">Account</a>        
-        </nav>      
-    </header>
+    {{>headerRegistered}}
 
-    <main role="main">
+	<main role="main">
+		<section class="bg-gray200 pt-5 pb-5">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col">
+						<div class="container">
+							<div>
+								{{#film}}
+									<img src="/{{id}}/image" style="width:100%">
+								{{/film}}
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card card-body">
+							{{#film}}
+								<h1 class="card-title display-4"> {{title}} </h1>
+								<div class="stars" id="rateYo"></div>
+								<br>
+							{{/film}}
+							<form action="/addComment/{{film.id}}" method="post">
+								<div class="form-content">
+									<p><b>Add you comment</b></p>
+									<div class="col-md-12">
+										<textarea name="note" placeholder="Comment" rows=5 cols=52></textarea>
+										<select name="stars" class="form-select" placeholder="Stars" required>
+											<option selected>Stars</option>
+											<option>0</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</div>
+									<div class="center">
+										<button class="col-12 button" type="submit">Confirm</button>
+									</div>
+									<input type="hidden" name="_csrf" value="{{token}}" />
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>	
+	</main>
 
-
-        <section class="bg-gray200 pt-5 pb-5">
-            <div class="container">
-               <div class="row justify-content-center">
-                  <div class="col">
-                    <!-- Container for the image gallery -->
-                    <div class="container">
-
-                      <!-- Full-width images with number text -->
-                      <div class="mySlides">
-                     {{#film}}
-                        <img src="/{{id}}/image" style="width:100%">
-                     {{/film}}
-                    </div>
-                    
-                    <!-- Next and previous buttons -->
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-                    <!-- Thumbnail images -->
-                  <div class="row">
-                        <div class="column">
-                          {{#film}}
-                        	<img src="/{{id}}/image" style="width:100%">
-                     	  {{/film}}
-                     	</div>
-                  </div>
-              </div>
-          </div>
-          <div class="col">
-             <div class="card card-body">
-				{{#film}}
-	               <h1 class="card-title display-4"> {{title}} </h1>
-	               <div class="stars" id="rateYo"></div><p></p>
-	               <div class="center"><h4> Asserts </h4></div class="center">
-               		{{#comments}}
-						<p>{{note}}</p>
-						<div class="stars" id="rateYo{{stars}}"></div><p></p>
-			   		{{/comments}}
-			   		{{^comments}}
-			   			<p>There are no asserts yet</p>
-			   		{{/comments}}
-		  		 {{/film}}
-	
-                <button class="col-12 button2" type="button">
-                    Add coment
-                </button>
-                
-                <form action="/addComment/{{film.id}}" method="post">
-               
-                    <div class="form">
-                        <div class="card card-body">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="note" placeholder="Comment" value=""/>
-                                    <select name="stars" class="form-select" placeholder="Stars" value="">
-                                        <option selected>Stars</option>  
-                                        <option>0</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-	                                </select>
-                                </div>
-                            </div>
-                            <button class="col-12 button" type="submit">Confirm</button>
-                            <input type="hidden" name="_csrf" value="{{token}}"/>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-
-</main>
-
-
-<script src="../themeFilm.js"></script>  
-<!--Stars-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-<script src="../stars.js"></script>
-</body>   
+	<!--Stars-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+	<script src="../stars.js"></script>
+</body>
 </html>

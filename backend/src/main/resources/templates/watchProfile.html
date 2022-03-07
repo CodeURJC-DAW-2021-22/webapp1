@@ -13,64 +13,65 @@
     <body>
         {{>headerRegistered}}
 
-        <div class="container emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="profile-head">
-                                <h1>Profile</h1>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 followers"><a href = "/followers">0 Followers</a></div>
-                            <div class="col-md-2 followers"><a href = "/following">0 Following</a></div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="button" class="profile-edit-btn" value="Follow" onclick="return change(this);"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-8">
-                        <div class="row seccion">
-                            <p>Comments</p>
-                        </div>
-                        <div class="row">
-                            <div class="row">
-                                <div class="col comment">
-                                    <a href = "/filmRegistered"><p>The Mitchel vs the machines</p></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p>This film is awesome</p>
-                                    <div id="rateYo2"></div><p></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>           
-        </div>
+		<div class="container emp-profile">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="profile-img">
+						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+							alt="" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="profile-head">
+							<h1>Profile</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 followers"><a href="/followers">0 Followers</a></div>
+						<div class="col-md-2 followers"><a href="/following">0 Following</a></div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<input type="button" class="profile-edit-btn" value="Follow" onclick="return change(this);" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-8">
+					<div class="row seccion">
+						<p>Comments</p>
+					</div>
+					<div class="row">
+						<div class="row">
+							<div class="col comment">
+								<a href="/filmRegistered">
+									<p>The Mitchel vs the machines</p>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<p>This film is awesome</p>
+								<div id="rateYo2"></div>
+								<p></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
         <script src="stars.js"></script>
 
         <script type="text/javascript">
-            function change( el )
-        {
-            if ( el.value === "Follow" )
-                el.value = "Unfollow";
-            else
-                el.value = "Follow";
-        }
+            function change(el) {
+            	if (el.value === "Follow")
+                	el.value = "Unfollow";
+            	else
+                	el.value = "Follow";
+        	}
         </script>
     </body>
 </html>

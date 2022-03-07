@@ -13,54 +13,57 @@
 		crossorigin="anonymous"></script>
 	<title>account</title>
 </head>
-
 <body>
 	{{>headerRegistered}}
+	
 	<div class="container emp-profile">
-		<form method="post">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="profile-img">
-						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-							alt="" />
-						<div class="file btn btn-lg btn-primary">
-							Change Photo
-							<input type="file" name="file" />
-						</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-img">
+					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+						alt="" />
+					<div class="file btn btn-lg btn-primary">
+						Change Photo
+						<input type="file" name="file" />
 					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="row">
-						<div class="profile-head">
-							<h1>Profile</h1>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-2 followers"><a href="/followers">0 Followers</a></div>
-						<div class="col-md-2 followers"><a href="/following">0 Following</a></div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					{{#user}}
-						<button class="profile-edit-btn"><a href="/editProfile/{{id}}">Edit Profile</a></button>
-						<input type="hidden" name="_csrf" value="{{token}}"/>
-					{{/user}}
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="profile-work">
-						<a href="../adviceMe.html">Sing Out</a>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="profile-head">
+						<h1>Profile</h1>
 					</div>
 				</div>
-				<div class="col-md-8">
-					<div class="tab-content profile-tab" id="myTabContent">
-						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-							<div class="row seccion">
-								<label>About</label>
-							</div>
-							<div class="row">
-								{{#user}}
+				<div class="row">
+					<div class="col-md-2 followers"><a href="/followers">0 Followers</a></div>
+					<div class="col-md-2 followers"><a href="/following">0 Following</a></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				{{#user}}
+					<button class="profile-edit-btn"><a href="/editProfile/{{id}}">Edit Profile</a></button>
+				{{/user}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-work">
+					<form action="/logout" method="post">
+						{{#user}}
+							<button type="submit" class="profile-edit-btn">Sign out</button>
+							<input type="hidden" name="_csrf" value="{{token}}"/>
+						{{/user}}
+					</form>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="tab-content profile-tab" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="row seccion">
+							<label>About</label>
+						</div>
+						<div class="row">
+							{{#user}}
 								<div class="row">
 									<div class="col-md-6">
 										<label>Name</label>
@@ -77,50 +80,48 @@
 										<p>{{email}}</p>
 									</div>
 								</div>
-								{{/user}}
-							</div>
+							{{/user}}
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-8">
-					<div class="row seccion">
-						<p>Comments</p>
-					</div>
-
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-8">
+				<div class="row seccion">
+					<p>Comments</p>
+				</div>
+	
+				<div class="row">
 					<div class="row">
-						<div class="row">
-							<div class="col comment">
-								<a href="/filmRegistered">
-									<p>The Mitchel vs the machines</p>
-								</a>
-							</div>
+						<div class="col comment">
+							<a href="/filmRegistered">
+								<p>The Mitchel vs the machines</p>
+							</a>
 						</div>
-						<div class="row">
-							<div class="col">
-								<p>This film is awesome</p>
-								<div id="rateYo2"></div>
-								<p></p>
-							</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<p>This film is awesome</p>
+							<div id="rateYo2"></div>
+							<p></p>
 						</div>
-						<div class="row">
-							<div class="col-md-3">
-								<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Comment" />
-							</div>
-							<div class="col-md-1">
-								<button class="btn"><img src="Images/delete.png" width="20px" /></button>
-							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<button class="profile-edit-btn">Edit Comment</button>
+						</div>
+						<div class="col-md-1">
+							<button class="btn"><img src="/Images/delete.png" width="20px"></button>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 	<script src="stars.js"></script>
 </body>
-
 </html>

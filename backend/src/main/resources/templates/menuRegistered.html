@@ -7,24 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript" src="chartAdviceMe"></script>
+  <script type="text/javascript" src="chartAdviceMe.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script type="text/javascript" src="loadButton.js"></script>
   <link rel="stylesheet" href="style.css" type="text/css">
   <link rel="stylesheet" href="loadingButton.css" type="text/css">
-
 </head>
 <body>
   <div class="wrapper">
-
     {{>headerRegistered}}
+    
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
-    	
-      <!--Hay que añadir el enlace a la otra pantalla y el gráfico-->
       {{#user}}
-      <a href="/menuRegistered"><button class="button">For you</button></a>
-      <a href="/menuFollowing/{{id}}"><button class="button">Following</button></a>
+      	<a href="/menuRegistered"><button class="button">For you</button></a>
+     	<a href="/menuFollowing/{{id}}"><button class="button">Following</button></a>
       {{/user}}
           
       <h1 id="home">Best Movie Genres</h1>
@@ -33,27 +30,26 @@
       <h1 id="recommendations">Recommendations for you</h1>
       <div class="box">
         {{#recomendation}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/recomendation}}
       </div>
       
-      <!--Hay que añadir botón más según esta seccion de arriba-->
+      <!--Load more-->
       
       <h1 id="comments">Your Comments</h1>
       <div class="box">
         {{#commented}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/commented}}               
       </div>
       
-      <!--Hay que añadir botón más según esta seccion de arriba-->
+      <!--Load more-->
       
       <h1 id="trending">Trending Now</h1>
       <div class="box">
         {{#trending}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/trending}}
-
 	  </div>
 	 
 	  <div id="moreFilmsTrending"></div>
@@ -63,7 +59,7 @@
       <h1 id="action">Action</h1>
       <div class="box">
         {{#action}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/action}}             
       </div>
       
@@ -74,19 +70,18 @@
       <h1 id="adventure">Adventure</h1>
       <div class="box">
         {{#adventure}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/adventure}}                  
       </div>
 
       <div id="moreFilmsAdventure"></div>
       <button id='btnAdventure' class='btnSubmit'>More Films</button>
       <div id="loaderAdventure" class="lds-dual-ring hidden overlay"></div>
-
       
       <h1 id="animation">Animation</h1>
       <div class="box">
         {{#animation}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/animation}}                  
       </div>
 
@@ -94,11 +89,10 @@
       <button id='btnAnimation' class='btnSubmit'>More Films</button>
       <div id="loaderAnimation" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="comedy">Comedy</h1>
       <div class="box">
         {{#comedy}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/comedy}}                  
       </div>
 
@@ -106,11 +100,10 @@
       <button id='btnComedy' class='btnSubmit'>More Films</button>
       <div id="loaderComedy" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="drama">Drama</h1>
       <div class="box">
         {{#drama}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/drama}}              
       </div>
 
@@ -118,11 +111,10 @@
       <button id='btnDrama' class='btnSubmit'>More Films</button>
       <div id="loaderDrama" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="horror">Horror</h1>
       <div class="box">
         {{#horror}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/horror}}                  
       </div>
 
@@ -130,19 +122,16 @@
       <button id='btnHorror' class='btnSubmit'>More Films</button>
       <div id="loaderHorror" class="lds-dual-ring hidden overlay"></div>
 
-
       <h1 id="scienceFiction">Science Fiction</h1>
       <div class="box">
         {{#scifi}}
-      		<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+      	  <a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
       	{{/scifi}}                  
       </div>
       
       <div id="moreFilmsScifi"></div>
       <button id='btnScifi' class='btnSubmit'>More Films</button>
       <div id="loaderScifi" class="lds-dual-ring hidden overlay"></div>
-
-      </div>
     </section> 
     <!-- END OF MAIN CONTAINER -->
   </div>

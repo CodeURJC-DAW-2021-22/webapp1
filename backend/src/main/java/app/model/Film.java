@@ -1,7 +1,7 @@
-package app.entity;
-
+package app.model;
 
 import java.sql.Blob;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,50 +14,39 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
-
 @Entity
 public class Film {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	@Column
+	
 	private String title;
-	@Column
-	private String releaseDate;
-	@Column
+	private Date releaseDate;
 	private float averageStars;
-	@Column
 	private String minAge;
-	@Column
 	private Genre genre;
-	@Column
-	private String duration;
+	private int duration;
+	
 	@Column (name="casting")
 	private String cast;
-	@Column
+	
 	private String director;
-	@Column
 	private String plot;
 	
-	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (mappedBy="film", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Lob
-	@JsonIgnore
 	private Blob imageFile;
 
-	@Column
 	private boolean image;
 	
 	public Film() {
 		
 	}
 	
-    public Film(String title, String releaseDate, String minAge, String genre, String duration, String cast, String director, String plot) {
+    public Film(String title, Date releaseDate, String minAge, String genre, int duration, String cast, String director, String plot) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.minAge = minAge;
@@ -67,28 +56,32 @@ public class Film {
         this.director = director;
         this.plot = plot;
     }
-    /*    
-    public void deleteComment(Comment comment) {
-		this.comments.remove(comment);
-		comment.setFilm(null);
-	}
 	
-    // Stars
-    public void calculateAverage() {
+    private void calculateAverage() {
     	int sum = 0;
+    	
     	for (Comment comment: comments) {
     		sum += comment.getStars();
     	}
-    	this.averageStars = (sum/comments.size());
+    	
+    	averageStars = sum / comments.size();
     }
-    */
+    
 	// Getters
+    public Long getId() {
+    	return id;
+    }
+    
 	public String getTitle() {
         return title;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
+    }
+    
+    public float getAverageStars() {
+    	return averageStars;
     }
 
     public String getMinAge() {
@@ -99,7 +92,7 @@ public class Film {
         return genre;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
@@ -120,11 +113,7 @@ public class Film {
 	}
 	
 	public boolean getImage(){
-		return this.image;
-	}
-	
-	public long getId() {
-		return id;
+		return image;
 	}
 	
 	public List<Comment> getComments() {
@@ -132,11 +121,15 @@ public class Film {
 	}
 	
     // Setters
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -148,7 +141,7 @@ public class Film {
         this.genre = genre;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 
@@ -171,13 +164,16 @@ public class Film {
 	public void setImage(boolean image){
 		this.image = image;
 	}
-
-	public void setId(long newId) {
-		this.id = newId;	
-	}
 	
 	public void addComment(Comment comment) {
-		this.comments.add(comment);
+		comments.add(comment);
+		comment.setFilm(this);
+		calculateAverage();
 	}
 	
+	public void deleteComment(Comment comment) {
+		comments.remove(comment);
+		comment.setFilm(null);
+		calculateAverage();
+	}
 }

@@ -1,9 +1,8 @@
-package app.entity;
+package app.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,54 +17,40 @@ import javax.persistence.Table;
 public class User{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column
 	private String name;
-	@Column
 	private String email;
-
 	
-	@OneToMany (mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Comment> comments = new ArrayList<>();
 	
-	@Column
 	private String encodedPassword;
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection(fetch=FetchType.EAGER)
 	private List<String> roles;
-	/*
-	 * Listas de usuarios 
-	 * seguidos y seguidores 
-	 */
 	
-	// Hay que tener cuidado con las peticiones de datos, lo mismo pueden acabar pidiendoselo circularmente
-	// Añadir atributo de imagen
+	// Image
+	// Followers
+	// Following
 
-	public User() {}
+	public User() {
+		
+	}
 
 	public User(String name, String email, String encodedPassword, String... roles) {
-		this.name=name;
-		this.email=email;
-		this.encodedPassword=encodedPassword;
-		this.roles=List.of(roles);
+		this.name = name;
+		this.email = email;
+		this.encodedPassword = encodedPassword;
+		this.roles = List.of(roles);
 	}
-
-
-	
-	// Comments
-
-	public void addComment(Comment comment) {
-		comments.add(comment);
-	}
-	/*
-	public void deleteComment(Comment comment) {
-		this.comments.remove(comment);
-	}
-	*/
 
 	// Getters
+	public Long getId() {
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -74,8 +59,8 @@ public class User{
 		return email;
 	}
 	
-	public Long getId() {
-		return id;
+	public List<Comment> getComments() {
+		return comments;
 	}
 	
 	public String getEncodedPassword() {
@@ -87,6 +72,10 @@ public class User{
 	}
 
 	// Setters
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -95,12 +84,21 @@ public class User{
 		this.email = email;
 	}
 
+	public void setEncodedPassword(String encodedPassword){
+		this.encodedPassword = encodedPassword;
+	}
+	
 	public void setRoles(List<String> roles){
 		this.roles = roles;
 	}
 
-	public void setEncodedPassword(String encodedPassword){
-		this.encodedPassword = encodedPassword;
+	public void addComment(Comment comment) {
+		comments.add(comment);
+		comment.setUser(this);
 	}
-
+	
+	public void deleteComment(Comment comment) {
+		comments.remove(comment);
+		comment.setUser(null);
+	}
 }

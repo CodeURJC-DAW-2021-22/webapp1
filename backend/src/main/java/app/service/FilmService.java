@@ -1,6 +1,5 @@
 package app.service;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -9,9 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import app.advice.FilmRepository;
-import app.entity.Film;
-import app.entity.Genre;
+import app.model.Film;
+import app.model.Genre;
+import app.repository.FilmRepository;
 
 @Service
 public class FilmService {
@@ -58,5 +57,4 @@ public class FilmService {
 	public long countByGenre(Genre genre) {
 		return repository.countByGenre(genre);
 	}
-	
 }

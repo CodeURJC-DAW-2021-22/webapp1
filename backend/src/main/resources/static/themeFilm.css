@@ -85,15 +85,14 @@ a, .a:hover {
     border: 1px solid #B8D5FD;
     margin-bottom: 2%;
     background: #f1f7fe;
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-radius: 30px;
     border: none;
 }
 
 .form-control {
     border-radius:1.5rem;
-    color: gray;
     border: none;
+    color: gray;
 }
 
 .form-group {
@@ -102,8 +101,12 @@ a, .a:hover {
 
 .form-select {
   border-radius:1.5rem;
-  color: gray;
   border: none;
+  color: gray;
+}
+
+textarea {
+	resize: none;
 }
 
 #logo {
@@ -262,9 +265,7 @@ a, .a:hover {
 }
 
 /* MEDIA QUERIES */
-
 @media(max-width: 900px) {
-
   header {
     display: grid;
     grid-gap: 20px;
@@ -282,7 +283,6 @@ a, .a:hover {
 }
 
 @media(max-width: 700px) {
-
   header {
     display: grid;
     grid-gap: 20px;
@@ -300,7 +300,6 @@ a, .a:hover {
 }
 
 @media(max-width: 500px) {
-
   .wrapper {
     font-size: 15px;
   }
@@ -351,6 +350,7 @@ a, .a:hover {
     transform: scale(1.1);
   }
 }
+
 /* HEADER */
 header {
   padding: 20px 20px 0 20px;
@@ -420,9 +420,7 @@ header {
 }
 
 /* MEDIA QUERIES */
-
 @media(max-width: 900px) {
-
   header {
     display: grid;
     grid-gap: 20px;
@@ -431,11 +429,9 @@ header {
     "nt nt nt  .  .  . sb . . . "
     "mn mn mn mn mn mn  mn mn mn mn";
   }
-
 }
 
 @media(max-width: 700px) {
-
   header {
     display: grid;
     grid-gap: 20px;
@@ -444,11 +440,9 @@ header {
     "nt nt nt  .  .  . sb . . . "
     "mn mn mn mn mn mn  mn mn mn mn";
   }
-
 }
 
 @media(max-width: 500px) {
-
   .wrapper {
     font-size: 15px;
   }
@@ -479,5 +473,4 @@ header {
     grid-template-columns: repeat(1, 1fr);
     text-align: center;
   }
-
 }

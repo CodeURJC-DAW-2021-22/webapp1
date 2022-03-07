@@ -25,6 +25,10 @@ h1 {
   padding-top: 60px;  
 }
 
+textarea {
+  resize: none;
+}
+
 .wrapper {
   margin: 0;
   padding: 0;
@@ -133,12 +137,7 @@ header {
   width: 100%;
 }
 
-/*#piechart {
-  
-}*/
-
-/*Register*/
-
+/* REGISTER */
 .note {
     text-align: center;
     height: 80px;
@@ -213,8 +212,7 @@ button a:hover {
   color: white;
 }
 
-/*Profile*/
-
+/* PROFILE */
 .emp-profile {
     padding: 3%;
     margin-top: 10%;
@@ -345,8 +343,7 @@ button a:hover {
   font-size: 15px;
 }
 
-/*Followers*/
-
+/* FOLLOWERS */
 .account {
   margin-left: 5%;
   color: black;
@@ -381,8 +378,7 @@ button a:hover {
     box-shadow: 0 0 2em #e6e9f9;
 }
 
-/*Edit profile*/
-
+/* EDIT PROFILE */
 .left {   
   margin-top: 5%;
   text-align: left;
@@ -399,8 +395,7 @@ button a:hover {
   color: black;
 }
 
-/*Add film*/
-
+/* ADD FILM */
 #postFilm {
   text-align: center;
 }
@@ -422,9 +417,7 @@ button a:hover {
 }
 
 /* MEDIA QUERIES */
-
 @media(max-width: 900px) {
-
   header {
     display: grid;
     grid-gap: 20px;
@@ -442,7 +435,6 @@ button a:hover {
 }
 
 @media(max-width: 700px) {
-
   header {
     display: grid;
     grid-gap: 20px;
@@ -460,7 +452,6 @@ button a:hover {
 }
 
 @media(max-width: 500px) {
-
   .wrapper {
     font-size: 15px;
   }

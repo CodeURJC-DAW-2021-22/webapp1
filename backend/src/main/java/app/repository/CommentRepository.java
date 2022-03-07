@@ -1,8 +1,8 @@
-package app.advice;
+package app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import app.entity.Comment;
+import app.model.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
