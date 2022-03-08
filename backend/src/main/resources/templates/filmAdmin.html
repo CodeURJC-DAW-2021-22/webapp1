@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../appFilm.css">
     <link rel="stylesheet" href="../themeFilm.css">
     <link rel="stylesheet" href="../jquery.rateyo.css">
+    
+    <script type="text/javascript" src="../loadButton.js"></script>
+    <link rel="stylesheet" href="../loadingButton.css" type="text/css">
     <title>film</title>
 </head>
 <body>
@@ -46,6 +49,8 @@
 								<p><b>Director: </b>{{director}}</p>
 								<p><b>Plot:</b></p>
 								<p>{{plot}}</p>
+							{{/film}}
+							
 								<div class="center">
 									<h4> Asserts </h4>
 								</div>
@@ -61,7 +66,12 @@
 								{{^comments}}
 									<p>There are no asserts yet</p>
 								{{/comments}}
-							{{/film}}
+								
+								<div id="moreComments"></div>
+      							<button id='btnComment' class='btnSubmit'>More Comments</button>
+      							<div id="loaderComment" class="lds-dual-ring hidden overlay"></div>
+     
+							
 						</div>
 					</div>
 				</div>

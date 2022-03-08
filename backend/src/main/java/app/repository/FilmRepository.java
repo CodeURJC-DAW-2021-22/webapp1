@@ -22,4 +22,10 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 	
 	@Query("SELECT f from Film f WHERE LOWER(f.title) LIKE %:name% ORDER BY f.averageStars DESC")
 	public List<Film> findLikeName(String name);
+
+	@Query("SELECT f from Film f WHERE LOWER(f.title) LIKE %:name% ORDER BY f.averageStars DESC")
+	public List<Film> findLikeName(String name, Pageable pageable);
+
+	@Query("SELECT count(f) from Film f WHERE LOWER(f.title) LIKE %:name%")
+	public int countByName(String name);
 }

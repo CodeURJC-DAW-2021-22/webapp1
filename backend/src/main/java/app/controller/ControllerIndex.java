@@ -4,6 +4,7 @@ package app.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,6 +88,16 @@ public class ControllerIndex {
 		return null;
 	}
 	
+	@GetMapping("/moreSearch/{name}/{page}")
+	public String getFilmsSeach(Model model, @PathVariable String name, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
+			model.addAttribute("films", filmService.findLikeName(name, PageRequest.of(page,6)));
+			return "movies";
+		}
+		return null;
+	}
+	
 	@GetMapping("/moreGenre/{genre}/{page}")
 	public String getFilmsGenre(Model model, @PathVariable String genre, @PathVariable int page) {
 		// Before returning a page it confirms that there are more left
@@ -140,7 +151,11 @@ public class ControllerIndex {
 	
 	@GetMapping("/searchFilms")
 	public String searchFilms(Model model, String query) {
-		model.addAttribute("result", filmService.findLikeName(query.toLowerCase()));
+		List<Film> result = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
+		model.addAttribute("result", result);
+		if (!result.isEmpty()) {
+			model.addAttribute("exist", true);
+		}
 		return "searchFilms";
 	}
 	
@@ -261,6 +276,7 @@ public class ControllerIndex {
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		model.addAttribute("film", film);
 		model.addAttribute("user", user);
+		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmRegistered";
@@ -290,6 +306,7 @@ public class ControllerIndex {
 		Film film = filmService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		model.addAttribute("film", film);
+		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		model.addAttribute("user", user);
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));

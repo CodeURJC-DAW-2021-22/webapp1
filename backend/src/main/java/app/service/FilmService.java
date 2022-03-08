@@ -34,6 +34,10 @@ public class FilmService {
 		return repository.findLikeName(name);
 	}
 	
+	public List<Film> findLikeName(String name, Pageable pageable) {
+		return repository.findLikeName(name, pageable);
+	}
+	
 	public boolean exist(long id) {
 		return repository.existsById(id);
 	}
@@ -61,4 +65,9 @@ public class FilmService {
 	public long countByGenre(Genre genre) {
 		return repository.countByGenre(genre);
 	}
+
+	public int countByName(String name) {
+		return repository.countByName(name);
+	}
+
 }
