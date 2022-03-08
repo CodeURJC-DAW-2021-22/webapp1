@@ -100,6 +100,20 @@ public class ControllerIndex {
 		return null;
 	}
 	
+	@GetMapping("/moreComments/{id}/{page}")
+	public String getComments(Model model, @PathVariable long id, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		Optional<Film> film = filmService.findById(id);
+		if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
+			
+			model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(page, 2)));
+
+			return "comments";
+		}
+		
+		return null;
+	}
+	
 	@GetMapping("/{id}/image")
 	public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
 		Optional<Film> film = filmService.findById(id);
@@ -235,6 +249,7 @@ public class ControllerIndex {
 	public String filmUnregistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
+		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmUnregistered";

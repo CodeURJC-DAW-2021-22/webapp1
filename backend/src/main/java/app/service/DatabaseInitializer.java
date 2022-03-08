@@ -121,10 +121,29 @@ public class DatabaseInitializer {
 			
 			user.addComment(com1);
 			user.addComment(com2);
-	        
+			
 	        film1.addComment(com1);
 			film2.addComment(com2);
 
+			// Eliminar después
+			Comment com3 = new Comment("4", "a");
+			Comment com4 = new Comment("2", "b");
+			Comment com5 = new Comment("5", "fe");
+			Comment com6 = new Comment("2", "as");
+			Comment com7 = new Comment("1", "asd");
+			user.addComment(com3);
+			user.addComment(com4);
+			user.addComment(com5);
+			user.addComment(com6);
+			user.addComment(com7);
+			
+	        film1.addComment(com3);
+			film1.addComment(com4);
+	        film1.addComment(com5);
+			film1.addComment(com6);
+			film1.addComment(com7);
+		//Hasta aquí
+			
 			filmRepository.save(film1);
 			filmRepository.save(film2);
 			filmRepository.save(film3);
