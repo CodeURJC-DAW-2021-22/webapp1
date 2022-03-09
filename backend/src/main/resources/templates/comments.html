@@ -1,5 +1,6 @@
 <script src="../stars.js"></script>
 
+
 {{#comments}}
 		{{#user}}
 			<p><b>{{name}}</b></p>
@@ -7,7 +8,7 @@
 		<p>{{note}}</p>
 		<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
 		{{#admin}}
-			<button class="col-3 button1" id="boton">Eliminate</button><p></p>
+			<button onclick="location.href='/removeComment/{{id}}'" class="button" id="boton">Eliminate</button><p></p>
 		{{/admin}}
 		<br>
 {{/comments}}
