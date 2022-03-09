@@ -36,7 +36,7 @@
 									<button onclick="location.href='/editFilm/{{film.id}}'" class="button" id="boton">Edit film</button>
 									<button onclick="location.href='/removeFilm/{{film.id}}'" class="button" id="boton">Eliminate</button>
 								</div>
-								<div class="stars" id="rateYo{{averageStars}}"></div>
+								<div class="stars rateyo" data-rateyo-rating="{{averageStars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
 								<br>
 								<p><b>Release date: </b>{{releaseDate}}</p>
 								<p><b>Minimum age: </b>{{minAge}}</p>
@@ -54,7 +54,7 @@
 										<p><b>{{name}}</b></p>
 									{{/user}}
 									<p>{{note}}</p>
-									<div class="stars" id="rateYo{{stars}}"></div>
+									<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
 									<button class="col-3 button1" id="boton">Eliminate</button><p></p>
 									<p></p>
 								{{/comments}}

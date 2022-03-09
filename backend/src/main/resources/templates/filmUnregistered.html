@@ -7,10 +7,7 @@
     <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css" rel="stylesheet"/>
-	<link rel="stylesheet" href="../appFilm.css">
+    <link rel="stylesheet" href="../appFilm.css">
     <link rel="stylesheet" href="../themeFilm.css">
     <link rel="stylesheet" href="../jquery.rateyo.css">
     <title>film</title>
@@ -35,7 +32,7 @@
 						<div class="card card-body">
 							{{#film}}
 								<h1 class="card-title display-4"> {{title}} </h1>
-								<div class="stars" id="rateYo{{averageStars}}"></div>
+								<div class="stars rateyo" data-rateyo-rating="{{averageStars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
 								<br>
 								<p><b>Release date: </b>{{releaseDate}}</p>
 								<p><b>Minimum age: </b>{{minAge}}</p>
@@ -53,7 +50,7 @@
 										<p><b>{{name}}</b></p>
 									{{/user}}
 									<p>{{note}}</p>
-									<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5">
+									<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true">
 									</div>
 									<br>
 								{{/comments}}

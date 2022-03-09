@@ -32,7 +32,7 @@
 						<div class="card card-body">
 							{{#film}}
 								<h1 class="card-title display-4"> {{title}} </h1>
-								<div class="stars" id="rateYo{{averageStars}}"></div>
+								<div class="stars rateyo" data-rateyo-rating="{{averageStars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
 								<br>
 								<p><b>Release date: </b>{{releaseDate}}</p>
 								<p><b>Minimum age: </b>{{minAge}}</p>
@@ -50,7 +50,7 @@
 										<p><b>{{name}}</b></p>
 									{{/user}}
 									<p>{{note}}</p>
-									<div class="stars" id="rateYo{{stars}}"></div>
+									<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
 									<br>
 								{{/comments}}
 								{{^comments}}
