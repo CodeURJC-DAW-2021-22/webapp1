@@ -239,10 +239,28 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/editProfile")
-	public String editProfileProcess(Model model, User user, MultipartFile imageField) throws IOException, SQLException {
-		updateImageProfile(user, imageField);
-		userService.save(user);
+	public String editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
+		User user = userService.findById(newUser.getId()).orElseThrow();
+		updateImageProfile(newUser, imageField);
+		user.getComments().forEach(c -> newUser.addComment(c));
+		userService.save(newUser);
 		return "redirect:/profile/" + user.getId();
+	}
+	
+	@GetMapping("/editComment/{id}")
+	public String editComment(Model model, @PathVariable long id) {
+		model.addAttribute("comment", commentService.findById(id).orElseThrow());
+		
+		return "editComment";
+	}
+	
+	@PostMapping("/editComment")
+	public String editComment(Model model, Comment newComment) throws IOException, SQLException {
+		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
+		newComment.setUser(comment.getUser());
+		newComment.setFilm(comment.getFilm());
+		commentService.save(newComment);
+		return "redirect:/profile/" + newComment.getUser().getId();
 	}
 	
 	@GetMapping("/followers")
@@ -299,6 +317,28 @@ public class ControllerIndex {
 		comment.setUser(user);
 		commentService.save(comment);
 		return"redirect:/filmRegistered/" + film.getId();
+	}
+	
+	@GetMapping("/removeComment/{id}")
+	public String removeComment(Model model, @PathVariable long id, HttpServletRequest request) {
+		Comment comment = commentService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		User userComment = comment.getUser();
+		
+		if (userComment.getId() == user.getId() || request.isUserInRole("ADMIN")) {
+			Film film = comment.getFilm();
+			commentService.delete(id);
+			film.calculateAverage();
+			filmService.save(film);
+			
+			if (request.isUserInRole("ADMIN")) {
+				return "redirect:/filmAdmin/" + film.getId();
+			} else {
+				return "redirect:/profile/" + user.getId();
+			}
+		} 
+		
+		return "redirect:/menuRegistered";
 	}
 	
 	@GetMapping("/filmAdmin/{id}")
@@ -360,16 +400,12 @@ public class ControllerIndex {
 	
 	@PostMapping("/editFilm/{id}")
 	public String editFilmProcess(Model model, Film newFilm, @PathVariable long id, MultipartFile imageField) throws IOException, SQLException {
-		Optional<Film> filmId = filmService.findById(id);
+		Film film = filmService.findById(id).orElseThrow();
+		updateImage(newFilm, imageField);
+		film.getComments().forEach(c -> newFilm.addComment(c));
+		filmService.save(newFilm);
 		
-		if (filmId.isPresent()) {
-			Film film = filmId.get();
-			updateImage(newFilm, imageField);
-			film.getComments().forEach(c -> newFilm.addComment(c));
-			filmService.save(newFilm);
-		}
-		
-		return "redirect:/menuAdmin";
+		return "redirect:/filmAdmin/" + film.getId();
 	}
 	
 	private void updateImage(Film film, MultipartFile imageField) throws IOException, SQLException {
@@ -392,11 +428,11 @@ public class ControllerIndex {
 			user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			user.setImage(true);
 		} else {
-			Film dbFilm = filmService.findById(user.getId()).orElseThrow();
+			User dbUser = userService.findById(user.getId()).orElseThrow();
 			
-			if (dbFilm.getImage()) {
-				user.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(),
-						dbFilm.getImageFile().length()));
+			if (dbUser.getImage()) {
+				user.setImageFile(BlobProxy.generateProxy(dbUser.getImageFile().getBinaryStream(),
+						dbUser.getImageFile().length()));
 				user.setImage(true);
 			}
 		}

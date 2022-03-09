@@ -67,6 +67,9 @@ public class Film {
         	
         	averageStars = Math.round(sum / comments.size());
     	}
+    	else { 
+    		averageStars = 0;
+    	}
     }
     
 	// Getters
