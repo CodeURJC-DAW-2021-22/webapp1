@@ -4,6 +4,7 @@ package app.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,6 +88,16 @@ public class ControllerIndex {
 		return null;
 	}
 	
+	@GetMapping("/moreSearch/{name}/{page}")
+	public String getFilmsSeach(Model model, @PathVariable String name, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
+			model.addAttribute("films", filmService.findLikeName(name, PageRequest.of(page,6)));
+			return "movies";
+		}
+		return null;
+	}
+	
 	@GetMapping("/moreGenre/{genre}/{page}")
 	public String getFilmsGenre(Model model, @PathVariable String genre, @PathVariable int page) {
 		// Before returning a page it confirms that there are more left
@@ -95,6 +106,20 @@ public class ControllerIndex {
 		if (page <= (int) Math.ceil(filmService.countByGenre(gen)/6)) {
 			model.addAttribute("films", filmService.findByGenre(gen, PageRequest.of(page,6)));
 			return "movies";
+		}
+		
+		return null;
+	}
+	
+	@GetMapping("/moreComments/{id}/{page}")
+	public String getComments(Model model, @PathVariable long id, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		Optional<Film> film = filmService.findById(id);
+		if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
+			
+			model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(page, 2)));
+
+			return "comments";
 		}
 		
 		return null;
@@ -112,9 +137,25 @@ public class ControllerIndex {
 		}
 	}
 	
+	@GetMapping("/{id}/imageProfile")
+	public ResponseEntity<Object> downloadImageProfile(@PathVariable long id) throws SQLException {
+		Optional<User> user = userService.findById(id);
+		
+		if (user.isPresent() && user.get().getImageFile() != null) {
+			Resource file = new InputStreamResource(user.get().getImageFile().getBinaryStream());
+			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").contentLength(user.get().getImageFile().length()).body(file);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
 	@GetMapping("/searchFilms")
 	public String searchFilms(Model model, String query) {
-		model.addAttribute("result", filmService.findLikeName(query.toLowerCase()));
+		List<Film> result = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
+		model.addAttribute("result", result);
+		if (!result.isEmpty()) {
+			model.addAttribute("exist", true);
+		}
 		return "searchFilms";
 	}
 	
@@ -198,9 +239,28 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/editProfile")
-	public String editProfileProcess(Model model, User user) throws IOException, SQLException {
-		userService.save(user);
+	public String editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
+		User user = userService.findById(newUser.getId()).orElseThrow();
+		updateImageProfile(newUser, imageField);
+		user.getComments().forEach(c -> newUser.addComment(c));
+		userService.save(newUser);
 		return "redirect:/profile/" + user.getId();
+	}
+	
+	@GetMapping("/editComment/{id}")
+	public String editComment(Model model, @PathVariable long id) {
+		model.addAttribute("comment", commentService.findById(id).orElseThrow());
+		
+		return "editComment";
+	}
+	
+	@PostMapping("/editComment")
+	public String editComment(Model model, Comment newComment) throws IOException, SQLException {
+		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
+		newComment.setUser(comment.getUser());
+		newComment.setFilm(comment.getFilm());
+		commentService.save(newComment);
+		return "redirect:/profile/" + newComment.getUser().getId();
 	}
 	
 	@GetMapping("/followers")
@@ -222,6 +282,7 @@ public class ControllerIndex {
 	public String filmUnregistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
+		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmUnregistered";
@@ -233,6 +294,7 @@ public class ControllerIndex {
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		model.addAttribute("film", film);
 		model.addAttribute("user", user);
+		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
 		return "filmRegistered";
@@ -257,11 +319,34 @@ public class ControllerIndex {
 		return"redirect:/filmRegistered/" + film.getId();
 	}
 	
+	@GetMapping("/removeComment/{id}")
+	public String removeComment(Model model, @PathVariable long id, HttpServletRequest request) {
+		Comment comment = commentService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		User userComment = comment.getUser();
+		
+		if (userComment.getId() == user.getId() || request.isUserInRole("ADMIN")) {
+			Film film = comment.getFilm();
+			commentService.delete(id);
+			film.calculateAverage();
+			filmService.save(film);
+			
+			if (request.isUserInRole("ADMIN")) {
+				return "redirect:/filmAdmin/" + film.getId();
+			} else {
+				return "redirect:/profile/" + user.getId();
+			}
+		} 
+		
+		return "redirect:/menuRegistered";
+	}
+	
 	@GetMapping("/filmAdmin/{id}")
 	public String filmAdmin(Model model, @PathVariable long id, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		model.addAttribute("film", film);
+		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		model.addAttribute("user", user);
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
@@ -315,16 +400,12 @@ public class ControllerIndex {
 	
 	@PostMapping("/editFilm/{id}")
 	public String editFilmProcess(Model model, Film newFilm, @PathVariable long id, MultipartFile imageField) throws IOException, SQLException {
-		Optional<Film> filmId = filmService.findById(id);
+		Film film = filmService.findById(id).orElseThrow();
+		updateImage(newFilm, imageField);
+		film.getComments().forEach(c -> newFilm.addComment(c));
+		filmService.save(newFilm);
 		
-		if (filmId.isPresent()) {
-			Film film = filmId.get();
-			updateImage(newFilm, imageField);
-			film.getComments().forEach(c -> newFilm.addComment(c));
-			filmService.save(newFilm);
-		}
-		
-		return "redirect:/menuAdmin";
+		return "redirect:/filmAdmin/" + film.getId();
 	}
 	
 	private void updateImage(Film film, MultipartFile imageField) throws IOException, SQLException {
@@ -338,6 +419,21 @@ public class ControllerIndex {
 				film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(),
 						dbFilm.getImageFile().length()));
 				film.setImage(true);
+			}
+		}
+	}
+	
+	private void updateImageProfile(User user, MultipartFile imageField) throws IOException, SQLException {
+		if (!imageField.isEmpty()) {
+			user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+			user.setImage(true);
+		} else {
+			User dbUser = userService.findById(user.getId()).orElseThrow();
+			
+			if (dbUser.getImage()) {
+				user.setImageFile(BlobProxy.generateProxy(dbUser.getImageFile().getBinaryStream(),
+						dbUser.getImageFile().length()));
+				user.setImage(true);
 			}
 		}
 	}

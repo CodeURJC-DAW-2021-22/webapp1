@@ -108,8 +108,10 @@ public class DatabaseInitializer {
 			setFilmImage(film20, "/static/Images/film20.jpg");
 			setFilmImage(film21, "/static/Images/film21.jpg");
 			
-			User user = new User("user", "user", passwordEncoder.encode("pass"), "USER");
-			User admin = new User("admin", "admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN");
+			User user = new User("user", "user@gmail.com", passwordEncoder.encode("pass"), "USER");
+			User admin = new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), "USER", "ADMIN");
+			
+			setProfileImage(user, "/static/Images/defaultImage.png");
 			
 			userRepository.save(user);
 	        userRepository.save(admin);
@@ -119,10 +121,29 @@ public class DatabaseInitializer {
 			
 			user.addComment(com1);
 			user.addComment(com2);
-	        
+			
 	        film1.addComment(com1);
 			film2.addComment(com2);
 
+			// Eliminar después
+			Comment com3 = new Comment("4", "a");
+			Comment com4 = new Comment("2", "b");
+			Comment com5 = new Comment("5", "fe");
+			Comment com6 = new Comment("2", "as");
+			Comment com7 = new Comment("1", "asd");
+			user.addComment(com3);
+			user.addComment(com4);
+			user.addComment(com5);
+			user.addComment(com6);
+			user.addComment(com7);
+			
+	        film1.addComment(com3);
+			film1.addComment(com4);
+	        film1.addComment(com5);
+			film1.addComment(com6);
+			film1.addComment(com7);
+		//Hasta aquí
+			
 			filmRepository.save(film1);
 			filmRepository.save(film2);
 			filmRepository.save(film3);
@@ -151,5 +172,11 @@ public class DatabaseInitializer {
 		film.setImage(true);
 		Resource image = new ClassPathResource(classpathResource);
 		film.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+	}
+	
+	public void setProfileImage(User user, String classpathResource) throws IOException {
+		user.setImage(true);
+		Resource image = new ClassPathResource(classpathResource);
+		user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
 	}
 }

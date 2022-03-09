@@ -1,0 +1,14 @@
+<script src="../stars.js"></script>
+
+{{#comments}}
+		{{#user}}
+			<p><b>{{name}}</b></p>
+		{{/user}}
+		<p>{{note}}</p>
+		<div class="stars" id="rateYo{{stars}}"></div>
+		{{#admin}}
+			<button class="col-3 button1" id="boton">Eliminate</button><p></p>
+		{{/admin}}
+		<br>
+{{/comments}}
+
