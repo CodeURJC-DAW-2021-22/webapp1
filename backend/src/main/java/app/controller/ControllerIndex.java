@@ -226,10 +226,12 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/editComment")
-	public String editComment(Model model, Comment comment) throws IOException, SQLException {
-		User user = comment.getUser();
-		commentService.save(comment);
-		return "redirect:/profile/" + user.getId();
+	public String editComment(Model model, Comment newComment) throws IOException, SQLException {
+		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
+		newComment.setUser(comment.getUser());
+		newComment.setFilm(comment.getFilm());
+		commentService.save(newComment);
+		return "redirect:/profile/" + newComment.getUser().getId();
 	}
 	
 	@GetMapping("/followers")
@@ -287,11 +289,25 @@ public class ControllerIndex {
 	}
 	
 	@GetMapping("/removeComment/{id}")
-	public String removeComment(Model model, @PathVariable long id) {
+	public String removeComment(Model model, @PathVariable long id, HttpServletRequest request) {
 		Comment comment = commentService.findById(id).orElseThrow();
-		User user = comment.getUser();
-		commentService.delete(id);
-		return "redirect:/profile/" + user.getId();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		User userComment = comment.getUser();
+		
+		if (userComment.getId() == user.getId() || request.isUserInRole("ADMIN")) {
+			Film film = comment.getFilm();
+			commentService.delete(id);
+			film.calculateAverage();
+			filmService.save(film);
+			
+			if (request.isUserInRole("ADMIN")) {
+				return "redirect:/filmAdmin/" + film.getId();
+			} else {
+				return "redirect:/profile/" + user.getId();
+			}
+		} 
+		
+		return "redirect:/menuRegistered";
 	}
 	
 	@GetMapping("/filmAdmin/{id}")

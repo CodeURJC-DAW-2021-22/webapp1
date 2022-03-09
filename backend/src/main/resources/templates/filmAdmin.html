@@ -55,7 +55,7 @@
 									{{/user}}
 									<p>{{note}}</p>
 									<div class="stars" id="rateYo{{stars}}"></div>
-									<button class="col-3 button1" id="boton">Eliminate</button><p></p>
+									<button onclick="location.href='/removeComment/{{id}}'" class="button" id="boton">Eliminate</button><p></p>
 									<p></p>
 								{{/comments}}
 								{{^comments}}
