@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,7 +39,11 @@ public class User{
 
 	private boolean image;
 	// Followers
+	@ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
+	private List<User> followers = new ArrayList<>();
 	// Following
+	@ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
+	private List<User> following = new ArrayList<>();
 
 	public User() {
 		
@@ -83,6 +88,10 @@ public class User{
 	public boolean getImage(){
 		return image;
 	}
+	
+	public List<User> getFollowing() {
+		return following;
+	}
 
 	// Setters
 	public void setId(Long id) {
@@ -121,5 +130,11 @@ public class User{
 	public void deleteComment(Comment comment) {
 		comments.remove(comment);
 		comment.setUser(null);
+	}
+	public void addFollowing(User user) {
+		following.add(user);
+	}
+	public void deleteFollowing(User user) {
+		following.remove(user);
 	}
 }

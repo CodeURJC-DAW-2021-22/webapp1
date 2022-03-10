@@ -268,13 +268,21 @@ public class ControllerIndex {
 		return "followers";
 	}
 	
-	@GetMapping("/following")
-	public String following(Model model) {
-		return "following";
+	@GetMapping("/addFollowing/{id}")
+	public String addFollowing(Model model, @PathVariable long id, HttpServletRequest request) {
+		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		User following = userService.findById(id).orElseThrow();
+		if(!follower.getFollowing().contains(following)) {
+			follower.addFollowing(following);
+		} else {
+			follower.deleteFollowing(following);
+		}
+		return"watchProfile";
 	}
 	
-	@GetMapping("/watchProfile")
-	public String watchProfile(Model model) {
+	@GetMapping("/watchProfile/{id}")
+	public String watchProfile(Model model, @PathVariable long id) {
+		model.addAttribute("user", userService.findById(id).orElseThrow());
 		return "watchProfile";
 	}
 	
@@ -289,11 +297,9 @@ public class ControllerIndex {
 	} 
 	
 	@GetMapping("/filmRegistered/{id}")
-	public String filmRegistered(Model model, @PathVariable long id, HttpServletRequest request) {
+	public String filmRegistered(Model model, @PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		model.addAttribute("film", film);
-		model.addAttribute("user", user);
 		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));

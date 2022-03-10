@@ -56,7 +56,7 @@
 								</div>
 								{{#comments}}
 									{{#user}}
-										<p><b>{{name}}</b></p>
+										<a href="/watchProfile/{{id}}"><p><b>{{name}}</b></p></a>
 									{{/user}}
 									<p>{{note}}</p>
 									<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
@@ -70,8 +70,6 @@
 								<div id="moreComments"></div>
       							<button id='btnComment' class='btnSubmit'>More Comments</button>
       							<div id="loaderComment" class="lds-dual-ring hidden overlay"></div>
-     
-							
 						</div>
 					</div>
 				</div>
