@@ -277,12 +277,14 @@ public class ControllerIndex {
 		} else {
 			follower.deleteFollowing(following);
 		}
-		return"watchProfile";
+		userService.save(following);
+		userService.save(follower);
+		return"redirect:/watchProfile/" + following.getId();
 	}
 	
 	@GetMapping("/watchProfile/{id}")
 	public String watchProfile(Model model, @PathVariable long id) {
-		model.addAttribute("user", userService.findById(id).orElseThrow());
+		model.addAttribute("userWatch", userService.findById(id).orElseThrow());
 		return "watchProfile";
 	}
 	

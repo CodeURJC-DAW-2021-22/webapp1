@@ -27,18 +27,21 @@
 				</div>
 			</div>
 			<div class="col-md-6">
+				{{#user}}
 				<div class="row">
 					<div class="profile-head">
-						<h1>Profile</h1>
+						<h1>{{name}}</h1>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-2 followers"><a href="/followers">0 Followers</a></div>
 					<div class="col-md-2 followers"><a href="/following">0 Following</a></div>
 				</div>
+				{{/user}}
 			</div>
 			<div class="col-md-2">
-				<input type="button" class="profile-edit-btn" value="Follow" onclick="return change(this);" />
+				<input onclick="location.href='/addFollowing/{{user.id}}'" type="button" class="profile-edit-btn"
+					value="Follow" onclick="return change(this);" />
 			</div>
 		</div>
 		<div class="row">
@@ -72,7 +75,7 @@
 				</div>
 				{{/comments}}
 				{{^comments}}
-					<p>There are no asserts yet</p>
+				<p>There are no asserts yet</p>
 				{{/comments}}
 				{{/user}}
 			</div>

@@ -38,13 +38,21 @@ public class User{
 	private Blob imageFile;
 
 	private boolean image;
+	
 	// Followers
-	@ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<User> following;
+	
+	@ManyToMany(mappedBy = "following")
+	private List<User> followers;
+	
+	/*
+	@ManyToMany (cascade=CascadeType.ALL)
 	private List<User> followers = new ArrayList<>();
 	// Following
-	@ManyToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@ManyToMany (cascade=CascadeType.ALL)
 	private List<User> following = new ArrayList<>();
-
+	*/
 	public User() {
 		
 	}
@@ -88,9 +96,13 @@ public class User{
 	public boolean getImage(){
 		return image;
 	}
-	
+
 	public List<User> getFollowing() {
 		return following;
+	}
+	
+	public List<User> getFollowers() {
+		return followers;
 	}
 
 	// Setters
@@ -131,10 +143,24 @@ public class User{
 		comments.remove(comment);
 		comment.setUser(null);
 	}
+	
 	public void addFollowing(User user) {
 		following.add(user);
+		user.addFollowers(this);
 	}
+	
 	public void deleteFollowing(User user) {
 		following.remove(user);
+		user.deleteFollowers(this);
 	}
+	
+	public void addFollowers(User user) {
+		followers.add(user);
+	}
+	public void deleteFollowers(User user) {
+		followers.remove(user);
+	}
+	
+	
+	
 }
