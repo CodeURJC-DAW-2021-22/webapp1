@@ -16,7 +16,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -171,8 +170,9 @@ public class ControllerIndex {
 		return "loginerror";
 	}
 
-	@RequestMapping("/errorOldPassword")
-	public String errorOldPassword() {
+	@GetMapping("/errorOldPassword/{id}")
+	public String errorOldPassword(Model model, @PathVariable long id) {
+		model.addAttribute("id", id);
 		return "errorOldPassword";
 	}
 
@@ -261,15 +261,14 @@ public class ControllerIndex {
 	}
 
 	@PostMapping("/editPassword")
-	public String editPasswordProcess(Model model, User newUser, @RequestParam String password) throws IOException, SQLException {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();   
-		User user = userService.findById(newUser.getId()).orElseThrow(); 
-		if (encoder.matches(password, user.getEncodedPassword())){
-			user.setEncodedPassword(encoder.encode(newUser.getEncodedPassword()));
+	public String editPasswordProcess(Model model, @RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword) throws IOException, SQLException {
+		User user = userService.findById(id).orElseThrow(); 
+		if (passwordEncoder.matches(oldPassword, user.getEncodedPassword())){
+			user.setEncodedPassword(passwordEncoder.encode(newPassword));
 			userService.save(user);
 			return "redirect:/profile/" + user.getId();
 		}
-		return "redirect:/errorOldPassword";
+		return "redirect:/errorOldPassword" + user.getId();
 	}
 	
 	@GetMapping("/editComment/{id}")
