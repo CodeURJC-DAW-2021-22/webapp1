@@ -286,7 +286,7 @@ public class ControllerIndex {
 				
 		following.calculateFollowers();
 		following.calculateFollowing();
-		userService.save(following);
+		
 		userService.save(follower);
 		return"redirect:/watchProfile/" + following.getId();
 	}

@@ -51,13 +51,6 @@ public class User{
 	
 	private int followersCount;
 	
-	/*
-	@ManyToMany (cascade=CascadeType.ALL)
-	private List<User> followers = new ArrayList<>();
-	// Following
-	@ManyToMany (cascade=CascadeType.ALL)
-	private List<User> following = new ArrayList<>();
-	*/
 	public User() {
 		
 	}
