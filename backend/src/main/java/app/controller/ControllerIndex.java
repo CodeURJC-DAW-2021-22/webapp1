@@ -16,6 +16,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.model.Comment;
@@ -169,6 +171,11 @@ public class ControllerIndex {
 		return "loginerror";
 	}
 
+	@RequestMapping("/errorOldPassword")
+	public String errorOldPassword() {
+		return "errorOldPassword";
+	}
+
 	@GetMapping("/register")
 	public String register() {
 		return "register";
@@ -245,6 +252,24 @@ public class ControllerIndex {
 		user.getComments().forEach(c -> newUser.addComment(c));
 		userService.save(newUser);
 		return "redirect:/profile/" + user.getId();
+	}
+
+	@GetMapping("/editPassword/{id}")
+	public String editPassword(Model model, @PathVariable long id){
+		model.addAttribute("user", userService.findById(id).orElseThrow());
+		return "editPassword";
+	}
+
+	@PostMapping("/editPassword")
+	public String editPasswordProcess(Model model, User newUser, @RequestParam String password) throws IOException, SQLException {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();   
+		User user = userService.findById(newUser.getId()).orElseThrow(); 
+		if (encoder.matches(password, user.getEncodedPassword())){
+			user.setEncodedPassword(encoder.encode(newUser.getEncodedPassword()));
+			userService.save(user);
+			return "redirect:/profile/" + user.getId();
+		}
+		return "redirect:/errorOldPassword";
 	}
 	
 	@GetMapping("/editComment/{id}")
@@ -325,7 +350,7 @@ public class ControllerIndex {
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		User userComment = comment.getUser();
 		
-		if (userComment.getId() == user.getId() || request.isUserInRole("ADMIN")) {
+		if (userComment.getId().equals(user.getId()) || request.isUserInRole("ADMIN")) {
 			Film film = comment.getFilm();
 			commentService.delete(id);
 			film.calculateAverage();
