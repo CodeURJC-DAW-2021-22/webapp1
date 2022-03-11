@@ -272,7 +272,7 @@ public class ControllerIndex {
 			userService.save(user);
 			return "redirect:/profile/" + user.getId();
 		}
-		return "redirect:/errorOldPassword" + user.getId();
+		return "redirect:/errorOldPassword/" + user.getId();
 	}
 	
 	@GetMapping("/editComment/{id}")
