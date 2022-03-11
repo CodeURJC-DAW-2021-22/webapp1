@@ -27,25 +27,20 @@
 				</div>
 			</div>
 			<div class="col-md-6">
-				{{#user}}
+				{{#userWatch}}
 				<div class="row">
 					<div class="profile-head">
 						<h1>{{name}}</h1>
 					</div>
 				</div>
 				<div class="row">
-					<p>{{followers}}</p>
-					<div class="col-md-2 followers"><a href="/followers">0 Followers</a></div>
-					<div class="col-md-2 followers"><a href="/following">0 Following</a></div>
+					<div class="col-md-2 followers"><a href="/followers">{{followersCount}} Followers</a></div>
+					<div class="col-md-2 followers"><a href="/following">{{followingCount}} Following</a></div>
 				</div>
-				{{/user}}
+				{{/userWatch}}
 			</div>
 			<div class="col-md-2">
-				<button onclick="location.href='/addFollowing/{{user.id}}'" class="button" id="boton">Follow</button>
-				<!--
-				<input type="button" class="profile-edit-btn"
-					value="Follow" onclick="return change(this);" />
-				-->
+				<input type="button" class="profile-edit-btn" value="{{follow}}" onclick="location.href='/addFollowing/{{userWatch.id}}'" />
 			</div>
 		</div>
 		<div class="row">
@@ -54,7 +49,7 @@
 				<div class="row seccion">
 					<p>Comments</p>
 				</div>
-				{{#user}}
+				{{#userWatch}}
 				{{#comments}}
 				<div class="row">
 					<div class="row">
@@ -81,7 +76,7 @@
 				{{^comments}}
 				<p>There are no asserts yet</p>
 				{{/comments}}
-				{{/user}}
+				{{/userWatch}}
 			</div>
 		</div>
 	</div>
@@ -89,14 +84,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 	<script src="../stars.js"></script>
 
-	<script type="text/javascript">
-		function change(el) {
-			if (el.value === "Follow")
-				el.value = "Unfollow";
-			else
-				el.value = "Follow";
-		}
-	</script>
 </body>
 
 </html>

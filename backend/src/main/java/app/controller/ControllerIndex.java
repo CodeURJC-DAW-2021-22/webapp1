@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
@@ -175,7 +176,10 @@ public class ControllerIndex {
 	}
 	
 	@PostMapping("/registerProcess")
-	public String registerProcess(Model model, User user) {
+	public String registerProcess(Model model, User user) throws IOException {
+		Resource image = new ClassPathResource("/static/Images/defaultImage.png");
+		user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+		user.setImage(true);
 		user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
 		userService.save(user);
 		return "redirect:/login";
@@ -277,14 +281,27 @@ public class ControllerIndex {
 		} else {
 			follower.deleteFollowing(following);
 		}
+		follower.calculateFollowers();
+		follower.calculateFollowing();
+				
+		following.calculateFollowers();
+		following.calculateFollowing();
 		userService.save(following);
 		userService.save(follower);
 		return"redirect:/watchProfile/" + following.getId();
 	}
 	
 	@GetMapping("/watchProfile/{id}")
-	public String watchProfile(Model model, @PathVariable long id) {
-		model.addAttribute("user", userService.findById(id).orElseThrow());
+	public String watchProfile(Model model, @PathVariable long id, HttpServletRequest request) {
+		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		User following = userService.findById(id).orElseThrow();
+		model.addAttribute("userWatch", following);
+		model.addAttribute("user", follower);
+		if(!follower.getFollowing().contains(following)) {
+			model.addAttribute("follow", "Follow");
+		} else {
+			model.addAttribute("follow", "Unfollow");
+		}
 		return "watchProfile";
 	}
 	
