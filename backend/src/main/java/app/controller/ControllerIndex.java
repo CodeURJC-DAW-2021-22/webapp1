@@ -284,7 +284,7 @@ public class ControllerIndex {
 	
 	@GetMapping("/watchProfile/{id}")
 	public String watchProfile(Model model, @PathVariable long id) {
-		model.addAttribute("userWatch", userService.findById(id).orElseThrow());
+		model.addAttribute("user", userService.findById(id).orElseThrow());
 		return "watchProfile";
 	}
 	

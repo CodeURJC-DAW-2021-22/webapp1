@@ -34,14 +34,18 @@
 					</div>
 				</div>
 				<div class="row">
+					<p>{{followers}}</p>
 					<div class="col-md-2 followers"><a href="/followers">0 Followers</a></div>
 					<div class="col-md-2 followers"><a href="/following">0 Following</a></div>
 				</div>
 				{{/user}}
 			</div>
 			<div class="col-md-2">
-				<input onclick="location.href='/addFollowing/{{user.id}}'" type="button" class="profile-edit-btn"
+				<button onclick="location.href='/addFollowing/{{user.id}}'" class="button" id="boton">Follow</button>
+				<!--
+				<input type="button" class="profile-edit-btn"
 					value="Follow" onclick="return change(this);" />
+				-->
 			</div>
 		</div>
 		<div class="row">
