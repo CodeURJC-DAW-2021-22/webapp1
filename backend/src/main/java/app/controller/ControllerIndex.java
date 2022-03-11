@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.model.Comment;
@@ -170,6 +171,12 @@ public class ControllerIndex {
 		return "loginerror";
 	}
 
+	@GetMapping("/errorOldPassword/{id}")
+	public String errorOldPassword(Model model, @PathVariable long id) {
+		model.addAttribute("id", id);
+		return "errorOldPassword";
+	}
+
 	@GetMapping("/register")
 	public String register() {
 		return "register";
@@ -249,6 +256,23 @@ public class ControllerIndex {
 		user.getComments().forEach(c -> newUser.addComment(c));
 		userService.save(newUser);
 		return "redirect:/profile/" + user.getId();
+	}
+
+	@GetMapping("/editPassword/{id}")
+	public String editPassword(Model model, @PathVariable long id){
+		model.addAttribute("user", userService.findById(id).orElseThrow());
+		return "editPassword";
+	}
+
+	@PostMapping("/editPassword")
+	public String editPasswordProcess(Model model, @RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword) throws IOException, SQLException {
+		User user = userService.findById(id).orElseThrow(); 
+		if (passwordEncoder.matches(oldPassword, user.getEncodedPassword())){
+			user.setEncodedPassword(passwordEncoder.encode(newPassword));
+			userService.save(user);
+			return "redirect:/profile/" + user.getId();
+		}
+		return "redirect:/errorOldPassword" + user.getId();
 	}
 	
 	@GetMapping("/editComment/{id}")
@@ -352,7 +376,7 @@ public class ControllerIndex {
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		User userComment = comment.getUser();
 		
-		if (userComment.getId() == user.getId() || request.isUserInRole("ADMIN")) {
+		if (userComment.getId().equals(user.getId()) || request.isUserInRole("ADMIN")) {
 			Film film = comment.getFilm();
 			commentService.delete(id);
 			film.calculateAverage();
