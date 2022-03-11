@@ -272,8 +272,8 @@ public class ControllerIndex {
 		return "followers";
 	}
 	
-	@GetMapping("/addFollowing/{id}")
-	public String addFollowing(Model model, @PathVariable long id, HttpServletRequest request) {
+	@GetMapping("/followUnfollow/{id}")
+	public String followUnfollow(Model model, @PathVariable long id, HttpServletRequest request) {
 		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		User following = userService.findById(id).orElseThrow();
 		if(!follower.getFollowing().contains(following)) {
@@ -316,9 +316,11 @@ public class ControllerIndex {
 	} 
 	
 	@GetMapping("/filmRegistered/{id}")
-	public String filmRegistered(Model model, @PathVariable long id) {
+	public String filmRegistered(Model model, @PathVariable long id, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
 		model.addAttribute("film", film);
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		model.addAttribute("user", user);
 		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenre(similar));
