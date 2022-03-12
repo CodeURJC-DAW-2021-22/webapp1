@@ -126,17 +126,9 @@ body {
   cursor: pointer;
 }
 
-.btnSubmit {
-  border:none;
-  border-radius:1.5rem;
-  padding: 1%;
-  width: 20%;
-  cursor: pointer;
-  background: #3e4684;
-  color: #fff;
-}
 
-.btnSubmit2{
+
+.btnSubmit{
   border: none;
   border-radius: 1.5rem;
   width: 70%;
