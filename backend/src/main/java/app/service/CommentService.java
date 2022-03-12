@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import app.model.Comment;
 import app.model.Film;
+import app.model.User;
 import app.repository.CommentRepository;
 
 @Service
@@ -44,4 +45,17 @@ public class CommentService {
 	public List<Comment> findByFilm(Film film, Pageable pageable) {
 		return repository.findByFilm(film, pageable);
 	}
+
+	public List<Comment> findByUser(User user, Pageable pageable) {
+		return repository.findByUser(user, pageable);
+	}
+
+	public int countByUser(Optional<User> user) {
+		return repository.countByUser(user);
+	}
+
+	public List<Comment> findByUser(Optional<User> user, Pageable pageable) {
+		return repository.findByUser(user, pageable);
+	}
+
 }

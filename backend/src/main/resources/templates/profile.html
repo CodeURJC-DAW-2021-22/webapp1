@@ -12,6 +12,9 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"
 		integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9"
 		crossorigin="anonymous"></script>
+	
+	<script type="text/javascript" src="../loadButton.js"></script>
+	<link rel="stylesheet" href="../loadingButton.css" type="text/css">
 	<title>account</title>
 </head>
 
@@ -92,7 +95,7 @@
 				<div class="row seccion">
 					<p>Comments</p>
 				</div>
-				{{#user}}
+
 					{{#comments}}
 						<div class="row">
 							<div class="row">
@@ -127,7 +130,11 @@
 					{{^comments}}
 						<p>There are no asserts yet</p>
 					{{/comments}}
-				{{/user}}
+					
+					<div id="moreCommentsProfile"></div>
+					<button id='btnCommentProfile' class='btnSubmit'>More Comments</button>
+					<div id="loaderCommentProfile" class="lds-dual-ring hidden overlay"></div>
+
 			</div>
 		</div>
 	</div>

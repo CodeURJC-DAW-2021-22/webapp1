@@ -11,6 +11,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.model.User;
+import app.service.CommentService;
 import app.service.UserService;
 
 @Controller
@@ -34,6 +36,9 @@ public class UserController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -49,7 +54,9 @@ public class UserController {
 	
 	@GetMapping("/profile/{id}")
 	public String profile(Model model, @PathVariable long id) {
-		model.addAttribute("user", userService.findById(id).orElseThrow());
+		User user = userService.findById(id).orElseThrow();
+		model.addAttribute("user", user);
+		model.addAttribute("comments", commentService.findByUser(user,  PageRequest.of(0,5)));
 		return "profile";
 	}
 	
@@ -122,6 +129,8 @@ public class UserController {
 		User following = userService.findById(id).orElseThrow();
 		model.addAttribute("userWatch", following);
 		model.addAttribute("user", follower);
+		
+		model.addAttribute("comments", commentService.findByUser(following,  PageRequest.of(0,5)));
 		
 		if(!follower.getFollowing().contains(following)) {
 			model.addAttribute("follow", "Follow");

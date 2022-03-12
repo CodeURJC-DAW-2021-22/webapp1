@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import app.model.Film;
 import app.model.Genre;
+import app.model.User;
 import app.service.CommentService;
 import app.service.FilmService;
+import app.service.UserService;
 
 @Controller
 public class AjaxController {
@@ -26,6 +28,9 @@ public class AjaxController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -82,6 +87,32 @@ public class AjaxController {
 		if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
 			model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(page, 2)));
 			return "comments";
+		}
+		
+		return null;
+	}
+
+	@GetMapping("/moreCommentsProfile/{id}/{page}")
+	public String getCommentsProfile(Model model, @PathVariable long id, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		Optional<User> user = userService.findById(id);
+		
+		if (page <= (int) Math.ceil(commentService.countByUser(user)/6)) {
+			model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(page, 5)));
+			return "commentsProfile";
+		}
+		
+		return null;
+	}
+	
+	@GetMapping("/moreCommentsWatchProfile/{id}/{page}")
+	public String getCommentsWatchProfile(Model model, @PathVariable long id, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		Optional<User> user = userService.findById(id);
+		
+		if (page <= (int) Math.ceil(commentService.countByUser(user)/6)) {
+			model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(page, 5)));
+			return "commentsWatchProfile";
 		}
 		
 		return null;
