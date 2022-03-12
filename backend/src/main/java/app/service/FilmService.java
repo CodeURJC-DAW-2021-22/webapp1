@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import app.model.Film;
@@ -22,20 +24,26 @@ public class FilmService {
 		return repository.findById(id);
 	}
 	
-	public List<Film> findByGenre(Genre similar){		
-		return repository.findByGenre(similar);
+	public List<Film> findByGenre(Genre similar) {		
+		return repository.findByGenre(similar, Sort.by(Sort.Direction.DESC, "averageStars"));
 	}
 	
-	public Page<Film> findByGenre(Genre genre, Pageable pageable){		
-		return repository.findByGenre(genre, pageable);
+	public List<Film> findByGenreDistinct(Genre similar, long id) {		
+		return repository.findByGenreDistinct(similar, id, Sort.by(Sort.Direction.DESC, "averageStars"));
+	}
+	
+	public Page<Film> findByGenre(Genre genre, Pageable pageable) {
+		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
+		return repository.findByGenre(genre, page);
 	}
 	
 	public List<Film> findLikeName(String name) {
-		return repository.findLikeName(name);
+		return repository.findLikeName(name, Sort.by(Sort.Direction.DESC, "averageStars"));
 	}
 	
 	public List<Film> findLikeName(String name, Pageable pageable) {
-		return repository.findLikeName(name, pageable);
+		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
+		return repository.findLikeName(name, page);
 	}
 	
 	public boolean exist(long id) {
@@ -43,11 +51,12 @@ public class FilmService {
 	}
 
 	public List<Film> findAll() {
-		return repository.findAll();
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "averageStars"));
 	}
 	
 	public Page<Film> findAll(Pageable pageable) {
-		return repository.findAll(pageable);
+		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
+		return repository.findAll(page);
 	}
 
 	public void save(Film film) {
