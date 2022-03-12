@@ -44,5 +44,4 @@ public class CommentService {
 	public List<Comment> findByFilm(Film film, Pageable pageable) {
 		return repository.findByFilm(film, pageable);
 	}
-
 }

@@ -36,18 +36,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/register").permitAll();
         http.authorizeRequests().antMatchers("/filmUnregistered/*").permitAll();
+        http.authorizeRequests().antMatchers("/searchFilms").permitAll();
 
         // Private pages
         http.authorizeRequests().antMatchers("/menuRegistered").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/menuFollowing/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/profile/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/editProfile/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/editPassword/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/errorOldPassword/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/followers").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/following").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/watchProfile/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/followUnfollow/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/filmRegistered/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/addComment/*").hasAnyRole("USER");
-        http.authorizeRequests().antMatchers("/editPassword/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/editComment/*").hasAnyRole("USER");
+        http.authorizeRequests().antMatchers("/removeComment/*").hasAnyRole("USER");
         http.authorizeRequests().antMatchers("/menuAdmin").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/filmAdmin/*").hasAnyRole("ADMIN");
         http.authorizeRequests().antMatchers("/addFilm").hasAnyRole("ADMIN");

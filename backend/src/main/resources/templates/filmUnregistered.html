@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,13 +13,10 @@
 	<link rel="stylesheet" href="../appFilm.css">
 	<link rel="stylesheet" href="../themeFilm.css">
 	<link rel="stylesheet" href="../jquery.rateyo.css">
-
 	<script type="text/javascript" src="../loadButton.js"></script>
 	<link rel="stylesheet" href="../loadingButton.css" type="text/css">
-
 	<title>film</title>
 </head>
-
 <body>
 	{{>headerUnregistered}}
 
@@ -59,7 +55,7 @@
 							</div>
 							{{#comments}}
 							{{#user}}
-							<p><b>{{name}}</b></p>
+							<a href="/watchProfile/{{id}}"><b>{{name}}</b></a>
 							{{/user}}
 							<p>{{note}}</p>
 							<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>

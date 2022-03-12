@@ -16,15 +16,20 @@
 </head>
 
 <body>
-	{{>headerRegistered}}
+	{{#admin}}
+		{{>headerAdmin}}
+	{{/admin}}
+	{{^admin}}
+		{{>headerRegistered}}
+	{{/admin}}
 
 	<div class="container emp-profile">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="profile-img">
-					{{#user}}
+					{{#userWatch}}
 					<img src="/{{id}}/imageProfile">
-					{{/user}}
+					{{/userWatch}}
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -41,7 +46,9 @@
 				{{/userWatch}}
 			</div>
 			<div class="col-md-2">
-				<input type="button" class="profile-edit-btn" value="{{follow}}" onclick="location.href='/followUnfollow/{{userWatch.id}}'" />
+				{{^admin}}
+				<input type="button" class="profile-edit-btn" value="{{follow}}" onclick="location.href='/followUnfollow/{{userWatch.id}}'"/>
+				{{/admin}}
 			</div>
 		</div>
 		<div class="row">

@@ -39,14 +39,12 @@ public class User{
 
 	private boolean image;
 	
-	// Following
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<User> following;
 	
 	private int followingCount;
 	
-	//Followers
-	@ManyToMany(mappedBy = "following")
+	@ManyToMany(mappedBy="following")
 	private List<User> followers;
 	
 	private int followersCount;
@@ -61,14 +59,6 @@ public class User{
 		this.encodedPassword = encodedPassword;
 		this.roles = List.of(roles);
 	}
-	
-	public void calculateFollowing() {
-    	followingCount = following.size();
-    }
-	
-	public void calculateFollowers() {
-		followersCount = followers.size();
-    }
 
 	// Getters
 	public Long getId() {
@@ -110,6 +100,14 @@ public class User{
 	public List<User> getFollowers() {
 		return followers;
 	}
+	
+	public int getFollowingCount() {
+        return followingCount;
+    }
+	
+	public int getFollowersCount() {
+        return followersCount;
+    }
 
 	// Setters
 	public void setId(Long id) {
@@ -168,4 +166,11 @@ public class User{
 		followers.remove(user);
 	}
 	
+	public void calculateFollowing() {
+    	followingCount = following.size();
+    }
+	
+	public void calculateFollowers() {
+		followersCount = followers.size();
+    }
 }

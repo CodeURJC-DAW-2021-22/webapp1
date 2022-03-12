@@ -69,5 +69,4 @@ public class FilmService {
 	public int countByName(String name) {
 		return repository.countByName(name);
 	}
-
 }
