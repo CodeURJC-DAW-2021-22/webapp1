@@ -126,7 +126,7 @@ body {
   cursor: pointer;
 }
 
-button {
+.btnSubmit {
   border:none;
   border-radius:1.5rem;
   padding: 1%;
@@ -134,4 +134,15 @@ button {
   cursor: pointer;
   background: #3e4684;
   color: #fff;
+}
+
+.btnSubmit2{
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: white;
+  background: #3e4684;
+  cursor: pointer;
 }

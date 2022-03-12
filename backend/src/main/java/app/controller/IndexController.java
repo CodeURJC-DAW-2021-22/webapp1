@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.JOptionPane;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
