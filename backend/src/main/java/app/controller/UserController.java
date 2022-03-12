@@ -131,18 +131,23 @@ public class UserController {
 	public String watchProfile(Model model, @PathVariable long id, HttpServletRequest request) {
 		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		User following = userService.findById(id).orElseThrow();
-		model.addAttribute("userWatch", following);
-		model.addAttribute("user", follower);
 		
-		model.addAttribute("comments", commentService.findByUser(following,  PageRequest.of(0,5)));
-		
-		if(!follower.getFollowing().contains(following)) {
-			model.addAttribute("follow", "Follow");
+		if (!follower.getId().equals(following.getId())) {
+			model.addAttribute("userWatch", following);
+			model.addAttribute("user", follower);
+			
+			model.addAttribute("comments", commentService.findByUser(following,  PageRequest.of(0,5)));
+			
+			if(!follower.getFollowing().contains(following)) {
+				model.addAttribute("follow", "Follow");
+			} else {
+				model.addAttribute("follow", "Unfollow");
+			}
+			
+			return "watchProfile";
 		} else {
-			model.addAttribute("follow", "Unfollow");
+			return "redirect:/profile/" + follower.getId();
 		}
-		
-		return "watchProfile";
 	}
 	
 	@GetMapping("/followUnfollow/{id}")

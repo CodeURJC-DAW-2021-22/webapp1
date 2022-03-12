@@ -24,6 +24,9 @@
 		                        <a href="/watchProfile/{{id}}">{{name}}</a>
 		                    </div>
 		                {{/following}}
+		                {{^following}}
+		            		<p>You are not following anyone<p>
+		            	{{/following}}
 	                </div>
 	            {{/user}}
             </form>           

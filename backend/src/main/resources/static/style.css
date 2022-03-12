@@ -55,7 +55,6 @@ header {
   object-fit: cover;
   width: 100px;
   max-height: 100%;
-  
   padding-left: 30px;
   padding-top: 0px;  
 }
@@ -349,6 +348,10 @@ button a:hover {
 .follorers {
   color: black;
   font-size: 15px;
+}
+
+.stars { 
+	z-index: 0;
 }
 
 /* FOLLOWERS */
