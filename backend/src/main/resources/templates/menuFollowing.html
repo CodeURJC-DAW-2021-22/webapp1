@@ -28,12 +28,15 @@
 
 			<div class="box">
 				{{#comments}}
-				{{#film}}
-				<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
-				{{/film}}
+					{{#film}}
+						<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+					{{/film}}
 				{{/comments}}
 			</div>
 
+			{{/following}}
+			{{^following}}
+				<h1>You are not following anyone yet</h1>
 			{{/following}}
 			{{/user}}
 		</section>
