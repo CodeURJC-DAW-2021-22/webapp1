@@ -23,6 +23,10 @@ $(window).on("load", function(){
     $('#btnSearchRegistered').on("click",()=>functionSearch("btnSearchRegistered", '#moreFilmsRegistered', '#loaderSearchRegistered'))
     $('#btnSearchAdmin').on("click",()=>functionSearch("btnSearchAdmin", '#moreFilmsAdmin', '#loaderSearchAdmin'))
 
+	// Loading Button from following/followers
+	$('#btnFollowers').on("click",()=>functionFollowers('#moreFollowers', '#loaderFollowers'))
+	$('#btnFollowing').on("click",()=>functionFollowing('#moreFollowing', '#loaderFollowing'))
+
 })
 
 var indexTrending;
@@ -41,6 +45,9 @@ var indexCommentWatchProfile;
 var indexSearchUnregis;
 var indexSearchRegis;
 var indexSearchAdmin;
+
+var indexFollowers;
+var indexFolowing;
 
 function ajaxCall(url, spinner, where) {
 	$.ajax({
@@ -124,6 +131,34 @@ function functionSearch(index, where, spinner) {
     ajaxCall(url, spinner, where);
 }
 
+function functionFollowers(where, spinner) {
+	value = indexFollowers;
+	this.indexFollowers += 1;
+	
+	// Search parameter in url
+	const arrayPath = window.location.pathname.split('/');
+	const id= arrayPath[2];
+	
+	url=('/moreFollowers/' + id + '/' + value);	
+	
+	ajaxCall(url, spinner, where);
+
+}
+
+function functionFollowing(where, spinner) {
+	value = indexFollowing;
+	this.indexFollowing += 1;
+	
+	// Search parameter in url
+	const arrayPath = window.location.pathname.split('/');
+	const id= arrayPath[2];
+	
+	url=('/moreFollowing/' + id + '/' + value);	
+	
+	ajaxCall(url, spinner, where);
+
+}
+
 function searchIndex(index) {
 	value = 0;
 	
@@ -190,10 +225,12 @@ function valueIndex(num) {
 	this.indexComment = num;
 	
 	this.indexCommentProfile = num;
-	
 	this.indexCommentWatchProfile = num;
 	
 	this.indexSearchUnregis = num;
     this.indexSearchRegis = num;
     this.indexSearchAdmin = num;
+    
+    this.indexFollowers = num;
+	this.indexFolowing = num;
 }

@@ -123,7 +123,8 @@ public class UserController {
 	@GetMapping("/following/{id}")
 	public String following(Model model, @PathVariable long id) {
 		User user = userService.findById(id).orElseThrow();
-		model.addAttribute("user", user);
+		
+		model.addAttribute("followers", userService.findFollowers(user, PageRequest.of(0, 10)));
 		return "following";
 	}
 	

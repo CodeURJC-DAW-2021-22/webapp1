@@ -117,4 +117,28 @@ public class AjaxController {
 		
 		return null;
 	}
+	
+	@GetMapping("/moreFollowers/{id}/{page}")
+	public String getFollowers(Model model, @PathVariable long id, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		User user = userService.findById(id).orElseThrow();
+		
+		if (page <= (int) Math.ceil(user.getFollowersCount()/10)) {
+			model.addAttribute("followers", userService.findFollowers(user, PageRequest.of(page, 10)));
+			return "followersMore";
+		}
+		return null;
+	}
+	
+	@GetMapping("/moreFollowing/{id}/{page}")
+	public String getFollowing(Model model, @PathVariable long id, @PathVariable int page) {
+		// Before returning a page it confirms that there are more left
+		User user = userService.findById(id).orElseThrow();
+		
+		if (page <= (int) Math.ceil(user.getFollowersCount()/10)) {
+			model.addAttribute("following", userService.findFollowing(user, PageRequest.of(page, 10)));
+			return "followingMore";
+		}
+		return null;
+	}
 }
