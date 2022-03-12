@@ -184,13 +184,14 @@ header {
 }
 
 .btnSubmit {
-    border:none;
-    border-radius:1.5rem;
-    padding: 1%;
-    width: 20%;
-    cursor: pointer;
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: white;
     background: #3e4684;
-    color: #fff;
+    cursor: pointer;
 }
 
 .center {   

@@ -38,4 +38,16 @@ public class UserService {
 	public Optional<User> findByName(String name){
 		return repository.findByName(name);
 	}
+	
+	public boolean existName(String name) {
+		List<User> users = this.findAll();
+		boolean equals = false;
+		int i = 0;
+		while (i < users.size() && !equals) {
+			User user = users.get(i);
+			equals = user.getName().equals(name);
+			i ++;
+		}
+		return equals;		
+	}
 }

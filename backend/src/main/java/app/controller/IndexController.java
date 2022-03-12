@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.JOptionPane;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,12 +80,22 @@ public class IndexController {
 	
 	@PostMapping("/registerProcess")
 	public String registerProcess(Model model, User user) throws IOException {
-		Resource image = new ClassPathResource("/static/Images/defaultImage.png");
-		user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
-		user.setImage(true);
-		user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
-		userService.save(user);
-		return "redirect:/login";
+		if (!userService.existName(user.getName())) {
+			Resource image = new ClassPathResource("/static/Images/defaultImage.png");
+			user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+			user.setImage(true);
+			user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
+			userService.save(user);
+			return "redirect:/login";
+		} else {
+			//"This nickname is taken";
+			return "redirect:/takenUserName";
+		}
+	}
+	
+	@GetMapping("/takenUserName")
+	public String takenUserName() {
+		return "takenUserName";
 	}
 	
 	@GetMapping("/menuRegistered")

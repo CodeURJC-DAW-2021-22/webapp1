@@ -8,6 +8,16 @@
     color: #fff;
 }
 
+.btnSubmit2 {
+    border:none;
+    border-radius:1.5rem;
+    padding: 2%;
+    width: 70%;
+    cursor: pointer;
+    background: #3e4684;
+    color: #fff;
+}
+
 .lds-dual-ring.hidden {
     display: none;
 }
