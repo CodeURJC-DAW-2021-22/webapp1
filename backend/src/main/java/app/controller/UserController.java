@@ -113,13 +113,17 @@ public class UserController {
 		return "errorOldPassword";
 	}
 	
-	@GetMapping("/followers")
-	public String followers(Model model) {
+	@GetMapping("/followers/{id}")
+	public String followers(Model model, @PathVariable long id) {
+		User user = userService.findById(id).orElseThrow();
+		model.addAttribute("user", user);
 		return "followers";
 	}
 	
-	@GetMapping("/following")
-	public String following(Model model) {
+	@GetMapping("/following/{id}")
+	public String following(Model model, @PathVariable long id) {
+		User user = userService.findById(id).orElseThrow();
+		model.addAttribute("user", user);
 		return "following";
 	}
 	
