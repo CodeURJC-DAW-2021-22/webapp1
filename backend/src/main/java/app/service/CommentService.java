@@ -70,15 +70,11 @@ public class CommentService {
 		List<Comment> comments = this.findByFilm(film);
 		boolean equals = false;
 		int i = 0;
-		if (comments.size() > 0) {
-			while (i < comments.size() && !equals) {
-				Comment comment = comments.get(i);
-				User user = comment.getUser();
-				equals = user.getId().equals(id);
-				i++;
-			}	
-		} else {
-			equals = false;
+		while (i < comments.size() && !equals) {
+			Comment comment = comments.get(i);
+			User user = comment.getUser();
+			equals = user.getId().equals(id);
+			i++;
 		}
 		return equals;	
 	}
