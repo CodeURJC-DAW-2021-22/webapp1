@@ -49,6 +49,9 @@ public class User{
 	
 	private int followersCount;
 	
+	@OneToMany (cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<Recommendation> recommendations = new ArrayList<>();
+	
 	public User() {
 		
 	}
@@ -108,6 +111,10 @@ public class User{
 	public int getFollowersCount() {
         return followersCount;
     }
+	
+	public List<Recommendation> getRecommendations() {
+		return recommendations;
+	}
 
 	// Setters
 	public void setId(Long id) {
@@ -173,4 +180,12 @@ public class User{
 	public void calculateFollowers() {
 		followersCount = followers.size();
     }
+	
+	public void addRecommedation(Recommendation recommendation) {
+		recommendations.add(recommendation);
+	}
+	
+	public void deleteRecommedation(Recommendation recommendation) {
+		recommendations.remove(recommendation);
+	}
 }
