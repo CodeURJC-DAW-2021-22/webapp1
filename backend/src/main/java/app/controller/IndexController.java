@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -117,13 +116,7 @@ public class IndexController {
 			return "menuRegistered";
 		}
 	}
-	
-	@GetMapping("/menuFollowing/{id}")
-	public String menuFollowing(Model model, @PathVariable long id) {
-		model.addAttribute("user", userService.findById(id).orElseThrow());
-		return "menuFollowing";
-	}
-	
+
 	@GetMapping("/menuAdmin")
 	public String menuAdmin(Model model, HttpServletRequest request) {
 		model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
