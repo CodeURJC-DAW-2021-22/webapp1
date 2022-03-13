@@ -105,7 +105,6 @@ public class IndexController {
 		} else {
 			model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 			//model.addAttribute("recommendation", filmService.);
-			//model.addAttribute("commented", filmService.);
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
 			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));
