@@ -87,7 +87,6 @@ public class IndexController {
 			userService.save(user);
 			return "redirect:/login";
 		} else {
-			//"This nickname is taken";
 			return "redirect:/takenUserName";
 		}
 	}

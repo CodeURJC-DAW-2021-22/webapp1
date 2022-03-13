@@ -40,14 +40,16 @@ public class UserService {
 	}
 	
 	public boolean existName(String name) {
-		List<User> users = this.findAll();
+		List<User> users = findAll();
 		boolean equals = false;
 		int i = 0;
-		while (i < users.size() && !equals) {
+		
+		while ((i < users.size()) && !equals) {
 			User user = users.get(i);
 			equals = user.getName().equals(name);
-			i ++;
+			i++;
 		}
+		
 		return equals;		
 	}
 }
