@@ -26,4 +26,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
 	public List<Comment> findByUser(Optional<User> user, Pageable pageable);
 
+	public List<Comment> findByFilm(Film film);
+
 }

@@ -74,6 +74,7 @@ public class FilmController {
 		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
 		model.addAttribute("similar", filmService.findByGenreDistinct(similar, film.getId()));
+		model.addAttribute("buttonUnhidden", !commentService.userHasCommented(user.getId(), film));
 		return "filmRegistered";
 	}
 	
