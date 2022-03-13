@@ -49,6 +49,10 @@ public class CommentService {
 	public List<Comment> findByFilm(Film film, Pageable pageable) {
 		return repository.findByFilm(film, pageable);
 	}
+	
+	public List<Comment> findByFilm(Film film) {
+		return repository.findByFilm(film);
+	}
 
 	public List<Comment> findByUser(User user, Pageable pageable) {
 		return repository.findByUser(user, pageable);
@@ -62,16 +66,21 @@ public class CommentService {
 		return repository.findByUser(user, pageable);
 	}
 
-	public boolean writeCommentThisId(long id) {
-		List<Comment> comments = this.findAll();
+	public boolean userHasCommented(long id, Film film) {
+		List<Comment> comments = this.findByFilm(film);
 		boolean equals = false;
 		int i = 0;
-		while (i < comments.size() && !equals) {
-			Comment comment = comments.get(i);
-			equals = (comment.getId() == id);
-			i++;
+		if (comments.size() > 0) {
+			while (i < comments.size() && !equals) {
+				Comment comment = comments.get(i);
+				User user = comment.getUser();
+				equals = user.getId().equals(id);
+				i++;
+			}	
+		} else {
+			equals = false;
 		}
-		return equals;		
+		return equals;	
 	}
 
 }

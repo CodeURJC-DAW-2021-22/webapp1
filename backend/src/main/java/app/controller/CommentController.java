@@ -49,9 +49,13 @@ public class CommentController {
 	public String addComent(Model model, @PathVariable long id, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		model.addAttribute("film", film);
-		model.addAttribute("user", user);
-		return"addComment";
+		if (!commentService.userHasCommented(user.getId(), film)){
+			model.addAttribute("film", film);
+			model.addAttribute("user", user);
+			return "addComment";
+		} else {
+			return "redirect:/filmRegistered/" + film.getId(); 
+		}
 	}
 	
 	@PostMapping("/addComment/{id}")
@@ -62,7 +66,7 @@ public class CommentController {
 		comment.setUser(user);
 		commentService.save(comment);
 		model.addAttribute("buttonUnhidden", false);
-		return"redirect:/filmRegistered/" + film.getId();
+		return "redirect:/filmRegistered/" + film.getId();
 	}
 	
 	@GetMapping("/editComment/{id}")
