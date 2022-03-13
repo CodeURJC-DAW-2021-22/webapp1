@@ -65,9 +65,9 @@ public class CommentController {
 	}
 	
 	@GetMapping("/editComment/{id}")
-	public String editComment(Model model, @PathVariable long id) {
+	public String editComment(Model model, @PathVariable long id, HttpServletRequest request) {
 		model.addAttribute("comment", commentService.findById(id).orElseThrow());
-		
+		model.addAttribute("user", userService.findByName(request.getUserPrincipal().getName()).orElseThrow());
 		return "editComment";
 	}
 	
