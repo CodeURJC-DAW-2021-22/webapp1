@@ -16,11 +16,10 @@
         {{>headerRegistered}}
 
         <div class="container emp-profile-follow">
-            <form method="post">
+            
                 <div class="row tittle">
                     Following
                 </div>
-                {{#user}}
 	                <div class="row account">
 	                	{{#following}}
 		                    <div class="col-md-2">
@@ -31,11 +30,11 @@
 		            		<p>You are not following anyone<p>
 		            	{{/following}}
 	                </div>
-	            {{/user}}
+	            
 	              <div id="moreFollowing"></div>
 			      <button id='btnFollowing' class='btnSubmit'>More Followers</button>
 			      <div id="loaderFollowing" class="lds-dual-ring hidden overlay"></div>
-            </form>           
+                      
         </div>
     </body>
 </html>

@@ -123,8 +123,8 @@ public class AjaxController {
 		// Before returning a page it confirms that there are more left
 		User user = userService.findById(id).orElseThrow();
 		
-		if (page <= (int) Math.ceil(user.getFollowersCount()/10)) {
-			model.addAttribute("followers", userService.findFollowers(user, PageRequest.of(page, 10)));
+		if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
+			model.addAttribute("followers", userService.findFollowingById(id, PageRequest.of(page, 5)));
 			return "followersMore";
 		}
 		return null;
@@ -135,8 +135,8 @@ public class AjaxController {
 		// Before returning a page it confirms that there are more left
 		User user = userService.findById(id).orElseThrow();
 		
-		if (page <= (int) Math.ceil(user.getFollowersCount()/10)) {
-			model.addAttribute("following", userService.findFollowing(user, PageRequest.of(page, 10)));
+		if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
+			model.addAttribute("following", userService.findFollowersById(id, PageRequest.of(page, 5)));
 			return "followingMore";
 		}
 		return null;

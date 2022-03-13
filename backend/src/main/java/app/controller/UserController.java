@@ -115,16 +115,13 @@ public class UserController {
 	
 	@GetMapping("/followers/{id}")
 	public String followers(Model model, @PathVariable long id) {
-		User user = userService.findById(id).orElseThrow();
-		model.addAttribute("user", user);
+		model.addAttribute("followers", userService.findFollowingById(id, PageRequest.of(0, 5)));
 		return "followers";
 	}
 	
 	@GetMapping("/following/{id}")
-	public String following(Model model, @PathVariable long id) {
-		User user = userService.findById(id).orElseThrow();
-		
-		model.addAttribute("followers", userService.findFollowers(user, PageRequest.of(0, 10)));
+	public String following(Model model, @PathVariable long id) {		
+		model.addAttribute("following", userService.findFollowersById(id, PageRequest.of(0, 5)));
 		return "following";
 	}
 	

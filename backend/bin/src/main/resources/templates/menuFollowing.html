@@ -1,49 +1,47 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  	<meta charset="utf-8" />
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<title>Advice.me</title>
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Advice.me</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"
+		integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9"
+		crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="../style.css" type="text/css">
 </head>
+
 <body>
-  <div class="wrapper">
-    {{>headerRegistered}}
-    
-    <!-- MAIN CONTAINER -->
-    <section class="main-container" >
-        {{#user}}
-      		<a href="/menuRegistered"><button class="button">For you</button></a>
-     		<a href="/menuFollowing/{{id}}"><button class="button">Following</button></a>
-      	{{/user}}
+	<div class="wrapper">
+		{{>headerRegistered}}
 
-    	<h1 id="recommendations">Mia</h1>
-    	<div class="box">
-    	</div>
-      
-    	<h1 id="comments">Nate</h1>
-    	<div class="box">
-        </div>
-      
-    	<h1 id="trending">Daniel</h1>
-    	<div class="box">
-        </div>
-      
-    	<h1 id="action">Tommy</h1>
-    	<div class="box">
-        </div>
+		<!-- MAIN CONTAINER -->
+		<section class="main-container">
+			{{#user}}
+			<center>
+				<a href="/menuRegistered"><button class="button">For you</button></a>
+				<a href="/menuFollowing/{{id}}"><button class="button">Following</button></a>
+			</center>
+			{{#following}}
+			<h1 id="recommendations">{{name}}</h1>
 
-    	<h1 id="adventure">Adventure</h1>
-    	<div class="box">
-        </div>
+			<div class="box">
+				{{#comments}}
+					{{#film}}
+						<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
+					{{/film}}
+				{{/comments}}
+			</div>
 
-    	<h1 id="comedy">Andy</h1>
-    	<div class="box">
-        </div>
-    </section> 
-    <!-- END OF MAIN CONTAINER -->
-  </div>
+			{{/following}}
+			{{^following}}
+				<h1>You are not following anyone yet</h1>
+			{{/following}}
+			{{/user}}
+		</section>
+		<!-- END OF MAIN CONTAINER -->
+	</div>
 </body>
+
 </html>

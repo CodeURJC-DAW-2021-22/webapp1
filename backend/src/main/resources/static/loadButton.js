@@ -47,7 +47,7 @@ var indexSearchRegis;
 var indexSearchAdmin;
 
 var indexFollowers;
-var indexFolowing;
+var indexFollowing;
 
 function ajaxCall(url, spinner, where) {
 	$.ajax({
@@ -140,7 +140,7 @@ function functionFollowers(where, spinner) {
 	const id= arrayPath[2];
 	
 	url=('/moreFollowers/' + id + '/' + value);	
-	
+	console.log("AAAAAAAAAAAAAAAAAAAAAA");
 	ajaxCall(url, spinner, where);
 
 }
@@ -154,7 +154,6 @@ function functionFollowing(where, spinner) {
 	const id= arrayPath[2];
 	
 	url=('/moreFollowing/' + id + '/' + value);	
-	
 	ajaxCall(url, spinner, where);
 
 }
@@ -232,5 +231,5 @@ function valueIndex(num) {
     this.indexSearchAdmin = num;
     
     this.indexFollowers = num;
-	this.indexFolowing = num;
+	this.indexFollowing = num;
 }
