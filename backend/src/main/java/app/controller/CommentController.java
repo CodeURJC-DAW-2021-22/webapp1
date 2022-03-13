@@ -65,6 +65,8 @@ public class CommentController {
 		comment.setFilm(film);
 		comment.setUser(user);
 		commentService.save(comment);
+		film.calculateAverage();
+		filmService.save(film);
 		model.addAttribute("buttonUnhidden", false);
 		return "redirect:/filmRegistered/" + film.getId();
 	}
@@ -79,9 +81,12 @@ public class CommentController {
 	@PostMapping("/editComment")
 	public String editComment(Model model, Comment newComment) throws IOException, SQLException {
 		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
+		Film film = comment.getFilm();
 		newComment.setUser(comment.getUser());
-		newComment.setFilm(comment.getFilm());
+		newComment.setFilm(film);
 		commentService.save(newComment);
+		film.calculateAverage();
+		filmService.save(film);
 		return "redirect:/profile/" + newComment.getUser().getId();
 	}
 	
