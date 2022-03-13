@@ -61,6 +61,7 @@ public class CommentController {
 		comment.setFilm(film);
 		comment.setUser(user);
 		commentService.save(comment);
+		model.addAttribute("buttonUnhidden", false);
 		return"redirect:/filmRegistered/" + film.getId();
 	}
 	
@@ -95,6 +96,7 @@ public class CommentController {
 			if (request.isUserInRole("ADMIN")) {
 				return "redirect:/filmAdmin/" + film.getId();
 			} else {
+				model.addAttribute("buttonUnhidden", true);
 				return "redirect:/profile/" + user.getId();
 			}
 		} 
