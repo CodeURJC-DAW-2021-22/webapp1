@@ -127,6 +127,7 @@ public class AjaxController {
 			model.addAttribute("followers", userService.findFollowingById(id, PageRequest.of(page, 5)));
 			return "followersMore";
 		}
+		
 		return null;
 	}
 	
@@ -139,6 +140,7 @@ public class AjaxController {
 			model.addAttribute("following", userService.findFollowersById(id, PageRequest.of(page, 5)));
 			return "followingMore";
 		}
+		
 		return null;
 	}
 }

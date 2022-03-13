@@ -114,13 +114,17 @@ public class UserController {
 	}
 	
 	@GetMapping("/followers/{id}")
-	public String followers(Model model, @PathVariable long id) {
+	public String followers(Model model, @PathVariable long id, HttpServletRequest request) {
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		model.addAttribute("user", user);
 		model.addAttribute("followers", userService.findFollowingById(id, PageRequest.of(0, 5)));
 		return "followers";
 	}
 	
 	@GetMapping("/following/{id}")
-	public String following(Model model, @PathVariable long id) {		
+	public String following(Model model, @PathVariable long id, HttpServletRequest request) {		
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		model.addAttribute("user", user);
 		model.addAttribute("following", userService.findFollowersById(id, PageRequest.of(0, 5)));
 		return "following";
 	}

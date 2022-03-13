@@ -45,12 +45,13 @@ a, .a:hover {
   cursor: pointer; }
 
 .button2{
-  padding: 1em;
-  background: #3e4684;
-  color: white;
   border: none;
-  border-radius: 30px;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
   font-weight: 600;
+  color: white;
+  background: #3e4684;
   cursor: pointer; }
 
 .container-fluid {

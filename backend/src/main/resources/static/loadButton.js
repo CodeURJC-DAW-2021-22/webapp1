@@ -140,7 +140,6 @@ function functionFollowers(where, spinner) {
 	const id= arrayPath[2];
 	
 	url=('/moreFollowers/' + id + '/' + value);	
-	console.log("AAAAAAAAAAAAAAAAAAAAAA");
 	ajaxCall(url, spinner, where);
 
 }

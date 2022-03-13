@@ -47,4 +47,18 @@ public class UserService {
 	public List<User> findFollowingById(long id, Pageable pageable) {
 		return repository.findByFollowingId(id, pageable);
 	}
+		
+	public boolean existName(String name) {
+		List<User> users = findAll();
+		boolean equals = false;
+		int i = 0;
+		
+		while ((i < users.size()) && !equals) {
+			User user = users.get(i);
+			equals = user.getName().equals(name);
+			i++;
+		}
+		
+		return equals;		
+	}
 }

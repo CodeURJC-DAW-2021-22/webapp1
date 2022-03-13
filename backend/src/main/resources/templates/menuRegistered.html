@@ -31,7 +31,7 @@
 			</center>
 			{{/user}}
 
-			<h1>Best Movie Genres</h1>
+			<h1>Most Commented Genres</h1>
 			<div id="piechart"></div>
 
 			<h1 id="recommendations">Recommendations for you</h1>
@@ -39,15 +39,6 @@
 				{{#recomendation}}
 				<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
 				{{/recomendation}}
-			</div>
-
-			<!--Load more-->
-
-			<h1 id="comments">Your Comments</h1>
-			<div class="box">
-				{{#commented}}
-				<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
-				{{/commented}}
 			</div>
 
 			<!--Load more-->
