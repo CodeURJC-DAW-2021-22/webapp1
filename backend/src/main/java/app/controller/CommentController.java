@@ -125,15 +125,24 @@ public class CommentController {
 	
 	@GetMapping("/editComment/{id}")
 	public String editComment(Model model, @PathVariable long id, HttpServletRequest request) {
-		model.addAttribute("comment", commentService.findById(id).orElseThrow());
-		model.addAttribute("user", userService.findByName(request.getUserPrincipal().getName()).orElseThrow());
-		return "editComment";
+		Comment comment = commentService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		User userComment = comment.getUser();
+	
+		if (userComment.getId().equals(user.getId())) {
+			model.addAttribute("comment", commentService.findById(id).orElseThrow());
+			model.addAttribute("user", userService.findByName(request.getUserPrincipal().getName()).orElseThrow());
+			return "editComment";
+		}
+		
+		return "redirect:/error";
 	}
 	
 	@PostMapping("/editComment")
-	public String editComment(Model model, Comment newComment) throws IOException, SQLException {
+	public String editComment(Model model, Comment newComment, HttpServletRequest request) throws IOException, SQLException {
 		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
 		Film film = comment.getFilm();
+		
 		newComment.setUser(comment.getUser());
 		newComment.setFilm(film);
 		commentService.save(newComment);

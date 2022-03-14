@@ -53,11 +53,17 @@ public class UserController {
 	}
 	
 	@GetMapping("/profile/{id}")
-	public String profile(Model model, @PathVariable long id) {
+	public String profile(Model model, @PathVariable long id, HttpServletRequest request) {
 		User user = userService.findById(id).orElseThrow();
-		model.addAttribute("user", user);
-		model.addAttribute("comments", commentService.findByUser(user,  PageRequest.of(0,5)));
-		return "profile";
+		User userRequest = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
+		if (user.getId().equals(userRequest.getId())) {
+			model.addAttribute("user", user);
+			model.addAttribute("comments", commentService.findByUser(user,  PageRequest.of(0,5)));
+			return "profile";
+		}
+		
+		return "redirect:/menuRegistered";
 	}
 	
 	@GetMapping("/{id}/imageProfile")
@@ -73,25 +79,39 @@ public class UserController {
 	}
 	
 	@GetMapping("/editProfile/{id}")
-	public String editProfile(Model model, @PathVariable long id) {
-		model.addAttribute("user", userService.findById(id).orElseThrow());
+	public String editProfile(Model model, @PathVariable long id, HttpServletRequest request) {
+		User user = userService.findById(id).orElseThrow();
+		User userRequest = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		
-		return "editProfile";
+		if (user.getId().equals(userRequest.getId())) {
+			model.addAttribute("user", user);
+			return "editProfile";
+		}
+		
+		return "redirect:/error";
 	}
 	
 	@PostMapping("/editProfile")
 	public String editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
 		User user = userService.findById(newUser.getId()).orElseThrow();
-		updateImageProfile(newUser, imageField);
-		user.getComments().forEach(c -> newUser.addComment(c));
-		userService.save(newUser);
+		updateImageProfile(user, imageField);
+		user.setName(newUser.getName());
+		user.setEmail(newUser.getEmail());
+		userService.save(user);
 		return "redirect:/profile/" + user.getId();
 	}
 
 	@GetMapping("/editPassword/{id}")
-	public String editPassword(Model model, @PathVariable long id){
-		model.addAttribute("user", userService.findById(id).orElseThrow());
-		return "editPassword";
+	public String editPassword(Model model, @PathVariable long id, HttpServletRequest request){
+		User user = userService.findById(id).orElseThrow();
+		User userRequest = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
+		if (user.getId().equals(userRequest.getId())) {
+			model.addAttribute("user", user);
+			return "editPassword";
+		}
+		
+		return "redirect:/error";
 	}
 
 	@PostMapping("/editPassword")
