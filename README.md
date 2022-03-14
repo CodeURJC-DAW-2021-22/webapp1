@@ -297,28 +297,28 @@ Miguel implemented the edit profile, the function of changing the profile photo 
 
 ### Juan Carlos Moreno García
 #### Textual description:
-Juan Carlos made the seach film function as well as the html page for it, optimiced code deleting unnecesary parts and refactored all the classes.
+Juan Carlos made the search film function as well as the html page for it, optimiced code deleting unnecesary parts and refactored all the classes. Moreover, he implemented the pie chart, based on the data from the database, the recommendations in order to send them to the users when they assest a film, and fixed other small bugs.
 
 #### The five most important commits:
 
 | Commit number | Description                                      | Link                                                                                            |
 | ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| #1            | ************************************************ | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/**************************************** | 
-| #2            | ************************************************ | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/**************************************** | 
-| #3            | ************************************************ | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/**************************************** | 
-| #4            | ************************************************ | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/**************************************** | 
-| #5            | ************************************************ | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/**************************************** |
+| #1            | Refactoring and organizing code. Solving several important bugs | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/550dff3142e8ce9bba9ee48fd67f0ff7b48e2f8c | 
+| #2            | Searcher implemented | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/5c22ac20dac0e3694783086678b3350c93ba030d | 
+| #3            | Pie chart implemented | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/83640ed81df12fa0ee0350236f037c1425fa04f0 | 
+| #4            | Recommendations implemented | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/d7ba175c869a6ca26ad5a128b3ac0b42b10ccfc5 | 
+| #5            | Order films by averageStars and more films section with different films | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/09f587adc428f5386633d01b943decc7aedaf19c |
 
 
 #### The five most participated files:
 
 | Commit number | File               |
 | ------------- | ------------------ |
-| #1            | [nombre](link)     | 
-| #2            | [nombre](link)     | 
-| #3            | [nombre](link)     | 
-| #4            | [nombre](link)     | 
-| #5            | [nombre](link)     | 
+| #1            | [FilmController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/FilmController.java)     | 
+| #2            | [WebSecurityConfig](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/security/WebSecurityConfig.java)     | 
+| #3            | [FilmService](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/service/FilmService.java)     | 
+| #4            | [Recommendation](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/model/Recommendation.java)     | 
+| #5            | [ChartController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/ChartController.java)     | 
 
 
 ### Héctor Fernández Martínez
