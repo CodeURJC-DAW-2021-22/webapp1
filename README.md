@@ -330,7 +330,7 @@ Héctor was in charge of the security of the application as well as the implemme
 | Commit number | Description                                      | Link                                                                                            |
 | ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | #1            | Final version of security in html	           | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/1256c10f08aa4d92746ee84b75fc5a1ba0a19018 | 
-| #2            | Final version of send email			   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/**************************************** | 
+| #2            | Final version of send email			   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/4bed499e0d5f51b5b47a1f297e081e9fd69187fa | 
 | #3            | Final version of error page in html		   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/94c2567b35a16e9aaa5c03318dacbfe82655860b | 
 | #4            | Final version of login			   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/1256c10f08aa4d92746ee84b75fc5a1ba0a19018 | 
 | #5            | Final version of change password		   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/604697df5021f4bc7beec0aaf68da2df047fe22c |
@@ -344,7 +344,7 @@ Héctor was in charge of the security of the application as well as the implemme
 | #2            | [login.html](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/resources/templates/login.html)     | 
 | #3            | [WebSecurityConfig.java](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/security/WebSecurityConfig.java)     | 
 | #4            | [IndexController.java](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/IndexController.java)     | 
-| #5            | [SendMail.java](link)     | 
+| #5            | [SendMail.java](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/service/SendMail.java)     | 
 
 
 ### Vanesa Reina Hernández
