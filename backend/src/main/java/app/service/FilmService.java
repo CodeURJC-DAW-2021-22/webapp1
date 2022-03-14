@@ -28,8 +28,13 @@ public class FilmService {
 		return repository.findByGenre(similar, Sort.by(Sort.Direction.DESC, "averageStars"));
 	}
 	
-	public List<Film> findByGenreDistinct(Genre similar, long id) {		
+	public List<Film> findByGenreDistinct(Genre similar, long id) {
 		return repository.findByGenreDistinct(similar, id, Sort.by(Sort.Direction.DESC, "averageStars"));
+	}
+	
+	public List<Film> findByGenreDistinct(Genre similar, long id, Pageable pageable) {
+		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
+		return repository.findByGenreDistinct(similar, id, page);
 	}
 	
 	public Page<Film> findByGenre(Genre genre, Pageable pageable) {

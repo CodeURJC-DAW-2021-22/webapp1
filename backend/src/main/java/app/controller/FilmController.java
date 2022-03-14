@@ -60,7 +60,7 @@ public class FilmController {
 		model.addAttribute("film", film);
 		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
-		model.addAttribute("similar", filmService.findByGenreDistinct(similar, film.getId()));
+		model.addAttribute("similar", filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6)));
 		return "filmUnregistered";
 	} 
 	
@@ -72,7 +72,7 @@ public class FilmController {
 		model.addAttribute("user", user);
 		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		Genre similar = film.getGenre();
-		model.addAttribute("similar", filmService.findByGenreDistinct(similar, film.getId()));
+		model.addAttribute("similar", filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6)));
 		model.addAttribute("buttonUnhidden", !commentService.userHasCommented(user.getId(), film));
 		return "filmRegistered";
 	}
@@ -85,7 +85,7 @@ public class FilmController {
 		model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(0,2)));
 		model.addAttribute("user", user);
 		Genre similar = film.getGenre();
-		model.addAttribute("similar", filmService.findByGenreDistinct(similar, film.getId()));
+		model.addAttribute("similar", filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6)));
 		return "filmAdmin";
 	}
 	

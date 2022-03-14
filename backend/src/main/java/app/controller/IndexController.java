@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import app.model.Genre;
 import app.model.User;
 import app.service.FilmService;
+import app.service.RecommendationService;
 import app.service.UserService;
 
 @Controller
@@ -31,6 +32,9 @@ public class IndexController {
 	
 	@Autowired
 	private FilmService filmService;
+	
+	@Autowired
+	private RecommendationService recommendationService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -102,7 +106,7 @@ public class IndexController {
 		if (request.isUserInRole("ADMIN")) {
 			return "redirect:/menuAdmin";
 		} else {
-			model.addAttribute("recommendations", user.getRecommendations());
+			model.addAttribute("recommendations", recommendationService.findByUser(user.getId(), PageRequest.of(0,6)));
 			model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));

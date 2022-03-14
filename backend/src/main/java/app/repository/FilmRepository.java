@@ -17,6 +17,9 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 	
 	@Query("SELECT f from Film f WHERE f.genre = :similar AND f.id != :id")
 	public List<Film> findByGenreDistinct(Genre similar, long id, Sort sort);
+	
+	@Query("SELECT f from Film f WHERE f.genre = :similar AND f.id != :id")
+	public List<Film> findByGenreDistinct(Genre similar, long id, Pageable pageable);
 
 	public Page<Film> findByGenre(Genre genre, Pageable pageable);
 	

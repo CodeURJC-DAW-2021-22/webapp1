@@ -2,6 +2,7 @@
 $(window).on("load", function(){
 	// Loading Buttons from menu
 	valueIndex(1);
+	$('#btnRecommendation').on("click",()=>functionRecommendation("btnRecommendation", '#moreRecommendations', '#loaderRecommendation'))
     $('#btnTrending').on("click",()=>functionCall("btnTrending", '#moreFilmsTrending', '#loaderTrending', null))
     $('#btnAction').on("click",()=>functionCall("btnAction", '#moreFilmsAction', '#loaderAction', "ACTION"))
     $('#btnAdventure').on("click",()=>functionCall("btnAdventure", '#moreFilmsAdventure', '#loaderAdventure', "ADVENTURE"))
@@ -29,6 +30,7 @@ $(window).on("load", function(){
 
 })
 
+var indexRecommendation;
 var indexTrending;
 var indexAction;
 var indexAdventure;
@@ -66,6 +68,12 @@ function ajaxCall(url, spinner, where) {
 	});
 }
 
+function functionRecommendation(index, where, spinner) {
+	value = searchIndex(index);
+	url=('/moreRecommendations/' + value);
+	ajaxCall(url, spinner, where);
+}
+
 function functionCall(index, where, spinner, genre) {
 	value = searchIndex(index);
 	 
@@ -76,7 +84,6 @@ function functionCall(index, where, spinner, genre) {
 	}
 	
 	ajaxCall(url, spinner, where);
-
 }
 
 function functionComment(where, spinner) {
@@ -160,7 +167,11 @@ function functionFollowing(where, spinner) {
 function searchIndex(index) {
 	value = 0;
 	
-	switch(index){
+	switch(index) {
+		case ("btnRecommendation"): 
+			value = indexRecommendation;
+			this.indexRecommendation += 1;
+			break;
 		case ("btnTrending"): 
 			value = indexTrending;
 			this.indexTrending += 1;
@@ -211,6 +222,7 @@ function searchIndex(index) {
 }
 
 function valueIndex(num) {
+	this.indexRecommendation = num;
 	this.indexTrending = num;
 	this.indexAction = num;
 	this.indexAdventure = num;

@@ -3,6 +3,8 @@ package app.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -58,13 +60,6 @@ public class CommentController {
 		if (!commentService.userHasCommented(user.getId(), film)){
 			model.addAttribute("film", film);
 			model.addAttribute("user", user);
-			
-			Recommendation recommendation = new Recommendation(film);
-			recommendationService.save(recommendation);
-			user.addRecommedation(recommendation);
-			userService.save(user);
-			
-			SendMail.sendMail(film, user);
 			return "addComment";
 		} else {
 			return "redirect:/filmRegistered/" + film.getId(); 
@@ -78,10 +73,54 @@ public class CommentController {
 		comment.setFilm(film);
 		comment.setUser(user);
 		commentService.save(comment);
+		
 		film.calculateAverage();
 		filmService.save(film);
-		model.addAttribute("buttonUnhidden", false);
+		
+		createRecommendation(id, film, user);
+		
 		return "redirect:/filmRegistered/" + film.getId();
+	}
+
+	private void createRecommendation(long id, Film film, User user) {
+		List<Film> films = filmService.findByGenreDistinct(film.getGenre(), id);
+		List<Recommendation> recommendations = user.getRecommendations();
+		HashSet<Long> filmsRecommended = new HashSet<>();
+		
+		for (int i = 0; i < recommendations.size(); i++) {
+			filmsRecommended.add(recommendations.get(i).getFilm().getId());
+		}
+		
+		if (!films.isEmpty()) {
+			Film recommended = null;
+			
+			if (!recommendations.isEmpty()) {
+				boolean equal = true;
+				int i = 0;
+
+				while ((i < films.size()) && equal) {
+					Film f = films.get(i);
+					
+					if (!filmsRecommended.contains(f.getId())) {
+						recommended = f;
+						equal = false;
+					}
+
+					i++;
+				}
+			} else {
+				recommended = films.get(0);
+			}
+
+			if (recommended != null) {
+				Recommendation recommendation = new Recommendation(recommended);
+				recommendationService.save(recommendation);
+				user.addRecommedation(recommendation);
+				userService.save(user);
+			
+				SendMail.sendMail(film, user);
+			}
+		}
 	}
 	
 	@GetMapping("/editComment/{id}")

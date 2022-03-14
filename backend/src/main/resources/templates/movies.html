@@ -11,6 +11,9 @@
 		{{#films}}
 			<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
 		{{/films}}
+		{{#recommendations}}
+			<a href="/filmRegistered/{{film.id}}"><img src="/{{film.id}}/image" alt=""></a>
+		{{/recommendations}}
 	</div>
 	{{/admin}}
 {{/logged}}

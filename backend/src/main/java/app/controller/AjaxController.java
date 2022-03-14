@@ -18,6 +18,7 @@ import app.model.Genre;
 import app.model.User;
 import app.service.CommentService;
 import app.service.FilmService;
+import app.service.RecommendationService;
 import app.service.UserService;
 
 @Controller
@@ -31,6 +32,9 @@ public class AjaxController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RecommendationService recommendationService;
 	
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -49,6 +53,19 @@ public class AjaxController {
 		// Before returning a page it confirms that there are more left
 		if (page <= (int) Math.ceil(filmService.count()/6)) {
 			model.addAttribute("films", filmService.findAll(PageRequest.of(page,6)));
+			return "movies";
+		}
+		
+		return null;
+	}
+	
+	@GetMapping("/moreRecommendations/{page}")
+	public String getFilmsRecommended(Model model, @PathVariable int page, HttpServletRequest request) {
+		// Before returning a page it confirms that there are more left
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
+		if (page <= (int) Math.ceil(recommendationService.countByUser(user.getId())/6)) {
+			model.addAttribute("recommendations", recommendationService.findByUser(user.getId(), PageRequest.of(page,6)));
 			return "movies";
 		}
 		
