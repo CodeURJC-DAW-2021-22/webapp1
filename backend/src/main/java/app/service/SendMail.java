@@ -12,12 +12,15 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Service;
 
+import app.model.Film;
+import app.model.User;
+
 @Service
 public class SendMail {
 
-    public static void sendMail() {
+    public static void sendMail(Film film, User user) {
         // Recipient's email ID needs to be mentioned.
-        String to = "hec20tor0@gmail.com";
+        String to = user.getEmail();
 
         // Sender's email ID needs to be mentioned
         String from = "adviceme11111@gmail.com";
@@ -29,11 +32,6 @@ public class SendMail {
         Properties properties = System.getProperties();
 
         // Setup mail server
-        /*properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "587");
-        properties.put("mail.smtp.tls.enable", "true");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.required", "true");*/
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.ssl.enable", "true");
@@ -60,10 +58,11 @@ public class SendMail {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
+            message.setSubject("New recommendation for you");
 
             // Now set the actual message
-            message.setText("This is actual message");
+            message.setText("Hello " + user.getName() + ", we have a new recommendation for you, because you commented this film: '" + film.getTitle() + 
+            		"'. Go to our website to watch it!");
 
             // Send message
             Transport.send(message);

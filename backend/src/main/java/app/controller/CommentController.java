@@ -64,7 +64,7 @@ public class CommentController {
 			user.addRecommedation(recommendation);
 			userService.save(user);
 			
-			SendMail.sendMail();
+			SendMail.sendMail(film, user);
 			return "addComment";
 		} else {
 			return "redirect:/filmRegistered/" + film.getId(); 

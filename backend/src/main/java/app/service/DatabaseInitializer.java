@@ -108,8 +108,8 @@ public class DatabaseInitializer {
 			setFilmImage(film20, "/static/Images/film20.jpg");
 			setFilmImage(film21, "/static/Images/film21.jpg");
 			
-			User user = new User("user", "user@gmail.com", passwordEncoder.encode("pass"), "USER");
-			User admin = new User("admin", "admin@gmail.com", passwordEncoder.encode("adminpass"), "USER", "ADMIN");
+			User user = new User("user", "exampleapp36@gmail.com", passwordEncoder.encode("pass"), "USER");
+			User admin = new User("admin", "adviceme11111@gmail.com", passwordEncoder.encode("adminpass"), "USER", "ADMIN");
 			
 			setProfileImage(user, "/static/Images/defaultImage.png");
 			

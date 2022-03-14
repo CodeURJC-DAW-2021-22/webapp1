@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 public class Recommendation {
 	
@@ -14,6 +17,7 @@ public class Recommendation {
 	private long id;
 	
 	@OneToOne
+	@OnDelete(action=OnDeleteAction.CASCADE)
 	private Film filmRecommended;
 	
 	public Recommendation() {
