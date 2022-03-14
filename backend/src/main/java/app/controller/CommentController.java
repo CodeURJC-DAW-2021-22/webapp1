@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import app.model.Comment;
 import app.model.Film;
+import app.model.Recommendation;
 import app.model.User;
 import app.service.CommentService;
 import app.service.FilmService;
+import app.service.RecommendationService;
+import app.service.SendMail;
 import app.service.UserService;
 
 @Controller
@@ -29,6 +32,9 @@ public class CommentController {
 	
 	@Autowired
 	private FilmService filmService;
+	
+	@Autowired
+	private RecommendationService recommendationService;
 	
 	@Autowired
 	private CommentService commentService;
@@ -52,6 +58,13 @@ public class CommentController {
 		if (!commentService.userHasCommented(user.getId(), film)){
 			model.addAttribute("film", film);
 			model.addAttribute("user", user);
+			
+			Recommendation recommendation = new Recommendation(film);
+			recommendationService.save(recommendation);
+			user.addRecommedation(recommendation);
+			userService.save(user);
+			
+			SendMail.sendMail();
 			return "addComment";
 		} else {
 			return "redirect:/filmRegistered/" + film.getId(); 

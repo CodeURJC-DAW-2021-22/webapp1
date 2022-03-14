@@ -28,7 +28,6 @@ import app.model.Genre;
 import app.model.User;
 import app.service.CommentService;
 import app.service.FilmService;
-import app.service.SendMail;
 import app.service.UserService;
 
 @Controller
@@ -133,9 +132,7 @@ public class FilmController {
 			film.setImage(true);
 		}
 		
-		filmService.save(film);
-		SendMail.sendMail();
-		
+		filmService.save(film);		
 		return "redirect:/menuAdmin";
 	}
 	

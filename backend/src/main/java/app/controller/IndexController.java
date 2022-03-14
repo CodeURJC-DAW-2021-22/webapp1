@@ -102,8 +102,8 @@ public class IndexController {
 		if (request.isUserInRole("ADMIN")) {
 			return "redirect:/menuAdmin";
 		} else {
+			model.addAttribute("recommendations", user.getRecommendations());
 			model.addAttribute("trending", filmService.findAll(PageRequest.of(0,6)));
-			//model.addAttribute("recommendation", filmService.);
 			model.addAttribute("action", filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6)));
 			model.addAttribute("adventure", filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6)));
 			model.addAttribute("animation", filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6)));

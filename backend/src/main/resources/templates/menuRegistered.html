@@ -28,12 +28,12 @@
 
 			<h1 id="recommendations">Recommendations for you</h1>
 			<div class="box">
-				{{#recomendation}}
-				<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
-				{{/recomendation}}
-				{{^recomendation}}
+				{{#recommendations}}
+				<a href="/filmRegistered/{{film.id}}"><img src="/{{film.id}}/image" alt=""></a>
+				{{/recommendations}}
+				{{^recommendations}}
 				<p>There are no recommendations for you yet</p>
-				{{/recomendation}}
+				{{/recommendations}}
 			</div>
 
 			<!--Load more-->
