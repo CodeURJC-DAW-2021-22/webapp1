@@ -95,7 +95,13 @@ public class UserController {
 	public String editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
 		User user = userService.findById(newUser.getId()).orElseThrow();
 		updateImageProfile(user, imageField);
-		user.setName(newUser.getName());
+		String newName = newUser.getName();
+		
+		if (!user.getName().equals(newName) && userService.existName(newName)) {
+			return "redirect:/takenUserName";
+		}
+		
+		user.setName(newName);
 		user.setEmail(newUser.getEmail());
 		userService.save(user);
 		return "redirect:/profile/" + user.getId();
