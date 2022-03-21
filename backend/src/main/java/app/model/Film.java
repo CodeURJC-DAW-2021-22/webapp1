@@ -1,5 +1,6 @@
 package app.model;
 
+
 import java.sql.Blob;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -8,11 +9,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.springframework.data.annotation.Transient;
 
 @Entity
 public class Film {
@@ -40,6 +45,11 @@ public class Film {
 	@Lob
 	private Blob imageFile;
 
+	// Attributes for API Rest
+	@Transient 
+	@ManyToMany 
+	private List<Film> similar;
+	
 	private boolean image;
 	
 	public Film() {
@@ -181,5 +191,9 @@ public class Film {
 		comments.remove(comment);
 		comment.setFilm(null);
 		calculateAverage();
+	}
+
+	public void setSimilar(List<Film> similarList) {
+		this.similar = similarList;	
 	}
 }
