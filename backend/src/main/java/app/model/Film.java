@@ -9,7 +9,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +16,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.Transient;
 
 @Entity
 public class Film {
@@ -46,9 +44,8 @@ public class Film {
 	private Blob imageFile;
 
 	// Attributes for API Rest
-	@Transient 
 	@ManyToMany 
-	private List<Film> similar;
+	private List<Film> similar = new ArrayList<>();
 	
 	private boolean image;
 	
