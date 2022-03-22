@@ -23,34 +23,22 @@
 
 		<!-- MAIN CONTAINER -->
 		<section class="main-container">
-		<div id="home"></div><br><br>
-			{{#user}}
-			<center>
-				<a href="/menuRegistered"><button class="button">For you</button></a>
-				<a href="/menuFollowing/{{id}}"><button class="button">Following</button></a>
-			</center>
-			{{/user}}
-
-			<h1>Best Movie Genres</h1>
+			<h1 id="home">Most Commented Genres</h1 id="home">
 			<div id="piechart"></div>
 
 			<h1 id="recommendations">Recommendations for you</h1>
 			<div class="box">
-				{{#recomendation}}
-				<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
-				{{/recomendation}}
+				{{#recommendations}}
+				<a href="/filmRegistered/{{film.id}}"><img src="/{{film.id}}/image" alt=""></a>
+				{{/recommendations}}
+				{{^recommendations}}
+				<p>There are no recommendations for you yet</p>
+				{{/recommendations}}
 			</div>
-
-			<!--Load more-->
-
-			<h1 id="comments">Your Comments</h1>
-			<div class="box">
-				{{#commented}}
-				<a href="/filmRegistered/{{id}}"><img src="/{{id}}/image" alt=""></a>
-				{{/commented}}
-			</div>
-
-			<!--Load more-->
+			
+			<div id="moreRecommendations"></div>
+			<button id='btnRecommendation' class='btnSubmit'>More Films</button>
+			<div id="loaderRecommendation" class="lds-dual-ring hidden overlay"></div>
 
 			<h1 id="trending">Trending Now</h1>
 			<div class="box">
