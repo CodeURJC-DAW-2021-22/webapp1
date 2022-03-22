@@ -2,27 +2,13 @@ package app.modelRest;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
 import app.model.Film;
 import app.model.User;
 
-@Entity
 public class ListFilmUser {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	
-	@Transient
 	private List<Film> films;
-	@Transient
 	private User user;
-	@Transient
 	private Boolean exist;
 
 	public ListFilmUser() {
@@ -36,10 +22,6 @@ public class ListFilmUser {
 
 	public void setExist(Boolean exist) {
 		this.exist = exist;
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public List<Film> getFilms() {
