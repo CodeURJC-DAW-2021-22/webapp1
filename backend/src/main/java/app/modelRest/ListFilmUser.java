@@ -1,5 +1,7 @@
 package app.modelRest;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,47 +12,55 @@ import app.model.Film;
 import app.model.User;
 
 @Entity
-public class FilmUser {
+public class ListFilmUser {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
 	@Transient
-	private Film film;
+	private List<Film> films;
 	@Transient
 	private User user;
 	@Transient
-	private Boolean buttonUnhidden;
+	private Boolean exist;
 
-	public FilmUser() {
+	public ListFilmUser() {
 
 	}
 	
-	public FilmUser(Film film, User user) {
-		this.film = film;
+	public ListFilmUser(List<Film> film, User user) {
+		this.films = film;
 		this.user = user;
 	}
 
-
-	public void setButtonUnhidden(Boolean buttonUnhidden) {
-		this.buttonUnhidden = buttonUnhidden;
+	public void setExist(Boolean exist) {
+		this.exist = exist;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public Film getFilm() {
-		return film;
+	public List<Film> getFilms() {
+		return films;
 	}
 
 	public User getUser() {
 		return user;
 	}
 
-	public Boolean getButtonUnhidden() {
-		return buttonUnhidden;
+	
+	public Boolean getExist() {
+		return exist;
+	}
+
+	public void setFilms(List<Film> films) {
+		this.films = List.copyOf(films);
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }
