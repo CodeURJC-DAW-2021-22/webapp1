@@ -170,7 +170,7 @@ public class FilmRestController {
 	}
 
 // editFilm
-
+	
 // put editFilm
 	
 	@DeleteMapping("/{id}")
@@ -188,6 +188,17 @@ public class FilmRestController {
 		}
 	}
 	
-// update image
+	private void updateImage(Film film, MultipartFile imageField) throws IOException, SQLException {
+	    if (!imageField.isEmpty()) {
+	        film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+	        film.setImage(true);
+	    } else {
+	        Film dbFilm = filmService.findById(film.getId()).orElseThrow();
 
+	        if (dbFilm.getImage()) {
+	            film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(), dbFilm.getImageFile().length()));
+	            film.setImage(true);
+	        }
+	    }
+	}
 }
