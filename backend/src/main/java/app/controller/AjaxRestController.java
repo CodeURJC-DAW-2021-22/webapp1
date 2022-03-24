@@ -100,7 +100,20 @@ public class AjaxRestController {
 		
 	}
 	
-//more comments profile
+	@GetMapping("/moreCommentsProfile/{id}")
+	public List<Comment> getCommentsProfile(Model model, @PathVariable long id, int page) {
+	    // Before returning a page it confirms that there are more left
+	    Optional<User> user = userService.findById(id);
+
+	    if (page <= (int) Math.ceil(commentService.countByUser(user)/6)) {
+	        model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(page, 5)));
+	        return commentService.findByUser(user, PageRequest.of(page, 5));
+	    } else {
+	        return null;            
+	    }
+
+	}
+	
 //more commets watch profile
 //more followers
 //more following
