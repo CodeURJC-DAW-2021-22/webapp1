@@ -65,4 +65,15 @@ public class UserRestController {
 	        return ResponseEntity.notFound().build();
 	    }
 	}
+	
+	@GetMapping("/editProfile/{id}")
+	public ResponseEntity<User> editProfile(Model model, @PathVariable long id, HttpServletRequest request) {
+		User user = userService.findById(id).orElseThrow();
+		User userRequest = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		if (user.getId().equals(userRequest.getId())) {
+			model.addAttribute("user", user);
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 }
