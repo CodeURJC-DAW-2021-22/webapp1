@@ -130,8 +130,8 @@ public class CommentController {
 		User userComment = comment.getUser();
 	
 		if (userComment.getId().equals(user.getId())) {
-			model.addAttribute("comment", commentService.findById(id).orElseThrow());
-			model.addAttribute("user", userService.findByName(request.getUserPrincipal().getName()).orElseThrow());
+			model.addAttribute("comment", comment);
+			model.addAttribute("user", user);
 			return "editComment";
 		}
 		
