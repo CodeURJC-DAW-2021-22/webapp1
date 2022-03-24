@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Comment;
@@ -59,7 +60,20 @@ public class CommentsRestController{
 		}
 	}
 	
-	//post addComment
+	@PostMapping("/addCom/{id}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<FilmUser> addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment){
+		Film film = filmService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		comment.setFilm(film);
+		comment.setUser(user);
+		commentService.save(comment);
+		film.calculateAverage();
+		filmService.save(film);
+		FilmUser filmUser = new FilmUser(film, user);
+		//createRecommendation(id, film, user);
+		return new ResponseEntity<>(filmUser, HttpStatus.OK);
+	}
 	//Get editComment
 	//Put editComment
 	//removeComment
