@@ -1,4 +1,4 @@
-package app.modelRest;
+package app.model.modelRest;
 
 
 import app.model.Comment;

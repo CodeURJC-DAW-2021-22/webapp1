@@ -1,4 +1,4 @@
-package app.controller;
+package app.controller.restController;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.model.User;
-import app.modelRest.ListFollowUser;
+import app.model.modelRest.ListFollowUser;
 import app.service.UserService;
 
 @RestController

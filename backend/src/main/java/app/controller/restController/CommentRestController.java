@@ -1,4 +1,4 @@
-package app.controller;
+package app.controller.restController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import app.model.Comment;
 import app.model.Film;
 import app.model.User;
+import app.model.modelRest.FilmUser;
+import app.model.modelRest.UserComment;
 import app.model.Genre;
-import app.modelRest.FilmUser;
-import app.modelRest.UserComment;
 import app.service.CommentService;
 import app.service.FilmService;
 import app.service.UserService;

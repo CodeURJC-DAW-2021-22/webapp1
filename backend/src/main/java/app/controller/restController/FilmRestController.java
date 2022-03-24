@@ -1,4 +1,4 @@
-package app.controller;
+package app.controller.restController;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -31,8 +31,8 @@ import org.springframework.web.multipart.MultipartFile;
 import app.model.Film;
 import app.model.Genre;
 import app.model.User;
-import app.modelRest.FilmUser;
-import app.modelRest.ListFilmUser;
+import app.model.modelRest.FilmUser;
+import app.model.modelRest.ListFilmUser;
 import app.service.CommentService;
 import app.service.FilmService;
 import app.service.UserService;
