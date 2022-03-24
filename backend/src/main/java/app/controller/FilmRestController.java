@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -182,7 +183,21 @@ public class FilmRestController {
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-// put editFilm
+	@PutMapping("/editFilm/{id}")
+	public ResponseEntity<Film> editFilmProcess(@RequestBody Film newFilm, @PathVariable long id, @RequestBody MultipartFile imageField) throws IOException, SQLException {
+	    Film film = filmService.findById(id).orElseThrow();
+
+	    if (film != null) {
+	        updateImage(newFilm, imageField);
+	        film.getComments().forEach(c -> newFilm.addComment(c));
+	        filmService.save(newFilm);
+
+	        return new ResponseEntity<>(newFilm, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+
+	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Film> removeFilm(@PathVariable long id) {
