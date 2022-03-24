@@ -29,7 +29,7 @@ import app.service.UserService;
 
 @RestController
 @RequestMapping("/api/comments")
-public class CommentsRestController {
+public class CommentRestController {
 
 	@Autowired
 	private UserService userService;
@@ -85,7 +85,7 @@ public class CommentsRestController {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	// Put editComment
+
 	@PutMapping("/editCom")
 	public ResponseEntity<FilmUser> editFilmProcess(Comment newComment, HttpServletRequest request){
 		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
