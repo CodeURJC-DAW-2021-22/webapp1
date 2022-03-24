@@ -86,5 +86,18 @@ public class CommentsRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	// Put editComment
+	@PutMapping("/editCom")
+	public ResponseEntity<FilmUser> editFilmProcess(Comment newComment, HttpServletRequest request){
+		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
+		Film film = comment.getFilm();
+		User user = comment.getUser();
+		newComment.setUser(user);
+		newComment.setFilm(film);
+		commentService.save(newComment);
+		film.calculateAverage();
+		filmService.save(film);
+		FilmUser filmUser = new FilmUser(film, user);
+		return new ResponseEntity<>(filmUser, HttpStatus.OK);
+	}
 	// removeComment
 }
