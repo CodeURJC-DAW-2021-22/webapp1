@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
@@ -7,18 +8,24 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import app.model.Film;
 import app.model.Genre;
@@ -137,17 +144,50 @@ public class FilmRestController {
 		
 		return new ResponseEntity<>(listFilmUser, HttpStatus.OK); 
 	}
-	
-	@GetMapping("/editFilm/{id}")
-	public ResponseEntity<FilmUser> editFilm(@PathVariable long id, HttpServletRequest request) {
-	    Optional<Film> film = filmService.findById(id);
 
-	    if (film.isPresent()) {
-	        User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-	        FilmUser filmUser = new FilmUser(film.get(), user);
-	        return new ResponseEntity<>(filmUser, HttpStatus.OK);
+	@GetMapping("/addFilm")
+	public ResponseEntity<User> addFilm(HttpServletRequest request) {
+	    User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+
+	    if (user != null) {
+	        return new ResponseEntity<>(user, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
 
-	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	
+	@PostMapping("/addFilm")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Film addFilmProcess(@RequestBody Film film, @RequestBody MultipartFile imageField) throws IOException {			
+		if (!imageField.isEmpty()) {
+			film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
+			film.setImage(true);
+		}
+		
+		filmService.save(film);		
+		return film;
+	}
+
+// editFilm
+
+// put editFilm
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Film> removeFilm(@PathVariable long id) {
+	
+		try {
+			Optional<Film> film = filmService.findById(id);
+			
+			if (film.isPresent()) {
+				filmService.delete(id);
+			}
+			return new ResponseEntity<>(null, HttpStatus.OK);
+		} catch (EmptyResultDataAccessException e) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+// update image
+
 }
