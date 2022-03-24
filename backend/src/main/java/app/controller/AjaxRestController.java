@@ -126,6 +126,17 @@ public class AjaxRestController {
 	    }
 
 	}
-//more followers
+
+	@GetMapping("/moreFollowers/{id}")
+	public List<User> getFollowers(Model model, @PathVariable long id, int page) {
+	    // Before returning a page it confirms that there are more left
+	    User user = userService.findById(id).orElseThrow();
+
+	    if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
+	        return userService.findFollowingById(id, PageRequest.of(page, 5));
+	    }
+
+	    return null;
+	}
 //more following
 }
