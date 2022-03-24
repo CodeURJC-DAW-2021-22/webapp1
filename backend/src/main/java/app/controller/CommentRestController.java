@@ -99,5 +99,18 @@ public class CommentRestController {
 		FilmUser filmUser = new FilmUser(film, user);
 		return new ResponseEntity<>(filmUser, HttpStatus.OK);
 	}
-	// removeComment
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<User> removeComment(@PathVariable long id, HttpServletRequest request) {
+		Comment comment = commentService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		User userComment = comment.getUser();
+		if (userComment.getId().equals(user.getId()) || request.isUserInRole("ADMIN")) {
+			Film film = comment.getFilm();
+			commentService.delete(id);
+			film.calculateAverage();
+			filmService.save(film);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 }
