@@ -85,6 +85,16 @@ public class UserRestController {
 	    return new ResponseEntity<>(newUser, HttpStatus.OK);
 	}
 	
+	@GetMapping("/editPassword/{id}")
+	public ResponseEntity<User> editPassword(Model model, @PathVariable long id, HttpServletRequest request) {
+		User user = userService.findById(id).orElseThrow();
+		User userRequest = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		if (user.getId().equals(userRequest.getId())) {
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	@PutMapping("/editPassword")
 	public ResponseEntity<User> editPasswordProcess(Model model, @RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword) throws IOException, SQLException {
 		User user = userService.findById(id).orElseThrow(); 
