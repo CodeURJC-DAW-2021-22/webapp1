@@ -137,6 +137,18 @@ public class FilmRestController {
 		
 		return new ResponseEntity<>(listFilmUser, HttpStatus.OK); 
 	}
+	
+	@GetMapping("/editFilm/{id}")
+	public ResponseEntity<FilmUser> editFilm(@PathVariable long id, HttpServletRequest request) {
+	    Optional<Film> film = filmService.findById(id);
 
+	    if (film.isPresent()) {
+	        User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+	        FilmUser filmUser = new FilmUser(film.get(), user);
+	        return new ResponseEntity<>(filmUser, HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 
 }
