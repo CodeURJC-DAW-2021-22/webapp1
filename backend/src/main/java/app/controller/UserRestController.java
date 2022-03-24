@@ -70,6 +70,21 @@ public class UserRestController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	@PutMapping("/editProfile")
+	public ResponseEntity<User> editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
+		User user = userService.findById(newUser.getId()).orElseThrow();
+		updateImageProfile(user, imageField);
+		String newName = newUser.getName();
+	    if (!user.getName().equals(newName) && userService.existName(newName)) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	
+	    user.setName(newName);
+	    user.setEmail(newUser.getEmail());
+	    userService.save(user);
+	    return new ResponseEntity<>(newUser, HttpStatus.OK);
+	}
+	
 	@PutMapping("/editPassword")
 	public ResponseEntity<User> editPasswordProcess(Model model, @RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword) throws IOException, SQLException {
 		User user = userService.findById(id).orElseThrow(); 
