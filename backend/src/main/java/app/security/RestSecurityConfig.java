@@ -46,11 +46,20 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**");
 		
 		// URLs that need authentication to access to it
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/comment/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/comment/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/comment/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreRecommendations").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreCommentsProfile/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/user/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/regis/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/admin/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/addFilm").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/films/addFilm").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/editFilm/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/films/editFilm/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/films/**").hasRole("ADMIN");
 		
 		// Other URLs can be accessed without authentication
 		http.authorizeRequests().anyRequest().permitAll();

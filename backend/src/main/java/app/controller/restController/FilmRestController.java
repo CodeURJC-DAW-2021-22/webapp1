@@ -50,7 +50,7 @@ public class FilmRestController {
 	@Autowired
 	private CommentService commentService;
 	
-	@GetMapping("/{id}")
+	@GetMapping("/unregis/{id}")
 	public ResponseEntity<Film> getfilmUnregistered(@PathVariable long id) {
 		Film film = filmService.findById(id).orElseThrow();
 		

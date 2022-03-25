@@ -29,7 +29,7 @@ import app.model.modelRest.ListFollowUser;
 import app.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserRestController {
 	
 	@Autowired

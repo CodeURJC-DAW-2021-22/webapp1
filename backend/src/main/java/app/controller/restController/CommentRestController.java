@@ -28,7 +28,7 @@ import app.service.FilmService;
 import app.service.UserService;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api/comment")
 public class CommentRestController {
 
 	@Autowired
