@@ -46,13 +46,13 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**");
 		
 		// URLs that need authentication to access to it
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/comment/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/comment/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/comment/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/comments/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/comments/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/comments/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreRecommendations").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreCommentsProfile/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/user/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/regis/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/admin/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/addFilm").hasRole("ADMIN");
