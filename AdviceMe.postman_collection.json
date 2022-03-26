@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "a925db6a-f6df-4727-9d8d-c351db8e5a9d",
+		"name": "AdviceMe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "filmRest",
+			"item": [
+				{
+					"name": "getFilmUnregistered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFilmRegistered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/regis/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"regis",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFilmAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/admin/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"admin",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "downloadImage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/:id/image",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								":id",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchFilms",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}/api/films/searchFilms?query=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"searchFilms"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addFilm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/addFilm",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"addFilm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addFilm",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageField",
+									"type": "file",
+									"src": "/C:/Users/Vanesa/Pictures/photo_2020-12-22_22-08-30.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/films/addFilm",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"addFilm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editFilm",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/editFilm/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"editFilm",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editFilm",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/editFilm/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"editFilm",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "481"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ajaxRest",
+			"item": [
+				{
+					"name": "moreFilms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/more?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"more"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreRecommendations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreRecommendations?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreRecommendations"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreSearch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreSearch?name=&page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreSearch"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreGenre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreGenre?genre=&page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreGenre"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modeComments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreComments/:id?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreComments",
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modeCommentsProfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreCommentsProfile/:id?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreCommentsProfile",
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modeCommentsWatchProfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreCommentsWatchProfile/:id?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreCommentsWatchProfile",
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreFollowers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreFollowers/:id?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreFollowers",
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreFollowing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/ajax/moreFollowing/:id?page",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"ajax",
+								"moreFollowing",
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": null
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
