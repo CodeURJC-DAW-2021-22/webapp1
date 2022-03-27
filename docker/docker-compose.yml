@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  web:
+    image: juancarlosurjc/codeurjc-daw-2021-22-webapp1
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db/AdviceMe
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+    ports:
+      - 8443:8443
+  db:
+    image: postgres:14.2
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=AdviceMe
+    volumes:
+      - ./postgres:/var/lib/postgres/data
