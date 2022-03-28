@@ -181,7 +181,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"title\": \"Lo imposible\",\r\n\t\"releaseDate\": \"2012-10-12\",\r\n\t\"minAge\": \"16 (Not suitable for people under 16)\",\r\n\t\"genre\": \"DRAMA\",\r\n\t\"duration\": 120,\r\n\t\"cast\": \"Tom Holland, Naomy Watts, Ewan McGregor\",\r\n\t\"director\": \"Juan Antonio Bayona\",\r\n\t\"plot\": \"A British family on Christmas holiday at a beach resort in Thailand is torn apart when a deadly tsunami devastates the area\"\r\n}",
+							"raw": "{\r\n\t\"title\": \"Lo imposible\",\r\n\t\"releaseDate\": \"2012-10-12\",\r\n\t\"minAge\": \"16 (Not suitable for people under 16)\",\r\n\t\"genre\": \"DRAMA\",\r\n\t\"duration\": 120,\r\n\t\"cast\": \"Tom Holland, Naomy Watts, Ewan McGregor\",\r\n\t\"director\": \"Juan Antonio Bayona\",\r\n\t\"plot\": \"A British family on Christmas holiday at a beach resort in Thailand is torn apart when a deadly tsunami devastates the area.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -233,6 +233,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"title\": \"Los Mitchell contra las maquinitas\",\r\n\t\"releaseDate\": \"2021-04-30\",\r\n\t\"minAge\": \"A (All people)\",\r\n\t\"genre\": \"COMEDY\",\r\n\t\"duration\": 114,\r\n\t\"cast\": \"Abbi Jacobson, Danny McBride, Maya Rudolph, Mike Rianda, Eric Andre, Olivia Colman\",\r\n\t\"director\": \"Mike Rianda\",\r\n\t\"plot\": \"The Mitchell family's road trip, escorting one of their children to his first day of college, is interrupted by a technological insurrection that threatens humanity.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{url}}/api/films/editFilm/:id",
 							"host": [

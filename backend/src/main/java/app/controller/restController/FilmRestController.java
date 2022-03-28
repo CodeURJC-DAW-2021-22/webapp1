@@ -196,11 +196,10 @@ public class FilmRestController {
 	}
 	
 	@PutMapping("/editFilm/{id}")
-	public ResponseEntity<Film> editFilmProcess(@RequestBody Film newFilm, @PathVariable long id, @RequestBody MultipartFile imageField) throws IOException, SQLException {
+	public ResponseEntity<Film> editFilmProcess(@RequestBody Film newFilm, @PathVariable long id) throws IOException, SQLException {
 	    Film film = filmService.findById(id).orElseThrow();
 
 	    if (film != null) {
-	        updateImage(newFilm, imageField);
 	        film.getComments().forEach(c -> newFilm.addComment(c));
 	        filmService.save(newFilm);
 
@@ -226,17 +225,4 @@ public class FilmRestController {
 		}
 	}
 	
-	private void updateImage(Film film, MultipartFile imageField) throws IOException, SQLException {
-	    if (!imageField.isEmpty()) {
-	        film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-	        film.setImage(true);
-	    } else {
-	        Film dbFilm = filmService.findById(film.getId()).orElseThrow();
-
-	        if (dbFilm.getImage()) {
-	            film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(), dbFilm.getImageFile().length()));
-	            film.setImage(true);
-	        }
-	    }
-	}
 }
