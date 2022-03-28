@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8b407f59-0351-492e-b816-805c34dbf771",
+		"_postman_id": "31f6fa39-770d-4dc8-bf44-1cea1241bb7e",
 		"name": "AdviceMe",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,13 +14,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/films/:id",
+							"raw": "{{url}}/api/films/unregis/:id",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
+								"unregis",
 								":id"
 							],
 							"variable": [
@@ -179,14 +180,13 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "imageField",
-									"type": "file",
-									"src": "/C:/Users/Vanesa/Pictures/photo_2020-12-22_22-08-30.jpg"
+							"mode": "raw",
+							"raw": "{\r\n\t\"title\": \"Lo imposible\",\r\n\t\"releaseDate\": \"2012-10-12\",\r\n\t\"minAge\": \"16 (Not suitable for people under 16)\",\r\n\t\"genre\": \"DRAMA\",\r\n\t\"duration\": 120,\r\n\t\"cast\": \"Tom Holland, Naomy Watts, Ewan McGregor\",\r\n\t\"director\": \"Juan Antonio Bayona\",\r\n\t\"plot\": \"A British family on Christmas holiday at a beach resort in Thailand is torn apart when a deadly tsunami devastates the area\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "{{url}}/api/films/addFilm",
@@ -255,7 +255,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "deleteFilm",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -273,6 +273,43 @@
 								{
 									"key": "id",
 									"value": "481"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateImage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageFile",
+									"type": "file",
+									"src": "/C:/Users/Vanesa/Pictures/Film Picture.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/films/update/:id/image",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"update",
+								":id",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -526,7 +563,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/ajax/moreFollowing/:id?page",
+							"raw": "{{url}}/api/ajax/moreFollowing/:id?page=",
 							"host": [
 								"{{url}}"
 							],
