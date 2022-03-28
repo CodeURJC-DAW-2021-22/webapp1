@@ -1,6 +1,9 @@
 package app.controller.restController;
 
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import java.io.IOException;
+import java.net.URI;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -160,15 +164,23 @@ public class FilmRestController {
 	
 	@PostMapping("/addFilm")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Film addFilmProcess(@RequestBody Film film, @RequestBody MultipartFile imageField) throws IOException {			
-		if (!imageField.isEmpty()) {
-			film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			film.setImage(true);
-		}
-		
+	public Film addFilmProcess(@RequestBody Film film) {					
 		filmService.save(film);		
 		return film;
 	}
+	
+	@PostMapping("/update/{id}/image")
+	public ResponseEntity<Object> uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException{
+		Film film = filmService.findById(id).orElseThrow();
+		URI location = fromCurrentRequest().build().toUri();
+		
+		film.setImage(true);
+		film.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+		
+		filmService.save(film);
+		return ResponseEntity.created(location).build();
+	}
+	
 
 	@GetMapping("/editFilm/{id}")
 	public ResponseEntity<FilmUser> editFilm(@PathVariable long id, HttpServletRequest request) {
