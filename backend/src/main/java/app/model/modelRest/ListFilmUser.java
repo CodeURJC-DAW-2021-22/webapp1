@@ -1,13 +1,13 @@
 package app.model.modelRest;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import app.model.Film;
 import app.model.User;
 
 public class ListFilmUser {
 	
-	private List<Film> films;
+	private Page<Film> films;
 	private User user;
 	private Boolean exist;
 
@@ -15,7 +15,7 @@ public class ListFilmUser {
 
 	}
 	
-	public ListFilmUser(List<Film> film, User user) {
+	public ListFilmUser(Page<Film> film, User user) {
 		this.films = film;
 		this.user = user;
 	}
@@ -24,7 +24,7 @@ public class ListFilmUser {
 		this.exist = exist;
 	}
 
-	public List<Film> getFilms() {
+	public Page<Film> getFilms() {
 		return films;
 	}
 
@@ -37,8 +37,8 @@ public class ListFilmUser {
 		return exist;
 	}
 
-	public void setFilms(List<Film> films) {
-		this.films = List.copyOf(films);
+	public void setFilms(Page<Film> films) {
+		this.films = films;
 	}
 
 	public void setUser(User user) {

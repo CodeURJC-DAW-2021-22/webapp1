@@ -51,7 +51,7 @@ public class AjaxRestController {
 	}
 	
 	@GetMapping("/moreRecommendations")
-	public List<Recommendation> getFilmsRecommended(int page, HttpServletRequest request) {
+	public Page<Recommendation> getFilmsRecommended(int page, HttpServletRequest request) {
 		// Before returning a page it confirms that there are more left
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		
@@ -64,7 +64,7 @@ public class AjaxRestController {
 	}
 
 	@GetMapping("/moreSearch")
-	public List<Film> getFilmsSeach(String name,int page) {
+	public Page<Film> getFilmsSearch(String name,int page) {
 		// Before returning a page it confirms that there are more left
 		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
 			return filmService.findLikeName(name, PageRequest.of(page,6));

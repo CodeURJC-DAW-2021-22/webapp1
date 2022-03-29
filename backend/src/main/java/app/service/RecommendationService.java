@@ -1,8 +1,7 @@
 package app.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ public class RecommendationService {
 	@Autowired
 	private RecommendationRepository repository;
 	
-	public List<Recommendation> findByUser(long id, Pageable pageable) {
+	public Page<Recommendation> findByUser(long id, Pageable pageable) {
 		return repository.findRecommendationsByUser(id, pageable);
 	}
 	

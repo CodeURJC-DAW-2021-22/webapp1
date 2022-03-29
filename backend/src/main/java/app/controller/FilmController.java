@@ -3,7 +3,6 @@ package app.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +11,7 @@ import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -103,7 +103,7 @@ public class FilmController {
 	
 	@GetMapping("/searchFilms")
 	public String searchFilms(Model model, String query, HttpServletRequest request) {
-		List<Film> result = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
+		Page<Film> result = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
 		model.addAttribute("result", result);
 		Principal principal = request.getUserPrincipal();
 

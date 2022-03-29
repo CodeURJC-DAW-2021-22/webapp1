@@ -61,7 +61,7 @@ public class CommentRestController {
 
 	@PostMapping("/addCom/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<FilmUser> addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
+	public Comment addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
 		Film film = filmService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		comment.setFilm(film);
@@ -69,9 +69,8 @@ public class CommentRestController {
 		commentService.save(comment);
 		film.calculateAverage();
 		filmService.save(film);
-		FilmUser filmUser = new FilmUser(film, user);
 		// createRecommendation(id, film, user);
-		return new ResponseEntity<>(filmUser, HttpStatus.OK);
+		return comment;
 	}
 
 	@GetMapping("/editCom/{id}")
@@ -111,6 +110,6 @@ public class CommentRestController {
 			film.calculateAverage();
 			filmService.save(film);
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 }
