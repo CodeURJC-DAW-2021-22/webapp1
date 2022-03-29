@@ -96,5 +96,22 @@ public class IndexRestController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+    
+    @GetMapping("/menuAdmin")
+    public ResponseEntity<FilmsList> getMenuAdmin(){
+		Page<Film> trending = filmService.findAll(PageRequest.of(0,6));
+		Page<Film> action = filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6));
+		Page<Film> adventure = filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6));
+		Page<Film> animation = filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6));
+		Page<Film> comedy = filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6));
+		Page<Film> drama = filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6));
+		Page<Film> horror = filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6));
+		Page<Film> scifi = filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6));
+
+		FilmsList listOfFilms = new FilmsList(null, trending, action, adventure, animation,
+				comedy, drama, horror, scifi);
+		
+		return new ResponseEntity<>(listOfFilms, HttpStatus.OK);
+	}
 	
 }
