@@ -1,7 +1,5 @@
 package app.model;
 
-
-
 import java.sql.Blob;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -16,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-
 
 @Entity
 public class Film {
@@ -43,13 +40,11 @@ public class Film {
 
 	@Lob
 	private Blob imageFile;
-
-	// Attributes for API Rest
- 
-	@Transient
-	private List<Film> similar = new ArrayList<>();
 	
 	private boolean image;
+ 
+	@Transient
+	private List<Film> similar;
 	
 	public Film() {
 		
@@ -135,6 +130,10 @@ public class Film {
 		return comments;
 	}
 	
+	public List<Film> getSimilar() {
+		return similar;	
+	}
+	
     // Setters
 	public void setId(Long id) {
 		this.id = id;
@@ -191,12 +190,8 @@ public class Film {
 		comment.setFilm(null);
 		calculateAverage();
 	}
-
-	public List<Film> getSimilar() {
-		return this.similar;	
-	}
 	
-	public void setSimilar(List<Film> similarList) {
-		this.similar = List.copyOf(similarList);	
+	public void setSimilar(List<Film> similar) {
+		this.similar = similar;	
 	}
 }

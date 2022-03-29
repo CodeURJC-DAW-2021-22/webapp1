@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,8 @@ public class CommentService {
 	@Autowired
 	private CommentRepository repository;
 	
-	public Optional<Comment> findById(long id) {
-		return repository.findById(id);
+	public List<Comment> findAll() {
+		return repository.findAll();
 	}
 	
 	public void save(Comment comment) {
@@ -34,36 +35,28 @@ public class CommentService {
 		return repository.count();
 	}
 	
-	public List<Comment> findByFilm(Optional<Film> film, Pageable pageable){
-		return repository.findByFilm(film, pageable);
+	public Optional<Comment> findById(long id) {
+		return repository.findById(id);
 	}
 
-	public long countByFilm(Optional<Film> film) {
-		return repository.countByFilm(film);
-	}
-
-	public List<Comment> findAll() {
-		return repository.findAll();
-	}
-
-	public List<Comment> findByFilm(Film film, Pageable pageable) {
+	public Page<Comment> findByFilm(Film film, Pageable pageable) {
 		return repository.findByFilm(film, pageable);
 	}
 	
 	public List<Comment> findByFilm(Film film) {
 		return repository.findByFilm(film);
 	}
+	
+	public long countByFilm(Film film) {
+		return repository.countByFilm(film);
+	}
 
-	public List<Comment> findByUser(User user, Pageable pageable) {
+	public Page<Comment> findByUser(User user, Pageable pageable) {
 		return repository.findByUser(user, pageable);
 	}
 
-	public int countByUser(Optional<User> user) {
+	public int countByUser(User user) {
 		return repository.countByUser(user);
-	}
-
-	public List<Comment> findByUser(Optional<User> user, Pageable pageable) {
-		return repository.findByUser(user, pageable);
 	}
 
 	public boolean userHasCommented(long id, Film film) {

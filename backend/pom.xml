@@ -12,7 +12,7 @@
 	<artifactId>advice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>advice</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Web app for recommending films</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -64,7 +64,6 @@
 			<groupId>org.postgresql</groupId>             
 			<artifactId>postgresql</artifactId>         
 		</dependency>
-
 	</dependencies>
 
 	<build>

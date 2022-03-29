@@ -96,12 +96,6 @@ public class IndexController {
 	
 	@GetMapping("/takenUserName")
 	public String takenUserName(Model model, HttpServletRequest request) {
-		Principal principal = request.getUserPrincipal();
-
-		if (principal != null) {
-			model.addAttribute("user", userService.findByName(principal.getName()).orElseThrow());
-		}
-		
 		return "takenUserName";
 	}
 	

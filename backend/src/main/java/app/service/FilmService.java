@@ -20,41 +20,6 @@ public class FilmService {
 	@Autowired
 	private FilmRepository repository;
 	
-	public Optional<Film> findById(long id) {
-		return repository.findById(id);
-	}
-	
-	public List<Film> findByGenre(Genre similar) {		
-		return repository.findByGenre(similar, Sort.by(Sort.Direction.DESC, "averageStars"));
-	}
-	
-	public List<Film> findByGenreDistinct(Genre similar, long id) {
-		return repository.findByGenreDistinct(similar, id, Sort.by(Sort.Direction.DESC, "averageStars"));
-	}
-	
-	public List<Film> findByGenreDistinct(Genre similar, long id, Pageable pageable) {
-		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
-		return repository.findByGenreDistinct(similar, id, page);
-	}
-	
-	public Page<Film> findByGenre(Genre genre, Pageable pageable) {
-		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
-		return repository.findByGenre(genre, page);
-	}
-	
-	public List<Film> findLikeName(String name) {
-		return repository.findLikeName(name, Sort.by(Sort.Direction.DESC, "averageStars"));
-	}
-	
-	public Page<Film> findLikeName(String name, Pageable pageable) {
-		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
-		return repository.findLikeName(name, page);
-	}
-	
-	public boolean exist(long id) {
-		return repository.existsById(id);
-	}
-
 	public List<Film> findAll() {
 		return repository.findAll(Sort.by(Sort.Direction.DESC, "averageStars"));
 	}
@@ -70,6 +35,33 @@ public class FilmService {
 
 	public void delete(long id) {
 		repository.deleteById(id);
+	}
+	
+	public Optional<Film> findById(long id) {
+		return repository.findById(id);
+	}
+	
+	public List<Film> findByGenre(Genre similar) {		
+		return repository.findByGenre(similar, Sort.by(Sort.Direction.DESC, "averageStars"));
+	}
+	
+	public Page<Film> findByGenre(Genre genre, Pageable pageable) {
+		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
+		return repository.findByGenre(genre, page);
+	}
+	
+	public List<Film> findByGenreDistinct(Genre similar, long id) {
+		return repository.findByGenreDistinct(similar, id, Sort.by(Sort.Direction.DESC, "averageStars"));
+	}
+	
+	public Page<Film> findByGenreDistinct(Genre similar, long id, Pageable pageable) {
+		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
+		return repository.findByGenreDistinct(similar, id, page);
+	}
+	
+	public Page<Film> findLikeName(String name, Pageable pageable) {
+		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
+		return repository.findLikeName(name, page);
 	}
 
 	public long count() {

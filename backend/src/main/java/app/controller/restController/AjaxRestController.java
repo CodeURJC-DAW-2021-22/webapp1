@@ -1,9 +1,5 @@
 package app.controller.restController;
 
-
-import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,9 +84,9 @@ public class AjaxRestController {
 	}
 
 	@GetMapping("/moreComments/{id}")
-	public List<Comment> getComments(Model model, @PathVariable long id, int page) {
+	public Page<Comment> getComments(Model model, @PathVariable long id, int page) {
 		// Before returning a page it confirms that there are more left
-		Optional<Film> film = filmService.findById(id);
+		Film film = filmService.findById(id).orElseThrow();
 		
 		if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
 			return commentService.findByFilm(film, PageRequest.of(page, 2));
@@ -101,9 +97,9 @@ public class AjaxRestController {
 	}
 	
 	@GetMapping("/moreCommentsProfile/{id}")
-	public List<Comment> getCommentsProfile(Model model, @PathVariable long id, int page) {
+	public Page<Comment> getCommentsProfile(Model model, @PathVariable long id, int page) {
 	    // Before returning a page it confirms that there are more left
-	    Optional<User> user = userService.findById(id);
+	    User user = userService.findById(id).orElseThrow();
 
 	    if (page <= (int) Math.ceil(commentService.countByUser(user)/6)) {
 	        model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(page, 5)));
@@ -115,9 +111,9 @@ public class AjaxRestController {
 	}
 	
 	@GetMapping("/moreCommentsWatchProfile/{id}")
-	public List<Comment> getCommentsWatchProfile(Model model, @PathVariable long id, int page) {
+	public Page<Comment> getCommentsWatchProfile(Model model, @PathVariable long id, int page) {
 	    // Before returning a page it confirms that there are more left
-	    Optional<User> user = userService.findById(id);
+	    User user = userService.findById(id).orElseThrow();
 
 	    if (page <= (int) Math.ceil(commentService.countByUser(user)/5)) {
 	        return commentService.findByUser(user, PageRequest.of(page, 5));
@@ -128,7 +124,7 @@ public class AjaxRestController {
 	}
 
 	@GetMapping("/moreFollowers/{id}")
-	public List<User> getFollowers(Model model, @PathVariable long id, int page) {
+	public Page<User> getFollowers(Model model, @PathVariable long id, int page) {
 	    // Before returning a page it confirms that there are more left
 	    User user = userService.findById(id).orElseThrow();
 
@@ -140,7 +136,7 @@ public class AjaxRestController {
 	}
 	
 	@GetMapping("/moreFollowing/{id}")
-	public List<User> getFollowing(Model model, @PathVariable long id, int page) {
+	public Page<User> getFollowing(Model model, @PathVariable long id, int page) {
 	    // Before returning a page it confirms that there are more left
 	    User user = userService.findById(id).orElseThrow();
 

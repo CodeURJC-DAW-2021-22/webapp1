@@ -59,11 +59,11 @@ public class UserController {
 		
 		if (user.getId().equals(userRequest.getId())) {
 			model.addAttribute("user", user);
-			model.addAttribute("comments", commentService.findByUser(user,  PageRequest.of(0,5)));
+			model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(0,5)));
 			return "profile";
 		}
 		
-		return "redirect:/menuRegistered";
+		return "redirect:/error";
 	}
 	
 	@GetMapping("/{id}/imageProfile")
@@ -95,13 +95,6 @@ public class UserController {
 	public String editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
 		User user = userService.findById(newUser.getId()).orElseThrow();
 		updateImageProfile(user, imageField);
-		String newName = newUser.getName();
-		
-		if (!user.getName().equals(newName) && userService.existName(newName)) {
-			return "redirect:/takenUserName";
-		}
-		
-		user.setName(newName);
 		user.setEmail(newUser.getEmail());
 		userService.save(user);
 		return "redirect:/profile/" + user.getId();
@@ -166,7 +159,7 @@ public class UserController {
 			
 			model.addAttribute("comments", commentService.findByUser(following,  PageRequest.of(0,5)));
 			
-			if(!follower.getFollowing().contains(following)) {
+			if (!follower.getFollowing().contains(following)) {
 				model.addAttribute("follow", "Follow");
 			} else {
 				model.addAttribute("follow", "Unfollow");
@@ -183,7 +176,7 @@ public class UserController {
 		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		User following = userService.findById(id).orElseThrow();
 		
-		if(!follower.getFollowing().contains(following)) {
+		if (!follower.getFollowing().contains(following)) {
 			follower.addFollowing(following);
 		} else {
 			follower.deleteFollowing(following);
@@ -203,13 +196,6 @@ public class UserController {
 		if (!imageField.isEmpty()) {
 			user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			user.setImage(true);
-		} else {
-			User dbUser = userService.findById(user.getId()).orElseThrow();
-			
-			if (dbUser.getImage()) {
-				user.setImageFile(BlobProxy.generateProxy(dbUser.getImageFile().getBinaryStream(), dbUser.getImageFile().length()));
-				user.setImage(true);
-			}
 		}
 	}
 }

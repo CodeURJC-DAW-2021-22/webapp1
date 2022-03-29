@@ -12,8 +12,8 @@ import app.model.Recommendation;
 public interface RecommendationRepository extends JpaRepository<Recommendation, Long> {
 	
 	@Query("SELECT u.recommendations FROM User u where u.id = :id")
-	public Page<Recommendation> findRecommendationsByUser(long id, Pageable pageable);
+	public List<Recommendation> findRecommendationsByUser(long id);
 	
 	@Query("SELECT u.recommendations FROM User u where u.id = :id")
-	public List<Recommendation> findRecommendationsByUser(long id);
+	public Page<Recommendation> findRecommendationsByUser(long id, Pageable pageable);
 }

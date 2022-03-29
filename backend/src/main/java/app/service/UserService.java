@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,6 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository repository;
-	
-	public Optional<User> findById(long id) {
-		return repository.findById(id);
-	}
-	
-	public boolean exist(long id) {
-		return repository.existsById(id);
-	}
 
 	public List<User> findAll() {
 		return repository.findAll();
@@ -36,29 +29,24 @@ public class UserService {
 		repository.deleteById(id);
 	}
 	
+	public Optional<User> findById(long id) {
+		return repository.findById(id);
+	}
+	
 	public Optional<User> findByName(String name){
 		return repository.findByName(name);
 	}
 
-	public List<User> findFollowersById(long id, Pageable pageable) {
+	public Page<User> findFollowersById(long id, Pageable pageable) {
 		return repository.findByFollowersId(id, pageable);
 	}
 
-	public List<User> findFollowingById(long id, Pageable pageable) {
+	public Page<User> findFollowingById(long id, Pageable pageable) {
 		return repository.findByFollowingId(id, pageable);
 	}
 		
 	public boolean existName(String name) {
-		List<User> users = findAll();
-		boolean equals = false;
-		int i = 0;
-		
-		while ((i < users.size()) && !equals) {
-			User user = users.get(i);
-			equals = user.getName().equals(name);
-			i++;
-		}
-		
-		return equals;		
+		Optional<User> user = findByName(name);
+		return user.isPresent();
 	}
 }

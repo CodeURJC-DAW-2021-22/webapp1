@@ -1,7 +1,6 @@
 package app.controller;
 
 import java.security.Principal;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,7 +72,7 @@ public class AjaxController {
 	}
 	
 	@GetMapping("/moreSearch/{name}/{page}")
-	public String getFilmsSeach(Model model, @PathVariable String name, @PathVariable int page) {
+	public String getFilmsSearch(Model model, @PathVariable String name, @PathVariable int page) {
 		// Before returning a page it confirms that there are more left
 		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
 			model.addAttribute("films", filmService.findLikeName(name, PageRequest.of(page,6)));
@@ -99,7 +98,7 @@ public class AjaxController {
 	@GetMapping("/moreComments/{id}/{page}")
 	public String getComments(Model model, @PathVariable long id, @PathVariable int page) {
 		// Before returning a page it confirms that there are more left
-		Optional<Film> film = filmService.findById(id);
+		Film film = filmService.findById(id).orElseThrow();
 		
 		if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
 			model.addAttribute("comments", commentService.findByFilm(film, PageRequest.of(page, 2)));
@@ -112,7 +111,7 @@ public class AjaxController {
 	@GetMapping("/moreCommentsProfile/{id}/{page}")
 	public String getCommentsProfile(Model model, @PathVariable long id, @PathVariable int page) {
 		// Before returning a page it confirms that there are more left
-		Optional<User> user = userService.findById(id);
+		User user = userService.findById(id).orElseThrow();
 		
 		if (page <= (int) Math.ceil(commentService.countByUser(user)/5)) {
 			model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(page, 5)));
@@ -125,7 +124,7 @@ public class AjaxController {
 	@GetMapping("/moreCommentsWatchProfile/{id}/{page}")
 	public String getCommentsWatchProfile(Model model, @PathVariable long id, @PathVariable int page) {
 		// Before returning a page it confirms that there are more left
-		Optional<User> user = userService.findById(id);
+		User user = userService.findById(id).orElseThrow();
 		
 		if (page <= (int) Math.ceil(commentService.countByUser(user)/5)) {
 			model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(page, 5)));

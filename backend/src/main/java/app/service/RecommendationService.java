@@ -14,16 +14,16 @@ public class RecommendationService {
 	@Autowired
 	private RecommendationRepository repository;
 	
-	public Page<Recommendation> findByUser(long id, Pageable pageable) {
-		return repository.findRecommendationsByUser(id, pageable);
-	}
-	
 	public void save(Recommendation recommendation) {
 		repository.save(recommendation);
 	}
 
 	public void delete(long id) {
 		repository.deleteById(id);
+	}
+	
+	public Page<Recommendation> findByUser(long id, Pageable pageable) {
+		return repository.findRecommendationsByUser(id, pageable);
 	}
 	
 	public int countByUser(long id) {

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,9 +60,9 @@ public class FilmRestController {
 		
 		if (film != null) {
 			Genre similar = film.getGenre();
-			List<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6));
+			Page<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6));
 			
-			film.setSimilar(similarList);
+			film.setSimilar(similarList.toList());
 			
 			return new ResponseEntity<>(film, HttpStatus.OK);
 			
@@ -80,9 +79,9 @@ public class FilmRestController {
 		
 		if ((film != null) && (user != null)) {
 			Genre similar = film.getGenre();
-			List<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6));
+			Page<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6));
 			
-			film.setSimilar(similarList);
+			film.setSimilar(similarList.toList());
 			
 			FilmUser filmUser = new FilmUser(film, user);
 			
@@ -103,9 +102,9 @@ public class FilmRestController {
 		
 		if ((film != null) && (user != null)) {
 			Genre similar = film.getGenre();
-			List<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6));
+			Page<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6));
 			
-			film.setSimilar(similarList);
+			film.setSimilar(similarList.toList());
 			
 			FilmUser filmUser = new FilmUser(film, user);
 

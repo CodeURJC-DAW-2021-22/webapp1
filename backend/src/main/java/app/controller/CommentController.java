@@ -57,6 +57,7 @@ public class CommentController {
 	public String addComent(Model model, @PathVariable long id, HttpServletRequest request) {
 		Film film = filmService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
 		if (!commentService.userHasCommented(user.getId(), film)){
 			model.addAttribute("film", film);
 			model.addAttribute("user", user);
@@ -166,11 +167,10 @@ public class CommentController {
 			if (request.isUserInRole("ADMIN")) {
 				return "redirect:/filmAdmin/" + film.getId();
 			} else {
-				model.addAttribute("buttonUnhidden", true);
 				return "redirect:/profile/" + user.getId();
 			}
 		} 
 		
-		return "redirect:/menuRegistered";
+		return "redirect:/error";
 	}
 }

@@ -153,10 +153,18 @@ public class FilmController {
 	@PostMapping("/editFilm/{id}")
 	public String editFilmProcess(Model model, Film newFilm, @PathVariable long id, MultipartFile imageField) throws IOException, SQLException {
 		Film film = filmService.findById(id).orElseThrow();
-		updateImage(newFilm, imageField);
-		film.getComments().forEach(c -> newFilm.addComment(c));
-		filmService.save(newFilm);
+		updateImage(film, imageField);
 		
+		film.setTitle(newFilm.getTitle());
+		film.setReleaseDate(newFilm.getReleaseDate());
+		film.setCast(newFilm.getCast());
+		film.setDuration(newFilm.getDuration());
+		film.setMinAge(newFilm.getMinAge());
+		film.setGenre(newFilm.getGenre());
+		film.setDirector(newFilm.getDirector());
+		film.setPlot(newFilm.getPlot());
+		
+		filmService.save(film);
 		return "redirect:/filmAdmin/" + film.getId();
 	}
 	
@@ -175,13 +183,6 @@ public class FilmController {
 		if (!imageField.isEmpty()) {
 			film.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			film.setImage(true);
-		} else {
-			Film dbFilm = filmService.findById(film.getId()).orElseThrow();
-			
-			if (dbFilm.getImage()) {
-				film.setImageFile(BlobProxy.generateProxy(dbFilm.getImageFile().getBinaryStream(), dbFilm.getImageFile().length()));
-				film.setImage(true);
-			}
 		}
 	}
 }
