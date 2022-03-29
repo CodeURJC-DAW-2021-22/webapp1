@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8e33d70d-9213-46be-b7c5-02b70e860827",
+		"_postman_id": "0a1e001f-4ab3-454f-b097-8e8fc78f280f",
 		"name": "AdviceMe",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -982,6 +982,44 @@
 								"api",
 								"index",
 								"adviceMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "menuResgistered",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/index/menuRegistered",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"index",
+								"menuRegistered"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "menuAdmin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/index/menuAdmin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"index",
+								"menuAdmin"
 							]
 						}
 					},
