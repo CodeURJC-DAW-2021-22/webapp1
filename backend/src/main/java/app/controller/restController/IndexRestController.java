@@ -1,6 +1,9 @@
 package app.controller.restController;
 
 import java.io.IOException;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Film;
 import app.model.Genre;
+import app.model.Recommendation;
 import app.model.User;
 import app.model.modelRest.FilmsList;
 import app.service.FilmService;
+import app.service.RecommendationService;
 import app.service.UserService;
 
 @RestController
 @RequestMapping("/api/index")
 public class IndexRestController {
-	
+
+	@Autowired
+	private RecommendationService recommendationService;
 	@Autowired
 	private FilmService filmService;
 	@Autowired
@@ -36,7 +43,7 @@ public class IndexRestController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@GetMapping("/adviceMe")
+	@GetMapping("/")
 	public ResponseEntity<FilmsList> getAdviceMe(){
 		Page<Film> trending = filmService.findAll(PageRequest.of(0,6));
 		Page<Film> action = filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6));
@@ -47,7 +54,7 @@ public class IndexRestController {
 		Page<Film> horror = filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6));
 		Page<Film> scifi = filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6));
 
-		FilmsList listOfFilms = new FilmsList(trending, action, adventure, animation,
+		FilmsList listOfFilms = new FilmsList(null, trending, action, adventure, animation,
 				comedy, drama, horror, scifi);
 		
 		return new ResponseEntity<>(listOfFilms, HttpStatus.OK);
@@ -65,6 +72,30 @@ public class IndexRestController {
 			return user; //login
 		} else {
 			return null; //takenUserName
+		}
+	}
+
+    @GetMapping("/menuRegistered")
+	public ResponseEntity<FilmsList> getMenuRegistered(HttpServletRequest request){
+        Optional<User> userPrincipal = userService.findByName(request.getUserPrincipal().getName());
+		if (userPrincipal.isPresent()){
+			User user = userPrincipal.get();
+			Page<Recommendation> recommendations = recommendationService.findByUser(user.getId(), PageRequest.of(0, 6));
+			Page<Film> trending = filmService.findAll(PageRequest.of(0,6));
+			Page<Film> action = filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6));
+			Page<Film> adventure = filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6));
+			Page<Film> animation = filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6));
+			Page<Film> comedy = filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6));
+			Page<Film> drama = filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6));
+			Page<Film> horror = filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6));
+			Page<Film> scifi = filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6));
+
+			FilmsList listOfFilms = new FilmsList(recommendations, trending, action, adventure, animation,
+					comedy, drama, horror, scifi);
+			
+			return new ResponseEntity<>(listOfFilms, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 	

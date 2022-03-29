@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -126,7 +127,7 @@ public class FilmRestController {
 
 	@GetMapping("/searchFilms")
 	public ResponseEntity<ListFilmUser> getSearchFilms(String query, HttpServletRequest request) {
-		List<Film> films = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
+		Page<Film> films = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
 		Principal principal = request.getUserPrincipal();
 		
 		ListFilmUser listFilmUser = new ListFilmUser();

@@ -3,9 +3,11 @@ package app.model.modelRest;
 import org.springframework.data.domain.Page;
 
 import app.model.Film;
+import app.model.Recommendation;
 
 public class FilmsList {
 	
+	private Page<Recommendation> recommendations;
 	private Page<Film> trending;
 	private Page<Film> action;
 	private Page<Film> adventure;
@@ -20,15 +22,21 @@ public class FilmsList {
 
 	}
 	
-	public FilmsList(Page<Film> trending2, Page<Film> action2, Page<Film> adventure2, Page<Film> animation2, Page<Film> comedy2, Page<Film> drama2, Page<Film> horror2, Page<Film> scifi2) {
-		this.setTrending(trending2);
-		this.setAction(action2);
-		this.setAdventure(adventure2);
-		this.setAnimation(animation2);
-		this.setComedy(comedy2);
-		this.setDrama(drama2);
-		this.setHorror(horror2);
-		this.setScifi(scifi2);
+	public FilmsList(Page<Recommendation> recommendations, Page<Film> trending, Page<Film> action, 
+	Page<Film> adventure, Page<Film> animation, Page<Film> comedy, Page<Film> drama, Page<Film> horror, Page<Film> scifi) {
+		this.setRecommendations(recommendations);
+		this.setTrending(trending);
+		this.setAction(action);
+		this.setAdventure(adventure);
+		this.setAnimation(animation);
+		this.setComedy(comedy);
+		this.setDrama(drama);
+		this.setHorror(horror);
+		this.setScifi(scifi);
+	}
+
+	public Page<Recommendation> getRecommendations() {
+		return recommendations;
 	}
 
 	public Page<Film> getTrending() {
@@ -63,6 +71,9 @@ public class FilmsList {
 		return scifi;
 	}
 
+	private void setRecommendations(Page<Recommendation> recommendations) {
+		this.recommendations = recommendations;
+	}
 
 	public void setTrending(Page<Film> trending) {
 		this.trending = trending;

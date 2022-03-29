@@ -46,7 +46,7 @@ public class FilmService {
 		return repository.findLikeName(name, Sort.by(Sort.Direction.DESC, "averageStars"));
 	}
 	
-	public List<Film> findLikeName(String name, Pageable pageable) {
+	public Page<Film> findLikeName(String name, Pageable pageable) {
 		Pageable page = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "averageStars"));
 		return repository.findLikeName(name, page);
 	}

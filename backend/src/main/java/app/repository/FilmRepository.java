@@ -31,7 +31,7 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 	public List<Film> findLikeName(String name, Sort sort);
 
 	@Query("SELECT f from Film f WHERE LOWER(f.title) LIKE %:name%")
-	public List<Film> findLikeName(String name, Pageable pageable);
+	public Page<Film> findLikeName(String name, Pageable pageable);
 
 	@Query("SELECT count(f) from Film f WHERE LOWER(f.title) LIKE %:name%")
 	public int countByName(String name);
