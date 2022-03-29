@@ -40,25 +40,7 @@ public class CommentRestController {
 	@Autowired
 	private CommentService commentService;
 
-	@GetMapping("/addCom/{id}")
-	public ResponseEntity<FilmUser> getAddComment(@PathVariable long id, HttpServletRequest request) {
-		Film film = filmService.findById(id).orElseThrow();
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		if (!commentService.userHasCommented(user.getId(), film)) {
-			FilmUser filmUser = new FilmUser(film, user);
-			return new ResponseEntity<>(filmUser, HttpStatus.OK);
-		} else {
-			Genre similar = film.getGenre();
-			List<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0, 6));
-
-			film.setSimilar(similarList);
-
-			FilmUser filmUser = new FilmUser(film, user);
-
-			return new ResponseEntity<>(filmUser, HttpStatus.OK);
-		}
-	}
-
+	
 	@PostMapping("/addCom/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Comment addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
@@ -71,18 +53,6 @@ public class CommentRestController {
 		filmService.save(film);
 		// createRecommendation(id, film, user);
 		return comment;
-	}
-
-	@GetMapping("/editCom/{id}")
-	public ResponseEntity<UserComment> getEditComment(@PathVariable long id, HttpServletRequest request) {
-		Comment comment = commentService.findById(id).orElseThrow();
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		User userCommented = comment.getUser();
-		if (userCommented.getId().equals(user.getId())) {
-			UserComment userComment = new UserComment(user, comment);
-			return new ResponseEntity<>(userComment, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@PutMapping("/editCom")

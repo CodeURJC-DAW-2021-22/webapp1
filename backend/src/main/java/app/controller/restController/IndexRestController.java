@@ -61,17 +61,16 @@ public class IndexRestController {
 	}
 	
 	@PostMapping("/registerProcess")
-	@ResponseStatus(HttpStatus.CREATED)
-	public User registerProcess(@RequestBody User user) throws IOException {
+	public ResponseEntity<User> registerProcess(@RequestBody User user) throws IOException {
 		if (!userService.existName(user.getName())) {
 			Resource image = new ClassPathResource("/static/Images/defaultImage.png");
 			user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
 			user.setImage(true);
 			user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
 			userService.save(user);
-			return user; //login
+			return new ResponseEntity<>(user, HttpStatus.CREATED);
 		} else {
-			return null; //takenUserName
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE); //takenUserName
 		}
 	}
 

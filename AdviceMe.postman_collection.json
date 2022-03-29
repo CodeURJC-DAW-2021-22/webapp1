@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "31f6fa39-770d-4dc8-bf44-1cea1241bb7e",
+		"_postman_id": "8e33d70d-9213-46be-b7c5-02b70e860827",
 		"name": "AdviceMe",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -958,6 +958,58 @@
 									"key": "id",
 									"value": null
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "indexRest",
+			"item": [
+				{
+					"name": "adviceMe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/index/adviceMe",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"index",
+								"adviceMe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerProcess",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Maria\",\r\n    \"email\": \"prueba@gmail.com\",\r\n\t\"encodedPassword\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/index/registerProcess",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"index",
+								"registerProcess"
 							]
 						}
 					},
