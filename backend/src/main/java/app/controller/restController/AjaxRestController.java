@@ -24,6 +24,7 @@ import app.service.UserService;
 @RestController
 @RequestMapping("/api/ajax")
 public class AjaxRestController {
+	
 	@Autowired
 	private FilmService filmService;
 	
@@ -60,7 +61,7 @@ public class AjaxRestController {
 	}
 
 	@GetMapping("/moreSearch")
-	public Page<Film> getFilmsSearch(String name,int page) {
+	public Page<Film> getFilmsSearch(String name, int page) {
 		// Before returning a page it confirms that there are more left
 		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
 			return filmService.findLikeName(name, PageRequest.of(page,6));

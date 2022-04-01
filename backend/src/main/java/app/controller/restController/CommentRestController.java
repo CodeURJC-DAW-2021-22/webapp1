@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import app.model.Comment;
 import app.model.Film;
 import app.model.User;
-import app.model.modelRest.FilmUser;
 import app.service.CommentService;
 import app.service.FilmService;
 import app.service.UserService;
@@ -51,7 +50,7 @@ public class CommentRestController {
 	}
 
 	@PutMapping("/editCom")
-	public ResponseEntity<FilmUser> editFilmProcess(Comment newComment, HttpServletRequest request){
+	public ResponseEntity<Comment> editComment(Comment newComment){
 		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
 		Film film = comment.getFilm();
 		User user = comment.getUser();
@@ -60,21 +59,23 @@ public class CommentRestController {
 		commentService.save(newComment);
 		film.calculateAverage();
 		filmService.save(film);
-		FilmUser filmUser = new FilmUser(film, user);
-		return new ResponseEntity<>(filmUser, HttpStatus.OK);
+		return new ResponseEntity<>(newComment, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<User> removeComment(@PathVariable long id, HttpServletRequest request) {
+	public ResponseEntity<Comment> removeComment(@PathVariable long id, HttpServletRequest request) {
 		Comment comment = commentService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		User userComment = comment.getUser();
+		
 		if (userComment.getId().equals(user.getId()) || request.isUserInRole("ADMIN")) {
 			Film film = comment.getFilm();
 			commentService.delete(id);
 			film.calculateAverage();
 			filmService.save(film);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }

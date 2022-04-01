@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -18,14 +19,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.model.User;
-import app.model.modelRest.ListFollowUser;
 import app.service.UserService;
 
 @RestController
@@ -52,6 +54,7 @@ public class UserRestController {
 	@GetMapping("/{id}/imageProfile")
 	public ResponseEntity<Object> downloadImageProfile(@PathVariable long id) throws SQLException {
 		Optional<User> user = userService.findById(id);
+		
 	    if (user.isPresent() && user.get().getImageFile() != null) {
 	        Resource file = new InputStreamResource(user.get().getImageFile().getBinaryStream());
 	        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").contentLength(user.get().getImageFile().length()).body(file);
@@ -60,39 +63,27 @@ public class UserRestController {
 	    }
 	}
 	
-	@GetMapping("/editProfile/{id}")
-	public ResponseEntity<User> editProfile(@PathVariable long id, HttpServletRequest request) {
-		User user = userService.findById(id).orElseThrow();
-		User userRequest = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		if (user.getId().equals(userRequest.getId())) {
-			return new ResponseEntity<>(user, HttpStatus.OK);
+	@PostMapping("/registerProcess")
+	public ResponseEntity<User> register(@RequestBody User user) throws IOException {
+		if (!userService.existName(user.getName())) {
+			Resource image = new ClassPathResource("/static/Images/defaultImage.png");
+			user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
+			user.setImage(true);
+			user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
+			userService.save(user);
+			return new ResponseEntity<>(user, HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); //takenUserName
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	@PutMapping("/editProfile")
 	public ResponseEntity<User> editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
 		User user = userService.findById(newUser.getId()).orElseThrow();
 		updateImageProfile(user, imageField);
-		String newName = newUser.getName();
-	    if (!user.getName().equals(newName) && userService.existName(newName)) {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	    }
-	
-	    user.setName(newName);
 	    user.setEmail(newUser.getEmail());
 	    userService.save(user);
-	    return new ResponseEntity<>(newUser, HttpStatus.OK);
-	}
-	
-	@GetMapping("/editPassword/{id}")
-	public ResponseEntity<User> editPassword(Model model, @PathVariable long id, HttpServletRequest request) {
-		User user = userService.findById(id).orElseThrow();
-		User userRequest = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		if (user.getId().equals(userRequest.getId())) {
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@PutMapping("/editPassword")
@@ -109,37 +100,27 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/followers/{id}")
-	public ResponseEntity<ListFollowUser> followers(Model model, @PathVariable long id, HttpServletRequest request) {
+	public List<User> followers(Model model, @PathVariable long id, HttpServletRequest request) {
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		List<User> followers = user.getFollowers();
-		ListFollowUser listFollowersUser = new ListFollowUser();
-		listFollowersUser.setUser(user);
-		listFollowersUser.setFollowers(followers);
-		
-		return new ResponseEntity<>(listFollowersUser, HttpStatus.OK);
+		return followers;
 	}
 	
 	@GetMapping("/following/{id}")
-	public ResponseEntity<ListFollowUser> following(Model model, @PathVariable long id, HttpServletRequest request) {		
+	public List<User> following(Model model, @PathVariable long id, HttpServletRequest request) {		
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		List<User> following = user.getFollowing();
-		ListFollowUser listFollowingUser = new ListFollowUser();
-		listFollowingUser.setUser(user);
-		listFollowingUser.setFollowers(following);
-		
-		return new ResponseEntity<>(listFollowingUser, HttpStatus.OK);
+		return following;
 	}
 	
 	@GetMapping("/watchProfile/{id}")
 	public ResponseEntity<User> watchProfile(Model model, @PathVariable long id, HttpServletRequest request) {
-		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		User following = userService.findById(id).orElseThrow();
+		Optional<User> user = userService.findById(id);
 		
-		if (!follower.getId().equals(following.getId())) {
-			
-			return new ResponseEntity<>(following, HttpStatus.OK);
+		if (user.isPresent()) {
+			return new ResponseEntity<>(user.get(), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(follower, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -168,13 +149,6 @@ public class UserRestController {
 		if (!imageField.isEmpty()) {
 			user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
 			user.setImage(true);
-		} else {
-			User dbUser = userService.findById(user.getId()).orElseThrow();
-			
-			if (dbUser.getImage()) {
-				user.setImageFile(BlobProxy.generateProxy(dbUser.getImageFile().getBinaryStream(), dbUser.getImageFile().length()));
-				user.setImage(true);
-			}
 		}
 	}
 }
