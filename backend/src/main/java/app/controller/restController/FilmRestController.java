@@ -69,36 +69,57 @@ public class FilmRestController {
 		}
 	}	
 
-	@GetMapping("/searchFilms")
+	@GetMapping("/")
 	public List<Film> searchFilms(String query) {
 		Page<Film> films = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
 		return films.toList(); 
 	}
 
-	@PostMapping("/addFilm")
+	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Film addFilm(@RequestBody Film film) {					
 		filmService.save(film);		
 		return film;
 	}
 	
-	@PostMapping("/update/{id}/image")
+	@PostMapping("/{id}/image")
 	public ResponseEntity<Object> uploadImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException{
-		Film film = filmService.findById(id).orElseThrow();
-		URI location = fromCurrentRequest().build().toUri();
+		Optional<Film> optionalFilm = filmService.findById(id);
 		
-		film.setImage(true);
-		film.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
-		
-		filmService.save(film);
-		return ResponseEntity.created(location).build();
+		if (optionalFilm.isPresent()) {
+			Film film = optionalFilm.get();
+			URI location = fromCurrentRequest().build().toUri();
+			
+			film.setImage(true);
+			film.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+			
+			filmService.save(film);
+			return ResponseEntity.created(location).build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
-	@PutMapping("/editFilm/{id}")
-	public ResponseEntity<Film> editFilm(@RequestBody Film newFilm, @PathVariable long id) throws IOException, SQLException {
-	    Film film = filmService.findById(id).orElseThrow();
+	@PutMapping("/{id}/image")
+	public ResponseEntity<Object> editImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException{
+		Optional<Film> optionalFilm = filmService.findById(id);
+		
+		if (optionalFilm.isPresent()) {
+			Film film = optionalFilm.get();
+			film.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+			filmService.save(film);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Film> editFilm(@RequestBody Film newFilm, @PathVariable long id) {
+		Optional<Film> optionalFilm = filmService.findById(id);
 
-	    if (film != null) {
+	    if (optionalFilm.isPresent()) {
+	    	Film film = optionalFilm.get();
 	    	film.setTitle(newFilm.getTitle());
 			film.setReleaseDate(newFilm.getReleaseDate());
 			film.setCast(newFilm.getCast());
@@ -109,7 +130,7 @@ public class FilmRestController {
 			film.setPlot(newFilm.getPlot());
 			
 			filmService.save(film);
-	        return new ResponseEntity<>(newFilm, HttpStatus.OK);
+	        return new ResponseEntity<>(film, HttpStatus.OK);
 	    } else {
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }

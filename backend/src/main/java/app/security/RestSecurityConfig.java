@@ -46,22 +46,17 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**");
 		
 		// URLs that need authentication to access to it
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/comments/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/comments/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/comments/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreRecommendations").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/comments/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreCommentsProfile/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreFollowers/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/ajax/moreFollowing/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/regis/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/index/menuRegistered").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/admin/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/addFilm").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/films/editFilm/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/films/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/films/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/films/**").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/films/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/index/menuAdmin").hasRole("ADMIN");
 		
 		// Other URLs can be accessed without authentication
 		http.authorizeRequests().anyRequest().permitAll();

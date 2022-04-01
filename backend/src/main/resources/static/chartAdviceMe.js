@@ -13,7 +13,7 @@ var scFiction;
 // Draw the chart and set the chart values
 function drawChart() {
   $.ajax({
-	url: '/chart'
+	url: '/api/chart/'
   }).done(function(counters) {
 	action = counters[0];
 	adventure = counters[1];

@@ -1,11 +1,11 @@
 package app.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Film;
@@ -13,13 +13,14 @@ import app.model.Genre;
 import app.service.FilmService;
 
 @RestController
+@RequestMapping("/api/chart")
 public class ChartController {
 	
 	@Autowired
 	private FilmService filmService;
 	
-	@GetMapping("/chart")
-	public Collection<Integer> calculateChart() {
+	@GetMapping("/")
+	public List<Integer> calculateChart() {
 		List<Integer> counters = new ArrayList<>();
 		List<Film> filmsAction = filmService.findByGenre(Genre.ACTION);
 		List<Film> filmsAdventure = filmService.findByGenre(Genre.ADVENTURE);

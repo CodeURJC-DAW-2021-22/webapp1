@@ -16,7 +16,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,16 +41,27 @@ public class UserRestController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getProfile(@PathVariable long id) {
-		User user = userService.findById(id).orElseThrow();
+		Optional<User> user = userService.findById(id);
 		
-		if (user != null) {
-			return new ResponseEntity<>(user, HttpStatus.OK);
+		if (user.isPresent()) {
+			return new ResponseEntity<>(user.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	@GetMapping("/{id}/imageProfile")
+	@GetMapping("/me")
+	public ResponseEntity<User> me(HttpServletRequest request) {
+		Optional<User> user = userService.findByName(request.getUserPrincipal().getName());
+		
+		if (user.isPresent()) {
+			return new ResponseEntity<>(user.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/{id}/image")
 	public ResponseEntity<Object> downloadImageProfile(@PathVariable long id) throws SQLException {
 		Optional<User> user = userService.findById(id);
 		
@@ -63,7 +73,7 @@ public class UserRestController {
 	    }
 	}
 	
-	@PostMapping("/registerProcess")
+	@PostMapping("/")
 	public ResponseEntity<User> register(@RequestBody User user) throws IOException {
 		if (!userService.existName(user.getName())) {
 			Resource image = new ClassPathResource("/static/Images/defaultImage.png");
@@ -77,59 +87,83 @@ public class UserRestController {
 		}
 	}
 	
-	@PutMapping("/editProfile")
-	public ResponseEntity<User> editProfileProcess(Model model, User newUser, MultipartFile imageField) throws IOException, SQLException {
-		User user = userService.findById(newUser.getId()).orElseThrow();
-		updateImageProfile(user, imageField);
-	    user.setEmail(newUser.getEmail());
-	    userService.save(user);
-	    return new ResponseEntity<>(user, HttpStatus.OK);
-	}
-	
-	@PutMapping("/editPassword")
-	public ResponseEntity<User> editPasswordProcess(Model model, @RequestParam long id, @RequestParam String oldPassword, @RequestParam String newPassword) throws IOException, SQLException {
-		User user = userService.findById(id).orElseThrow(); 
+	@PutMapping("/{id}")
+	public ResponseEntity<User> editProfile(@RequestBody User newUser) throws IOException, SQLException {
+		Optional<User> optionalUser = userService.findById(newUser.getId());
 		
-		if (passwordEncoder.matches(oldPassword, user.getEncodedPassword())){
-			user.setEncodedPassword(passwordEncoder.encode(newPassword));
-			userService.save(user);
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		}
-		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-	
-	@GetMapping("/followers/{id}")
-	public List<User> followers(Model model, @PathVariable long id, HttpServletRequest request) {
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		List<User> followers = user.getFollowers();
-		return followers;
-	}
-	
-	@GetMapping("/following/{id}")
-	public List<User> following(Model model, @PathVariable long id, HttpServletRequest request) {		
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		List<User> following = user.getFollowing();
-		return following;
-	}
-	
-	@GetMapping("/watchProfile/{id}")
-	public ResponseEntity<User> watchProfile(Model model, @PathVariable long id, HttpServletRequest request) {
-		Optional<User> user = userService.findById(id);
-		
-		if (user.isPresent()) {
-			return new ResponseEntity<>(user.get(), HttpStatus.OK);
+		if (optionalUser.isPresent()) {
+			User user = optionalUser.get();
+		    user.setEmail(newUser.getEmail());
+		    userService.save(user);
+		    return new ResponseEntity<>(user, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	@GetMapping("/followUnfollow/{id}")
-	public ResponseEntity<User> followUnfollow(Model model, @PathVariable long id, HttpServletRequest request) {
+	@PutMapping("/{id}/image")
+	public ResponseEntity<Object> editImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException{
+		Optional<User> optionalUser = userService.findById(id);
+		
+		if (optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			user.setImageFile(BlobProxy.generateProxy(imageFile.getInputStream(), imageFile.getSize()));
+			userService.save(user);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}	
+	}
+	
+	@PutMapping("/{id}/password")
+	public ResponseEntity<User> editPassword(@PathVariable long id, @RequestParam String oldPassword, @RequestParam String newPassword) throws IOException, SQLException {
+		Optional<User> optionalUser = userService.findById(id); 
+		
+		if (optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			
+			if (passwordEncoder.matches(oldPassword, user.getEncodedPassword())){
+				user.setEncodedPassword(passwordEncoder.encode(newPassword));
+				userService.save(user);
+				return new ResponseEntity<>(user, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/{id}/followers}")
+	public ResponseEntity<List<User>> followers(@PathVariable long id, HttpServletRequest request) {
+		Optional<User> user = userService.findById(id);
+		
+		if (user.isPresent()) {
+			List<User> followers = user.get().getFollowers();
+			return new ResponseEntity<>(followers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/{id}/following")
+	public ResponseEntity<List<User>> following(@PathVariable long id, HttpServletRequest request) {		
+		Optional<User> user = userService.findById(id);
+		
+		if (user.isPresent()) {
+			List<User> following = user.get().getFollowing();
+			return new ResponseEntity<>(following, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/{id}/followed")
+	public ResponseEntity<User> followUnfollow(@PathVariable long id, HttpServletRequest request) {
 		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 		User following = userService.findById(id).orElseThrow();
 		
-		if(!follower.getFollowing().contains(following)) {
+		if (!follower.getFollowing().contains(following)) {
 			follower.addFollowing(following);
 		} else {
 			follower.deleteFollowing(following);
@@ -143,12 +177,5 @@ public class UserRestController {
 		
 		userService.save(follower);
 		return new ResponseEntity<>(following, HttpStatus.OK);
-	}
-	
-	private void updateImageProfile(User user, MultipartFile imageField) throws IOException, SQLException {
-		if (!imageField.isEmpty()) {
-			user.setImageFile(BlobProxy.generateProxy(imageField.getInputStream(), imageField.getSize()));
-			user.setImage(true);
-		}
 	}
 }

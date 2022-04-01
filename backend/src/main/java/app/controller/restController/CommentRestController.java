@@ -1,5 +1,7 @@
 package app.controller.restController;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,49 +35,65 @@ public class CommentRestController {
 
 	@Autowired
 	private CommentService commentService;
-
 	
-	@PostMapping("/addCom/{id}")
+	@PostMapping("/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Comment addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
 		Film film = filmService.findById(id).orElseThrow();
 		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
 		comment.setFilm(film);
 		comment.setUser(user);
 		commentService.save(comment);
+		
 		film.calculateAverage();
 		filmService.save(film);
 		// createRecommendation(id, film, user);
 		return comment;
 	}
 
-	@PutMapping("/editCom")
-	public ResponseEntity<Comment> editComment(Comment newComment){
-		Comment comment = commentService.findById(newComment.getId()).orElseThrow();
-		Film film = comment.getFilm();
-		User user = comment.getUser();
-		newComment.setUser(user);
-		newComment.setFilm(film);
-		commentService.save(newComment);
-		film.calculateAverage();
-		filmService.save(film);
-		return new ResponseEntity<>(newComment, HttpStatus.OK);
+	@PutMapping("/{id}")
+	public ResponseEntity<Comment> editComment(@PathVariable long id, @RequestBody Comment newComment) {
+		Optional<Comment> optionalComment = commentService.findById(id);
+		
+		if (optionalComment.isPresent()) {
+			Comment comment = optionalComment.get();
+			Film film = comment.getFilm();
+			User user = comment.getUser();
+			
+			newComment.setId(id);
+			newComment.setUser(user);
+			newComment.setFilm(film);
+			commentService.save(newComment);
+			
+			film.calculateAverage();
+			filmService.save(film);
+			return new ResponseEntity<>(newComment, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Comment> removeComment(@PathVariable long id, HttpServletRequest request) {
-		Comment comment = commentService.findById(id).orElseThrow();
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		User userComment = comment.getUser();
+		Optional<Comment> optionalComment = commentService.findById(id);
 		
-		if (userComment.getId().equals(user.getId()) || request.isUserInRole("ADMIN")) {
-			Film film = comment.getFilm();
-			commentService.delete(id);
-			film.calculateAverage();
-			filmService.save(film);
-			return new ResponseEntity<>(HttpStatus.OK);
+		if (optionalComment.isPresent()) {
+			Comment comment = optionalComment.get();
+			User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+			User userComment = comment.getUser();
+			
+			if (userComment.getId().equals(user.getId()) || request.isUserInRole("ADMIN")) {
+				Film film = comment.getFilm();
+				commentService.delete(id);
+				film.calculateAverage();
+				filmService.save(film);
+				return new ResponseEntity<>(HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }

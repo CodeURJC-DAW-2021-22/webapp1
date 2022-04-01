@@ -152,7 +152,7 @@ public class AjaxController {
 		// Before returning a page it confirms that there are more left
 		User user = userService.findById(id).orElseThrow();
 		
-		if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
+		if (page <= (int) Math.ceil(user.getFollowingCount()/5)) {
 			model.addAttribute("following", userService.findFollowersById(id, PageRequest.of(page, 5)));
 			return "followingMore";
 		}

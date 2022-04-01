@@ -56,8 +56,7 @@ public class AjaxRestController {
 			return recommendationService.findByUser(user.getId(), PageRequest.of(page,6));
 		} else {
 			return null;
-		}
-		
+		}		
 	}
 
 	@GetMapping("/moreSearch")
@@ -67,8 +66,7 @@ public class AjaxRestController {
 			return filmService.findLikeName(name, PageRequest.of(page,6));
 		} else {
 			return null;			
-		}
-		
+		}		
 	}
 	
 	@GetMapping("/moreGenre")
@@ -81,7 +79,6 @@ public class AjaxRestController {
 		} else {
 			return null;	
 		}
-
 	}
 
 	@GetMapping("/moreComments/{id}")
@@ -93,26 +90,11 @@ public class AjaxRestController {
 			return commentService.findByFilm(film, PageRequest.of(page, 2));
 		} else {
 			return null;
-		}
-		
+		}		
 	}
 	
 	@GetMapping("/moreCommentsProfile/{id}")
 	public Page<Comment> getCommentsProfile(Model model, @PathVariable long id, int page) {
-	    // Before returning a page it confirms that there are more left
-	    User user = userService.findById(id).orElseThrow();
-
-	    if (page <= (int) Math.ceil(commentService.countByUser(user)/6)) {
-	        model.addAttribute("comments", commentService.findByUser(user, PageRequest.of(page, 5)));
-	        return commentService.findByUser(user, PageRequest.of(page, 5));
-	    } else {
-	        return null;            
-	    }
-
-	}
-	
-	@GetMapping("/moreCommentsWatchProfile/{id}")
-	public Page<Comment> getCommentsWatchProfile(Model model, @PathVariable long id, int page) {
 	    // Before returning a page it confirms that there are more left
 	    User user = userService.findById(id).orElseThrow();
 
@@ -121,7 +103,6 @@ public class AjaxRestController {
 	    } else {
 	        return null;            
 	    }
-
 	}
 
 	@GetMapping("/moreFollowers/{id}")
@@ -131,9 +112,9 @@ public class AjaxRestController {
 
 	    if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
 	        return userService.findFollowingById(id, PageRequest.of(page, 5));
+	    } else {
+	        return null;            
 	    }
-
-	    return null;
 	}
 	
 	@GetMapping("/moreFollowing/{id}")
@@ -141,11 +122,10 @@ public class AjaxRestController {
 	    // Before returning a page it confirms that there are more left
 	    User user = userService.findById(id).orElseThrow();
 
-	    if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
+	    if (page <= (int) Math.ceil(user.getFollowingCount()/5)) {
 	        return  userService.findFollowersById(id, PageRequest.of(page, 5));
 	    } else {
 	        return null;    
 	    }
-
 	}
 }
