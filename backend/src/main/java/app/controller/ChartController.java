@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.model.Film;
 import app.model.Genre;
 import app.service.FilmService;
 
@@ -22,32 +21,15 @@ public class ChartController {
 	@GetMapping("/")
 	public List<Integer> calculateChart() {
 		List<Integer> counters = new ArrayList<>();
-		List<Film> filmsAction = filmService.findByGenre(Genre.ACTION);
-		List<Film> filmsAdventure = filmService.findByGenre(Genre.ADVENTURE);
-		List<Film> filmsAnimation = filmService.findByGenre(Genre.ANIMATION);
-		List<Film> filmsComedy = filmService.findByGenre(Genre.COMEDY);
-		List<Film> filmsDrama = filmService.findByGenre(Genre.DRAMA);
-		List<Film> filmsHorror = filmService.findByGenre(Genre.HORROR);
-		List<Film> filmsScFiction = filmService.findByGenre(Genre.SCIENCE_FICTION);
 		
-		counters.add(getNumberComments(filmsAction));
-		counters.add(getNumberComments(filmsAdventure));
-		counters.add(getNumberComments(filmsAnimation));
-		counters.add(getNumberComments(filmsComedy));
-		counters.add(getNumberComments(filmsDrama));
-		counters.add(getNumberComments(filmsHorror));
-		counters.add(getNumberComments(filmsScFiction));
+		counters.add(filmService.countCommentsByGenre(Genre.ACTION));
+		counters.add(filmService.countCommentsByGenre(Genre.ADVENTURE));
+		counters.add(filmService.countCommentsByGenre(Genre.ANIMATION));
+		counters.add(filmService.countCommentsByGenre(Genre.COMEDY));
+		counters.add(filmService.countCommentsByGenre(Genre.DRAMA));
+		counters.add(filmService.countCommentsByGenre(Genre.HORROR));
+		counters.add(filmService.countCommentsByGenre(Genre.SCIENCE_FICTION));
 		
 		return counters;
-	}
-
-	private int getNumberComments(List<Film> films) {
-		int counter = 0;
-		
-		for (Film film : films) {
-			counter += film.getComments().size();
-		}
-		
-		return counter;
 	}
 }

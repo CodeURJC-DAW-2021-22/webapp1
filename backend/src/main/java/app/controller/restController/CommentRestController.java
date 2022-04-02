@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Comment;
 import app.model.Film;
+import app.model.Recommendation;
 import app.model.User;
 import app.service.CommentService;
 import app.service.FilmService;
+import app.service.RecommendationService;
+import app.service.SendMail;
 import app.service.UserService;
 
 @RestController
@@ -36,6 +39,9 @@ public class CommentRestController {
 	@Autowired
 	private CommentService commentService;
 	
+	@Autowired
+	private RecommendationService recommendationService;
+	
 	@PostMapping("/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Comment addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
@@ -48,7 +54,18 @@ public class CommentRestController {
 		
 		film.calculateAverage();
 		filmService.save(film);
-		// createRecommendation(id, film, user);
+		
+		Film recommended = filmService.findFilmForRecommendation(id, film, user);
+		
+		if (recommended != null) {
+			Recommendation recommendation = new Recommendation(recommended);
+			recommendationService.save(recommendation);
+			user.addRecommedation(recommendation);
+			userService.save(user);
+		
+			SendMail.sendMail(film, user);
+		}
+		
 		return comment;
 	}
 

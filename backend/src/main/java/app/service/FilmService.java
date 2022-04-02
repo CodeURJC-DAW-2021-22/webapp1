@@ -1,5 +1,6 @@
 package app.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import app.model.Film;
 import app.model.Genre;
+import app.model.Recommendation;
+import app.model.User;
 import app.repository.FilmRepository;
 
 @Service
@@ -74,5 +77,49 @@ public class FilmService {
 
 	public int countByName(String name) {
 		return repository.countByName(name);
+	}
+	
+	public int countCommentsByGenre(Genre genre) {
+		List<Film> films = findByGenre(genre);
+		int counter = 0;
+		
+		for (Film film : films) {
+			counter += film.getComments().size();
+		}
+		
+		return counter;
+	}
+	
+	public Film findFilmForRecommendation(long id, Film film, User user) {
+		List<Film> films = findByGenreDistinct(film.getGenre(), id);
+		List<Recommendation> recommendations = user.getRecommendations();
+		HashSet<Long> filmsRecommended = new HashSet<>();
+		Film recommended = null;
+		
+		for (int i = 0; i < recommendations.size(); i++) {
+			filmsRecommended.add(recommendations.get(i).getFilm().getId());
+		}
+		
+		if (!films.isEmpty()) {
+			if (!recommendations.isEmpty()) {
+				boolean equal = true;
+				int i = 0;
+
+				while ((i < films.size()) && equal) {
+					Film f = films.get(i);
+					
+					if (!filmsRecommended.contains(f.getId())) {
+						recommended = f;
+						equal = false;
+					}
+
+					i++;
+				}
+			} else {
+				recommended = films.get(0);
+			}
+		}
+		
+		return recommended;
 	}
 }

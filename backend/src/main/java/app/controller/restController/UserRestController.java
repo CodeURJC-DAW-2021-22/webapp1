@@ -102,7 +102,7 @@ public class UserRestController {
 	}
 	
 	@PutMapping("/{id}/image")
-	public ResponseEntity<Object> editImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException{
+	public ResponseEntity<Object> editImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
 		Optional<User> optionalUser = userService.findById(id);
 		
 		if (optionalUser.isPresent()) {
