@@ -88,8 +88,8 @@ public class UserRestController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> editProfile(@RequestBody User newUser) throws IOException, SQLException {
-		Optional<User> optionalUser = userService.findById(newUser.getId());
+	public ResponseEntity<User> editProfile(@PathVariable long id, @RequestBody User newUser) throws IOException, SQLException {
+		Optional<User> optionalUser = userService.findById(id);
 		
 		if (optionalUser.isPresent()) {
 			User user = optionalUser.get();
@@ -134,7 +134,7 @@ public class UserRestController {
 		}
 	}
 	
-	@GetMapping("/{id}/followers}")
+	@GetMapping("/{id}/followers")
 	public ResponseEntity<List<User>> followers(@PathVariable long id, HttpServletRequest request) {
 		Optional<User> user = userService.findById(id);
 		

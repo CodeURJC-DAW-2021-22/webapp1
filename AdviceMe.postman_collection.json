@@ -1,79 +1,74 @@
 {
 	"info": {
-		"_postman_id": "0a1e001f-4ab3-454f-b097-8e8fc78f280f",
+		"_postman_id": "0151e140-6b6b-4c07-abf3-a606eccf7aba",
 		"name": "AdviceMe",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
+			"name": "indexRest",
+			"item": [
+				{
+					"name": "getMenu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/index/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"index",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chartRest",
+			"item": [
+				{
+					"name": "calculateChart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/chart/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"chart",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "filmRest",
 			"item": [
 				{
-					"name": "getFilmUnregistered",
+					"name": "getFilm",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/films/unregis/:id",
+							"raw": "{{url}}/api/films/:id",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
-								"unregis",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getFilmRegistered",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/films/regis/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"films",
-								"regis",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getFilmAdmin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/films/admin/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"films",
-								"admin",
 								":id"
 							],
 							"variable": [
@@ -136,39 +131,20 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{url}}/api/films/searchFilms?query=",
+							"raw": "{{url}}/api/films/?query=",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
-								"searchFilms"
+								""
 							],
 							"query": [
 								{
 									"key": "query",
 									"value": ""
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "addFilm",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/films/addFilm",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"films",
-								"addFilm"
 							]
 						}
 					},
@@ -189,39 +165,85 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/films/addFilm",
+							"raw": "{{url}}/api/films/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
-								"addFilm"
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "editFilm",
+					"name": "uploadImage",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageFile",
+									"type": "file",
+									"src": "/C:/Users/Usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film14.jpg"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{url}}/api/films/editFilm/:id",
+							"raw": "{{url}}/api/films/:id/image",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
-								"editFilm",
-								":id"
+								":id",
+								"image"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editImage",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "imageFile",
+									"type": "file",
+									"src": "/C:/Users/Usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film12.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/films/:id/image",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								":id",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -243,20 +265,19 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/films/editFilm/:id",
+							"raw": "{{url}}/api/films/:id",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
-								"editFilm",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -264,7 +285,7 @@
 					"response": []
 				},
 				{
-					"name": "deleteFilm",
+					"name": "removeFilm",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -281,7 +302,37 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "481"
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userRest",
+			"item": [
+				{
+					"name": "getProfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
 								}
 							]
 						}
@@ -289,9 +340,116 @@
 					"response": []
 				},
 				{
-					"name": "updateImage",
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "downloadImageProfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id/image",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
 					"request": {
 						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Maria\",\r\n    \"email\": \"prueba@gmail.com\",\r\n\t\"encodedPassword\": \"password\",\r\n    \"roles\": \"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editProfile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"prueba2@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2128"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editImage",
+					"request": {
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "formdata",
@@ -299,21 +457,237 @@
 								{
 									"key": "imageFile",
 									"type": "file",
-									"src": "/C:/Users/Vanesa/Pictures/Film Picture.jpg"
+									"src": "/D:/Mis Archivos/Móvil/Fotos/Fotos de Perfil/IMG-20210502-WA0012.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/films/update/:id/image",
+							"raw": "{{url}}/api/users/:id/image",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"films",
-								"update",
+								"users",
 								":id",
 								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editPassword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "oldPassword",
+									"value": "pass",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "pass2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/users/:id/password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"password"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFollowers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id/followers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"followers"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2128"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFollowing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id/following",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"following"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "followUnfollow",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id/followed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"followed"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "commentRest",
+			"item": [
+				{
+					"name": "addComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\": \"This is really nice!\",\r\n    \"stars\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/comments/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editComment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\": \"This is really nice! I recommend it!\",\r\n    \"stars\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/comments/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeComment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/comments/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								":id"
 							],
 							"variable": [
 								{
@@ -439,7 +813,7 @@
 					"response": []
 				},
 				{
-					"name": "modeComments",
+					"name": "moreComments",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -471,7 +845,7 @@
 					"response": []
 				},
 				{
-					"name": "modeCommentsProfile",
+					"name": "moreCommentsProfile",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -484,38 +858,6 @@
 								"api",
 								"ajax",
 								"moreCommentsProfile",
-								":id"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": ""
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "modeCommentsWatchProfile",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreCommentsWatchProfile/:id?page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreCommentsWatchProfile",
 								":id"
 							],
 							"query": [
@@ -591,463 +933,8 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "userRest",
-			"item": [
-				{
-					"name": "getProfile",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "downloadImageProfile",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/:id/imageProfile",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":id",
-								"imageProfile"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getEditProfile",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "/api/users/editProfile/:id",
-							"path": [
-								"api",
-								"users",
-								"editProfile",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getEditPassword",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "/api/users/editPassword/:id",
-							"path": [
-								"api",
-								"users",
-								"editPassword",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "putEditProfile",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "/api/users/editProfile",
-							"path": [
-								"api",
-								"users",
-								"editProfile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "putEditPassword",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "/api/users/editPassword",
-							"path": [
-								"api",
-								"users",
-								"editPassword"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getFollowers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/followers/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"followers",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getFollowing",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/following/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"following",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getWatchProfile",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/watchProfile/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"watchProfile",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getFollowUnfollow",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/followUnfollow/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								"followUnfollow",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "commentRest",
-			"item": [
-				{
-					"name": "getAddComment",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/comments/addCom/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"comments",
-								"addCom",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "postAddComment",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/comments/addCom/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"comments",
-								"addCom",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getEditComment",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/comments/editCom/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"comments",
-								"editCom",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "putEditComment",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/comments/editCom",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"comments",
-								"editCom"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteComment",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/comments/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"comments",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "indexRest",
-			"item": [
-				{
-					"name": "adviceMe",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/index/adviceMe",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"index",
-								"adviceMe"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "menuResgistered",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/index/menuRegistered",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"index",
-								"menuRegistered"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "menuAdmin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/index/menuAdmin",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"index",
-								"menuAdmin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "registerProcess",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"Maria\",\r\n    \"email\": \"prueba@gmail.com\",\r\n\t\"encodedPassword\": \"password\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/index/registerProcess",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"index",
-								"registerProcess"
 							]
 						}
 					},
