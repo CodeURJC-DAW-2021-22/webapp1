@@ -15,6 +15,8 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Film {
 	
@@ -36,9 +38,11 @@ public class Film {
 	private String plot;
 	
 	@OneToMany (mappedBy="film", cascade=CascadeType.ALL, orphanRemoval=true)
+	@JsonIgnore
 	private List<Comment> comments = new ArrayList<>();
 
 	@Lob
+	@JsonIgnore
 	private Blob imageFile;
 	
 	private boolean image;

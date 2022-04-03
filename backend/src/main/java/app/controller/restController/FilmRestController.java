@@ -29,8 +29,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import app.model.Comment;
 import app.model.Film;
 import app.model.Genre;
+import app.model.modelRest.FilmComments;
+import app.service.CommentService;
 import app.service.FilmService;
 
 @RestController
@@ -40,8 +43,11 @@ public class FilmRestController {
 	@Autowired
 	private FilmService filmService;
 	
+	@Autowired
+	private CommentService commentService;
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<Film> getFilm(@PathVariable long id) {
+	public ResponseEntity<FilmComments> getFilm(@PathVariable long id) {
 		Optional<Film> optionalFilm = filmService.findById(id);
 		
 		if (optionalFilm.isPresent()) {
@@ -51,7 +57,9 @@ public class FilmRestController {
 			Page<Film> similarList = filmService.findByGenreDistinct(similar, film.getId(), PageRequest.of(0,6));
 			
 			film.setSimilar(similarList.toList());
-			return new ResponseEntity<>(film, HttpStatus.OK);
+			Page<Comment> comments = commentService.findByFilm(film, PageRequest.of(0,2));
+			FilmComments filmComments = new FilmComments(film, comments);
+			return new ResponseEntity<>(filmComments, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -110,7 +118,7 @@ public class FilmRestController {
 			filmService.save(film);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
-			return ResponseEntity.notFound().build();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 	

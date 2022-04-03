@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Comment {
 	
@@ -19,11 +17,9 @@ public class Comment {
 	private String note;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Film film;
 	
 	@ManyToOne
-	@JsonIgnore
 	private User user;
 	
 	public Comment() {

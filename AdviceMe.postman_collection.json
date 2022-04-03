@@ -257,7 +257,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"title\": \"Los Mitchell contra las maquinitas\",\r\n\t\"releaseDate\": \"2021-04-30\",\r\n\t\"minAge\": \"A (All people)\",\r\n\t\"genre\": \"COMEDY\",\r\n\t\"duration\": 114,\r\n\t\"cast\": \"Abbi Jacobson, Danny McBride, Maya Rudolph, Mike Rianda, Eric Andre, Olivia Colman\",\r\n\t\"director\": \"Mike Rianda\",\r\n\t\"plot\": \"The Mitchell family's road trip, escorting one of their children to his first day of college, is interrupted by a technological insurrection that threatens humanity.\"\r\n}",
+							"raw": "{\r\n\t\"title\": \"Los Mitchell contra las máquinas\",\r\n\t\"releaseDate\": \"2021-04-30\",\r\n\t\"minAge\": \"A (All people)\",\r\n\t\"genre\": \"COMEDY\",\r\n\t\"duration\": 114,\r\n\t\"cast\": \"Abbi Jacobson, Danny McBride, Maya Rudolph, Mike Rianda, Eric Andre, Olivia Colman\",\r\n\t\"director\": \"Mike Rianda\",\r\n\t\"plot\": \"The Mitchell family's road trip, escorting one of their children to his first day of college, is interrupted by a technological insurrection that threatens humanity.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -391,7 +391,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"Maria\",\r\n    \"email\": \"prueba@gmail.com\",\r\n\t\"encodedPassword\": \"password\",\r\n    \"roles\": \"USER\"\r\n}",
+							"raw": "{\r\n\t\"name\": \"JuanCarlos\",\r\n    \"email\": \"juancar_more2@hotmail.com\",\r\n\t\"encodedPassword\": \"pass\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -415,16 +415,17 @@
 				{
 					"name": "editProfile",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"prueba2@gmail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "newEmail",
+									"value": "juancar_more2@hotmail.com",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{url}}/api/users/:id",
@@ -439,7 +440,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2128"
+									"value": ""
 								}
 							]
 						}
@@ -457,7 +458,7 @@
 								{
 									"key": "imageFile",
 									"type": "file",
-									"src": "/D:/Mis Archivos/Móvil/Fotos/Fotos de Perfil/IMG-20210502-WA0012.jpg"
+									"src": "/C:/Users/Usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film1.jpg"
 								}
 							]
 						},
@@ -485,7 +486,7 @@
 				{
 					"name": "editPassword",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "formdata",
@@ -542,7 +543,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2128"
+									"value": ""
 								}
 							]
 						}
@@ -594,7 +595,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								}
 							]
 						}

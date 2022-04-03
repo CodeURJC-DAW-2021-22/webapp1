@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name="Customer")
 public class User{
@@ -27,29 +29,35 @@ public class User{
 	private String email;
 	
 	@OneToMany (mappedBy="user", cascade=CascadeType.ALL, orphanRemoval=true)
+	@JsonIgnore
 	private List<Comment> comments = new ArrayList<>();
 	
 	private String encodedPassword;
 
 	@ElementCollection(fetch=FetchType.EAGER)
+	@JsonIgnore
 	private List<String> roles;
 	
 	@Lob
+	@JsonIgnore
 	private Blob imageFile;
 
 	private boolean image;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
+	@JsonIgnore
 	private List<User> following;
 	
 	private int followingCount;
 	
 	@ManyToMany(mappedBy="following")
+	@JsonIgnore
 	private List<User> followers;
 	
 	private int followersCount;
 	
 	@OneToMany (cascade=CascadeType.ALL, orphanRemoval=true)
+	@JsonIgnore
 	private List<Recommendation> recommendations = new ArrayList<>();
 	
 	public User() {
@@ -92,7 +100,7 @@ public class User{
 		return imageFile;
 	}
 	
-	public boolean getImage(){
+	public boolean getImage() {
 		return image;
 	}
 
@@ -129,11 +137,11 @@ public class User{
 		this.email = email;
 	}
 
-	public void setEncodedPassword(String encodedPassword){
+	public void setEncodedPassword(String encodedPassword) {
 		this.encodedPassword = encodedPassword;
 	}
 	
-	public void setRoles(List<String> roles){
+	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
 	
@@ -141,7 +149,7 @@ public class User{
 		this.imageFile = image;
 	}
 	
-	public void setImage(boolean image){
+	public void setImage(boolean image) {
 		this.image = image;
 	}
 

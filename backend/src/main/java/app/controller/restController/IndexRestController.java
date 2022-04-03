@@ -39,7 +39,7 @@ public class IndexRestController {
     	Principal principal = request.getUserPrincipal();
     	Page<Recommendation> recommendations = null;
         
-		if (principal != null) {
+		if (principal != null && !request.isUserInRole("ADMIN")) {
 			Optional<User> user = userService.findByName(request.getUserPrincipal().getName());
 			
 			if (user.isPresent()) {

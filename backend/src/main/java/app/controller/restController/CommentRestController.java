@@ -70,22 +70,27 @@ public class CommentRestController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Comment> editComment(@PathVariable long id, @RequestBody Comment newComment) {
+	public ResponseEntity<Comment> editComment(@PathVariable long id, @RequestBody Comment newComment, HttpServletRequest request) {
 		Optional<Comment> optionalComment = commentService.findById(id);
 		
 		if (optionalComment.isPresent()) {
 			Comment comment = optionalComment.get();
 			Film film = comment.getFilm();
 			User user = comment.getUser();
+			User userPrincipal = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 			
-			newComment.setId(id);
-			newComment.setUser(user);
-			newComment.setFilm(film);
-			commentService.save(newComment);
-			
-			film.calculateAverage();
-			filmService.save(film);
-			return new ResponseEntity<>(newComment, HttpStatus.OK);
+			if (userPrincipal.getId().equals(user.getId())) {
+				newComment.setId(id);
+				newComment.setUser(user);
+				newComment.setFilm(film);
+				commentService.save(newComment);
+				
+				film.calculateAverage();
+				filmService.save(film);
+				return new ResponseEntity<>(newComment, HttpStatus.OK); 
+			} else {
+				return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+			}
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -107,7 +112,7 @@ public class CommentRestController {
 				filmService.save(film);
 				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 			}
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
