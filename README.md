@@ -80,126 +80,126 @@ Search films by title and sort by ratings from highest to lowest. Furthermore, t
 **Initial menu:** 
 First screen of the webpage that contains a list of films splitted by genre and a pie chart that informs the most famous film genres of Advice.me. 
  
-![avatar](ImagesPhase2/adviceMe.png) 
+![avatar](ImagesPhase3/adviceMe.png) 
  
 **Login:** 
 Screen that will allow registered users to log in giving their email and password. All users have access to this screen even though only registered users will be able to end this process. 
  
-![avatar](ImagesPhase2/Login.png) 
+![avatar](ImagesPhase3/Login.png) 
 
  **Login error:** 
 Screen that will appear when the user is trying to login and he writes his credentials wrong. 
 
-![avatar](ImagesPhase2/ErrorLogin.png) 
+![avatar](ImagesPhase3/ErrorLogin.png) 
 
 **Register:** 
 Screen that will allow new users to sing up in Advice.me and access exclusive content and services. 
  
-![avatar](ImagesPhase2/Register.png) 
+![avatar](ImagesPhase3/Register.png) 
 
 **Taken User Name:** 
 Screen that will apear when he tries to register with a nickname that is already taken. 
 
-![avatar](ImagesPhase2/TakenUserName.png) 
+![avatar](ImagesPhase3/TakenUserName.png) 
 
 **Film description:** 
 Screen that will display information, image and assessments about the film. Also, at the bottom of the page related films will appear. 
  
-![avatar](ImagesPhase2/FilmUnregistered.png) 
+![avatar](ImagesPhase3/FilmUnregistered.png) 
 
 **Search film:** 
 Screen that will display the films that contains the words that you searched. 
  
-![avatar](ImagesPhase2/SearchFilms.png) 
+![avatar](ImagesPhase3/SearchFilms.png) 
 
 ### Registered users 
 
 **Initial menu:** 
 First screen of the webpage that contains a list of films splitted by genre and a circle graph that informs the most famous film genres of Advice.me. Moreover, this screen will have personaliced recomendations for the user and access to their account. 
  
-![avatar](ImagesPhase2/MenuRegistered.png) 
+![avatar](ImagesPhase3/MenuRegistered.png) 
 
 **Profile:** 
 Screen that will display the users information and profile picture. Also they will be able to access the modification profile information and change their profile picture. 
  
-![avatar](ImagesPhase2/Profile.png) 
+![avatar](ImagesPhase3/Profile.png) 
 
 **Edit profile:** 
 Screen that will allow the user to  modify their information. 
  
-![avatar](ImagesPhase2/EditProfile.png) 
+![avatar](ImagesPhase3/EditProfile.png) 
 
 **Change password:** 
 Screen that will allow the user to change his password. 
 
-![avatar](ImagesPhase2/ChangePassword.png) 
+![avatar](ImagesPhase3/ChangePassword.png) 
 
 **Error old password:** 
 Screen that will appear when the user is trying to change the password and writes his old password wrong.  
 
-![avatar](ImagesPhase2/ErrorOldPassword.png) 
+![avatar](ImagesPhase3/ErrorOldPassword.png) 
 
 **Film description:** 
 Screen that will display information, images and assessments about the film. Also, at the bottom of the page related films will appear. Registered users can add an assessment to the film if they did not do it before. 
  
-![avatar](ImagesPhase2/FilmRegistered.png) 
+![avatar](ImagesPhase3/FilmRegistered.png) 
 
 **Add comment:** 
 Screen that will allow the user to upload a comment writing his opinion and adding a rating of the film. 
 
-![avatar](ImagesPhase2/AddComment.png) 
+![avatar](ImagesPhase3/AddComment.png) 
 
 **Edit comment:** 
 Screen that will allow the user to modify their comments. 
 
-![avatar](ImagesPhase2/EditComment.png) 
+![avatar](ImagesPhase3/EditComment.png) 
 
 **Watch profile:** 
 Screen that will allow the user to watch others profiles without the edit profile and the remove/edit comments buttons. Also the user can follow the other user with a button. 
 
-![avatar](ImagesPhase2/WatchProfile.png) 
+![avatar](ImagesPhase3/WatchProfile.png) 
 
 **Followers:** 
 Screen that will allow the user to watch the users who follow him. 
 
-![avatar](ImagesPhase2/Followers.png) 
+![avatar](ImagesPhase3/Followers.png) 
 
 **Following:** 
 Screen that will allow the user to watch the users you follow. 
 
-![avatar](ImagesPhase2/Following.png) 
+![avatar](ImagesPhase3/Following.png) 
 
 **Search films:** 
 Screen that will allow the user to watch a list of films that contains a certain word/words in their tittle. 
 
-![avatar](ImagesPhase2/SearchFilmRegistered.png) 
+![avatar](ImagesPhase3/SearchFilmRegistered.png) 
 
 ### Admin 
 
 **Initial menu:** 
 First screen of the webpage that contains a list of films splitted by genre and a circle graph that informs the most famous film genres of Advice.me. Admins will have access to the "Post film" button. 
  
-![avatar](ImagesPhase2/MenuAdmin.png) 
+![avatar](ImagesPhase3/MenuAdmin.png) 
 
 **Add film:** 
 Screen that will allow admins to add films to the database. 
  
-![avatar](ImagesPhase2/AddFilm.png) 
+![avatar](ImagesPhase3/AddFilm.png) 
 
 **Film description:** 
 Screen that will display information, images and assessments about the film. Admins can eliminate the film and its assesments. Also, admins will be able to enter in the edit film page. 
  
-![avatar](ImagesPhase2/FilmAdmin.png) 
+![avatar](ImagesPhase3/FilmAdmin.png) 
 
 **Edit film:** 
 Screen that will allow admins to edit the information from any film and save it in the database. 
  
-![avatar](ImagesPhase2/EditFilm.png)
+![avatar](ImagesPhase3/EditFilm.png)
 
 **Search films:** 
 Screen that will allow the user to watch a list of films that contains a certain word/words in their tittle. 
  
-![avatar](ImagesPhase2/SearchFilmAdmin.png)
+![avatar](ImagesPhase3/SearchFilmAdmin.png)
 
 ## Navigation Diagram
 * Blue = Unregistered users.
@@ -207,21 +207,21 @@ Screen that will allow the user to watch a list of films that contains a certain
 * Green = Admins.
 * Red = Error pages.
 
-![diagram](ImagesPhase2/NavigationDiagram.png)
+![diagram](ImagesPhase3/NavigationDiagram.png)
 
 
 # Phase 2
 ## Database Entity Diagram
 
-![diagram](ImagesPhase2/DatabaseEntityDiagram.png)
+![diagram](ImagesPhase3/DatabaseEntityDiagram.png)
 
 ## UML Java Classes Diagram
 
-![diagram](ImagesPhase2/UMLJavaClassesDiagram.png)
+![diagram](ImagesPhase3/UMLJavaClassesDiagram.png)
 
 ## Classes and Templates Diagram
 
-![diagram](ImagesPhase2/ClassesAndTemplatesDiagram.png)
+![diagram](ImagesPhase3/ClassesAndTemplatesDiagram.png)
 
 ## Execute instructions
 In order to install this application you should follow the next steps:
@@ -371,3 +371,173 @@ Vanesa was in charge of the transition from H2 database to PostGreeSQL. She crea
 | #3            | [FilmService](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/service/FilmService.java)     | 
 | #4            | [AjaxController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/AjaxController.java)     | 
 | #5            | [AdviceMe](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/resources/templates/adviceMe.html)     | 
+
+
+# Phase 3
+## App deployed on Heroku
+
+
+
+## API REST Documentation
+
+https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/api-docs/api-docs.yaml
+
+https://raw.githack.com/CodeURJC-DAW-2021-22/webapp1/main/backend/api-docs/api-docs.html
+
+## Instructions for executing the dockerized app
+In order to execute the dockerized app you should follow the next steps:
+1.	Install Docker Desktop.
+2.	Open any shell of type "bash".
+3.	Clone this repository using the command "git clone https://github.com/CodeURJC-DAW-2021-22/webapp1.git".
+4.	Use command "cd" until you get to the folder "Docker".
+5.	Execute the command "docker-compose up" on the shell.
+6.	When the app is running, open any browser and search "https://localhost:8443".
+
+## Instructions for constructing the docker image
+In order to create de docker image you should follow the next steps:
+1.	Install Docker Desktop.
+2.	Create and account on Dockerhub.
+3.	Open any shell of type "bash".
+4.	Clone this repository using the command "git clone https://github.com/CodeURJC-DAW-2021-22/webapp1.git".
+5.	Use command "cd" until you get to the folder "Docker".
+6.	Execute the command "./create_image.sh <DockerhubUsername>/codeurjc-daw-2021-22-webapp1".
+
+## Instructions for deploying the app on Heroku
+In order to deploy the app on Heroku you should follow the next steps:
+1.	Create an account on Heroku.
+2.	Install Heroku package.
+3.	Install maven.
+4.	Open any shell of type "bash".
+5.	Login on Heroku using the command "heroku login".
+6.	Use command "cd" until you get to the folder "Docker".
+7.	Execute the command "./create_heroku_app.sh codeurjc-daw-2021-22-webapp1".
+8.	Execute the command "./deploy_heroku_app.sh codeurjc-daw-2021-22-webapp1".
+9.	Open your Heroku dashboard, click on the new repository and then click on "Open App".
+
+## Group members participation
+### María Esteban Sánchez
+#### Textual description:
+María had created some functions for the different RestControllers, the SecurityRestController and participated in IndexRestController. She also made some postman methods, the class of FilmsList and the ApiRest documentation.
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | Methods of SecurityRestController		   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/4135f874ad514b258a56233b75e5c3d96977a74f | 
+| #2            | Method moreCommentsProfile in AjaxRestController | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/a87a1a1669ab0da400fd4331b4c55708ed08f12c | 
+| #3            | Methods of IndexRestController and class FilmsList| https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/843ad983a51d47de649c3e7d8dd06957d1bd13ed | 
+| #4            | Methods in postman for IndexRestController	   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/fb700b9f2fe3741d7295a3389e85a52ceb92d7c6 | 
+| #5            | ApiRest Documentation				   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/efc35fe510e348cfa63c9af046cdb60af337824b | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [SecurityRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/security/RestSecurityConfig.java)     | 
+| #2            | [IndexRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/IndexRestController.java)     | 
+| #3            | [FilmsList](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/model/modelRest/FilmsList.java)     | 
+| #4            | [AjaxRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/AjaxRestController.java)     | 
+| #5            | [Postman](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/AdviceMe.postman_collection.json)     | 
+
+### Miguel Regato Herrero
+#### Textual description:
+Miguel made the userRestController and some functions of the AjaxRestController and IndexRestController. He alse made the postman methods of IndexRestController and updated the pom file with the new requirements.
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | Methods of UserRestController			   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/e53b2a97465a0593d184ad9e3d0e3f354fdc3efa | 
+| #2            | Method moreCommentsWatchProfile in AjaxRestController | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/9f08af19d9669123998e8423d4a98749886d99fd | 
+| #3            | Method menuAdmin in IndexRestController	   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/7e5adcdac87510f7ecef73750704bfe83342b7db | 
+| #4            | Methods in postman for IndexRestController	   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/684becbaf630fe4c086af2a65c7a787633fb34f1 | 
+| #5            | Pom modified					   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/e0de7b9dabb0752e0bd0c452204e1f454aa0231d | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [UserRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/UserRestController.java)     | 
+| #2            | [IndexRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/IndexRestController.java)     | 
+| #3            | [Postman](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/AdviceMe.postman_collection.json)     | 
+| #4            | [AjaxRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/AjaxRestController.java)     | 
+| #5            | [Pom](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/pom.xml)     | 
+
+
+### Juan Carlos Moreno García
+#### Textual description:
+Juan Carlos was in charge of creating the Docker image, Docker compose and deploying the app in Heroku. Also, he fixed problems of the application and implemented some functions of the different RestControllers.
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | docker-compose.yml and deploy_heroku_app.sh | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/c861ba77a292f01d6a36ca4013b95f302e10def8 | 
+| #2            | removeComment and important changes were made in restController module | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/84b5d839a9201ed218695f077e1984210ce0dc8c | 
+| #3            | Names for api rest method changed and some extra changes | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/c123e550be973c494e131a8ec517260a96dd9da8 | 
+| #4            | Repeated methods moved to service layer | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/5fee948ab5088708808413e7fc916921eb31dbb4 | 
+| #5            | Important bugs fixed| https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/db05d0a692be45b24cd48c36e302bb92c715b9b1 | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [docker (docker-compose and deploy_heroku_app.sh)](https://github.com/CodeURJC-DAW-2021-22/webapp1/tree/main/docker)     | 
+| #2            | [FilmRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/FilmRestController.java)     | 
+| #3            | [CommentRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/CommentRestController.java)     | 
+| #4            | [UserRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/UserRestController.java)     | 
+| #5            | [Postman](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/AdviceMe.postman_collection.json)     | 
+
+
+### Héctor Fernández Martínez
+#### Textual description:
+Héctor was in charge of creating the Docker image, Docker compose and deploying the app in Heroku. Also, he made the security and login of the API REST, some functions of RestController, specially IndexRestController, and creation of api-docs.
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | Dockerfile, create_image.sh and create_heroku_app.sh| https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/7d7d078b916355f4a3cd4167be8294dc6682e665 | 
+| #2            | Security of RestSecurityConfig		   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/f75f53e46c7e84e6ef1e202677610bac29071744 | 
+| #3            | Create LoginRestController			   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/c1a2fea18a07c2056593c0cf645f333a5fa71916 | 
+| #4            | More attributes of Application.properties	   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/0451a796f40615f9f341ef8277172b602aaf3084 | 
+| #5            | Functions of IndexRestController		   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/38e14d93976f37cf41340b72e7b6a4ed40262793 | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [RestSecurityConfig](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/security/RestSecurityConfig.java)     | 
+| #2            | [docker (Dockerfile, create_image.sh and create_heroku_app.sh)](https://github.com/CodeURJC-DAW-2021-22/webapp1/tree/main/docker)     | 
+| #3            | [LoginRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/auth/LoginRestController.java)     | 
+| #4            | [Application.properties](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/resources/application.properties)     | 
+| #5            | [IndexRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/IndexRestController.java)     | 
+
+### Vanesa Reina Hernández
+#### Textual description:
+Vanesa was the responsible of the most part of AjaxRestController and FilmRestController. She created the functions of postman of those RestControllers, as well as two functions for UserRestController and CommentRestController.
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | Postman json for AjaxRest and FilmRest	   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/cf7edb584cca450cddfa350fcd743771a0af03ee | 
+| #2            | AjaxRestController most functions impplemented   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/61df85507e9b32c3abaa39850c200e215ab66e8f | 
+| #3            | AddComment function for CommentsRestController | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/d0ee94dd7b9b8d184d3cd6b7b2c1d8a813a76d0a | 
+| #4            | FilmRestController functions | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/d99a8d7494135763cd2f0ba6a45ae64157a734ae | 
+| #5            | FilmRest functions				   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/2d0df9ca5b8e3a7996b661cf4128b71adb4110bb | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [Postman](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/AdviceMe.postman_collection.json)     | 
+| #2            | [CommentRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/CommentRestController.java)     | 
+| #3            | [FilmRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/FilmRestController.java)     | 
+| #4            | [AjaxRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/AjaxRestController.java)     | 
+| #5            | [UserRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/UserRestController.java)     | 
