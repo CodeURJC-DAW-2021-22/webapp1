@@ -376,7 +376,7 @@ Vanesa was in charge of the transition from H2 database to PostGreeSQL. She crea
 # Phase 3
 ## App deployed on Heroku
 
-
+https://codeurjc-daw-2021-22-webapp1.herokuapp.com/
 
 ## API REST Documentation
 
@@ -400,7 +400,7 @@ In order to create de docker image you should follow the next steps:
 3.	Open any shell of type "bash".
 4.	Clone this repository using the command "git clone https://github.com/CodeURJC-DAW-2021-22/webapp1.git".
 5.	Use command "cd" until you get to the folder "Docker".
-6.	Execute the command "./create_image.sh <DockerhubUsername>/codeurjc-daw-2021-22-webapp1".
+6.	Execute the command "./create_image.sh DockerhubUsername/codeurjc-daw-2021-22-webapp1".
 
 ## Instructions for deploying the app on Heroku
 In order to deploy the app on Heroku you should follow the next steps:
