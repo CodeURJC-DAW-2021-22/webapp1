@@ -4,9 +4,13 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import java.io.IOException;
 import java.net.URI;
+import java.security.Principal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +36,15 @@ import org.springframework.web.multipart.MultipartFile;
 import app.model.Comment;
 import app.model.Film;
 import app.model.Genre;
+import app.model.Recommendation;
+import app.model.User;
 import app.model.modelRest.FilmComments;
+import app.model.modelRest.FilmsList;
 import app.service.CommentService;
 import app.service.FilmService;
+import app.service.RecommendationService;
+import app.service.SendMail;
+import app.service.UserService;
 
 @RestController
 @RequestMapping("/api/films")
@@ -45,6 +55,90 @@ public class FilmRestController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private RecommendationService recommendationService;
+	
+	@GetMapping("/")
+	public ResponseEntity<FilmsList> getMenu(HttpServletRequest request) {
+    	Principal principal = request.getUserPrincipal();
+    	Page<Recommendation> recommendations = null;
+        
+		if (principal != null && !request.isUserInRole("ADMIN")) {
+			Optional<User> user = userService.findByName(request.getUserPrincipal().getName());
+			
+			if (user.isPresent()) {
+				recommendations = recommendationService.findByUser(user.get().getId(), PageRequest.of(0, 6));
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+		}
+		
+		Page<Film> trending = filmService.findAll(PageRequest.of(0,6));
+		Page<Film> action = filmService.findByGenre(Genre.ACTION, PageRequest.of(0,6));
+		Page<Film> adventure = filmService.findByGenre(Genre.ADVENTURE, PageRequest.of(0,6));
+		Page<Film> animation = filmService.findByGenre(Genre.ANIMATION, PageRequest.of(0,6));
+		Page<Film> comedy = filmService.findByGenre(Genre.COMEDY, PageRequest.of(0,6));
+		Page<Film> drama = filmService.findByGenre(Genre.DRAMA, PageRequest.of(0,6));
+		Page<Film> horror = filmService.findByGenre(Genre.HORROR, PageRequest.of(0,6));
+		Page<Film> scifi = filmService.findByGenre(Genre.SCIENCE_FICTION, PageRequest.of(0,6));
+
+		FilmsList listOfFilms = new FilmsList(recommendations, trending, action, adventure, animation, comedy, drama, horror, scifi);
+		
+		return new ResponseEntity<>(listOfFilms, HttpStatus.OK);
+	}
+	
+	@GetMapping("/")
+	public Page<Film> moreFilms(int page) {
+		// Before returning a page it confirms that there are more left
+		if (page <= (int) Math.ceil(filmService.count()/6)) {
+			return filmService.findAll(PageRequest.of(page,6));
+		} else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/recommendations")
+	public Page<Recommendation> moreRecommendations(int page, HttpServletRequest request) {
+		// Before returning a page it confirms that there are more left
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
+		if (page <= (int) Math.ceil(recommendationService.countByUser(user.getId())/6)) {
+			return recommendationService.findByUser(user.getId(), PageRequest.of(page,6));
+		} else {
+			return null;
+		}		
+	}
+	
+	@GetMapping("/")
+	public Page<Film> moreFilmsByGenre(String genre, int page) {
+		// Before returning a page it confirms that there are more left
+		Genre gen = Genre.valueOf(genre);
+		
+		if (page <= (int) Math.ceil(filmService.countByGenre(gen)/6)) {
+			return filmService.findByGenre(gen, PageRequest.of(page,6));
+		} else {
+			return null;	
+		}
+	}
+	
+	@GetMapping("/commentsNumber")
+	public List<Integer> calculateChart() {
+		List<Integer> counters = new ArrayList<>();
+		
+		counters.add(filmService.countCommentsByGenre(Genre.ACTION));
+		counters.add(filmService.countCommentsByGenre(Genre.ADVENTURE));
+		counters.add(filmService.countCommentsByGenre(Genre.ANIMATION));
+		counters.add(filmService.countCommentsByGenre(Genre.COMEDY));
+		counters.add(filmService.countCommentsByGenre(Genre.DRAMA));
+		counters.add(filmService.countCommentsByGenre(Genre.HORROR));
+		counters.add(filmService.countCommentsByGenre(Genre.SCIENCE_FICTION));
+		
+		return counters;
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<FilmComments> getFilm(@PathVariable long id) {
@@ -75,12 +169,34 @@ public class FilmRestController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
-	}	
+	}
+	
+	@GetMapping("/{id}/comments")
+	public Page<Comment> moreComments(@PathVariable long id, int page) {
+		// Before returning a page it confirms that there are more left
+		Film film = filmService.findById(id).orElseThrow();
+		
+		if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
+			return commentService.findByFilm(film, PageRequest.of(page, 2));
+		} else {
+			return null;
+		}		
+	}
 
 	@GetMapping("/")
-	public List<Film> searchFilms(String query) {
+	public Page<Film> searchFilms(String query) {
 		Page<Film> films = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
-		return films.toList(); 
+		return films; 
+	}
+	
+	@GetMapping("/")
+	public Page<Film> moreSearchedFilms(String name, int page) {
+		// Before returning a page it confirms that there are more left
+		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
+			return filmService.findLikeName(name, PageRequest.of(page,6));
+		} else {
+			return null;			
+		}		
 	}
 
 	@PostMapping("/")
@@ -154,5 +270,32 @@ public class FilmRestController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@PostMapping("/{id}/comments")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Comment addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
+		Film film = filmService.findById(id).orElseThrow();
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
+		comment.setFilm(film);
+		comment.setUser(user);
+		commentService.save(comment);
+		
+		film.calculateAverage();
+		filmService.save(film);
+		
+		Film recommended = filmService.findFilmForRecommendation(id, film, user);
+		
+		if (recommended != null) {
+			Recommendation recommendation = new Recommendation(recommended);
+			recommendationService.save(recommendation);
+			user.addRecommedation(recommendation);
+			userService.save(user);
+		
+			SendMail.sendMail(film, user);
+		}
+		
+		return comment;
 	}
 }

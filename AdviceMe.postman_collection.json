@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "0151e140-6b6b-4c07-abf3-a606eccf7aba",
+		"_postman_id": "6ef6d74b-66f0-43f9-aecc-80605f3b8e22",
 		"name": "AdviceMe",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "indexRest",
+			"name": "filmRest",
 			"item": [
 				{
 					"name": "getMenu",
@@ -14,48 +14,117 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/index/",
+							"raw": "{{url}}/api/films/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"index",
+								"films",
 								""
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "chartRest",
-			"item": [
+				},
+				{
+					"name": "moreFilms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreRecommendations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/recommendations?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								"recommendations"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreFilmsByGenre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/?genre=&page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								""
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "calculateChart",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/chart/",
+							"raw": "{{url}}/api/films/commentsNumber",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"chart",
-								""
+								"films",
+								"commentsNumber"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "filmRest",
-			"item": [
+				},
 				{
 					"name": "getFilm",
 					"request": {
@@ -108,6 +177,38 @@
 					"response": []
 				},
 				{
+					"name": "moreComments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/films/:id/comments?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								":id",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "searchFilms",
 					"event": [
 						{
@@ -143,6 +244,35 @@
 							"query": [
 								{
 									"key": "query",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreSearchedFilms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/fims/?name=&page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"fims",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "page",
 									"value": ""
 								}
 							]
@@ -308,6 +438,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "addComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\": \"This is really nice!\",\r\n    \"stars\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/films/:id/comments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"films",
+								":id",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -359,7 +524,7 @@
 					"response": []
 				},
 				{
-					"name": "downloadImageProfile",
+					"name": "downloadImage",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -373,6 +538,38 @@
 								"users",
 								":id",
 								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreComments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id/comments?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
 							],
 							"variable": [
 								{
@@ -458,7 +655,7 @@
 								{
 									"key": "imageFile",
 									"type": "file",
-									"src": "/C:/Users/Usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film1.jpg"
+									"src": "/C:/Users/usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Móvil/Fotos/Fotos de Perfil/IMG-20210502-WA0011.jpg"
 								}
 							]
 						},
@@ -551,6 +748,38 @@
 					"response": []
 				},
 				{
+					"name": "moreFollowers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id/followers?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"followers"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "getFollowing",
 					"request": {
 						"method": "GET",
@@ -570,6 +799,38 @@
 								{
 									"key": "id",
 									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "moreFollowing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/:id/following?page=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id",
+								"following"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
 								}
 							]
 						}
@@ -607,40 +868,6 @@
 		{
 			"name": "commentRest",
 			"item": [
-				{
-					"name": "addComment",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"note\": \"This is really nice!\",\r\n    \"stars\": 4\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/comments/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"comments",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "editComment",
 					"request": {
@@ -689,247 +916,6 @@
 								"api",
 								"comments",
 								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "ajaxRest",
-			"item": [
-				{
-					"name": "moreFilms",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/more?page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"more"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreRecommendations",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreRecommendations?page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreRecommendations"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreSearch",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreSearch?name=&page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreSearch"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": ""
-								},
-								{
-									"key": "page",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreGenre",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreGenre?genre=&page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreGenre"
-							],
-							"query": [
-								{
-									"key": "genre",
-									"value": ""
-								},
-								{
-									"key": "page",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreComments",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreComments/:id?page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreComments",
-								":id"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": ""
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreCommentsProfile",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreCommentsProfile/:id?page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreCommentsProfile",
-								":id"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": ""
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreFollowers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreFollowers/:id?page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreFollowers",
-								":id"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": ""
-								}
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreFollowing",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/ajax/moreFollowing/:id?page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"ajax",
-								"moreFollowing",
-								":id"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": ""
-								}
 							],
 							"variable": [
 								{

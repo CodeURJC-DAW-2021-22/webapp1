@@ -9,21 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.model.Comment;
 import app.model.Film;
-import app.model.Recommendation;
 import app.model.User;
 import app.service.CommentService;
 import app.service.FilmService;
-import app.service.RecommendationService;
-import app.service.SendMail;
 import app.service.UserService;
 
 @RestController
@@ -38,36 +33,6 @@ public class CommentRestController {
 
 	@Autowired
 	private CommentService commentService;
-	
-	@Autowired
-	private RecommendationService recommendationService;
-	
-	@PostMapping("/{id}")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Comment addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
-		Film film = filmService.findById(id).orElseThrow();
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		
-		comment.setFilm(film);
-		comment.setUser(user);
-		commentService.save(comment);
-		
-		film.calculateAverage();
-		filmService.save(film);
-		
-		Film recommended = filmService.findFilmForRecommendation(id, film, user);
-		
-		if (recommended != null) {
-			Recommendation recommendation = new Recommendation(recommended);
-			recommendationService.save(recommendation);
-			user.addRecommedation(recommendation);
-			userService.save(user);
-		
-			SendMail.sendMail(film, user);
-		}
-		
-		return comment;
-	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Comment> editComment(@PathVariable long id, @RequestBody Comment newComment, HttpServletRequest request) {

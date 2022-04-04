@@ -77,7 +77,7 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/{id}/image")
-	public ResponseEntity<Object> downloadImageProfile(@PathVariable long id) throws SQLException {
+	public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException {
 		Optional<User> user = userService.findById(id);
 		
 	    if (user.isPresent() && user.get().getImageFile() != null) {
@@ -85,6 +85,18 @@ public class UserRestController {
 	        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").contentLength(user.get().getImageFile().length()).body(file);
 	    } else {
 	        return ResponseEntity.notFound().build();
+	    }
+	}
+	
+	@GetMapping("/{id}/comments")
+	public Page<Comment> moreComments(@PathVariable long id, int page) {
+	    // Before returning a page it confirms that there are more left
+	    User user = userService.findById(id).orElseThrow();
+
+	    if (page <= (int) Math.ceil(commentService.countByUser(user)/5)) {
+	        return commentService.findByUser(user, PageRequest.of(page, 5));
+	    } else {
+	        return null;            
 	    }
 	}
 	
@@ -179,6 +191,18 @@ public class UserRestController {
 		}
 	}
 	
+	@GetMapping("/{id}/followers")
+	public Page<User> moreFollowers(@PathVariable long id, int page) {
+	    // Before returning a page it confirms that there are more left
+	    User user = userService.findById(id).orElseThrow();
+
+	    if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
+	        return userService.findFollowingById(id, PageRequest.of(page, 5));
+	    } else {
+	        return null;            
+	    }
+	}
+	
 	@GetMapping("/{id}/following")
 	public ResponseEntity<Page<User>> following(@PathVariable long id) {		
 		Optional<User> user = userService.findById(id);
@@ -189,6 +213,18 @@ public class UserRestController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@GetMapping("/{id}/following")
+	public Page<User> moreFollowing(@PathVariable long id, int page) {
+	    // Before returning a page it confirms that there are more left
+	    User user = userService.findById(id).orElseThrow();
+
+	    if (page <= (int) Math.ceil(user.getFollowingCount()/5)) {
+	        return  userService.findFollowersById(id, PageRequest.of(page, 5));
+	    } else {
+	        return null;    
+	    }
 	}
 	
 	@GetMapping("/{id}/followed")
