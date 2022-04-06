@@ -378,6 +378,12 @@ Vanesa was in charge of the transition from H2 database to PostGreeSQL. She crea
 
 https://codeurjc-daw-2021-22-webapp1.herokuapp.com/
 
+### Example users credentials
+
+**Username**: user  -  **Password**: pass.
+
+**Username**: admin  -  **Password**: adminpass.
+
 ## API REST Documentation
 
 https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/api-docs/api-docs.yaml
