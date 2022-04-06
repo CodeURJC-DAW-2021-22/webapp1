@@ -75,7 +75,7 @@ public class AjaxController {
 	public String getFilmsSearch(Model model, @PathVariable String name, @PathVariable int page) {
 		// Before returning a page it confirms that there are more left
 		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
-			model.addAttribute("films", filmService.findLikeName(name, PageRequest.of(page,6)));
+			model.addAttribute("films", filmService.findLikeName(name.toLowerCase(), PageRequest.of(page,6)));
 			return "movies";
 		}
 		

@@ -14,14 +14,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/films/",
+							"raw": "{{url}}/api/films/menu",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
-								""
+								"menu"
 							]
 						}
 					},
@@ -43,6 +43,16 @@
 								""
 							],
 							"query": [
+								{
+									"key": "genre",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "",
+									"disabled": true
+								},
 								{
 									"key": "page",
 									"value": ""
@@ -78,48 +88,20 @@
 					"response": []
 				},
 				{
-					"name": "moreFilmsByGenre",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/films/?genre=&page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"films",
-								""
-							],
-							"query": [
-								{
-									"key": "genre",
-									"value": ""
-								},
-								{
-									"key": "page",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "calculateChart",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/films/commentsNumber",
+							"raw": "{{url}}/api/films/comments/number",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"films",
-								"commentsNumber"
+								"comments",
+								"number"
 							]
 						}
 					},
@@ -201,78 +183,6 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "searchFilms",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"url": {
-							"raw": "{{url}}/api/films/?query=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"films",
-								""
-							],
-							"query": [
-								{
-									"key": "query",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreSearchedFilms",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/fims/?name=&page=",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"fims",
-								""
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": ""
-								},
-								{
-									"key": "page",
 									"value": ""
 								}
 							]
@@ -555,7 +465,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/users/:id/comments?page=",
+							"raw": "{{url}}/api/users/:id/comments?page=0",
 							"host": [
 								"{{url}}"
 							],
@@ -568,7 +478,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": ""
+									"value": "0"
 								}
 							],
 							"variable": [
@@ -722,33 +632,7 @@
 					"response": []
 				},
 				{
-					"name": "getFollowers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/:id/followers",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":id",
-								"followers"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreFollowers",
+					"name": "followers",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -780,33 +664,7 @@
 					"response": []
 				},
 				{
-					"name": "getFollowing",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/users/:id/following",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":id",
-								"following"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "moreFollowing",
+					"name": "following",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -868,6 +726,31 @@
 		{
 			"name": "commentRest",
 			"item": [
+				{
+					"name": "getComment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/comments/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"comments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "editComment",
 					"request": {

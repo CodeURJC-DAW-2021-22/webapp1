@@ -89,7 +89,7 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/{id}/comments")
-	public Page<Comment> moreComments(@PathVariable long id, int page) {
+	public Page<Comment> moreComments(@PathVariable long id, @RequestParam int page) {
 	    // Before returning a page it confirms that there are more left
 	    User user = userService.findById(id).orElseThrow();
 
@@ -180,51 +180,27 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/{id}/followers")
-	public ResponseEntity<Page<User>> followers(@PathVariable long id) {
+	public ResponseEntity<Page<User>> followers(@PathVariable long id, @RequestParam int page) {
 		Optional<User> user = userService.findById(id);
 		
-		if (user.isPresent()) {
-			Page<User> followers = userService.findFollowingById(id, PageRequest.of(0, 5));
+		if (user.isPresent() && page <= (int) Math.ceil(user.get().getFollowersCount()/5)) {
+			Page<User> followers = userService.findFollowingById(id, PageRequest.of(page, 5));
 			return new ResponseEntity<>(followers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	@GetMapping("/{id}/followers")
-	public Page<User> moreFollowers(@PathVariable long id, int page) {
-	    // Before returning a page it confirms that there are more left
-	    User user = userService.findById(id).orElseThrow();
-
-	    if (page <= (int) Math.ceil(user.getFollowersCount()/5)) {
-	        return userService.findFollowingById(id, PageRequest.of(page, 5));
-	    } else {
-	        return null;            
-	    }
-	}
-	
 	@GetMapping("/{id}/following")
-	public ResponseEntity<Page<User>> following(@PathVariable long id) {		
+	public ResponseEntity<Page<User>> following(@PathVariable long id, @RequestParam int page) {
 		Optional<User> user = userService.findById(id);
 		
-		if (user.isPresent()) {
-			Page<User> following = userService.findFollowersById(id, PageRequest.of(0, 5));
+		if (user.isPresent() && page <= (int) Math.ceil(user.get().getFollowingCount()/5)) {
+			Page<User> following = userService.findFollowersById(id, PageRequest.of(page, 5));
 			return new ResponseEntity<>(following, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-	}
-	
-	@GetMapping("/{id}/following")
-	public Page<User> moreFollowing(@PathVariable long id, int page) {
-	    // Before returning a page it confirms that there are more left
-	    User user = userService.findById(id).orElseThrow();
-
-	    if (page <= (int) Math.ceil(user.getFollowingCount()/5)) {
-	        return  userService.findFollowersById(id, PageRequest.of(page, 5));
-	    } else {
-	        return null;    
-	    }
 	}
 	
 	@GetMapping("/{id}/followed")
