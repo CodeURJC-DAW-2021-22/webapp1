@@ -11,15 +11,23 @@ import { FilmService } from './../../services/film.service';
 export class FilmListAdviceMeComponent implements OnInit {
     
     filmsList!: FilmsList;
-    trendingList: Film[] = [];
+    trendingList!: Film[];
+    page!: string;
 
     constructor(private router: Router, private service: FilmService){ }
 
     ngOnInit() {
         this.service.getFilms().subscribe(
-            filmsList => this.filmsList = filmsList,
+            response => this.update(response),
             error => console.log(error)
         );
-        this.trendingList = this.filmsList.getTrending();
+    }
+
+    update(response: FilmsList) {
+        this.filmsList = response;
+        this.trendingList = this.filmsList.trending;
+        console.log(this.trendingList);
+        this.page = this.trendingList[4].title;
+        console.log(this.page);
     }
 }
