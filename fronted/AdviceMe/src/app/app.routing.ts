@@ -7,6 +7,7 @@ const appRoutes = [
     { path: 'adviceMe', component: FilmListAdviceMeComponent},
     { path: 'films/:id', component: FilmUnregisteredComponent},
     
+    // El siguiente es para borrar, es una prueba
     { path: 'filmsUnregistered', component: FilmUnregisteredComponent},
     
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }
