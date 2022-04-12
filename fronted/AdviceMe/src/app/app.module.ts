@@ -7,9 +7,9 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
 import { FilmListAdviceMeComponent } from './components/films/filmListAdviceMe.component';
-
+import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
 @NgModule({
-  declarations: [AppComponent, FilmListAdviceMeComponent],
+  declarations: [AppComponent, FilmListAdviceMeComponent, FilmUnregisteredComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [],
   bootstrap: [AppComponent]
