@@ -132,15 +132,21 @@ public class FilmRestController {
 	}
 	
 	@GetMapping("/recommendations")
-	public Page<Recommendation> moreRecommendations(@RequestParam int page, HttpServletRequest request) {
+	public ResponseEntity<Page<Recommendation>> moreRecommendations(@RequestParam int page, HttpServletRequest request) {
 		// Before returning a page it confirms that there are more left
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		Optional<User> optionalUser = userService.findByName(request.getUserPrincipal().getName());
 		
-		if (page <= (int) Math.ceil(recommendationService.countByUser(user.getId())/6)) {
-			return recommendationService.findByUser(user.getId(), PageRequest.of(page,6));
+		if (optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			
+			if (page <= (int) Math.ceil(recommendationService.countByUser(user.getId())/6)) {
+				return new ResponseEntity<>(recommendationService.findByUser(user.getId(), PageRequest.of(page,6)), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 		} else {
-			return null;
-		}		
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@GetMapping("/comments/number")
@@ -190,15 +196,21 @@ public class FilmRestController {
 	}
 	
 	@GetMapping("/{id}/comments")
-	public Page<Comment> moreComments(@PathVariable long id, @RequestParam int page) {
+	public ResponseEntity<Page<Comment>> moreComments(@PathVariable long id, @RequestParam int page) {
 		// Before returning a page it confirms that there are more left
-		Film film = filmService.findById(id).orElseThrow();
+		Optional<Film> optionalFilm = filmService.findById(id);
 		
-		if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
-			return commentService.findByFilm(film, PageRequest.of(page, 2));
+		if (optionalFilm.isPresent()) {
+			Film film = optionalFilm.get();
+			
+			if (page <= (int) Math.ceil(commentService.countByFilm(film)/2)) {
+				return new ResponseEntity<>(commentService.findByFilm(film, PageRequest.of(page, 2)), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 		} else {
-			return null;
-		}		
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@PostMapping("/")
@@ -275,29 +287,34 @@ public class FilmRestController {
 	}
 	
 	@PostMapping("/{id}/comments")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Comment addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
-		Film film = filmService.findById(id).orElseThrow();
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+	public ResponseEntity<Comment> addComment(@PathVariable long id, HttpServletRequest request, @RequestBody Comment comment) {
+		Optional<Film> optionalFilm = filmService.findById(id);
 		
-		comment.setFilm(film);
-		comment.setUser(user);
-		commentService.save(comment);
-		
-		film.calculateAverage();
-		filmService.save(film);
-		
-		Film recommended = filmService.findFilmForRecommendation(id, film, user);
-		
-		if (recommended != null) {
-			Recommendation recommendation = new Recommendation(recommended);
-			recommendationService.save(recommendation);
-			user.addRecommedation(recommendation);
-			userService.save(user);
-		
-			SendMail.sendMail(film, user);
+		if (optionalFilm.isPresent()) {
+			Film film = optionalFilm.get();
+			User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+			
+			comment.setFilm(film);
+			comment.setUser(user);
+			commentService.save(comment);
+			
+			film.calculateAverage();
+			filmService.save(film);
+			
+			Film recommended = filmService.findFilmForRecommendation(id, film, user);
+			
+			if (recommended != null) {
+				Recommendation recommendation = new Recommendation(recommended);
+				recommendationService.save(recommendation);
+				user.addRecommedation(recommendation);
+				userService.save(user);
+			
+				SendMail.sendMail(film, user);
+			}
+			
+			return new ResponseEntity<>(comment, HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		return comment;
 	}
 }

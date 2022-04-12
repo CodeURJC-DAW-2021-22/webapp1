@@ -229,7 +229,7 @@
 								{
 									"key": "imageFile",
 									"type": "file",
-									"src": "/C:/Users/Usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film14.jpg"
+									"src": "/C:/Users/usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film6.jpeg"
 								}
 							]
 						},
@@ -265,7 +265,7 @@
 								{
 									"key": "imageFile",
 									"type": "file",
-									"src": "/C:/Users/Usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film12.jpg"
+									"src": "/C:/Users/usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/film11.jpg"
 								}
 							]
 						},
@@ -465,7 +465,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/users/:id/comments?page=0",
+							"raw": "{{url}}/api/users/:id/comments?page=",
 							"host": [
 								"{{url}}"
 							],
@@ -478,7 +478,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "0"
+									"value": ""
 								}
 							],
 							"variable": [
@@ -497,13 +497,24 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"JuanCarlos\",\r\n    \"email\": \"juancar_more2@hotmail.com\",\r\n\t\"encodedPassword\": \"pass\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "JuanCarlos",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "juancar_more2@hotmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "pass",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{url}}/api/users/",
@@ -565,7 +576,7 @@
 								{
 									"key": "imageFile",
 									"type": "file",
-									"src": "/C:/Users/usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Móvil/Fotos/Fotos de Perfil/IMG-20210502-WA0011.jpg"
+									"src": "/C:/Users/usuario/OneDrive - Universidad Rey Juan Carlos/Mis Archivos/Documentos/Universidad/3-Tercer Año (2021-2022)/Desarrollo de Aplicaciones Web/webapp1/backend/src/main/resources/static/Images/img2.jpg"
 								}
 							]
 						},
@@ -688,7 +699,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": ""
 								}
 							]
 						}

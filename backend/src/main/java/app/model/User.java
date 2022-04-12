@@ -32,6 +32,7 @@ public class User{
 	@JsonIgnore
 	private List<Comment> comments = new ArrayList<>();
 	
+	@JsonIgnore
 	private String encodedPassword;
 
 	@ElementCollection(fetch=FetchType.EAGER)

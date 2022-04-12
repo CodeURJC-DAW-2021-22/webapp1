@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,24 +88,34 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/{id}/comments")
-	public Page<Comment> moreComments(@PathVariable long id, @RequestParam int page) {
+	public ResponseEntity<Page<Comment>> moreComments(@PathVariable long id, @RequestParam int page) {
 	    // Before returning a page it confirms that there are more left
-	    User user = userService.findById(id).orElseThrow();
+	    Optional<User> optionalUser = userService.findById(id);
 
-	    if (page <= (int) Math.ceil(commentService.countByUser(user)/5)) {
-	        return commentService.findByUser(user, PageRequest.of(page, 5));
+	    if (optionalUser.isPresent()) {
+	    	User user = optionalUser.get();
+	    	
+		    if (page <= (int) Math.ceil(commentService.countByUser(user)/5)) {
+		    	Page<Comment> comments =commentService.findByUser(user, PageRequest.of(page, 5));
+		        return new ResponseEntity<>(comments, HttpStatus.OK);
+		    } else {
+		    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);           
+		    }
 	    } else {
-	        return null;            
+	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
 	}
 	
 	@PostMapping("/")
-	public ResponseEntity<User> register(@RequestBody User user) throws IOException {
-		if (!userService.existName(user.getName())) {
+	public ResponseEntity<User> register(@RequestParam String name, @RequestParam String email, @RequestParam String password) throws IOException {
+		if (!userService.existName(name)) {
+			User user = new User();
 			Resource image = new ClassPathResource("/static/Images/defaultImage.png");
 			user.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.contentLength()));
 			user.setImage(true);
-			user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
+			user.setName(name);
+			user.setEmail(email);
+			user.setEncodedPassword(passwordEncoder.encode(password));
 			user.setRoles(Arrays.asList("USER"));
 			userService.save(user);
 			return new ResponseEntity<>(user, HttpStatus.CREATED);
@@ -206,21 +215,27 @@ public class UserRestController {
 	@GetMapping("/{id}/followed")
 	public ResponseEntity<User> followUnfollow(@PathVariable long id, HttpServletRequest request) {
 		User follower = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		User following = userService.findById(id).orElseThrow();
+		Optional<User> optionalFollowing = userService.findById(id);
 		
-		if (!follower.getFollowing().contains(following)) {
-			follower.addFollowing(following);
+		if (optionalFollowing.isPresent()) {
+			User following = optionalFollowing.get();
+			
+			if (!follower.getFollowing().contains(following)) {
+				follower.addFollowing(following);
+			} else {
+				follower.deleteFollowing(following);
+			}
+			
+			follower.calculateFollowers();
+			follower.calculateFollowing();
+					
+			following.calculateFollowers();
+			following.calculateFollowing();
+			
+			userService.save(follower);
+			return new ResponseEntity<>(following, HttpStatus.OK);
 		} else {
-			follower.deleteFollowing(following);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		follower.calculateFollowers();
-		follower.calculateFollowing();
-				
-		following.calculateFollowers();
-		following.calculateFollowing();
-		
-		userService.save(follower);
-		return new ResponseEntity<>(following, HttpStatus.OK);
 	}
 }
