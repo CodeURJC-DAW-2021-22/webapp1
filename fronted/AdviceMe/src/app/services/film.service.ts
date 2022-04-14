@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
-import { Film } from '../models/film.model';
 import { FilmsList } from '../models/rest/filmsList.model';
 
 const BASE_URL = '/api/films';
