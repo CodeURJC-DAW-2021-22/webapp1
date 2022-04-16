@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+
+import { FilmsList } from '../models/rest/filmsList.model';
+
+const BASE_URL = '/api/films';
+
+@Injectable({ providedIn: 'root'})
+export class FilmService {
+    constructor(private httpClient: HttpClient) { }
+
+    getFilms(): Observable<FilmsList> {
+        return this.httpClient.get(BASE_URL + '/menu').pipe(
+        ) as Observable<FilmsList>;
+    }
+}

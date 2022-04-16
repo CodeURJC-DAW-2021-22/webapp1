@@ -1,0 +1,88 @@
+
+<div class="bodyBig">
+    <header>
+        <div class="AdviceMeLogo">
+            <a id="logo" href="/#home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+        </div>
+        <nav class="main-nav">
+            <a href="/#home">Home</a>
+            <a href="/#action">Action</a>
+            <a href="/#adventure">Adventure</a>
+            <a href="/#animation">Animation</a>
+            <a href="/#comedy">Comedy</a>
+            <a href="/#drama">Drama</a>
+            <a href="/#horror">Horror</a>
+            <a href="/#scienceFiction">Science Fiction</a>
+        </nav>
+        <nav class="sub-nav">
+            <form action="/searchFilms">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">
+                    <i class="fas fa-search sub-nav-logo"></i>
+                </button>
+                <a [routerLink]="['/login']">Login</a>
+            </form>
+        </nav>
+    </header>
+
+    <main role="main">
+        <section class="bg-gray200 pt-5 pb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="container">
+                            <div>
+                                <img src="/{{film.id}}/image" style="width:100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card card-body">
+                            <h1 class="card-title display-4"> {{film.title}} </h1>
+                            <!--<div class="stars rateyo" data-rateyo-rating="{{film.averageStars}}" data-rateyo-num-stars="5"
+                                data-rateyo-read-only="true"></div>-->
+                            <br>
+                            <p><b>Release date: </b>{{film.releaseDate}}</p>
+                            <p><b>Minimum age: </b>{{film.minAge}}</p>
+                            <p><b>Genre: </b>{{film.genre}}</p>
+                            <p><b>Running time: </b>{{film.duration}} minutes</p>
+                            <p><b>Cast: </b>{{film.cast}}</p>
+                            <p><b>Director: </b>{{film.director}}</p>
+                            <p><b>Plot:</b></p>
+                            <p>{{film.plot}}</p>
+
+                            <div class="center">
+                                <h4> Asserts </h4>
+                            </div>
+
+                            <div *ngFor="let comment of comments">
+                                <a href="/watchProfile/{{comment.user.id}}"><b>{{comment.user.name}}</b></a>
+                                <p>{{comment.note}}</p>
+                            <!-- <div class="stars rateyo" data-rateyo-rating="{{comment.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
+                            -->  <br>
+                            </div>
+
+                            <p *ngIf="comments != null">There are no asserts yet</p>
+
+
+                            <div id="moreComments"></div>
+                            <div class="center"><button id='btnComment' class='btnSubmit2'>More Comments</button></div>
+                            <div id="loaderComment" class="lds-dual-ring hidden overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-5">
+                <div class="col">
+                    <div class="row">
+                        <h3 class="font-weight-bold">More like this</h3>
+                        <div class="box" *ngFor="let film of similar">
+                            <a href="/filmUnregistered/{{film.id}}"><img src="/{{film.id}}/image" alt=""></a>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
