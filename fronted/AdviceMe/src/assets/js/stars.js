@@ -6,3 +6,4 @@ $(function () {
     $(this).parent().find('.result').text('rating :'+ rating);
    });
 });
+

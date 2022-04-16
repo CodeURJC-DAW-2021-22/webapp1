@@ -6,7 +6,7 @@ import { FilmService } from './../../services/film.service';
 
 @Component({
     templateUrl: './films-adviceMe.html',
-    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css']
+    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
 })
 
 export class FilmListAdviceMeComponent implements OnInit {

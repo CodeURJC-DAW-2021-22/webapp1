@@ -4,8 +4,8 @@ import { Film } from "src/app/models/film.model";
 import { FilmComments } from "src/app/models/rest/fillmComments.model";
 
 @Component({
-    templateUrl: './filmUnregistered.component.html',
-    styleUrls: ['../css/appFilm.component.css', '../css/themeFilm.component.css', '../css/jquery.rateyo.component.css', '../css/loadingButton.component.css']
+    templateUrl: './films-Unregistered.component.html',
+    styleUrls: ['../css/appFilm.component.css', '../css/themeFilm.component.css', '../css/jquery.rateyo.component.css', '../css/loadingButton.component.css',]
 
 })
 export class FilmUnregisteredComponent implements OnInit {
