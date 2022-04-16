@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.model.Film;
@@ -102,7 +103,7 @@ public class FilmController {
 	}
 	
 	@GetMapping("/searchFilms")
-	public String searchFilms(Model model, String query, HttpServletRequest request) {
+	public String searchFilms(Model model, @RequestParam String query, HttpServletRequest request) {
 		Page<Film> result = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
 		model.addAttribute("result", result);
 		Principal principal = request.getUserPrincipal();

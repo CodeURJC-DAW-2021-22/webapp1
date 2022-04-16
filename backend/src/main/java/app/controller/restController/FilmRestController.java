@@ -62,7 +62,7 @@ public class FilmRestController {
 	@Autowired
 	private RecommendationService recommendationService;
 	
-	@GetMapping("/")
+	@GetMapping("/menu")
 	public ResponseEntity<FilmsList> getMenu(HttpServletRequest request) {
     	Principal principal = request.getUserPrincipal();
     	Page<Recommendation> recommendations = null;
@@ -92,7 +92,17 @@ public class FilmRestController {
 	}
 	
 	@GetMapping("/")
-	public Page<Film> moreFilms(int page) {
+	public Page<Film> moreFilms(@RequestParam(required=false) String genre, @RequestParam(required=false) String name, @RequestParam int page) {
+		if (genre != null) {
+			return moreFilmsByGenre(genre, page);
+		} else if (name != null) {
+			return searchFilms(name, page);
+		} else {
+			return moreFilmsTrending(page);
+		}
+	}
+	
+	private Page<Film> moreFilmsTrending(int page) {
 		// Before returning a page it confirms that there are more left
 		if (page <= (int) Math.ceil(filmService.count()/6)) {
 			return filmService.findAll(PageRequest.of(page,6));
@@ -100,21 +110,8 @@ public class FilmRestController {
 			return null;
 		}
 	}
-	
-	@GetMapping("/recommendations")
-	public Page<Recommendation> moreRecommendations(int page, HttpServletRequest request) {
-		// Before returning a page it confirms that there are more left
-		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
-		
-		if (page <= (int) Math.ceil(recommendationService.countByUser(user.getId())/6)) {
-			return recommendationService.findByUser(user.getId(), PageRequest.of(page,6));
-		} else {
-			return null;
-		}		
-	}
-	
-	@GetMapping("/")
-	public Page<Film> moreFilmsByGenre(String genre, int page) {
+
+	private Page<Film> moreFilmsByGenre(String genre, int page) {
 		// Before returning a page it confirms that there are more left
 		Genre gen = Genre.valueOf(genre);
 		
@@ -125,7 +122,28 @@ public class FilmRestController {
 		}
 	}
 	
-	@GetMapping("/commentsNumber")
+	public Page<Film> searchFilms(String name, int page) {
+		// Before returning a page it confirms that there are more left
+		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
+			return filmService.findLikeName(name.toLowerCase(), PageRequest.of(page,6));
+		} else {
+			return null;			
+		}		
+	}
+	
+	@GetMapping("/recommendations")
+	public Page<Recommendation> moreRecommendations(@RequestParam int page, HttpServletRequest request) {
+		// Before returning a page it confirms that there are more left
+		User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
+		
+		if (page <= (int) Math.ceil(recommendationService.countByUser(user.getId())/6)) {
+			return recommendationService.findByUser(user.getId(), PageRequest.of(page,6));
+		} else {
+			return null;
+		}		
+	}
+	
+	@GetMapping("/comments/number")
 	public List<Integer> calculateChart() {
 		List<Integer> counters = new ArrayList<>();
 		
@@ -172,7 +190,7 @@ public class FilmRestController {
 	}
 	
 	@GetMapping("/{id}/comments")
-	public Page<Comment> moreComments(@PathVariable long id, int page) {
+	public Page<Comment> moreComments(@PathVariable long id, @RequestParam int page) {
 		// Before returning a page it confirms that there are more left
 		Film film = filmService.findById(id).orElseThrow();
 		
@@ -180,22 +198,6 @@ public class FilmRestController {
 			return commentService.findByFilm(film, PageRequest.of(page, 2));
 		} else {
 			return null;
-		}		
-	}
-
-	@GetMapping("/")
-	public Page<Film> searchFilms(String query) {
-		Page<Film> films = filmService.findLikeName(query.toLowerCase(), PageRequest.of(0,6));
-		return films; 
-	}
-	
-	@GetMapping("/")
-	public Page<Film> moreSearchedFilms(String name, int page) {
-		// Before returning a page it confirms that there are more left
-		if (page <= (int) Math.ceil(filmService.countByName(name)/6)) {
-			return filmService.findLikeName(name, PageRequest.of(page,6));
-		} else {
-			return null;			
 		}		
 	}
 
