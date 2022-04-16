@@ -1,0 +1,108 @@
+<div class="bodyBig">
+    <div class="wrapper">
+        <header>
+            <div class="AdviceMeLogo">
+                <a id="logo" href="/menuRegistered#home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+            </div>
+            <nav id="navPrincipal" class="main-nav">
+                <a href="/menuRegistered#home">Home</a>
+                <a href="/menuRegistered#action">Action</a>
+                <a href="/menuRegistered#adventure">Adventure</a>
+                <a href="/menuRegistered#comedy">Comedy</a>
+                <a href="/menuRegistered#drama">Drama</a>
+                <a href="/menuRegistered#horror">Horror</a>
+                <a href="/menuRegistered#scienceFiction">Science Fiction</a>
+            </nav>
+            <nav class="sub-nav">
+                <form action="/searchFilms">
+                    <input type="text" name="query" placeholder="Search...">
+                    <button type="submit">
+                        <i class="fas fa-search sub-nav-logo"></i>
+                    </button>
+                        <a href="/profile/{{user.id}}">Account</a>
+                </form>
+            </nav>
+        </header>
+
+        <section class="main-container" >
+            <h1 id="home">Most Commented Genres</h1>
+            <div id="piechart"></div>
+
+            <h1 id="trending">Trending Now</h1>
+            <div class="box" *ngFor="let film of trending">
+                <!--
+                    <a [routerLink]="['/films', film.id]"><img src="/{{film.id}}/image" alt=""></a>
+                -->
+                <a [routerLink]="['/filmsUnregistered']">{{film}}</a>
+            </div>
+
+            <div id="moreFilmsTrending"></div>
+            <button id='btnTrending' class='btnSubmit'>More Films</button>
+            <div id="loaderTrending" class="lds-dual-ring hidden overlay"></div>
+
+            <h1 id="action">Action</h1>
+            <div class="box" *ngFor="let film of action">
+                
+            </div>
+            
+            <div id="moreFilmsAction"></div>
+            <button id='btnAction' class='btnSubmit'>More Films</button>
+            <div id="loaderAction" class="lds-dual-ring hidden overlay"></div>
+
+            <h1 id="adventure">Adventure</h1>
+            <div class="box" *ngFor="let film of adventure">
+                    
+            </div>
+
+            <div id="moreFilmsAdventure"></div>
+            <button id='btnAdventure' class='btnSubmit'>More Films</button>
+            <div id="loaderAdventure" class="lds-dual-ring hidden overlay"></div>
+            
+            <h1 id="animation">Animation</h1>
+            <div class="box" *ngFor="let film of trending">
+                        
+            </div>
+
+            <div id="moreFilmsAnimation"></div>
+            <button id='btnAnimation' class='btnSubmit'>More Films</button>
+            <div id="loaderAnimation" class="lds-dual-ring hidden overlay"></div>
+
+            <h1 id="comedy">Comedy</h1>
+            <div class="box" *ngFor="let film of comedy">
+                        
+            </div>
+
+            <div id="moreFilmsComedy"></div>
+            <button id='btnComedy' class='btnSubmit'>More Films</button>
+            <div id="loaderComedy" class="lds-dual-ring hidden overlay"></div>
+
+            <h1 id="drama">Drama</h1>
+            <div class="box" *ngFor="let film of comedy">
+                
+            </div>
+
+            <div id="moreFilmsDrama"></div>
+            <button id='btnDrama' class='btnSubmit'>More Films</button>
+            <div id="loaderDrama" class="lds-dual-ring hidden overlay"></div>
+
+            <h1 id="horror">Horror</h1>
+            <div class="box" *ngFor="let film of horror">
+                    
+            </div>
+
+            <div id="moreFilmsHorror"></div>
+            <button id='btnHorror' class='btnSubmit'>More Films</button>
+            <div id="loaderHorror" class="lds-dual-ring hidden overlay"></div>
+
+            <h1 id="scienceFiction">Science Fiction</h1>
+            <div class="box" *ngFor="let film of scifi">
+                        
+            </div>
+            
+            <div id="moreFilmsScifi"></div>
+            <button id='btnScifi' class='btnSubmit'>More Films</button>
+            <div id="loaderScifi" class="lds-dual-ring hidden overlay"></div>
+        </section>
+    </div>
+
+</div>

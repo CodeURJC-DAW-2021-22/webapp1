@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilmsList } from 'src/app/models/rest/filmsList.model';
 import { Film } from '../../models/film.model';
-import { FilmService } from './../../services/film.service';
+import { FilmService } from '../../services/film.service';
 
 @Component({
-    templateUrl: './films-adviceMe.html',
+    templateUrl: './adviceMe.html',
     styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
 })
 
