@@ -3,7 +3,7 @@ import { User } from "./user.model";
 
 export interface Comment {
     id?: number;
-    starts: number;
+    stars: number;
     note: string;
 
     film: Film;

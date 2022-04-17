@@ -15,7 +15,7 @@ export class FilmRegisteredComponent implements OnInit {
     film!: Film;
     comments!: Comment[];
     similar!: Film[];
-    buttonHidden: boolean = false;
+    visible: boolean = true;
     user!: User;
     
     ngOnInit(): void {

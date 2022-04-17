@@ -9,6 +9,8 @@ import { RegisterComponent } from './components/user/register.component';
 import { MenuRegistered } from './components/menu/menuRegistered.component';
 import { MenuAdmin } from './components/menu/menuAdmin.component';
 import { AddFilm } from './components/add/addFilm.component';
+import { AddComment } from './components/add/addComment.component';
+import { EditComment } from './components/user/editComment.component';
 
 const appRoutes = [
     // Add
@@ -30,6 +32,8 @@ const appRoutes = [
     { path: 'filmsUnregistered', component: FilmUnregisteredComponent},
     { path: 'filmsRegistered', component: FilmRegisteredComponent},
     { path: 'addFilm', component: AddFilm},
+    { path: 'addComment', component: AddComment},
+    { path: 'editComment', component: EditComment},
 
     
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }

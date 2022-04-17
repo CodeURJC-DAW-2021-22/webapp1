@@ -8,6 +8,7 @@ import { routing } from './app.routing';
 
 // AddFilm
 import { AddFilm } from './components/add/addFilm.component';
+import { AddComment } from './components/add/addComment.component';
 
 // Films
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
@@ -21,13 +22,14 @@ import { MenuAdmin } from './components/menu/menuAdmin.component';
 // User
 import { LoginComponent } from './components/user/login.component';
 import { RegisterComponent } from './components/user/register.component';
+import { EditComment } from './components/user/editComment.component';
 
 @NgModule({
   declarations: [AppComponent, 
-    AddFilm,
+    AddFilm, AddComment,
     FilmUnregisteredComponent, FilmRegisteredComponent, 
     FilmListAdviceMeComponent, MenuRegistered, MenuAdmin,
-    LoginComponent, RegisterComponent],
+    LoginComponent, RegisterComponent, EditComment],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [],
   bootstrap: [AppComponent],
