@@ -11,8 +11,8 @@ import { FilmListAdviceMeComponent } from './components/films/filmListAdviceMe.c
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
 
 // User
-import { LoginComponent } from './components/user/login.component';
-import { RegisterComponent } from './components/user/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/login/register.component';
 
 @NgModule({
   declarations: [AppComponent, FilmListAdviceMeComponent, FilmUnregisteredComponent,

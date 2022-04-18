@@ -3,8 +3,8 @@ import { RouterModule } from '@angular/router';
 import { FilmListAdviceMeComponent} from './components/films/filmListAdviceMe.component';
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
 
-import { LoginComponent } from './components/user/login.component';
-import { RegisterComponent } from './components/user/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/login/register.component';
 
 const appRoutes = [
     // Films

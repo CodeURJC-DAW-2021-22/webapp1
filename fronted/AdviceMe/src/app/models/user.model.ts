@@ -6,7 +6,7 @@ export interface User {
     name: string;
     email: string;
 
-    comments: Array<Comment>;
+    comments?: Array<Comment>;
 
     encodedPassword: string;
 
@@ -15,11 +15,11 @@ export interface User {
     imageFile: Blob;
     image: boolean;
 
-    following: Array<User>;
+    following?: Array<User>;
     followingCount: number;
 
-    followers: Array<User>;
-    followesCount: number;
+    followers?: Array<User>;
+    followersCount: number;
 
-    recommentdations: Array<Recommendation>
+    recommendations: Array<Recommendation>
 }
