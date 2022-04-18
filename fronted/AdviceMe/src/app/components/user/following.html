@@ -1,0 +1,49 @@
+<div class="bodyBig">
+	<header>
+        <div class="AdviceMeLogo">
+            <a id="logo" href="/menuRegistered#home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+        </div>
+        <nav id="navPrincipal" class="main-nav">
+            <a href="/menuRegistered#home">Home</a>
+            <a href="/menuRegistered#action">Action</a>
+            <a href="/menuRegistered#adventure">Adventure</a>
+            <a href="/menuRegistered#comedy">Comedy</a>
+            <a href="/menuRegistered#drama">Drama</a>
+            <a href="/menuRegistered#horror">Horror</a>
+            <a href="/menuRegistered#scienceFiction">Science Fiction</a>
+        </nav>
+        <nav class="sub-nav">
+            <form action="/searchFilms">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">
+                    <i class="fas fa-search sub-nav-logo"></i>
+                </button>
+                    <a href="/profile/{{user.id}}">Account</a>
+            </form>
+        </nav>
+    </header>
+
+	<div class="container emp-profile-follow">
+		<div class="row tittle">
+			Following
+		</div>
+		<div *ngFor="let following of followings">
+            <div class="row account">
+                <div class="col-md-2">
+                    <a href="/watchProfile/{{following.id}}">{{following.name}}</a>
+                </div>
+            </div>
+		</div>
+		
+		<div *ngIf="followings != null"class="row account">	
+			<div class="col-md-2">
+				<p>Not following anyone</p>
+			</div>
+		</div>
+
+
+		<div id="moreFollowing"></div>
+		<button id='btnFollowing' class='btnSubmit'>More Followers</button>
+		<div id="loaderFollowing" class="lds-dual-ring hidden overlay"></div>
+	</div>
+</div>

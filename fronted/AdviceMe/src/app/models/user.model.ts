@@ -19,7 +19,7 @@ export interface User {
     followingCount: number;
 
     followers: Array<User>;
-    followesCount: number;
+    followersCount: number;
 
     recommentdations: Array<Recommendation>
 }

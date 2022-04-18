@@ -10,7 +10,14 @@ import { MenuRegistered } from './components/menu/menuRegistered.component';
 import { MenuAdmin } from './components/menu/menuAdmin.component';
 import { AddFilm } from './components/add/addFilm.component';
 import { AddComment } from './components/add/addComment.component';
-import { EditComment } from './components/user/editComment.component';
+import { EditComment } from './components/add/editComment.component';
+import { EditFilm } from './components/add/editFilm.component';
+import { EditPassword } from './components/add/editPassword.component';
+import { EditProfile } from './components/add/editProfile.component';
+import { FilmAdminComponent } from './components/films/filmsAdmin.component';
+import { FollowersComponent } from './components/user/followers.component';
+import { FollowingComponent } from './components/user/following.component';
+import { ProfileComponent } from './components/user/profile.component';
 
 const appRoutes = [
     // Add
@@ -31,9 +38,16 @@ const appRoutes = [
     // Los siguientes es para borrar, son pruebas
     { path: 'filmsUnregistered', component: FilmUnregisteredComponent},
     { path: 'filmsRegistered', component: FilmRegisteredComponent},
+    { path: 'filmsAdmin', component: FilmAdminComponent},
     { path: 'addFilm', component: AddFilm},
     { path: 'addComment', component: AddComment},
     { path: 'editComment', component: EditComment},
+    { path: 'editFilm', component: EditFilm},
+    { path: 'editPassword', component: EditPassword},
+    { path: 'editProfile', component: EditProfile},
+    { path: 'followers', component: FollowersComponent},
+    { path: 'following', component: FollowingComponent},
+    { path: 'profile', component: ProfileComponent},
 
     
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }

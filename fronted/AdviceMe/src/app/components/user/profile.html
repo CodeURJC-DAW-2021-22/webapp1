@@ -1,0 +1,130 @@
+<div class="bodyBig">
+	<header>
+        <div class="AdviceMeLogo">
+            <a id="logo" href="/menuRegistered#home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+        </div>
+        <nav id="navPrincipal" class="main-nav">
+            <a href="/menuRegistered#home">Home</a>
+            <a href="/menuRegistered#action">Action</a>
+            <a href="/menuRegistered#adventure">Adventure</a>
+            <a href="/menuRegistered#comedy">Comedy</a>
+            <a href="/menuRegistered#drama">Drama</a>
+            <a href="/menuRegistered#horror">Horror</a>
+            <a href="/menuRegistered#scienceFiction">Science Fiction</a>
+        </nav>
+        <nav class="sub-nav">
+            <form action="/searchFilms">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">
+                    <i class="fas fa-search sub-nav-logo"></i>
+                </button>
+                    <a href="/profile/{{user.id}}">Account</a>
+            </form>
+        </nav>
+    </header>
+
+	<div class="container emp-profile">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-img">
+					<img src="/{{user.id}}/imageProfile">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="profile-head">
+						<h1>Profile</h1>
+					</div>
+				</div>
+				<div class="row">
+						<div class="col-md-2 followers"><a href="/followers/{{user.id}}">{{user.followersCount}} Followers</a></div>
+						<div class="col-md-2 followers"><a href="/following/{{user.id}}">{{user.followingCount}} Following</a></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<button class="profile-edit-btn" (click)="'/editProfile/{{user.id}}'">Edit Profile</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-work">
+					<br>
+					<form action="/logout" method="post">
+						<button type="submit" class="profile-edit-btn">Sign out</button>
+						<input type="hidden" name="_csrf" value="{{token}}" />
+					</form>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="tab-content profile-tab" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="row seccion">
+							<label>About</label>
+						</div>
+						<div class="row">
+							<div class="row">
+								<div class="col-md-6">
+									<label>Name</label>
+								</div>
+								<div class="col-md-6">
+									<p>{{user.name}}</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label>Email</label>
+								</div>
+								<div class="col-md-6">
+									<p>{{user.email}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-8">
+				<div class="row seccion">
+					<p>Comments</p>
+				</div>
+
+					<div *ngFor="let comment of comments">
+						<div class="row">
+							<div class="row">
+								<div class="col comment">
+										<a href="/filmRegistered/{{comment.film.id}}">
+											<p><b>{{comment.film.title}}</b></p>
+										</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<p>{{comment.note}}</p>
+									<!--<div class="stars rateyo" data-rateyo-rating="{{film.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
+									-->	<p></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<button class="profile-edit-btn"><a href="/editComment/{{comment.id}}">Edit Comment</a></button>
+								</div>
+								<div class="col-md-1">
+									<button class="btn"><a href="/removeComment/{{comment.id}}"><img src="/Images/delete.png" width="20px"></a></button>
+								</div>
+							</div>
+						</div>
+						<br>
+					</div>
+						<p *ngIf="comments!=null">There are no asserts yet</p>
+					
+					<div id="moreCommentsProfile"></div>
+					<button id='btnCommentProfile' class='btnSubmit'>More Comments</button>
+					<div id="loaderCommentProfile" class="lds-dual-ring hidden overlay"></div>
+
+			</div>
+		</div>
+	</div>
+
+</div>

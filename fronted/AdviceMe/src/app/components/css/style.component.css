@@ -20,6 +20,12 @@
     --light: 	black;
   }
   
+  .bodyBig div.row.tittle{
+    color: black;
+    --dark: grey;
+    --light: 	black;
+  }
+
   img {
     max-width: 100%;
   }

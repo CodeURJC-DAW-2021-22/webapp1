@@ -8,11 +8,16 @@ import { routing } from './app.routing';
 
 // AddFilm
 import { AddFilm } from './components/add/addFilm.component';
+import { EditFilm } from './components/add/editFilm.component';
 import { AddComment } from './components/add/addComment.component';
+import { EditComment } from './components/add/editComment.component';
+import { EditPassword } from './components/add/editPassword.component';
+import { EditProfile } from './components/add/editProfile.component';
 
 // Films
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
 import { FilmRegisteredComponent } from './components/films/filmRegistered.component';
+import { FilmAdminComponent } from './components/films/filmsAdmin.component';
 
 // Menu
 import { FilmListAdviceMeComponent } from './components/menu/filmListAdviceMe.component';
@@ -22,14 +27,16 @@ import { MenuAdmin } from './components/menu/menuAdmin.component';
 // User
 import { LoginComponent } from './components/user/login.component';
 import { RegisterComponent } from './components/user/register.component';
-import { EditComment } from './components/user/editComment.component';
+import { FollowersComponent } from './components/user/followers.component';
+import { FollowingComponent } from './components/user/following.component';
+import { ProfileComponent } from './components/user/profile.component';
 
 @NgModule({
   declarations: [AppComponent, 
-    AddFilm, AddComment,
-    FilmUnregisteredComponent, FilmRegisteredComponent, 
+    AddFilm, EditFilm, AddComment, EditComment, EditPassword, EditProfile,
+    FilmUnregisteredComponent, FilmRegisteredComponent, FilmAdminComponent,
     FilmListAdviceMeComponent, MenuRegistered, MenuAdmin,
-    LoginComponent, RegisterComponent, EditComment],
+    LoginComponent, RegisterComponent, FollowersComponent, FollowingComponent, ProfileComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [],
   bootstrap: [AppComponent],
