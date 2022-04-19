@@ -6,20 +6,20 @@ export interface User {
     name: string;
     email: string;
 
-    comments: Array<Comment>;
+    comments?: Array<Comment>;
 
     encodedPassword: string;
 
-    roles: Array<string>;
+    roles: string[];
 
     imageFile: Blob;
     image: boolean;
 
-    following: Array<User>;
+    following?: Array<User>;
     followingCount: number;
 
-    followers: Array<User>;
+    followers?: Array<User>;
     followersCount: number;
 
-    recommentdations: Array<Recommendation>
+    recommendations: Array<Recommendation>;
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilmsList } from 'src/app/models/rest/filmsList.model';
 import { Film } from '../../models/film.model';
-import { FilmService } from '../../services/film.service';
+import { FilmsService } from './../../services/film.service';
 
 @Component({
     templateUrl: './adviceMe.html',
@@ -22,7 +22,7 @@ export class FilmListAdviceMeComponent implements OnInit {
     horror: Film[] = [];
     scifi: Film[] = [];
     
-    constructor(private router: Router, private service: FilmService){ }
+    constructor(private router: Router, private service: FilmsService){ }
 
     ngOnInit() {
         this.service.getFilms().subscribe(

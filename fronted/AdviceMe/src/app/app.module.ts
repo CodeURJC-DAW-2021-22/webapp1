@@ -25,11 +25,12 @@ import { MenuRegistered } from './components/menu/menuRegistered.component';
 import { MenuAdmin } from './components/menu/menuAdmin.component';
 
 // User
-import { LoginComponent } from './components/user/login.component';
-import { RegisterComponent } from './components/user/register.component';
-import { FollowersComponent } from './components/user/followers.component';
-import { FollowingComponent } from './components/user/following.component';
-import { ProfileComponent } from './components/user/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/login/register.component';
+import { FollowersComponent } from './components/login/followers.component';
+import { FollowingComponent } from './components/login/following.component';
+import { ProfileComponent } from './components/login/profile.component';
+
 
 @NgModule({
   declarations: [AppComponent, 

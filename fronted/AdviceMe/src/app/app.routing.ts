@@ -4,8 +4,8 @@ import { FilmListAdviceMeComponent} from './components/menu/filmListAdviceMe.com
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
 import { FilmRegisteredComponent } from './components/films/filmRegistered.component';
 
-import { LoginComponent } from './components/user/login.component';
-import { RegisterComponent } from './components/user/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/login/register.component';
 import { MenuRegistered } from './components/menu/menuRegistered.component';
 import { MenuAdmin } from './components/menu/menuAdmin.component';
 import { AddFilm } from './components/add/addFilm.component';
@@ -15,9 +15,9 @@ import { EditFilm } from './components/add/editFilm.component';
 import { EditPassword } from './components/add/editPassword.component';
 import { EditProfile } from './components/add/editProfile.component';
 import { FilmAdminComponent } from './components/films/filmsAdmin.component';
-import { FollowersComponent } from './components/user/followers.component';
-import { FollowingComponent } from './components/user/following.component';
-import { ProfileComponent } from './components/user/profile.component';
+import { FollowersComponent } from './components/login/followers.component';
+import { FollowingComponent } from './components/login/following.component';
+import { ProfileComponent } from './components/login/profile.component';
 
 const appRoutes = [
     // Add
