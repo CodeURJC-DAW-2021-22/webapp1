@@ -10,7 +10,7 @@ export interface User {
 
     encodedPassword: string;
 
-    roles: Array<string>;
+    roles: string[];
 
     imageFile: Blob;
     image: boolean;
@@ -21,5 +21,5 @@ export interface User {
     followers?: Array<User>;
     followersCount: number;
 
-    recommendations: Array<Recommendation>
+    recommendations: Array<Recommendation>;
 }
