@@ -5,7 +5,6 @@ export interface Comment {
     id?: number;
     stars: number;
     note: string;
-
     film: Film;
     user: User;
 }

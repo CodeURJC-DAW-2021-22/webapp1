@@ -9,17 +9,9 @@ export interface Film {
     minAge: string;
     genre: Genre;
     duration: number;
-
     cast: string;
-
     director: string;
     plot: string;
-
-    comments: Array<Comment>;
-
-    imageFile: Blob;
-
     image: boolean;
-
     similar: Array<Film>;
 }

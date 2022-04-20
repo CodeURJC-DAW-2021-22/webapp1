@@ -5,21 +5,8 @@ export interface User {
     id?: number;
     name: string;
     email: string;
-
-    comments?: Array<Comment>;
-
-    encodedPassword: string;
-
     roles: string[];
-
-    imageFile: Blob;
     image: boolean;
-
-    following?: Array<User>;
     followingCount: number;
-
-    followers?: Array<User>;
     followersCount: number;
-
-    recommendations: Array<Recommendation>;
 }

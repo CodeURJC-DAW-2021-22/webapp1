@@ -36,7 +36,6 @@ public class User{
 	private String encodedPassword;
 
 	@ElementCollection(fetch=FetchType.EAGER)
-	@JsonIgnore
 	private List<String> roles;
 	
 	@Lob
