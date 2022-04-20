@@ -12,8 +12,7 @@ import { FilmsService } from './../../services/film.service';
 export class FilmListAdviceMeComponent implements OnInit {
     
     filmsList!: FilmsList;
-    //trending: Film[] = [];
-    trending: string[] = ["Película 1", "Película 2"]
+    trending: Film[] = [];
     action: Film[] = [];
     adventure: Film[] = [];
     animation: Film[] = [];
@@ -33,7 +32,7 @@ export class FilmListAdviceMeComponent implements OnInit {
 
     update(response:FilmsList) {
         this.filmsList = response;
-        
+        this.trending = this.filmsList.trending.content;
     }
 
     // Pruebas para que funcione bien la API

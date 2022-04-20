@@ -1,13 +1,14 @@
 import { Film } from '../film.model';
+import { Page } from './page.model';
 
 export interface FilmsList {
-    recommendations?: Array<Film>;
-    trending: Array<Film>;
-    action: Array<Film>;
-    adventure: Array<Film>;
-    animation: Array<Film>;
-    comedy: Array<Film>;
-    drama: Array<Film>;
-    horror: Array<Film>;
-    scifi: Array<Film>;
+    recommendations?: Page<Film>;
+    trending: Page<Film>;
+    action: Page<Film>;
+    adventure: Page<Film>;
+    animation: Page<Film>;
+    comedy: Page<Film>;
+    drama: Page<Film>;
+    horror: Page<Film>;
+    scifi: Page<Film>;
 }
