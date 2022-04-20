@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-    templateUrl: './addFilm.html',
-    styleUrls: ['../css/style.component.css'],
+    templateUrl: './addFilm.component.html',
+    styleUrls: ['../../../assets/css/style.component.css'],
 })
 
 export class AddFilm implements OnInit {

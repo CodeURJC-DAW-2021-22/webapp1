@@ -5,8 +5,8 @@ import { Film } from '../../models/film.model';
 import { FilmsService } from './../../services/film.service';
 
 @Component({
-    templateUrl: './adviceMe.html',
-    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
+    templateUrl: './adviceMe.component.html',
+    styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/loadingButton.component.css'],
 })
 
 export class FilmListAdviceMeComponent implements OnInit {

@@ -1,4 +1,3 @@
-import {Comment} from "./comment.model";
 import {Genre} from "./genre.model";
 
 export interface Film {

@@ -4,8 +4,8 @@ import { FilmsList } from "src/app/models/rest/filmsList.model";
 import { User } from "src/app/models/user.model";
 
 @Component({
-    templateUrl: './menuRegistered.html',
-    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
+    templateUrl: './menuRegistered.component.html',
+    styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/loadingButton.component.css'],
 })
 
 export class MenuRegistered implements OnInit {

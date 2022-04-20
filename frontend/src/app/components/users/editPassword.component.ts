@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/models/user.model";
 
 declare var showPassword: any;
+
 @Component({
-    templateUrl: './editPassword.html',
-    styleUrls: ['../css/style.component.css', '../css/styleLogin.component.css'],
+    templateUrl: './editPassword.component.html',
+    styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/styleLogin.component.css'],
 })
 
 export class EditPassword implements OnInit {

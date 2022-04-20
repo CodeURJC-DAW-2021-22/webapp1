@@ -2,18 +2,16 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/models/user.model";
 
 @Component({
-    templateUrl: './following.html',
-    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
+    templateUrl: './editProfile.component.html',
+    styleUrls: ['../../../assets/css/style.component.css'],
 })
 
-export class FollowingComponent implements OnInit {
+export class EditProfile implements OnInit {
 
     user!: User;
-    followings: User[] = []
     token: any;
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");
     }
-
 }

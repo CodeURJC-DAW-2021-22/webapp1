@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/models/user.model";
 
 @Component({
-    templateUrl: './followers.html',
-    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
+    templateUrl: './followers.component.html',
+    styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/loadingButton.component.css'],
 })
 
 export class FollowersComponent implements OnInit {

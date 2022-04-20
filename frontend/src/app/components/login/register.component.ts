@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 declare var showPassword: any;
 @Component({
     templateUrl: './register.component.html',
-    styleUrls: ['../css/style.component.css','../css/styleLogin.component.css']
+    styleUrls: ['../../../assets/css/style.component.css','../../../assets/css/styleLogin.component.css']
 })
 
 export class RegisterComponent implements OnInit {

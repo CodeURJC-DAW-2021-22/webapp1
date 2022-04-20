@@ -3,8 +3,8 @@ import { Comment } from "src/app/models/comment.model";
 import { User } from "src/app/models/user.model";
 
 @Component({
-    templateUrl: './profile.html',
-    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
+    templateUrl: './profile.component.html',
+    styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/loadingButton.component.css'],
 })
 
 export class ProfileComponent implements OnInit {

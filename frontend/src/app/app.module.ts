@@ -6,38 +6,41 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
-// AddFilm
-import { AddFilm } from './components/add/addFilm.component';
-import { EditFilm } from './components/add/editFilm.component';
-import { AddComment } from './components/add/addComment.component';
-import { EditComment } from './components/add/editComment.component';
-import { EditPassword } from './components/add/editPassword.component';
-import { EditProfile } from './components/add/editProfile.component';
+// Comments
+import { AddComment } from './components/comments/addComment.component';
+import { EditComment } from './components/comments/editComment.component';
 
 // Films
-import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
+import { AddFilm } from './components/films/addFilm.component';
+import { EditFilm } from './components/films/editFilm.component';
+import { FilmFormComponent } from './components/films/filmForm.component';
+import { FilmAdminComponent } from './components/films/filmAdmin.component';
 import { FilmRegisteredComponent } from './components/films/filmRegistered.component';
-import { FilmAdminComponent } from './components/films/filmsAdmin.component';
+import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
+
+// Login
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/login/register.component';
 
 // Menu
 import { FilmListAdviceMeComponent } from './components/menu/filmListAdviceMe.component';
-import { MenuRegistered } from './components/menu/menuRegistered.component';
 import { MenuAdmin } from './components/menu/menuAdmin.component';
+import { MenuRegistered } from './components/menu/menuRegistered.component';
 
-// User
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/login/register.component';
-import { FollowersComponent } from './components/login/followers.component';
-import { FollowingComponent } from './components/login/following.component';
-import { ProfileComponent } from './components/login/profile.component';
-
+// Users
+import { EditPassword } from './components/users/editPassword.component';
+import { EditProfile } from './components/users/editProfile.component';
+import { FollowersComponent } from './components/users/followers.component';
+import { FollowingComponent } from './components/users/following.component';
+import { ProfileComponent } from './components/users/profile.component';
 
 @NgModule({
   declarations: [AppComponent, 
-    AddFilm, EditFilm, AddComment, EditComment, EditPassword, EditProfile,
-    FilmUnregisteredComponent, FilmRegisteredComponent, FilmAdminComponent,
-    FilmListAdviceMeComponent, MenuRegistered, MenuAdmin,
-    LoginComponent, RegisterComponent, FollowersComponent, FollowingComponent, ProfileComponent],
+    AddComment, EditComment,
+    AddFilm, EditFilm, FilmFormComponent, FilmAdminComponent, FilmRegisteredComponent, FilmUnregisteredComponent,
+    LoginComponent, RegisterComponent,
+    FilmListAdviceMeComponent, MenuAdmin, MenuRegistered,
+    EditPassword, EditProfile, FollowersComponent, FollowingComponent, ProfileComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [],
   bootstrap: [AppComponent],

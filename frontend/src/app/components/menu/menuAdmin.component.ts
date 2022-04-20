@@ -4,8 +4,8 @@ import { FilmsList } from "src/app/models/rest/filmsList.model";
 
 
 @Component({
-    templateUrl: './menuAdmin.html',
-    styleUrls: ['../css/style.component.css', '../css/loadingButton.component.css'],
+    templateUrl: './menuAdmin.component.html',
+    styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/loadingButton.component.css'],
 })
 
 export class MenuAdmin implements OnInit {
