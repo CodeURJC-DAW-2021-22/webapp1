@@ -32,7 +32,6 @@
             "scripts": [
               "src/assets/js/showPassword.js",
               "src/assets/js/chartAdviceMe.js",
-              "src/assets/js/loadButton.js",
               "src/assets/js/stars.js"
             ]
           },

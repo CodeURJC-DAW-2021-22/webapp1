@@ -5,6 +5,8 @@ import { catchError } from 'rxjs/operators';
 
 import { FilmsList } from '../models/rest/filmsList.model';
 import { Film } from '../models/film.model';
+import { Page } from '../models/rest/page.model';
+import { Genre } from '../models/genre.model';
 
 const BASE_URL = '/api/films';
 
@@ -34,6 +36,20 @@ export class FilmsService {
 				catchError(error => this.handleError(error))
 			);
 		}
+	}
+
+	downloadImage(film: Film) {
+		return film.image? '/api/films/'+ film.id + '/image' : '/assets/images/no_image.png';
+	}
+
+	moreFilms(page: number) {
+		return this.httpClient.get(BASE_URL + '/?page=' + page).pipe(
+		) as Observable<Page<Film>>;
+	}
+
+	moreFilmsGenre(genre: String, page: number) {
+		return this.httpClient.get(BASE_URL + '/?genre=' + genre +'&page=' + page).pipe(
+		) as Observable<Page<Film>>;
 	}
 
     private handleError(error: any) {
