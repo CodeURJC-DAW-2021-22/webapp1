@@ -21,6 +21,9 @@ export class LoginService {
             response => {
                 this.user = response as User;
                 this.logged = true;
+                if (this.isAdmin()){
+                    this.router.navigate(['/menuAdmin']);
+                }
                 this.router.navigate(['/menuRegistered']);
             },
             error => {
