@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 const BASE_URL = '/api/auth';
 
@@ -10,7 +11,7 @@ export class LoginService {
     logged: boolean = false;
     user: User | undefined;
 
-    constructor(private http: HttpClient) {
+    constructor(private router: Router, activatedRoute: ActivatedRoute, private http: HttpClient) {
         this.reqIsLogged();
     }
 
@@ -20,6 +21,7 @@ export class LoginService {
             response => {
                 this.user = response as User;
                 this.logged = true;
+                this.router.navigate(['/menuRegistered']);
             },
             error => {
                 if (error.status != 404) {
