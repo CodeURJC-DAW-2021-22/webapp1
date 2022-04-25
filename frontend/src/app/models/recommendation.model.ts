@@ -1,6 +1,6 @@
 import { Film } from "./film.model";
 
 export interface Recommendation {
-    id?: number;
+    id: number;
     filmRecommended: Film;
 }

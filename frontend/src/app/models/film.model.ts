@@ -1,7 +1,7 @@
 import {Genre} from "./genre.model";
 
 export interface Film {
-    id?: number;
+    id: number;
     title: string;
     releaseDate: Date;
     averageStars: number;

@@ -13,7 +13,7 @@ export class FilmsService {
 
     constructor(private httpClient: HttpClient) { }
 
-    getFilms(): Observable<FilmsList> {
+    getMenu(): Observable<FilmsList> {
         return this.httpClient.get(BASE_URL + '/menu').pipe(
         ) as Observable<FilmsList>;
     }

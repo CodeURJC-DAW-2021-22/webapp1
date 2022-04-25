@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Genre } from 'src/app/models/genre.model';
 import { FilmsList } from 'src/app/models/rest/filmsList.model';
 import { Film } from '../../models/film.model';
 import { FilmsService } from './../../services/film.service';
@@ -24,7 +25,7 @@ export class FilmListAdviceMeComponent implements OnInit {
     constructor(private router: Router, private service: FilmsService){ }
 
     ngOnInit() {
-        this.service.getFilms().subscribe(
+        this.service.getMenu().subscribe(
             response => this.update(response),
             error => console.log(error)
         );
@@ -33,22 +34,20 @@ export class FilmListAdviceMeComponent implements OnInit {
     update(response:FilmsList) {
         this.filmsList = response;
         this.trending = this.filmsList.trending.content;
+        this.action = this.filmsList.action.content;
+        this.adventure = this.filmsList.adventure.content;
+        this.animation = this.filmsList.animation.content;
+        this.comedy = this.filmsList.comedy.content;
+        this.drama = this.filmsList.drama.content;
+        this.horror = this.filmsList.drama.content;
+        this.scifi = this.filmsList.scifi.content;
     }
 
-    // Pruebas para que funcione bien la API
-    update1(response: FilmsList) {
-        this.filmsList = response;
-        /*const obj = Object.values(this.filmsList.trending);
-        console.log(obj[0]);
-        this.array = obj[0];
-        this.array.forEach(element => {
-            console.log();
-        });
-        this.trendingList = this.filmsList.trending;
-        //console.log(this.trendingList);
+    filmImage (film: Film) {
+        return film.image? '/api/films/'+ film.id + '/image' : '/assets/images/no_image.png';
+    }
 
-
-        this.page = this.trendingList[4].title;
-        console.log(this.page);*/
+    loadMore(genre: String) {
+        
     }
 }
