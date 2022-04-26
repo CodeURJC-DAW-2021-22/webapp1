@@ -52,6 +52,11 @@ export class FilmsService {
 		) as Observable<Page<Film>>;
 	}
 
+	moreFilmsRecommendations(page: number) {
+		return this.httpClient.get(BASE_URL + 'recommendations' +'/?page=' + page).pipe(
+		) as Observable<Page<Film>>;
+	}
+
     private handleError(error: any) {
 		console.log("ERROR:");
 		console.error(error);

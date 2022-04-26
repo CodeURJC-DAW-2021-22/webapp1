@@ -34,79 +34,70 @@
             <div id="piechart"></div>
 
             <h1 id="trending">Trending Now</h1>
-            <div class="box" *ngFor="let film of trending">
-                <!--
-                    <a [routerLink]="['/films', film.id]"><img src="/{{film.id}}/image" alt=""></a>
-                -->
-                <a [routerLink]="['/filmsUnregistered']">{{film}}</a>
+            <div class="box">
+                <!-- Recordar cambiar la ruta para ir a filmsAdmin -->
+                    <a *ngFor="let film of trending" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
-            <div id="moreFilmsTrending"></div>
-            <button id='btnTrending' class='btnSubmit'>More Films</button>
-            <div id="loaderTrending" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMore('indexTrending')" id='btnTrending' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderTrending" class="lds-dual-ring overlay"></div>
 
             <h1 id="action">Action</h1>
-            <div class="box" *ngFor="let film of action">
-                
+            <div class="box" >
+                <a *ngFor="let film of action" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
             
-            <div id="moreFilmsAction"></div>
-            <button id='btnAction' class='btnSubmit'>More Films</button>
-            <div id="loaderAction" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMoreGenre('indexAction', 'ACTION')" id='btnAction' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderAction" class="lds-dual-ring overlay"></div>
 
             <h1 id="adventure">Adventure</h1>
-            <div class="box" *ngFor="let film of adventure">
-                    
+            <div class="box" >
+                <a *ngFor="let film of adventure" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
-            <div id="moreFilmsAdventure"></div>
-            <button id='btnAdventure' class='btnSubmit'>More Films</button>
-            <div id="loaderAdventure" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMoreGenre('indexAdventure', 'ADVENTURE')" id='btnAdventure' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderAdventure" class="lds-dual-ring overlay"></div>
             
             <h1 id="animation">Animation</h1>
-            <div class="box" *ngFor="let film of trending">
-                        
+            <div class="box" >
+                <a *ngFor="let film of animation" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
-            <div id="moreFilmsAnimation"></div>
-            <button id='btnAnimation' class='btnSubmit'>More Films</button>
-            <div id="loaderAnimation" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMoreGenre('indexAnimation', 'ANIMATION')" id='btnAnimation' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderAnimation" class="lds-dual-ring overlay"></div>
 
             <h1 id="comedy">Comedy</h1>
-            <div class="box" *ngFor="let film of comedy">
-                        
+            <div class="box" >
+                <a *ngFor="let film of comedy" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
-            <div id="moreFilmsComedy"></div>
-            <button id='btnComedy' class='btnSubmit'>More Films</button>
-            <div id="loaderComedy" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMoreGenre('indexComedy', 'COMEDY')" id='btnComedy' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderComedy" class="lds-dual-ring overlay"></div>
 
             <h1 id="drama">Drama</h1>
-            <div class="box" *ngFor="let film of comedy">
-                
+            <div class="box" >
+                <a *ngFor="let film of drama" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <div id="moreFilmsDrama"></div>
-            <button id='btnDrama' class='btnSubmit'>More Films</button>
-            <div id="loaderDrama" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMoreGenre('indexDrama', 'DRAMA')" id='btnDrama' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderDrama" class="lds-dual-ring overlay"></div>
 
             <h1 id="horror">Horror</h1>
-            <div class="box" *ngFor="let film of horror">
-                    
+            <div class="box" >
+                <a *ngFor="let film of horror" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
-            <div id="moreFilmsHorror"></div>
-            <button id='btnHorror' class='btnSubmit'>More Films</button>
-            <div id="loaderHorror" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMoreGenre('indexHorror', 'HORROR')" id='btnHorror' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderHorror" class="lds-dual-ring hidden overlay"></div>
 
             <h1 id="scienceFiction">Science Fiction</h1>
-            <div class="box" *ngFor="let film of scifi">
-                        
+            <div class="box" >
+                <a *ngFor="let film of scifi" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
             
-            <div id="moreFilmsScifi"></div>
-            <button id='btnScifi' class='btnSubmit'>More Films</button>
-            <div id="loaderScifi" class="lds-dual-ring hidden overlay"></div>
+            <button (click)="loadMoreGenre('indexScifi','SCIENCE_FICTION')" id='btnScifi' class='btnSubmit'>More Films</button>
+            <div *ngIf="loaderScifi" class="lds-dual-ring overlay"></div>
         </section>
     </div>
 
