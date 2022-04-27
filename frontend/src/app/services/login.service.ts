@@ -21,10 +21,6 @@ export class LoginService {
             response => {
                 this.user = response as User;
                 this.logged = true;
-                if (this.isAdmin()){
-                    this.router.navigate(['/menuAdmin']);
-                }
-                this.router.navigate(['/menuRegistered']);
             },
             error => {
                 if (error.status != 404) {
@@ -35,9 +31,9 @@ export class LoginService {
 
     }
 
-    logIn(user: string, pass: string) {
+    logIn(user: string, password: string) {
 
-        this.http.post(BASE_URL + "/login", { username: user, password: pass }, { withCredentials: true })
+        this.http.post(BASE_URL + "/login", { username: user, password: password }, { withCredentials: true })
             .subscribe(
                 (response) => this.reqIsLogged(),
                 (error) => alert("Wrong credentials")

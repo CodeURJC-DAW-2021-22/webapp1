@@ -1,7 +1,7 @@
 <div class="bodyBig">
   <div class="screen-1">
     <img class="logo" src="assets/Images/logo.png" alt="logo" width="300" height="300">
-    <form *ngIf="!loginService.isLogged()" action="/login" method="post">
+    <form *ngIf="!logged" action="/login" method="post">
       <div class="username">
         <label for="username">Username</label>
         <div class="sec-2">
@@ -13,12 +13,12 @@
         <label for="password">Password</label>
         <div class="sec-2">
           <ion-icon name="lock-closed-outline"></ion-icon>
-          <input #pass type="password" name="password" id="password" placeholder="············" required>
+          <input #password type="password" name="password" id="password" placeholder="············" required>
           <ion-icon name="eye" onclick="showPassword()"></ion-icon>
         </div>
       </div>
       <div class="center">
-        <button type="submit" (click)="logIn($event, user.value, pass.value)" class="btnSubmit">Log in</button>
+        <button type="submit" (click)="logIn($event, user.value, password.value)" class="btnSubmit">Log in</button>
       </div>
       <input type="hidden" name="_csrf" value="{{token}}"/>
     </form>
