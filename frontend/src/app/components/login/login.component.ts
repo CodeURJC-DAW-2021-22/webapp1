@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { LoginService } from "src/app/services/login.service";
+//import { Router } from '@angular/router';
 
 @Component({
     selector : 'login',
@@ -7,24 +8,18 @@ import { LoginService } from "src/app/services/login.service";
     styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/styleLogin.component.css'],
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent{
 
-    token: any;
-    ngOnInit(): void {
-        throw new Error("Method not implemented.");
+    username!: string;
+    password!: string;
+
+    constructor(private loginService: LoginService, /*private router: Router*/) { 
+        /*if(this.loginService.isLogged()){
+            this.router.navigate(['/menuRegistered']);
+        }*/
     }
 
-    constructor(public loginService: LoginService) { }
-
-    logIn(event: any, user: string, pass: string) {
-  
-      event.preventDefault();
-  
-      this.loginService.logIn(user, pass);
+    logIn() {
+        this.loginService.logIn(this.username, this.password);
     }
-  
-    logOut() {
-      this.loginService.logOut();
-    }
-
 }
