@@ -5,3 +5,11 @@
     margin-right: auto;
     margin-left: 0;
 }
+
+svg.ngx-charts {
+    float: none;
+}
+
+text.pie-label {
+    font-size: 15px;
+}
