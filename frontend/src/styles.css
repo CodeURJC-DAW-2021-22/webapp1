@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+.container {
+    width: 100%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: 0;
+}

@@ -58,4 +58,4 @@ const appRoutes = [
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }
 ]
 
-export const routing = RouterModule.forRoot(appRoutes);
+export const routing = RouterModule.forRoot(appRoutes, { anchorScrolling: 'enabled' });

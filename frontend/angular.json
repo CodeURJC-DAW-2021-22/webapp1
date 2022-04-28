@@ -27,11 +27,11 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": [
               "src/assets/js/showPassword.js",
-              "src/assets/js/chartAdviceMe.js",
               "src/assets/js/stars.js"
             ]
           },

@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
@@ -41,7 +43,7 @@ import { ProfileComponent } from './components/users/profile.component';
     LoginComponent, RegisterComponent,
     FilmListAdviceMeComponent, MenuAdmin, MenuRegistered,
     EditPassword, EditProfile, FollowersComponent, FollowingComponent, ProfileComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule, routing],
+  imports: [BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, routing, NgbModule, NgxChartsModule],
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

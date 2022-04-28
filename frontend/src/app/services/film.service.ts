@@ -25,6 +25,11 @@ export class FilmsService {
         ) as Observable<Film>;
     }
 
+	getChartData(): Observable<number[]>{
+        return this.httpClient.get(BASE_URL + '/comments/number').pipe(
+        ) as Observable<number[]>;
+    }
+
     addFilm(film: Film) {
 		if (!film.id) {
 			return this.httpClient.post(BASE_URL, film)

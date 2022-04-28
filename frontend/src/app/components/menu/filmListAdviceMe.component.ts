@@ -43,6 +43,8 @@ export class FilmListAdviceMeComponent implements OnInit {
     indexHorror: number = 0;
     indexScifi: number = 0;
 
+    data: any[] = [];
+
     constructor(private router: Router, private service: FilmsService){ }
 
     ngOnInit() {
@@ -50,6 +52,8 @@ export class FilmListAdviceMeComponent implements OnInit {
             response => this.update(response),
             error => console.log(error)
         );
+
+        this.loadChart();
     }
 
     update(response:FilmsList) {
@@ -60,12 +64,48 @@ export class FilmListAdviceMeComponent implements OnInit {
         this.animation = this.filmsList.animation.content;
         this.comedy = this.filmsList.comedy.content;
         this.drama = this.filmsList.drama.content;
-        this.horror = this.filmsList.drama.content;
+        this.horror = this.filmsList.horror.content;
         this.scifi = this.filmsList.scifi.content;
     }
 
     filmImage (film: Film) {
         return this.service.downloadImage(film);
+    }
+
+    loadChart() {
+        this.service.getChartData().subscribe(
+            response => this.data = [
+                {
+                  name: "Action",
+                  value: response[0]
+                },
+                {
+                  name: "Adventure",
+                  value: response[1]
+                },
+                {
+                  name: "Animation",
+                  value: response[2]
+                },
+                {
+                  name: "Comedy",
+                  value: response[3]
+                },
+                {
+                  name: "Drama",
+                  value: response[4]
+                },
+                {
+                  name: "Horror",
+                  value: response[5]
+                },
+                {
+                  name: "Science Fiction",
+                  value: response[6]
+                }
+            ],
+            error => console.log(error)
+        );
     }
 
     loadMore(index: String) {
@@ -199,5 +239,4 @@ export class FilmListAdviceMeComponent implements OnInit {
                 break;                  
         }
     }
-
 }
