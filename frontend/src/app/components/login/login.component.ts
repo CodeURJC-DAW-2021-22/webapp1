@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { LoginService } from "src/app/services/login.service";
-import { ActivatedRoute, Router } from '@angular/router';
+//import { Router } from '@angular/router';
 
 @Component({
     selector : 'login',
@@ -8,24 +8,18 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/styleLogin.component.css'],
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent{
 
-    logged: boolean = false;
-    token: any;
-    ngOnInit(): void {
-        this.logged = this.loginService.isLogged();
-        if (this.logged){
+    username!: string;
+    password!: string;
+
+    constructor(private loginService: LoginService, /*private router: Router*/) { 
+        /*if(this.loginService.isLogged()){
             this.router.navigate(['/menuRegistered']);
-        }
+        }*/
     }
 
-    constructor(public loginService: LoginService, private router: Router,
-        activatedRoute: ActivatedRoute) { }
-
-    logIn(event: any, user: string, password: string) {
-  
-      event.preventDefault();
-  
-      this.loginService.logIn(user, password);
+    logIn() {
+        this.loginService.logIn(this.username, this.password);
     }
 }

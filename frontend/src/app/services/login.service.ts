@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 const BASE_URL = '/api/auth';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
 
-    logged: boolean = false;
+    logged!: boolean;
     user: User | undefined;
 
-    constructor(private router: Router, activatedRoute: ActivatedRoute, private http: HttpClient) {
+    constructor(private router: Router, private http: HttpClient) {
         this.reqIsLogged();
     }
 
@@ -21,6 +21,7 @@ export class LoginService {
             response => {
                 this.user = response as User;
                 this.logged = true;
+                this.router.navigate(['/menuRegistered']);
             },
             error => {
                 if (error.status != 404) {
@@ -31,9 +32,9 @@ export class LoginService {
 
     }
 
-    logIn(user: string, password: string) {
+    logIn(username: string, password: string) {
 
-        this.http.post(BASE_URL + "/login", { username: user, password: password }, { withCredentials: true })
+        this.http.post(BASE_URL + "/login", { username: username, password: password }, { withCredentials: true })
             .subscribe(
                 (response) => this.reqIsLogged(),
                 (error) => alert("Wrong credentials")

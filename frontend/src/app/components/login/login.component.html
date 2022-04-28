@@ -1,27 +1,23 @@
 <div class="bodyBig">
   <div class="screen-1">
     <img class="logo" src="assets/Images/logo.png" alt="logo" width="300" height="300">
-    <form *ngIf="!logged" action="/login" method="post">
-      <div class="username">
-        <label for="username">Username</label>
-        <div class="sec-2">
-          <input #user type="text" name="username" placeholder="Username" required>
-        </div>
+    <div class="username">
+      <label for="username">Username</label>
+      <div class="sec-2">
+        <input [(ngModel)]="username" type="text" name="username" placeholder="Username" required>
       </div>
-    <br>
-      <div class="password">
-        <label for="password">Password</label>
-        <div class="sec-2">
-          <ion-icon name="lock-closed-outline"></ion-icon>
-          <input #password type="password" name="password" id="password" placeholder="············" required>
-          <ion-icon name="eye" onclick="showPassword()"></ion-icon>
-        </div>
+    </div>
+    <div class="password">
+      <label for="password">Password</label>
+      <div class="sec-2">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <input [(ngModel)]="password" type="password" name="password" id="password" placeholder="············" required>
+        <ion-icon name="eye" onclick="showPassword()"></ion-icon>
       </div>
-      <div class="center">
-        <button type="submit" (click)="logIn($event, user.value, password.value)" class="btnSubmit">Log in</button>
-      </div>
-      <input type="hidden" name="_csrf" value="{{token}}"/>
-    </form>
+    </div>
+    <div class="center">
+      <button (click)="logIn()" class="btnSubmit">Log in</button>
+    </div>
     <div class="footer"><span>You don't have an account yet? <a href="/register">Sign up</a></span></div>
   </div>
 </div>

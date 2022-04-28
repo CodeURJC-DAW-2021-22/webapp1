@@ -1,8 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-
-import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, throwError } from "rxjs";
+import { catchError } from 'rxjs/operators';
 
 import { User } from "../models/user.model";
 
@@ -14,7 +13,7 @@ export class UserService {
     registered!: boolean;
     user: User | undefined;
 
-    constructor(private router: Router, activatedRoute: ActivatedRoute, private httpClient: HttpClient) {  
+    constructor(private httpClient: HttpClient) {  
         this.reqIsRegistered();     
     }
 
@@ -30,7 +29,6 @@ export class UserService {
             response => {
                 this.user = response as User;
                 this.registered = true;
-                this.router.navigate(['/api/auth/login']);
             },
             error => {
                 if (error.status != 404) {
@@ -42,12 +40,18 @@ export class UserService {
     }
 
     register(formData: FormData) {
-
-        this.httpClient.post(BASE_URL + "/", formData)
-            .subscribe(
-                (response) => this.reqIsRegistered(),
-                (error) => alert("Wrong credentials")
-            );
-
+        return this.httpClient.post(BASE_URL + "/", formData, { withCredentials: true }).pipe(
+            catchError(error => this.handleError(error))
+        );
     }
+
+    private handleError(error: any) {
+		console.log("ERROR:");
+		console.error(error);
+		return throwError("Server error (" + error.status + "): " + error.text())
+	}
+
+    /*isRegistered() {
+        return this.registered;
+    }*/
 }
