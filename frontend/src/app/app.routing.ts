@@ -53,7 +53,7 @@ const appRoutes = [
     { path: 'editProfile', component: EditProfile },
     { path: 'followers', component: FollowersComponent },
     { path: 'following', component: FollowingComponent },
-    { path: 'profile', component: ProfileComponent },
+    { path: 'account', component: ProfileComponent },
     
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }
 ]

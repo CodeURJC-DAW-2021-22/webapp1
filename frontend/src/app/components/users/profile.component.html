@@ -18,7 +18,7 @@
                 <button type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
-                    <a href="/profile/{{user.id}}">Account</a>
+                    <a href="/account">Account</a>
             </form>
         </nav>
     </header>
@@ -49,10 +49,7 @@
 			<div class="col-md-4">
 				<div class="profile-work">
 					<br>
-					<form action="/logout" method="post">
-						<button type="submit" class="profile-edit-btn">Sign out</button>
-						<input type="hidden" name="_csrf" value="{{token}}" />
-					</form>
+						<button (click)="logOut()" class="profile-edit-btn">Sign out</button>
 				</div>
 			</div>
 			<div class="col-md-8">
