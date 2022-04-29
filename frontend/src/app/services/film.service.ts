@@ -18,13 +18,8 @@ export class FilmsService {
         return this.httpClient.get(BASE_URL + '/menu').pipe(
         ) as Observable<FilmsList>;
     }
-    
-    getFilm(id: number): Observable<Film>{
-        return this.httpClient.get(BASE_URL + id).pipe(
-        ) as Observable<Film>;
-    }
 
-	getFilmComments(id: number): Observable<FilmComments>{
+	getFilm(id: number): Observable<FilmComments>{
         return this.httpClient.get(BASE_URL + '/' +id).pipe(
         ) as Observable<FilmComments>;
     }

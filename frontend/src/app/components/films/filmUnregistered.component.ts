@@ -9,40 +9,40 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
     templateUrl: './filmUnregistered.component.html',
     styleUrls: ['../../../assets/css/appFilm.component.css', '../../../assets/css/themeFilm.component.css',
-    '../../../assets/css/jquery.rateyo.component.css', '../../../assets/css/loadingButton.component.css',]
+        '../../../assets/css/jquery.rateyo.component.css', '../../../assets/css/loadingButton.component.css',]
 })
 export class FilmUnregisteredComponent implements OnInit {
-    
+
     filmComments!: FilmComments;
     film!: Film;
     comments!: Comment[];
     similar!: Film[];
 
-    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService){
-        
+    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService) {
     }
 
     ngOnInit(): void {
         const id = this.activatedRouter.snapshot.params['id'];
-        this.service.getFilmComments(id).subscribe(
-            response => this.update(response),
+        this.update(id);
+    }
+
+    update(id: number) {
+        this.service.getFilm(id).subscribe(
+            response => {
+                this.filmComments = response;
+                this.film = this.filmComments.film;
+                this.comments = this.filmComments.comments.content;
+                this.similar = this.film.similar;
+            },
             error => console.log(error)
         );
+
     }
 
-    update(response:FilmComments){
-        this.filmComments = response;
-        this.film = this.filmComments.film;
-        this.comments = this.filmComments.comments.content;
-        this.similar = this.film.similar;
-    }
 
-    filmImage (film: Film) {
+
+    filmImage(film: Film) {
         return this.service.downloadImage(film);
     }
 
-    /*filmImage (film: Film) {
-        return this.service.downloadImage(film);
-    }*/
-    
 }
