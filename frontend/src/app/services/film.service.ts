@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { FilmsList } from '../models/rest/filmsList.model';
 import { Film } from '../models/film.model';
+import { FilmComments } from '../models/rest/filmComments.model';
 
 const BASE_URL = '/api/films';
 
@@ -21,6 +22,11 @@ export class FilmsService {
     getFilm(id: number): Observable<Film>{
         return this.httpClient.get(BASE_URL + id).pipe(
         ) as Observable<Film>;
+    }
+
+	getFilmComments(id: number): Observable<FilmComments>{
+        return this.httpClient.get(BASE_URL + id).pipe(
+        ) as Observable<FilmComments>;
     }
 
     addFilm(film: Film) {
@@ -40,5 +46,9 @@ export class FilmsService {
 		console.log("ERROR:");
 		console.error(error);
 		return throwError("Server error (" + error.status + "): " + error.text())
+	}
+
+	downloadImage(film: Film) {
+		return film.image? '/api/films/'+ film.id + '/image' : '/assets/images/no_image.png';
 	}
 }

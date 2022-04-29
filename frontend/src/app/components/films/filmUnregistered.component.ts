@@ -24,8 +24,8 @@ export class FilmUnregisteredComponent implements OnInit {
 
     ngOnInit(): void {
         const id = this.activatedRouter.snapshot.params['id'];
-        this.service.getFilm(id).subscribe(
-            //this.filmComments => this.update(this.filmComments),
+        this.service.getFilmComments(id).subscribe(
+            response => this.update(response),
             error => console.log(error)
         );
     }
@@ -35,6 +35,10 @@ export class FilmUnregisteredComponent implements OnInit {
         this.film = this.filmComments.film;
         this.comments = this.filmComments.comments.content;
         this.similar = this.filmComments.film.similar;
+    }
+
+    filmImage (film: Film) {
+        return this.service.downloadImage(film);
     }
 
     /*filmImage (film: Film) {
