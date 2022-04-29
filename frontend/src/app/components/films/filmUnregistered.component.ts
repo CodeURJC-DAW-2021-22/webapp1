@@ -34,7 +34,7 @@ export class FilmUnregisteredComponent implements OnInit {
         this.filmComments = response;
         this.film = this.filmComments.film;
         this.comments = this.filmComments.comments.content;
-        this.similar = this.filmComments.film.similar;
+        this.similar = this.film.similar;
     }
 
     filmImage (film: Film) {

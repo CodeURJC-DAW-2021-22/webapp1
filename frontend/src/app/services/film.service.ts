@@ -25,7 +25,7 @@ export class FilmsService {
     }
 
 	getFilmComments(id: number): Observable<FilmComments>{
-        return this.httpClient.get(BASE_URL + id).pipe(
+        return this.httpClient.get(BASE_URL + '/' +id).pipe(
         ) as Observable<FilmComments>;
     }
 

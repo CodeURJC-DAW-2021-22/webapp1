@@ -32,44 +32,44 @@
                     <div class="col">
                         <div class="container">
                             <div>
-                                <img [src]="filmImage(filmComments.film)">
+                                <img [src]="filmImage(film)">
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="card card-body">
-                            <h1 class="card-title display-4"> {{filmComments.film.title}} </h1>
+                            <h1 class="card-title display-4"> {{film.title}} </h1>
                             <!--<div class="stars rateyo" data-rateyo-rating="{{film.averageStars}}" data-rateyo-num-stars="5"
                                 data-rateyo-read-only="true"></div>-->
                             <br>
-                            <p><b>Release date: </b>{{filmComments.film.releaseDate}}</p>
-                            <p><b>Minimum age: </b>{{filmComments.film.minAge}}</p>
-                            <p><b>Genre: </b>{{filmComments.film.genre}}</p>
-                            <p><b>Running time: </b>{{filmComments.film.duration}} minutes</p>
-                            <p><b>Cast: </b>{{filmComments.film.cast}}</p>
-                            <p><b>Director: </b>{{filmComments.film.director}}</p>
+                            <p><b>Release date: </b>{{film.releaseDate}}</p>
+                            <p><b>Minimum age: </b>{{film.minAge}}</p>
+                            <p><b>Genre: </b>{{film.genre}}</p>
+                            <p><b>Running time: </b>{{film.duration}} minutes</p>
+                            <p><b>Cast: </b>{{film.cast}}</p>
+                            <p><b>Director: </b>{{film.director}}</p>
                             <p><b>Plot:</b></p>
-                            <p>{{filmComments.film.plot}}</p>
+                            <p>{{film.plot}}</p>
 
                             <div class="center">
                                 <h4> Asserts </h4>
                             </div>
 
-                            <!--
+                            
                             <div *ngFor="let comment of comments">
-                                <a href="/watchProfile/{{filmComments.comments.user.id}}"><b>{{filmComments.comments.user.name}}</b></a>
+                                <a href="/watchProfile/{{comment.user.id}}"><b>{{comment.user.name}}</b></a>
                                 <p>{{comment.note}}</p>
-                             <div class="stars rateyo" data-rateyo-rating="{{comment.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
-                              <br>
+                             <!--<div class="stars rateyo" data-rateyo-rating="{{comment.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
+                             --> <br>
                             </div>
 
-                            <p *ngIf="comments != null">There are no asserts yet</p>
+                            <p *ngIf="!comments">There are no asserts yet</p>
 
 
                             <div id="moreComments"></div>
                             <div class="center"><button id='btnComment' class='btnSubmit2'>More Comments</button></div>
                             <div id="loaderComment" class="lds-dual-ring hidden overlay"></div>
-                            -->
+                            
                         </div>
                     </div>
                 </div>
@@ -78,8 +78,8 @@
                 <div class="col">
                     <div class="row">
                         <h3 class="font-weight-bold">More like this</h3>
-                        <div class="box" *ngFor="let film of similar">
-                            <a href="/filmUnregistered/{{filmComments.film.id}}"><img src="/{{film.id}}/image" alt=""></a>
+                        <div class="box">
+                            <a *ngFor="let film of similar" href="/filmUnregistered/{{film.id}}"><img [src]="filmImage(film)"></a>
                         </div>
                         <br>
                     </div>
