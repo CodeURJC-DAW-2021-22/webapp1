@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { LoginService } from "src/app/services/login.service";
-//import { Router } from '@angular/router';
 
 @Component({
     selector : 'login',
@@ -13,11 +12,7 @@ export class LoginComponent{
     username!: string;
     password!: string;
 
-    constructor(private loginService: LoginService, /*private router: Router*/) { 
-        /*if(this.loginService.isLogged()){
-            this.router.navigate(['/menuRegistered']);
-        }*/
-    }
+    constructor(private loginService: LoginService) { }
 
     logIn() {
         this.loginService.logIn(this.username, this.password);

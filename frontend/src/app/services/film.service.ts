@@ -16,7 +16,7 @@ export class FilmsService {
     constructor(private httpClient: HttpClient) { }
 
     getMenu(): Observable<FilmsList> {
-        return this.httpClient.get(BASE_URL + '/menu').pipe(
+        return this.httpClient.get(BASE_URL + '/menu', { withCredentials: true }).pipe(
         ) as Observable<FilmsList>;
     }
     

@@ -294,25 +294,29 @@ public class FilmRestController {
 			Film film = optionalFilm.get();
 			User user = userService.findByName(request.getUserPrincipal().getName()).orElseThrow();
 			
-			comment.setFilm(film);
-			comment.setUser(user);
-			commentService.save(comment);
-			
-			film.calculateAverage();
-			filmService.save(film);
-			
-			Film recommended = filmService.findFilmForRecommendation(id, film, user);
-			
-			if (recommended != null) {
-				Recommendation recommendation = new Recommendation(recommended);
-				recommendationService.save(recommendation);
-				user.addRecommedation(recommendation);
-				userService.save(user);
-			
-				SendMail.sendMail(film, user);
+			if (!commentService.userHasCommented(user.getId(), film)) {
+				comment.setFilm(film);
+				comment.setUser(user);
+				commentService.save(comment);
+				
+				film.calculateAverage();
+				filmService.save(film);
+				
+				Film recommended = filmService.findFilmForRecommendation(id, film, user);
+				
+				if (recommended != null) {
+					Recommendation recommendation = new Recommendation(recommended);
+					recommendationService.save(recommendation);
+					user.addRecommedation(recommendation);
+					userService.save(user);
+				
+					SendMail.sendMail(film, user);
+				}
+				
+				return new ResponseEntity<>(comment, HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 			}
-			
-			return new ResponseEntity<>(comment, HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

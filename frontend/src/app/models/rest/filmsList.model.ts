@@ -1,8 +1,9 @@
 import { Film } from '../film.model';
+import { Recommendation } from '../recommendation.model';
 import { Page } from './page.model';
 
 export interface FilmsList {
-    recommendations?: Page<Film>;
+    recommendations: Page<Recommendation>;
     trending: Page<Film>;
     action: Page<Film>;
     adventure: Page<Film>;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { UserComments } from '../models/rest/userComments.model';
 import { Router } from '@angular/router';
 
 const BASE_URL = '/api/auth';
@@ -9,19 +10,27 @@ const BASE_URL = '/api/auth';
 export class LoginService {
 
     logged!: boolean;
+    userComments: UserComments | undefined;
     user: User | undefined;
 
-    constructor(private router: Router, private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         this.reqIsLogged();
     }
 
     reqIsLogged() {
-
-        this.http.get('/api/users/me', { withCredentials: true }).subscribe(
+        return this.http.get('/api/users/me', { withCredentials: true }).subscribe(
             response => {
-                this.user = response as User;
+                this.userComments = response as UserComments;
+                this.user = this.userComments.user;
                 this.logged = true;
-                this.router.navigate(['/menuRegistered']);
+
+                if (this.isLogged()) {
+                    if (this.isAdmin()) {
+                        this.router.navigate(['/menuAdmin']);
+                    } else {
+                        this.router.navigate(['/menuRegistered']);
+                    }
+                }
             },
             error => {
                 if (error.status != 404) {
@@ -29,28 +38,24 @@ export class LoginService {
                 }
             }
         );
-
     }
 
     logIn(username: string, password: string) {
-
-        this.http.post(BASE_URL + "/login", { username: username, password: password }, { withCredentials: true })
-            .subscribe(
-                (response) => this.reqIsLogged(),
-                (error) => alert("Wrong credentials")
-            );
-
+        return this.http.post(BASE_URL + "/login", { username: username, password: password }, { withCredentials: true }).subscribe(
+            response => {
+                this.reqIsLogged();
+            },
+            error => alert("Wrong credentials")
+        );
     }
 
     logOut() {
-
         return this.http.post(BASE_URL + '/logout', { withCredentials: true })
             .subscribe((resp: any) => {
-                console.log("LOGOUT: Successfully");
                 this.logged = false;
                 this.user = undefined;
+                this.userComments = undefined;
             });
-
     }
 
     isLogged() {

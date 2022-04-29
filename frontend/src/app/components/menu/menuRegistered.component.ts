@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { Film } from "src/app/models/film.model";
 import { FilmsList } from "src/app/models/rest/filmsList.model";
 import { Page } from "src/app/models/rest/page.model";
 import { User } from "src/app/models/user.model";
 import { FilmsService } from "src/app/services/film.service";
+import { LoginService } from "src/app/services/login.service";
 
 @Component({
     templateUrl: './menuRegistered.component.html',
@@ -25,7 +25,7 @@ export class MenuRegistered implements OnInit {
     horror: Film[] = [];
     scifi: Film[] = [];
 
-    user: any;
+    user!: User;
 
     // Spinners
     loaderRecommendations: boolean = false;
@@ -51,7 +51,7 @@ export class MenuRegistered implements OnInit {
 
     data: any[] = [];
 
-    constructor(private router: Router, private service: FilmsService){ }
+    constructor(private service: FilmsService, private loginService: LoginService) { }
 
     ngOnInit() {
         this.service.getMenu().subscribe(
@@ -64,7 +64,12 @@ export class MenuRegistered implements OnInit {
 
     update(response:FilmsList) {
         this.filmsList = response;
-        this.filmsList.recommendations? this.recommendations = this.filmsList.recommendations?.content : null;
+        
+        this.filmsList.recommendations.content.forEach(recommendation => {
+            console.log(recommendation);
+            this.recommendations.push(recommendation.film);
+        });
+
         this.trending = this.filmsList.trending.content;
         this.action = this.filmsList.action.content;
         this.adventure = this.filmsList.adventure.content;
@@ -159,6 +164,7 @@ export class MenuRegistered implements OnInit {
 
     searchIndex(index: String) {
         let value = 0;
+
         switch (index) {
             case ("indexRecommendations"):
                 this.indexRecommendations += 1;
@@ -197,14 +203,16 @@ export class MenuRegistered implements OnInit {
                 value = this.indexScifi;
                 break;                  
         }
+
         return value;
     }
 
     searchList(index: String) {
         let value: Film[] = [];
+
         switch (index) {
             case ("indexRecommendations"):
-                value = this.recommendations;
+                //value = this.recommendations;
                 break;
             case ("indexTrending"):
                 value = this.trending;
