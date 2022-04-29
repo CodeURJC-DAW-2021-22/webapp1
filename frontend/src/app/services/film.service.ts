@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { FilmsList } from '../models/rest/filmsList.model';
 import { Film } from '../models/film.model';
 import { Page } from '../models/rest/page.model';
-import { Genre } from '../models/genre.model';
+import { FilmComments } from '../models/rest/filmComments.model';
 
 const BASE_URL = '/api/films';
 
@@ -19,10 +18,10 @@ export class FilmsService {
         return this.httpClient.get(BASE_URL + '/menu', { withCredentials: true }).pipe(
         ) as Observable<FilmsList>;
     }
-    
-    getFilm(id: number): Observable<Film>{
-        return this.httpClient.get(BASE_URL + id).pipe(
-        ) as Observable<Film>;
+
+	getFilm(id: number): Observable<FilmComments>{
+        return this.httpClient.get(BASE_URL + '/' +id).pipe(
+        ) as Observable<FilmComments>;
     }
 
 	getChartData(): Observable<number[]>{
@@ -67,4 +66,5 @@ export class FilmsService {
 		console.error(error);
 		return throwError("Server error (" + error.status + "): " + error.text())
 	}
+
 }

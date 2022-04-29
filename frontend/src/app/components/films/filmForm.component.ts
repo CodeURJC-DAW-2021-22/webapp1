@@ -25,7 +25,7 @@ export class FilmFormComponent {
     const id = activatedRoute.snapshot.params['id'];
     if (id) {
       service.getFilm(id).subscribe(
-        film => this.film = film,
+        response => this.film = response.film,
         error => console.error(error)
       );
       this.newFilm = false;
