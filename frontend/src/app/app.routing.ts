@@ -35,8 +35,8 @@ const appRoutes = [
     // Films
     { path: 'addFilm', component: AddFilm },
     { path: 'editFilm', component: EditFilm },
-    { path: 'filmAdmin', component: FilmAdminComponent },
-    { path: 'filmRegistered', component: FilmRegisteredComponent },
+    { path: 'filmAdmin/:id', component: FilmAdminComponent },
+    { path: 'filmRegistered/:id', component: FilmRegisteredComponent },
     { path: 'films/:id', component: FilmUnregisteredComponent },
 
     // Login
