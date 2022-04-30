@@ -20,12 +20,13 @@ export class FilmRegisteredComponent implements OnInit {
     comments!: Comment[];
     similar!: Film[];
     visible: boolean = true;
-    user!: User;
+    user: User | undefined;
 
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService) { }
     
     ngOnInit(): void {
         const id = this.activatedRouter.snapshot.params['id'];
+        this.user = this.loginService.currentUser();
         this.update(id);
     }
 
@@ -41,10 +42,12 @@ export class FilmRegisteredComponent implements OnInit {
         );
     }
 
-
-
     filmImage(film: Film) {
         return this.service.downloadImage(film);
+    }
+
+    account(){
+        this.router.navigate(['/profile/', this.user?.id]);
     }
 
 }

@@ -26,7 +26,7 @@ export class MenuRegistered implements OnInit {
     horror: Film[] = [];
     scifi: Film[] = [];
 
-    user!: User;
+    user: User | undefined;
 
     // Spinners
     loaderRecommendations: boolean = false;
@@ -59,7 +59,7 @@ export class MenuRegistered implements OnInit {
             response => this.update(response),
             error => console.log(error)
         );
-
+        this.user = this.loginService.currentUser();
         this.loadChart();
     }
 
