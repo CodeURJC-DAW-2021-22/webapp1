@@ -7,7 +7,7 @@ import { User } from "../models/user.model";
 
 const BASE_URL = '/api/users';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserService {
 
     constructor(private httpClient: HttpClient) { }
@@ -23,68 +23,56 @@ export class UserService {
     }
 
     register(formData: FormData) {
-        return this.httpClient.post(BASE_URL + "/", formData, { withCredentials: true });
+        return this.httpClient.post(BASE_URL + "/", formData);
     }
 
     downloadImage(user: User) {
-        return user.image? 'api/users/' + user.id + '/image' : 'assets/images/defaultImage.png';
+        return user.image ? 'api/users/' + user.id + '/image' : 'assets/images/defaultImage.png';
     }
 
-    /* moreComments(page: number) {
-        
-    } */
-
-    editProfile(user: User) {
-        if (user.id) {
-            return this.httpClient.post(BASE_URL, user)
-                .pipe(
-                    catchError(error => this.handleError(error))
-                );
-        } else {
-            return this.httpClient.put('/api/auth/login', user)
-                .pipe(
-                    catchError(error => this.handleError(error))
-                );
-        }
+    moreComments(page: number, id: number) {
+        return this.httpClient.get(BASE_URL + '/' + id + '/comments?page=' + page).pipe(
+        ) as Observable<Page<Comment>>;
     }
 
-    editImage(user: User) {
-        if (user.id) {
-            return this.httpClient.post(BASE_URL + '/' + user.id + '/image', user)
-                .pipe(
-                    catchError(error => this.handleError(error))
-                );
-        } else {
-            return this.httpClient.put('/api/auth/login', user)
-                .pipe(
-                    catchError(error => this.handleError(error))
-                );
-        }
+    editProfile(id: number, formData: FormData) {
+        return this.httpClient.patch(BASE_URL + '/' + id, formData, { withCredentials: true })
+            .pipe(
+                catchError(error => this.handleError(error))
+            );
     }
 
-    /*
-    editPassword() {
-
+    editImage(id: number, formData: FormData) {
+        return this.httpClient.put(BASE_URL + '/' + id + '/image', formData, { withCredentials: true })
+            .pipe(
+                catchError(error => this.handleError(error))
+            );
     }
-    */
+
+    editPassword(id: number, formData: FormData) {
+        return this.httpClient.patch(BASE_URL + '/' + id + '/password', formData, { withCredentials: true })
+        .pipe(
+            catchError(error => this.handleError(error))
+        );
+    }
 
     followers(page: number, id: number) {
-        return this.httpClient.get(BASE_URL + id + '/followers?page=' + page).pipe(
+        return this.httpClient.get(BASE_URL + '/' + id + '/followers?page=' + page).pipe(
         ) as Observable<Page<User>>;
     }
 
     following(page: number, id: number) {
-        return this.httpClient.get(BASE_URL + id + '/following?page=' + page).pipe(
-            ) as Observable<Page<User>>;
+        return this.httpClient.get(BASE_URL + '/' + id + '/following?page=' + page).pipe(
+        ) as Observable<Page<User>>;
     }
 
     followUnfollow(id: number) {
-        return this.httpClient.get(BASE_URL + id + '/followed');
+        return this.httpClient.get(BASE_URL + '/' + id + '/followed', { withCredentials: true });
     }
 
     private handleError(error: any) {
-		console.log("ERROR:");
-		console.error(error);
-		return throwError("Server error (" + error.status + "): " + error.text())
-	}
+        console.log("ERROR:");
+        console.error(error);
+        return throwError("Server error (" + error.status + "): " + error.text())
+    }
 }
