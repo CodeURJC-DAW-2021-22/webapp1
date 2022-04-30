@@ -26,6 +26,10 @@ export class SearchFilmsComponent implements OnInit {
     
     ngOnInit(): void {
         let query = this.activatedRouter.snapshot.params['query'];
+        this.update(query);
+    }
+
+    update(query: String) {
         this.service.searchFilm(query, this.index).subscribe(
             response => this.films=response.content,
             error => console.log(error)

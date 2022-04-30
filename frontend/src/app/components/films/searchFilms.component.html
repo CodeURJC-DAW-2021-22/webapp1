@@ -17,7 +17,7 @@
         <nav class="sub-nav">
             <form action="/searchFilms">
                 <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                <button (click)="update(fieldText)" [routerLink]="['/searchFilms/' + fieldText]" type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
                 <a href="/addFilm">Post Film</a>
@@ -45,7 +45,7 @@
         <nav class="sub-nav">
             <form action="/searchFilms">
                 <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                <button (click)="update(fieldText)" [routerLink]="['/searchFilms/' + fieldText]" type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
                 <a [routerLink]="['/profile']">Account</a>
@@ -69,7 +69,7 @@
         <nav class="sub-nav">
             <form action="/searchFilms">
                 <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                <button (click)="update(fieldText)" [routerLink]="['/searchFilms/' + fieldText]" type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
                 <a [routerLink]="['/login']">Login</a>
