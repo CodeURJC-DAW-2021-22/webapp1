@@ -4,6 +4,7 @@ import { Film } from "src/app/models/film.model";
 import { FilmsList } from "src/app/models/rest/filmsList.model";
 import { Page } from "src/app/models/rest/page.model";
 import { FilmsService } from "src/app/services/film.service";
+import { LoginService } from "src/app/services/login.service";
 
 
 @Component({
@@ -48,7 +49,7 @@ export class MenuAdmin implements OnInit {
 
     data: any[] = [];
 
-    constructor(private router: Router, private service: FilmsService){ }
+    constructor(private router: Router, private service: FilmsService, private loginService: LoginService){ }
 
     ngOnInit() {
         this.service.getMenu().subscribe(
@@ -129,6 +130,11 @@ export class MenuAdmin implements OnInit {
             response => this.insertFilms(response, index),
             error => console.log(error)
         );
+    }
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 
     insertFilms(response: Page<Film>, index: String) {

@@ -5,6 +5,7 @@ import { Page } from "src/app/models/rest/page.model";
 import { User } from "src/app/models/user.model";
 import { FilmsService } from "src/app/services/film.service";
 import { LoginService } from "src/app/services/login.service";
+import { Router } from "@angular/router";
 
 @Component({
     templateUrl: './menuRegistered.component.html',
@@ -51,7 +52,7 @@ export class MenuRegistered implements OnInit {
 
     data: any[] = [];
 
-    constructor(private service: FilmsService, private loginService: LoginService) { }
+    constructor(private router: Router, private service: FilmsService, private loginService: LoginService) { }
 
     ngOnInit() {
         this.service.getMenu().subscribe(
@@ -148,6 +149,11 @@ export class MenuRegistered implements OnInit {
             response => this.insertFilms(response, index),
             error => this.loaderRecommendations = false
         );
+    }
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 
     insertFilms(response: Page<Film>, index: String) {

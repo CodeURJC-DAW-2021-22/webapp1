@@ -22,10 +22,11 @@
                     </button>
                     <a href="/addFilm">Post Film</a>
                 </form>
-                <form action="/logout" method="post">
-                        <input type="submit" value="Sign out" />
+                <button (click)="logout()"> Sign out</button>
+                <!--<form action="/logout" method="post">
+                        <input (click)="logout()" type="submit" value="Sign out" />
                         <input type="hidden" name="_csrf" value="{{token}}" />
-                </form>
+                </form>-->
             </nav>
         </header>
 
