@@ -6,6 +6,7 @@ import { FilmsList } from '../models/rest/filmsList.model';
 import { Film } from '../models/film.model';
 import { Page } from '../models/rest/page.model';
 import { FilmComments } from '../models/rest/filmComments.model';
+import { exists } from 'fs';
 
 const BASE_URL = '/api/films';
 
@@ -40,6 +41,20 @@ export class FilmsService {
 				catchError(error => this.handleError(error))
 			);
 		}
+	}
+
+	deleteFilm(film: Film) {
+		this.httpClient.delete(BASE_URL + film.id).subscribe(
+			response => this.getMenu,
+			error => this.handleError(error)
+		);
+	}
+
+	addComment(film: Film, comment: Comment){
+		return this.httpClient.put(BASE_URL ).subscribe(
+			response => this.getFilm(film.id),
+			error  => this.handleError(error)
+		)
 	}
 
 	downloadImage(film: Film) {

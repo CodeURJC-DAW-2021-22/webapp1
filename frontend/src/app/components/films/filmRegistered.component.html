@@ -80,7 +80,7 @@
 					<div class="row">
 						<h3 class="font-weight-bold">More like this</h3>
                         <div class="box">
-							<a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+							<a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmRegistered', film.id]"><img [src]="filmImage(film)"></a>
                         </div>
 					</div>
 					<br>

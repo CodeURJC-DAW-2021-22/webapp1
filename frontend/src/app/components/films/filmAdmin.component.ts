@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Comment } from "src/app/models/comment.model";
 import { Film } from "src/app/models/film.model";
 import { FilmComments } from "src/app/models/rest/filmComments.model";
+import { FilmsService } from "src/app/services/film.service";
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from "src/app/services/login.service";
 
 @Component({
     templateUrl: './filmAdmin.component.html',
@@ -18,8 +21,31 @@ export class FilmAdminComponent implements OnInit {
 
     token: any;
     
+    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService) { }
+    
     ngOnInit(): void {
-        throw new Error("Method not implemented.");
+        const id = this.activatedRouter.snapshot.params['id'];
+        this.update(id);
+    }
+
+    update(id: number) {
+        this.service.getFilm(id).subscribe(
+            response => {
+                this.filmComments = response;
+                this.film = this.filmComments.film;
+                this.comments = this.filmComments.comments.content;
+                this.similar = this.film.similar;
+            },
+            error => console.log(error)
+        );
+    }
+
+    filmImage(film: Film) {
+        return this.service.downloadImage(film);
+    }
+
+    deleteFilm(film: Film) {
+        return this.service.deleteFilm(film);
     }
 
 }

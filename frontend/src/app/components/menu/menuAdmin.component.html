@@ -47,8 +47,7 @@
 
             <h1 id="trending">Trending Now</h1>
             <div class="box">
-                <!-- Recordar cambiar la ruta para ir a filmsAdmin -->
-                    <a *ngFor="let film of trending" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                    <a *ngFor="let film of trending" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <button (click)="loadMore('indexTrending')" id='btnTrending' class='btnSubmit'>More Films</button>
@@ -56,7 +55,7 @@
 
             <h1 id="action">Action</h1>
             <div class="box" >
-                <a *ngFor="let film of action" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of action" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
             
             <button (click)="loadMoreGenre('indexAction', 'ACTION')" id='btnAction' class='btnSubmit'>More Films</button>
@@ -64,7 +63,7 @@
 
             <h1 id="adventure">Adventure</h1>
             <div class="box" >
-                <a *ngFor="let film of adventure" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of adventure" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <button (click)="loadMoreGenre('indexAdventure', 'ADVENTURE')" id='btnAdventure' class='btnSubmit'>More Films</button>
@@ -72,7 +71,7 @@
             
             <h1 id="animation">Animation</h1>
             <div class="box" >
-                <a *ngFor="let film of animation" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of animation" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <button (click)="loadMoreGenre('indexAnimation', 'ANIMATION')" id='btnAnimation' class='btnSubmit'>More Films</button>
@@ -80,7 +79,7 @@
 
             <h1 id="comedy">Comedy</h1>
             <div class="box" >
-                <a *ngFor="let film of comedy" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of comedy" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <button (click)="loadMoreGenre('indexComedy', 'COMEDY')" id='btnComedy' class='btnSubmit'>More Films</button>
@@ -88,7 +87,7 @@
 
             <h1 id="drama">Drama</h1>
             <div class="box" >
-                <a *ngFor="let film of drama" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of drama" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <div id="moreFilmsDrama"></div>
@@ -97,7 +96,7 @@
 
             <h1 id="horror">Horror</h1>
             <div class="box" >
-                <a *ngFor="let film of horror" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of horror" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <button (click)="loadMoreGenre('indexHorror', 'HORROR')" id='btnHorror' class='btnSubmit'>More Films</button>
@@ -105,7 +104,7 @@
 
             <h1 id="scienceFiction">Science Fiction</h1>
             <div class="box" >
-                <a *ngFor="let film of scifi" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of scifi" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
             </div>
             
             <button (click)="loadMoreGenre('indexScifi','SCIENCE_FICTION')" id='btnScifi' class='btnSubmit'>More Films</button>
