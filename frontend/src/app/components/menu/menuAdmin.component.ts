@@ -25,6 +25,7 @@ export class MenuAdmin implements OnInit {
     scifi: Film[] = [];
 
     token: any;
+    fieldText: String = "";
 
     // Spinners
     loaderTrending: boolean = false;

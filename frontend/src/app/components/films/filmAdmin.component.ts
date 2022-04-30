@@ -15,6 +15,7 @@ export class FilmAdminComponent implements OnInit {
     film!: Film;
     comments!: Comment[];
     similar!: Film[];
+    fieldText: String = "";
 
     token: any;
     

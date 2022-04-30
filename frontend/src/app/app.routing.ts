@@ -10,6 +10,7 @@ import { EditFilm } from './components/films/editFilm.component';
 import { FilmAdminComponent } from './components/films/filmAdmin.component';
 import { FilmRegisteredComponent } from './components/films/filmRegistered.component';
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
+import { SearchFilmsComponent } from './components/films/searchFilms.component';
 
 // Login
 import { LoginComponent } from './components/login/login.component';
@@ -38,6 +39,7 @@ const appRoutes = [
     { path: 'filmAdmin', component: FilmAdminComponent },
     { path: 'filmRegistered', component: FilmRegisteredComponent },
     { path: 'films/:id', component: FilmUnregisteredComponent },
+    { path: 'searchFilms/:query', component: SearchFilmsComponent },
 
     // Login
     { path: 'login', component: LoginComponent },

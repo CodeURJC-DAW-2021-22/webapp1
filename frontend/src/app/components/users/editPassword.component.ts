@@ -12,6 +12,7 @@ export class EditPassword implements OnInit {
 
     user!: User;
     token: any;
+    fieldText: String = "";
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");

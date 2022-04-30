@@ -19,6 +19,7 @@ import { FilmFormComponent } from './components/films/filmForm.component';
 import { FilmAdminComponent } from './components/films/filmAdmin.component';
 import { FilmRegisteredComponent } from './components/films/filmRegistered.component';
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
+import { SearchFilmsComponent } from './components/films/searchFilms.component';
 
 // Login
 import { LoginComponent } from './components/login/login.component';
@@ -39,7 +40,7 @@ import { ProfileComponent } from './components/users/profile.component';
 @NgModule({
   declarations: [AppComponent, 
     AddComment, EditComment,
-    AddFilm, EditFilm, FilmFormComponent, FilmAdminComponent, FilmRegisteredComponent, FilmUnregisteredComponent,
+    AddFilm, EditFilm, FilmFormComponent, FilmAdminComponent, FilmRegisteredComponent, FilmUnregisteredComponent, SearchFilmsComponent,
     LoginComponent, RegisterComponent,
     FilmListAdviceMeComponent, MenuAdmin, MenuRegistered,
     EditPassword, EditProfile, FollowersComponent, FollowingComponent, ProfileComponent],

@@ -10,6 +10,7 @@ export class EditProfile implements OnInit {
 
     user!: User;
     token: any;
+    fieldText: String = "";
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");

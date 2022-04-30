@@ -9,6 +9,7 @@ import { Film } from "src/app/models/film.model";
 export class EditFilm implements OnInit {
 
     film!: Film;
+    fieldText: String = "";
     token: any;
     
     ngOnInit(): void {

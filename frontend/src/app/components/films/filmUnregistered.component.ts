@@ -17,7 +17,8 @@ export class FilmUnregisteredComponent implements OnInit {
     film!: Film;
     comments!: Comment[];
     similar!: Film[];
-
+    fieldText: String = "";
+    
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService) {
     }
 

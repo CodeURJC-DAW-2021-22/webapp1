@@ -11,6 +11,7 @@ export class FollowingComponent implements OnInit {
     user!: User;
     followings: User[] = []
     token: any;
+    fieldText: String = "";
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");

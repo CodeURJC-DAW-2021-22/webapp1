@@ -18,6 +18,7 @@ export class FilmRegisteredComponent implements OnInit {
     similar!: Film[];
     visible: boolean = true;
     user!: User;
+    fieldText: String = "";
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");

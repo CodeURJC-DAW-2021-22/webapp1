@@ -15,8 +15,8 @@
         </nav>
         <nav class="sub-nav">
             <form action="/searchFilms">
-                <input type="text" name="query" placeholder="Search...">
-                <button type="submit">
+                <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
+                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
                 <a href="/addFilm">Post Film</a>

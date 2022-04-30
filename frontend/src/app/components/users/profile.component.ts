@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
     user!: User;
     comments: Comment[] = []
     token: any;
+    fieldText: String = "";
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");

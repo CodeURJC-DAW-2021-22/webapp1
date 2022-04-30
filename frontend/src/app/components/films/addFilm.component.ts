@@ -8,6 +8,7 @@ import { Component, OnInit } from "@angular/core";
 export class AddFilm implements OnInit {
 
     token: any;
+    fieldText: String = "";
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");

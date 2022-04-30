@@ -26,6 +26,7 @@ export class MenuRegistered implements OnInit {
     scifi: Film[] = [];
 
     user!: User;
+    fieldText: String = "";
 
     // Spinners
     loaderRecommendations: boolean = false;

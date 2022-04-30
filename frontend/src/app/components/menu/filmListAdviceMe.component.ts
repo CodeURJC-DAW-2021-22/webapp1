@@ -5,6 +5,7 @@ import { Page } from 'src/app/models/rest/page.model';
 import { Film } from '../../models/film.model';
 import { FilmsService } from './../../services/film.service';
 
+
 @Component({
     templateUrl: './adviceMe.component.html',
     styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/loadingButton.component.css'],
@@ -44,6 +45,7 @@ export class FilmListAdviceMeComponent implements OnInit {
     indexScifi: number = 0;
 
     data: any[] = [];
+    fieldText: String = "";
 
     constructor(private router: Router, private service: FilmsService){ }
 
