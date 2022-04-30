@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, throwError } from "rxjs";
+import { Page } from "../models/rest/page.model";
 import { UserComments } from "../models/rest/userComments.model";
 import { User } from "../models/user.model";
 
@@ -59,6 +60,26 @@ export class UserService {
                     catchError(error => this.handleError(error))
                 );
         }
+    }
+
+    /*
+    editPassword() {
+
+    }
+    */
+
+    followers(page: number, id: number) {
+        return this.httpClient.get(BASE_URL + id + '/followers?page=' + page).pipe(
+        ) as Observable<Page<User>>;
+    }
+
+    following(page: number, id: number) {
+        return this.httpClient.get(BASE_URL + id + '/following?page=' + page).pipe(
+            ) as Observable<Page<User>>;
+    }
+
+    followUnfollow(id: number) {
+        return this.httpClient.get(BASE_URL + id + '/followed');
     }
 
     private handleError(error: any) {
