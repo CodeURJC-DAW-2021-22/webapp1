@@ -1,7 +1,8 @@
 import { Component} from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserComments } from "src/app/models/rest/userComments.model";
 import { User } from "src/app/models/user.model";
+import { LoginService } from "src/app/services/login.service";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -18,16 +19,27 @@ export class FollowersComponent {
     loader: boolean = false;
     page: number = 0;
 
-    constructor(private userService: UserService, private activatedRouter: ActivatedRoute) {
-        this.userService.getUser(activatedRouter.snapshot.params['id']).subscribe(
+    constructor(private userService: UserService, private loginService: LoginService, private router: Router, private activatedRouter: ActivatedRoute) {
+
+        if (!this.loginService.isLogged()) {
+            this.router.navigate(['/login']);
+        }
+
+        this.userService.getUser(this.activatedRouter.snapshot.params['id']).subscribe(
             response => {
                 this.userComments = response;
                 this.user = this.userComments.user;
                 this.userService.followers(this.user.id, 0).subscribe(
                     response => {
                         this.followersList = response.content;
+                    },
+                    error =>  {
+                        console.log(error);
                     }
                 )
+            },
+            error =>  {
+                console.log(error);
             }
         );
         

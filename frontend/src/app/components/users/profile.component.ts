@@ -32,7 +32,7 @@ export class ProfileComponent {
         const id = this.activatedRouter.snapshot.params['id'];
         let currentUser = this.loginService.currentUser();
         
-        if (!id || (currentUser && currentUser.id == id)) {
+        if (!id) {
             this.userService.getMe().subscribe(
                 response => {
                     this.userComments = response;
@@ -42,6 +42,9 @@ export class ProfileComponent {
                 }
             );
         } else {
+            if (currentUser && currentUser.id == id) {
+                this.router.navigate(['/account']);
+            }
             this.userService.getUser(id).subscribe(
                 response => {
                     this.userComments = response;

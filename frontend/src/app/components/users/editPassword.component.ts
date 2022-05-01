@@ -1,5 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { UserComments } from "src/app/models/rest/userComments.model";
 import { User } from "src/app/models/user.model";
+import { LoginService } from "src/app/services/login.service";
+import { UserService } from "src/app/services/user.service";
 
 declare var showPassword: any;
 
@@ -8,13 +12,35 @@ declare var showPassword: any;
     styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/styleLogin.component.css'],
 })
 
-export class EditPassword implements OnInit {
+export class EditPassword {
 
     user!: User;
-    token: any;
-    
-    ngOnInit(): void {
-        throw new Error("Method not implemented.");
+    userComments!: UserComments;
+    password!: string;
+    newPassword!: string; 
+
+    constructor(private userService: UserService, private activatedRouter: ActivatedRoute, private router: Router, private loginService: LoginService) {
+
+        if (!this.loginService.isLogged()) {
+            this.router.navigate(['/login']);
+        }
+
+        this.userService.getMe().subscribe(
+            response => {
+                this.userComments = response;
+                this.user = this.userComments.user;
+            }
+        );
+    }
+
+    save() {
+        let formData = new FormData();
+        formData.append("oldPassword", this.password);
+        formData.append("newPassword", this.newPassword);
+        this.userService.editPassword(this.user.id, formData).subscribe(
+            response => this.router.navigate(['/account']),
+            error => alert('Error updating password')
+        )
     }
 
     showPassword() {
