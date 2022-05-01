@@ -2,22 +2,22 @@
   <div class="wrapper">
 	<header *ngIf="admin">
         <div class="AdviceMeLogo">
-            <a id="logo" [routerLink]="['/menuAdmin']" fragment="home"><img src="assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+            <a id="logo" [routerLink]="['/']" fragment="home"><img src="assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
         </div>
         <nav class="main-nav">
-            <a [routerLink]="['/menuAdmin']" fragment="home">Home</a>
-            <a [routerLink]="['/menuAdmin']" fragment="action">Action</a>
-            <a [routerLink]="['/menuAdmin']" fragment="adventure">Adventure</a>
-            <a [routerLink]="['/menuAdmin']" fragment="animation">Animation</a>
-            <a [routerLink]="['/menuAdmin']" fragment="comedy">Comedy</a>
-            <a [routerLink]="['/menuAdmin']" fragment="drama">Drama</a>
-            <a [routerLink]="['/menuAdmin']" fragment="horror">Horror</a>
-            <a [routerLink]="['/menuAdmin']" fragment="scienceFiction">Science Fiction</a>
+            <a [routerLink]="['/']" fragment="home">Home</a>
+            <a [routerLink]="['/']" fragment="action">Action</a>
+            <a [routerLink]="['/']" fragment="adventure">Adventure</a>
+            <a [routerLink]="['/']" fragment="animation">Animation</a>
+            <a [routerLink]="['/']" fragment="comedy">Comedy</a>
+            <a [routerLink]="['/']" fragment="drama">Drama</a>
+            <a [routerLink]="['/']" fragment="horror">Horror</a>
+            <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
         </nav>
         <nav class="sub-nav">
             <form action="/searchFilms">
                 <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button (click)="update(fieldText)" [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
                 <a href="/addFilm">Post Film</a>
@@ -30,22 +30,22 @@
     </header>
 	<header *ngIf="registered">
         <div class="AdviceMeLogo">
-            <a id="logo" [routerLink]="['/menuRegistered']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+            <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
         </div>
         <nav id="navPrincipal" class="main-nav">
-            <a [routerLink]="['/menuRegistered']" fragment="home">Home</a>
-            <a [routerLink]="['/menuRegistered']" fragment="action">Action</a>
-            <a [routerLink]="['/menuRegistered']" fragment="adventure">Adventure</a>
-            <a [routerLink]="['/menuRegistered']" fragment="animation">Animation</a>
-            <a [routerLink]="['/menuRegistered']" fragment="comedy">Comedy</a>
-            <a [routerLink]="['/menuRegistered']" fragment="drama">Drama</a>
-            <a [routerLink]="['/menuRegistered']" fragment="horror">Horror</a>
-            <a [routerLink]="['/menuRegistered']" fragment="scienceFiction">Science Fiction</a>
+            <a [routerLink]="['/']" fragment="home">Home</a>
+            <a [routerLink]="['/']" fragment="action">Action</a>
+            <a [routerLink]="['/']" fragment="adventure">Adventure</a>
+            <a [routerLink]="['/']" fragment="animation">Animation</a>
+            <a [routerLink]="['/']" fragment="comedy">Comedy</a>
+            <a [routerLink]="['/']" fragment="drama">Drama</a>
+            <a [routerLink]="['/']" fragment="horror">Horror</a>
+            <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
         </nav>
         <nav class="sub-nav">
             <form action="/searchFilms">
                 <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button (click)="update(fieldText)" [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
                 <a [routerLink]="['/profile']">Account</a>

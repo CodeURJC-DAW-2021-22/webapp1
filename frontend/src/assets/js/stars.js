@@ -1,5 +1,5 @@
 
-$(function () {
+$(function rate() {
   $(".rateyo").rateYo().on("rateyo.change", function (data) {
 	
     var rating = data.rating;

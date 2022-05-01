@@ -1,0 +1,112 @@
+<div class="bodyBig">
+    <header *ngIf="registered">
+        <div class="AdviceMeLogo">
+            <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+        </div>
+        <nav id="navPrincipal" class="main-nav">
+            <a [routerLink]="['/']" fragment="home">Home</a>
+            <a [routerLink]="['/']" fragment="action">Action</a>
+            <a [routerLink]="['/']" fragment="adventure">Adventure</a>
+            <a [routerLink]="['/']" fragment="animation">Animation</a>
+            <a [routerLink]="['/']" fragment="comedy">Comedy</a>
+            <a [routerLink]="['/']" fragment="drama">Drama</a>
+            <a [routerLink]="['/']" fragment="horror">Horror</a>
+            <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
+        </nav>
+        <nav class="sub-nav">
+            <form action="/searchFilms">
+                <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
+                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                    <i class="fas fa-search sub-nav-logo"></i>
+                </button>
+                <a [routerLink]="['/profile']">Account</a>
+            </form>
+        </nav>
+    </header>
+    <header *ngIf="admin">
+        <div class="AdviceMeLogo">
+            <a id="logo" [routerLink]="['/']" fragment="home"><img src="assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+        </div>
+        <nav class="main-nav">
+            <a [routerLink]="['/']" fragment="home">Home</a>
+            <a [routerLink]="['/']" fragment="action">Action</a>
+            <a [routerLink]="['/']" fragment="adventure">Adventure</a>
+            <a [routerLink]="['/']" fragment="animation">Animation</a>
+            <a [routerLink]="['/']" fragment="comedy">Comedy</a>
+            <a [routerLink]="['/']" fragment="drama">Drama</a>
+            <a [routerLink]="['/']" fragment="horror">Horror</a>
+            <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
+        </nav>
+        <nav class="sub-nav">
+            <form action="/searchFilms">
+                <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
+                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                    <i class="fas fa-search sub-nav-logo"></i>
+                </button>
+                <a href="/addFilm">Post Film</a>
+            </form>
+            <form action="/logout" method="post">
+                    <input type="submit" value="Sign out" />
+                    <input type="hidden" name="_csrf" value="{{token}}" />
+            </form>
+        </nav>
+    </header>
+
+	<div class="container emp-profile">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="profile-img">
+					<img src="/{{userWatch.id}}/imageProfile">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="profile-head">
+						<h1>{{userWatch.name}}</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2 followers"><a href="/followers/{{userWatch.id}}">{{userWatch.followersCount}} Followers</a></div>
+					<div class="col-md-2 followers"><a href="/following/{{userWatch.id}}">{{userWatch.followingCount}} Following</a></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+                <!--ESTO HAY QUE MIRARLO DETENIDAMENTE AL HACERLO
+				<input *ngIf="registered" type="button" class="profile-edit-btn" value="{{follow}}" onclick="location.href='/followUnfollow/{{userWatch.id}}'"/>
+                -->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-8">
+				<div class="row seccion">
+					<p>Comments</p>
+				</div>
+				
+				<div *ngFor="let comment of comments" class="row">
+					<div class="row">
+						<div class="col comment">
+							<a href="/filmRegistered/{{comment.film.id}}">
+								<p><b>{{comment.film.title}}</b></p>
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<p>{{comment.note}}</p>
+							<!--<div class="stars rateyo" data-rateyo-rating="{{stars}}" data-rateyo-num-stars="5"
+								data-rateyo-read-only="true"></div> -->
+							<br>
+						</div>
+					</div>
+				</div>
+
+				<p *ngIf="!comments">There are no asserts yet</p>				
+				
+				<button (click)="loadMoreComments()" id='btnCommentWatchProfile' class='btnSubmit'>More Comments</button>
+				<div *ngIf="loaderCommentWatchProfile" class="lds-dual-ring overlay"></div>
+			</div>
+		</div>
+	</div>
+
+</div>

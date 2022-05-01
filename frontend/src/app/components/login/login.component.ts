@@ -12,9 +12,19 @@ export class LoginComponent{
     username!: string;
     password!: string;
 
+    passVisible: boolean= false;
+
     constructor(private loginService: LoginService) { }
 
     logIn() {
         this.loginService.logIn(this.username, this.password);
+    }
+
+    showPassword(){
+        if (this.passVisible == true) {
+            this.passVisible = false;
+        } else {
+            this.passVisible = true;
+        }
     }
 }

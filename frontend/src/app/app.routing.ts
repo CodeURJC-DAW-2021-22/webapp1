@@ -25,6 +25,7 @@ import { EditProfile } from './components/users/editProfile.component';
 import { FollowersComponent } from './components/users/followers.component';
 import { FollowingComponent } from './components/users/following.component';
 import { ProfileComponent } from './components/users/profile.component';
+import { WatchProfileComponent } from './components/users/watchProfile.component';
 
 const appRoutes = [
     // Comments
@@ -52,6 +53,7 @@ const appRoutes = [
     { path: 'followers', component: FollowersComponent },
     { path: 'following', component: FollowingComponent },
     { path: 'profile', component: ProfileComponent },
+    { path: 'watchProfile', component: WatchProfileComponent },
     
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }
 ]

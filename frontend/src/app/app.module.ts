@@ -34,6 +34,7 @@ import { EditProfile } from './components/users/editProfile.component';
 import { FollowersComponent } from './components/users/followers.component';
 import { FollowingComponent } from './components/users/following.component';
 import { ProfileComponent } from './components/users/profile.component';
+import { WatchProfileComponent } from './components/users/watchProfile.component';
 
 @NgModule({
   declarations: [AppComponent, 
@@ -41,7 +42,7 @@ import { ProfileComponent } from './components/users/profile.component';
     AddFilm, EditFilm, FilmFormComponent, FilmAdminComponent, FilmRegisteredComponent, FilmUnregisteredComponent, SearchFilmsComponent,
     LoginComponent, RegisterComponent,
     MenuComponent, 
-    EditPassword, EditProfile, FollowersComponent, FollowingComponent, ProfileComponent],
+    EditPassword, EditProfile, FollowersComponent, FollowingComponent, ProfileComponent, WatchProfileComponent],
   imports: [BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, routing, NgbModule, NgxChartsModule],
   providers: [],
   bootstrap: [AppComponent],

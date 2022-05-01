@@ -31,7 +31,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/js/showPassword.js",
               "src/assets/js/stars.js"
             ]
           },
