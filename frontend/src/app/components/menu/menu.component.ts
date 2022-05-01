@@ -14,6 +14,10 @@ import { LoginService } from "src/app/services/login.service";
 
 export class MenuComponent implements OnInit {
 
+    // ESTE SE BORRARÁ
+    token: any;
+
+    // Control of headers
     admin: boolean = false;
     registered: boolean = false;
     unregistered: boolean = false;
@@ -67,11 +71,6 @@ export class MenuComponent implements OnInit {
         } else {
             this.unregistered = true;
         }        
-    }
-
-    logout(){
-        this.loginService.logOut();
-        this.router.navigate(['/']);
     }
 
     ngOnInit() {

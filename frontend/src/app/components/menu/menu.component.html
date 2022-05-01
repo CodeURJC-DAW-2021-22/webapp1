@@ -46,7 +46,6 @@
                     </button>
                     <a [routerLink]="['/profile']">Account</a>
                 </form>
-                <button (click)="logout()"> Sign out</button>
             </nav>
         </header>
         <header *ngIf="admin">
@@ -71,12 +70,10 @@
                     </button>
                     <a href="/addFilm">Post Film</a>
                 </form>
-                <button (click)="logout()"> Sign out</button>
-                <!--
                 <form action="/logout" method="post">
                         <input type="submit" value="Sign out" />
                         <input type="hidden" name="_csrf" value="{{token}}" />
-                </form>-->
+                </form>
             </nav>
         </header>
         <section class="main-container" >
