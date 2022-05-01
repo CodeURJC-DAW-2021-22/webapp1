@@ -39,8 +39,8 @@ export class FollowersComponent {
 
         this.userService.followers(this.user.id, this.page).subscribe(
             response => {
-                response.content.forEach(userF => {
-                    this.followersList.push(userF);
+                response.content.forEach(user => {
+                    this.followersList.push(user);
                 });
 
                 this.loader = false;

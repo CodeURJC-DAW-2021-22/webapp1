@@ -18,7 +18,7 @@
                 <button type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
-                    <a href="/profile/{{user.id}}">Account</a>
+                <a [routerLink]="['/account']">Account</a>
             </form>
         </nav>
     </header>
@@ -27,23 +27,23 @@
 		<div class="row tittle">
 			Following
 		</div>
-		<div *ngFor="let following of followings">
+		<div *ngFor="let following of followingList">
             <div class="row account">
                 <div class="col-md-2">
-                    <a href="/watchProfile/{{following.id}}">{{following.name}}</a>
+                    <a [routerLink]="['/profile', following.id]">{{following.name}}</a>
                 </div>
             </div>
 		</div>
 		
-		<div *ngIf="followings != null"class="row account">	
-			<div class="col-md-2">
-				<p>Not following anyone</p>
+		<div *ngIf="followingList.length == 0"class="row account">	
+			<div class="col-md-6">
+				<p>There are not following yet</p>
 			</div>
 		</div>
 
 
 		<div id="moreFollowing"></div>
-		<button id='btnFollowing' class='btnSubmit'>More Followers</button>
-		<div id="loaderFollowing" class="lds-dual-ring hidden overlay"></div>
+		<button (click)="following()" id='btnFollowing' class='btnSubmit'>More Followers</button>
+		<div *ngIf="loader" class="lds-dual-ring overlay"></div>
 	</div>
 </div>
