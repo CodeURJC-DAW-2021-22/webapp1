@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
+import { Comment } from '../models/comment.model';
 
 const BASE_URL = '/api/comments';
 
@@ -23,8 +24,8 @@ export class CommentService {
         )
     }
 
-    editComment(id: number, note: string, stars: number){
-        return this.httpClient.put(BASE_URL + '/' + id, {note: note, stars: stars}, { withCredentials: true }).subscribe(
+    editComment(comment: Comment, note: string, stars: number){
+        return this.httpClient.put(BASE_URL + '/' + comment.id, {note: note, stars: stars}, { withCredentials: true }).subscribe(
             response => this.router.navigate(['/profile']), // añadir id del usuario
             error => this.handleError(error)
         )

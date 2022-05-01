@@ -120,6 +120,7 @@
                                 <button *ngIf="admin" (click)="'/removeComment/{{id}}'" class="button btnSubmit2"
                                     id="boton">Eliminate</button>
                                 <br>
+                                <a *ngIf="registered" [routerLink]="['/addComment', film.id]"><button class="col-12 button2" type="button">Add comment</button></a>
                                 <br>
                             </div>
 
@@ -135,45 +136,24 @@
                 </div>
             </div>
 
-            <div *ngIf="unregistered" class="container-fluid mt-5">
+            <div  class="container-fluid mt-5">
                 <div class="col">
                     <div class="row">
                         <h3 class="font-weight-bold">More like this</h3>
-                        <div class="box">
+                        <div *ngIf="unregistered" class="box">
                             <a *ngFor="let film of similar" (click)="update(film.id)"
                                 [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                        </div>
+                        <div *ngIf="registered" class="box">
+							<a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmRegistered', film.id]"><img [src]="filmImage(film)"></a>
+                        </div>
+                        <div *ngIf="admin" class="box">
+                            <a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
                         </div>
                         <br>
                     </div>
                 </div>
             </div>
-
-            <div *ngIf="registered" class="container-fluid mt-5">
-				<div class="col">
-					<div class="row">
-						<h3 class="font-weight-bold">More like this</h3>
-                        <div class="box">
-							<a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmRegistered', film.id]"><img [src]="filmImage(film)"></a>
-                        </div>
-					</div>
-					<br>
-				</div>
-			</div>
-
-            <div *ngIf="admin" class="container-fluid mt-5">
-				<div class="col">
-					<div class="row">
-						<h3 class="font-weight-bold">More like this</h3>
-						<div class="box">
-							<div class="box">
-                                <a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
-                            </div>
-						</div>
-						<br>
-					</div>
-				</div>
-			</div>
-
         </section>
     </main>
 </div>

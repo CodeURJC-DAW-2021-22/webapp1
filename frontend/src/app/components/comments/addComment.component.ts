@@ -4,6 +4,8 @@ import { User } from "src/app/models/user.model";
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommentService } from "src/app/services/comment.service";
 import { FilmsService } from "src/app/services/film.service";
+import { Comment } from 'src/app/models/comment.model';
+import { LoginService } from "src/app/services/login.service";
 
 @Component({
     templateUrl: './addComment.component.html',
@@ -13,30 +15,31 @@ import { FilmsService } from "src/app/services/film.service";
 export class AddComment implements OnInit {
 
     film!: Film;
-    user!: User;
+    user: User | undefined;
     comment!: Comment;
     note!: string;
     stars!: number; 
     newComment!: boolean;
     
-    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: CommentService, private filmService: FilmsService) {
+    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: CommentService, private filmService: FilmsService, private loginService: LoginService) {
     }
 
     ngOnInit(): void {
         const idFilm = this.activatedRouter.snapshot.params['idFilm'];
         const idComment = this.activatedRouter.snapshot.params['idComment'];
-        if(idFilm){
-            this.filmService.getFilm(idFilm).subscribe(
-                response => this.film = response.film,
-                error => console.log(error)
-            )
-            this.newComment = true;
-        } else {
+        this.user = this.loginService.currentUser();
+        if(idComment){
             this.service.getComment(idComment).subscribe(
                 response => this.comment = response,
                 error => console.log(error)
             )
             this.newComment = false;
+        } else {
+            this.filmService.getFilm(idFilm).subscribe(
+                response => this.film = response.film,
+                error => console.log(error)
+            )
+            this.newComment = true;
         }
     }
 
@@ -46,12 +49,16 @@ export class AddComment implements OnInit {
 
     //addComment, editComment
 
-    save(idComment: number){
+    save(){
         if(this.newComment){
             this.filmService.addComment(this.film.id, this.note, this.stars);
         } else {
-            this.service.editComment(idComment, this.note, this.stars);
+            this.service.editComment(this.comment, this.note, this.stars);
         }
+    }
+
+    account(){
+        this.router.navigate(['/profile/', this.user?.id]);
     }
     
 }
