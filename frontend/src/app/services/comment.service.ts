@@ -18,8 +18,6 @@ export class CommentService {
 
     deleteComment(id: number){
         return this.httpClient.delete(BASE_URL + '/' + id, { withCredentials: true }).subscribe(
-            //si es desde profile o desde película como admin
-            //response => this.router.navigate([])
             error => this.handleError(error)
         )
     }

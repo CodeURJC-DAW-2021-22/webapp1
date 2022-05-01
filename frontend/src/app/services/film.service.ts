@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FilmsList } from '../models/rest/filmsList.model';
 import { Film } from '../models/film.model';
+import { Comment } from '../models/comment.model';
 import { Page } from '../models/rest/page.model';
 import { FilmComments } from '../models/rest/filmComments.model';
 import { Router } from '@angular/router';
@@ -56,7 +57,7 @@ export class FilmsService {
 			error => {
 				if (error.status == 403) {
 					alert('You have already commented in this film.');
-				} else { 
+				} else {
 					this.handleError(error);
 				}
 			}
@@ -65,6 +66,11 @@ export class FilmsService {
 
 	downloadImage(film: Film) {
 		return film.image ? '/api/films/' + film.id + '/image' : '/assets/images/no_image.png';
+	}
+
+	moreComments(page: number, id: number) {
+		return this.httpClient.get(BASE_URL + id + '/comments?page=' + page).pipe(
+		) as Observable<Page<Comment>>;
 	}
 
 	moreFilms(page: number) {

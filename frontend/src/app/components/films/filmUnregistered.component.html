@@ -43,7 +43,7 @@
                 <button type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
-                    <a (click)="account()">Account</a>
+                <a (click)="account()">Account</a>
             </form>
         </nav>
     </header>
@@ -71,7 +71,7 @@
                 <a href="/addFilm">Post Film</a>
             </form>
             <form action="/logout" method="post">
-                    <input type="submit" value="Sign out" />
+                <input type="submit" value="Sign out" />
             </form>
         </nav>
     </header>
@@ -116,27 +116,24 @@
                                 <p>{{comment.note}}</p>
                                 <!--<div class="stars rateyo" data-rateyo-rating="{{comment.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
                              -->
-
-                                <button *ngIf="admin" (click)="'/removeComment/{{id}}'" class="button btnSubmit2"
-                                    id="boton">Eliminate</button>
-                                <br>
-                                <a *ngIf="registered" [routerLink]="['/addComment', film.id]"><button class="col-12 button2" type="button">Add comment</button></a>
+                                <a *ngIf="admin" (click)="deleteComment(comment)"><button class="button btnSubmit2" id="boton">Eliminate</button></a>
                                 <br>
                             </div>
+                            <a *ngIf="registered" [routerLink]="['/addComment', film.id]"><button class="col-12 button2"
+                                    type="button">Add comment</button></a>
+                            <br>
 
                             <p *ngIf="!comments">There are no asserts yet</p>
 
-
-                            <div id="moreComments"></div>
-                            <div class="center"><button id='btnComment' class='btnSubmit2'>More Comments</button></div>
-                            <div id="loaderComment" class="lds-dual-ring hidden overlay"></div>
+                            <div class="center"><button (click)="loadMoreComments()" id='btnComment' class='btnSubmit2'>More Comments</button></div>
+                            <div *ngIf="loader" id="loaderComment" class="lds-dual-ring hidden overlay"></div>
 
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div  class="container-fluid mt-5">
+            <div class="container-fluid mt-5">
                 <div class="col">
                     <div class="row">
                         <h3 class="font-weight-bold">More like this</h3>
@@ -145,10 +142,12 @@
                                 [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
                         </div>
                         <div *ngIf="registered" class="box">
-							<a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmRegistered', film.id]"><img [src]="filmImage(film)"></a>
+                            <a *ngFor="let film of similar" (click)="update(film.id)"
+                                [routerLink]="['/filmRegistered', film.id]"><img [src]="filmImage(film)"></a>
                         </div>
                         <div *ngIf="admin" class="box">
-                            <a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
+                            <a *ngFor="let film of similar" (click)="update(film.id)"
+                                [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
                         </div>
                         <br>
                     </div>
