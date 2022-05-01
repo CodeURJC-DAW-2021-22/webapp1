@@ -50,8 +50,4 @@ export class FilmRegisteredComponent implements OnInit {
         this.router.navigate(['/profile/', this.user?.id]);
     }
 
-    addComment(film: Film, comment: Comment){
-        return this.service.addComment(film, comment);
-    }
-
 }

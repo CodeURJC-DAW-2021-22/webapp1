@@ -2,9 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { Comment } from "src/app/models/comment.model";
 import { Film } from "src/app/models/film.model";
 import { FilmComments } from "src/app/models/rest/filmComments.model";
-import { Page } from "src/app/models/rest/page.model";
 import { FilmsService } from "src/app/services/film.service";
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoginService } from "src/app/services/login.service";
+import { User } from "src/app/models/user.model";
 
 @Component({
     templateUrl: './filmUnregistered.component.html',
@@ -17,8 +18,23 @@ export class FilmUnregisteredComponent implements OnInit {
     film!: Film;
     comments!: Comment[];
     similar!: Film[];
+    user: User | undefined;
 
-    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService) {
+    admin: boolean = false;
+    registered: boolean = false;
+    unregistered: boolean = false;
+
+    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService) {
+        if (this.loginService.isLogged()){
+            if (this.loginService.isAdmin()) {
+                this.admin = true;
+            } else {
+                this.registered = true;
+                this.user = this.loginService.currentUser();
+            }
+        } else {
+            this.unregistered = true;
+        }   
     }
 
     ngOnInit(): void {
@@ -39,10 +55,16 @@ export class FilmUnregisteredComponent implements OnInit {
 
     }
 
-
+    deleteFilm(film: Film) {
+        this.service.deleteFilm(film.id);
+    }
 
     filmImage(film: Film) {
         return this.service.downloadImage(film);
+    }
+
+    account(){
+        this.router.navigate(['/profile/', this.user?.id]);
     }
 
 }

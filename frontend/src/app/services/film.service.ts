@@ -6,14 +6,14 @@ import { FilmsList } from '../models/rest/filmsList.model';
 import { Film } from '../models/film.model';
 import { Page } from '../models/rest/page.model';
 import { FilmComments } from '../models/rest/filmComments.model';
-import { exists } from 'fs';
+import { Router } from '@angular/router';
 
 const BASE_URL = '/api/films';
 
 @Injectable({ providedIn: 'root'})
 export class FilmsService {
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient, private router: Router) { }
 
     getMenu(): Observable<FilmsList> {
         return this.httpClient.get(BASE_URL + '/menu', { withCredentials: true }).pipe(
@@ -21,7 +21,7 @@ export class FilmsService {
     }
 
 	getFilm(id: number): Observable<FilmComments>{
-        return this.httpClient.get(BASE_URL + '/' +id).pipe(
+        return this.httpClient.get(BASE_URL + '/' + id).pipe(
         ) as Observable<FilmComments>;
     }
 
@@ -43,16 +43,16 @@ export class FilmsService {
 		}
 	}
 
-	deleteFilm(film: Film) {
-		this.httpClient.delete(BASE_URL + film.id).subscribe(
-			response => this.getMenu,
+	deleteFilm(id: number) {
+		this.httpClient.delete(BASE_URL + '/' + id).subscribe(
+			response => this.router.navigate(['/menuAdmin']),
 			error => this.handleError(error)
 		);
 	}
 
-	addComment(film: Film, comment: Comment){
-		return this.httpClient.put(BASE_URL ).subscribe(
-			response => this.getFilm(film.id),
+	addComment(id: number, note: string, stars: number){
+		return this.httpClient.post(BASE_URL + '/' + id + '/comments', {note: note, stars: stars}, { withCredentials: true }).subscribe(
+			response => this.router.navigate(['/filmRegistered/' + id]),
 			error  => this.handleError(error)
 		)
 	}

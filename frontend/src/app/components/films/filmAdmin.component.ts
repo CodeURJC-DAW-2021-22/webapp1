@@ -18,8 +18,6 @@ export class FilmAdminComponent implements OnInit {
     film!: Film;
     comments!: Comment[];
     similar!: Film[];
-
-    token: any;
     
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService) { }
     
@@ -45,7 +43,7 @@ export class FilmAdminComponent implements OnInit {
     }
 
     deleteFilm(film: Film) {
-        return this.service.deleteFilm(film);
+        this.service.deleteFilm(film.id);
     }
 
 }

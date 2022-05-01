@@ -29,8 +29,8 @@ import { ProfileComponent } from './components/users/profile.component';
 
 const appRoutes = [
     // Comments
-    { path: 'addComment', component: AddComment },
-    { path: 'editComment', component: EditComment },
+    { path: 'film/:idFilm/addComment', component: AddComment },
+    { path: 'editComment/:idComment', component: EditComment },
 
     // Films
     { path: 'addFilm', component: AddFilm },

@@ -23,7 +23,6 @@
             </form>
             <form action="/logout" method="post">
                     <input type="submit" value="Sign out" />
-                    <input type="hidden" name="_csrf" value="{{token}}" />
             </form>
         </nav>
     </header>
@@ -42,9 +41,10 @@
 					<div class="col">
 						<div class="card card-body">
 								<h1 class="card-title display-4"> {{film.title}} </h1>
-								<div class="row">
+
+								<div ngIf class="row">
 									<button (click)="'/editFilm/{{film.id}}'" class="button" id="boton">Edit film</button>
-									<a (click)="deleteFilm(film)" [routerLink]="['/menuAdmin']"><button class="button" id="boton">Eliminate</button></a>
+									<a (click)="deleteFilm(film)"><button class="button" id="boton">Eliminate</button></a>
 								</div>
 								<!--<div class="stars rateyo" data-rateyo-rating="{{film.averageStars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
                                 -->	<br>
