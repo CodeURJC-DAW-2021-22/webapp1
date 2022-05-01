@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from "rxjs";
 import { Page } from "../models/rest/page.model";
 import { UserComments } from "../models/rest/userComments.model";
 import { User } from "../models/user.model";
+import { Comment } from "../models/comment.model";
 
 const BASE_URL = '/api/users';
 
@@ -30,7 +31,7 @@ export class UserService {
         return user.image ? 'api/users/' + user.id + '/image' : 'assets/images/defaultImage.png';
     }
 
-    moreComments(page: number, id: number) {
+    moreComments(id: number, page: number) {
         return this.httpClient.get(BASE_URL + '/' + id + '/comments?page=' + page).pipe(
         ) as Observable<Page<Comment>>;
     }
@@ -56,18 +57,19 @@ export class UserService {
         );
     }
 
-    followers(page: number, id: number) {
+    followers(id: number, page: number) {
         return this.httpClient.get(BASE_URL + '/' + id + '/followers?page=' + page).pipe(
         ) as Observable<Page<User>>;
     }
 
-    following(page: number, id: number) {
+    following(id: number, page: number) {
         return this.httpClient.get(BASE_URL + '/' + id + '/following?page=' + page).pipe(
         ) as Observable<Page<User>>;
     }
 
     followUnfollow(id: number) {
-        return this.httpClient.get(BASE_URL + '/' + id + '/followed', { withCredentials: true });
+        return this.httpClient.get(BASE_URL + '/' + id + '/followed', { withCredentials: true }).pipe(
+        ) as Observable<User>;
     }
 
     private handleError(error: any) {
