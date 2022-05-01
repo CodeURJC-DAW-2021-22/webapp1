@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FilmsList } from 'src/app/models/rest/filmsList.model';
-import { Page } from 'src/app/models/rest/page.model';
-import { Film } from '../../models/film.model';
-import { FilmsService } from './../../services/film.service';
-
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Film } from "src/app/models/film.model";
+import { FilmsList } from "src/app/models/rest/filmsList.model";
+import { Page } from "src/app/models/rest/page.model";
+import { User } from "src/app/models/user.model";
+import { FilmsService } from "src/app/services/film.service";
+import { LoginService } from "src/app/services/login.service";
 
 @Component({
-    templateUrl: './adviceMe.component.html',
+    templateUrl: './menu.component.html',
     styleUrls: ['../../../assets/css/style.component.css', '../../../assets/css/loadingButton.component.css'],
 })
 
-export class FilmListAdviceMeComponent implements OnInit {
- 
+export class MenuComponent implements OnInit {
+
+    admin: boolean = false;
+    registered: boolean = false;
+    unregistered: boolean = false;
+
     // Template elements
     filmsList!: FilmsList;
+    recommendations: Film[] = [];
     trending: Film[] = [];
     action: Film[] = [];
     adventure: Film[] = [];
@@ -24,7 +30,11 @@ export class FilmListAdviceMeComponent implements OnInit {
     horror: Film[] = [];
     scifi: Film[] = [];
 
+    user!: User;
+    fieldText: String = "";
+
     // Spinners
+    loaderRecommendations: boolean = false;
     loaderTrending: boolean = false;
     loaderAction: boolean = false;
     loaderAdventure: boolean = false;
@@ -35,6 +45,7 @@ export class FilmListAdviceMeComponent implements OnInit {
     loaderScifi: boolean = false;
     
     // Index for pages
+    indexRecommendations: number = 0;
     indexTrendig: number = 0;
     indexAction: number = 0;
     indexAdventure: number = 0;
@@ -45,9 +56,23 @@ export class FilmListAdviceMeComponent implements OnInit {
     indexScifi: number = 0;
 
     data: any[] = [];
-    fieldText: String = "";
 
-    constructor(private router: Router, private service: FilmsService){ }
+    constructor(private router: Router, private service: FilmsService, private loginService: LoginService) {
+        if (this.loginService.isLogged()){
+            if (this.loginService.isAdmin()) {
+                this.admin = true;
+            } else {
+                this.registered = true;
+            }
+        } else {
+            this.unregistered = true;
+        }        
+    }
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
+    }
 
     ngOnInit() {
         this.service.getMenu().subscribe(
@@ -60,6 +85,14 @@ export class FilmListAdviceMeComponent implements OnInit {
 
     update(response:FilmsList) {
         this.filmsList = response;
+        
+        if (this.registered) {
+            this.filmsList.recommendations.content.forEach(recommendation => {
+                console.log(recommendation);
+                this.recommendations.push(recommendation.film);
+            });
+        }
+
         this.trending = this.filmsList.trending.content;
         this.action = this.filmsList.action.content;
         this.adventure = this.filmsList.adventure.content;
@@ -130,6 +163,16 @@ export class FilmListAdviceMeComponent implements OnInit {
         );
     }
 
+    loadMoreRecommendations(index: String) {
+        this.loaderRecommendations = true;
+        let value = this.searchIndex(index); 
+
+        this.service.moreFilmsRecommendations(value).subscribe(
+            response => this.insertFilms(response, index),
+            error => this.loaderRecommendations = false
+        );
+    }
+
     insertFilms(response: Page<Film>, index: String) {
         let value = this.searchList(index);
 
@@ -144,7 +187,12 @@ export class FilmListAdviceMeComponent implements OnInit {
 
     searchIndex(index: String) {
         let value = 0;
+
         switch (index) {
+            case ("indexRecommendations"):
+                this.indexRecommendations += 1;
+                value = this.indexRecommendations;
+                break;
             case ("indexTrending"):
                 this.indexTrendig += 1;
                 value = this.indexTrendig;
@@ -178,12 +226,17 @@ export class FilmListAdviceMeComponent implements OnInit {
                 value = this.indexScifi;
                 break;                  
         }
+
         return value;
     }
 
     searchList(index: String) {
         let value: Film[] = [];
+
         switch (index) {
+            case ("indexRecommendations"):
+                //value = this.recommendations;
+                break;
             case ("indexTrending"):
                 value = this.trending;
                 break;
@@ -215,6 +268,9 @@ export class FilmListAdviceMeComponent implements OnInit {
 
     searchSpinner(index: String, value: boolean) {
         switch (index) {
+            case ("indexRecommendations"):
+                this.loaderRecommendations = value;
+                break;
             case ("indexTrending"):
                 this.loaderTrending = value;
                 break;
@@ -240,5 +296,9 @@ export class FilmListAdviceMeComponent implements OnInit {
                 this.loaderScifi = value;
                 break;                  
         }
+    }
+
+    isEmpty(list: Film[]) {
+        return list.length == 0;
     }
 }

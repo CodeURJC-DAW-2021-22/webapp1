@@ -17,9 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/login/register.component';
 
 // Menu
-import { FilmListAdviceMeComponent} from './components/menu/filmListAdviceMe.component';
-import { MenuAdmin } from './components/menu/menuAdmin.component';
-import { MenuRegistered } from './components/menu/menuRegistered.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 // Users
 import { EditPassword } from './components/users/editPassword.component';
@@ -46,9 +44,7 @@ const appRoutes = [
     { path: 'register', component: RegisterComponent },
 
     // Menu
-    { path: 'adviceMe', component: FilmListAdviceMeComponent },
-    { path: 'menuAdmin', component: MenuAdmin },
-    { path: 'menuRegistered', component: MenuRegistered },
+    { path: 'adviceMe', component: MenuComponent },
 
     // Users
     { path: 'editPassword', component: EditPassword },

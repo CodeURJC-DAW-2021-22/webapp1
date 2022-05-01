@@ -25,11 +25,7 @@ export class LoginService {
                 this.logged = true;
 
                 if (this.isLogged()) {
-                    if (this.isAdmin()) {
-                        this.router.navigate(['/menuAdmin']);
-                    } else {
-                        this.router.navigate(['/menuRegistered']);
-                    }
+                    this.router.navigate(['/adviceMe']);
                 }
             },
             error => {

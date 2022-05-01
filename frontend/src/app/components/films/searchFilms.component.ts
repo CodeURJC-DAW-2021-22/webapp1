@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Film } from "src/app/models/film.model";
 import { Page } from "src/app/models/rest/page.model";
 import { FilmsService } from "src/app/services/film.service";
+import { LoginService } from "src/app/services/login.service";
 
 @Component({
     templateUrl: './searchFilms.component.html',
@@ -11,9 +12,9 @@ import { FilmsService } from "src/app/services/film.service";
 
 export class SearchFilmsComponent implements OnInit {
 
-    admin!: boolean;
-    registered!: boolean;
-    unregistered: boolean = true;
+    admin: boolean = false;
+    registered: boolean = false;
+    unregistered: boolean = false;
 
     films: Film[] =[];
     index: number = 0;
@@ -22,7 +23,17 @@ export class SearchFilmsComponent implements OnInit {
     fieldText: String = "";
     token: any;
 
-    constructor(private router: Router,  private activatedRouter: ActivatedRoute, private service: FilmsService){ }
+    constructor(private router: Router,  private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService){ 
+        if (this.loginService.isLogged()){
+            if (this.loginService.isAdmin()) {
+                this.admin = true;
+            } else {
+                this.registered = true;
+            }
+        } else {
+            this.unregistered = true;
+        }        
+    }
     
     ngOnInit(): void {
         let query = this.activatedRouter.snapshot.params['query'];

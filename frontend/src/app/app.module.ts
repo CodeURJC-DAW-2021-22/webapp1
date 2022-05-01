@@ -26,9 +26,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/login/register.component';
 
 // Menu
-import { FilmListAdviceMeComponent } from './components/menu/filmListAdviceMe.component';
-import { MenuAdmin } from './components/menu/menuAdmin.component';
-import { MenuRegistered } from './components/menu/menuRegistered.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 // Users
 import { EditPassword } from './components/users/editPassword.component';
@@ -42,7 +40,7 @@ import { ProfileComponent } from './components/users/profile.component';
     AddComment, EditComment,
     AddFilm, EditFilm, FilmFormComponent, FilmAdminComponent, FilmRegisteredComponent, FilmUnregisteredComponent, SearchFilmsComponent,
     LoginComponent, RegisterComponent,
-    FilmListAdviceMeComponent, MenuAdmin, MenuRegistered,
+    MenuComponent, 
     EditPassword, EditProfile, FollowersComponent, FollowingComponent, ProfileComponent],
   imports: [BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, routing, NgbModule, NgxChartsModule],
   providers: [],

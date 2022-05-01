@@ -1,6 +1,6 @@
 <div class="bodyBig">
     <div class="wrapper">
-        <header>
+        <header *ngIf="unregistered">
             <div class="AdviceMeLogo">
                 <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
             </div>
@@ -24,7 +24,61 @@
                 </form>
             </nav>
         </header>
-
+        <header *ngIf="registered">
+            <div class="AdviceMeLogo">
+                <a id="logo" [routerLink]="['/menuRegistered']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+            </div>
+            <nav id="navPrincipal" class="main-nav">
+                <a [routerLink]="['/menuRegistered']" fragment="home">Home</a>
+                <a [routerLink]="['/menuRegistered']" fragment="action">Action</a>
+                <a [routerLink]="['/menuRegistered']" fragment="adventure">Adventure</a>
+                <a [routerLink]="['/menuRegistered']" fragment="animation">Animation</a>
+                <a [routerLink]="['/menuRegistered']" fragment="comedy">Comedy</a>
+                <a [routerLink]="['/menuRegistered']" fragment="drama">Drama</a>
+                <a [routerLink]="['/menuRegistered']" fragment="horror">Horror</a>
+                <a [routerLink]="['/menuRegistered']" fragment="scienceFiction">Science Fiction</a>
+            </nav>
+            <nav class="sub-nav">
+                <form action="/searchFilms">
+                    <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
+                    <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                        <i class="fas fa-search sub-nav-logo"></i>
+                    </button>
+                    <a [routerLink]="['/profile']">Account</a>
+                </form>
+                <button (click)="logout()"> Sign out</button>
+            </nav>
+        </header>
+        <header *ngIf="admin">
+            <div class="AdviceMeLogo">
+                <a id="logo" [routerLink]="['/menuAdmin']" fragment="home"><img src="assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+            </div>
+            <nav class="main-nav">
+                <a [routerLink]="['/menuAdmin']" fragment="home">Home</a>
+                <a [routerLink]="['/menuAdmin']" fragment="action">Action</a>
+                <a [routerLink]="['/menuAdmin']" fragment="adventure">Adventure</a>
+                <a [routerLink]="['/menuAdmin']" fragment="animation">Animation</a>
+                <a [routerLink]="['/menuAdmin']" fragment="comedy">Comedy</a>
+                <a [routerLink]="['/menuAdmin']" fragment="drama">Drama</a>
+                <a [routerLink]="['/menuAdmin']" fragment="horror">Horror</a>
+                <a [routerLink]="['/menuAdmin']" fragment="scienceFiction">Science Fiction</a>
+            </nav>
+            <nav class="sub-nav">
+                <form action="/searchFilms">
+                    <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
+                    <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
+                        <i class="fas fa-search sub-nav-logo"></i>
+                    </button>
+                    <a href="/addFilm">Post Film</a>
+                </form>
+                <button (click)="logout()"> Sign out</button>
+                <!--
+                <form action="/logout" method="post">
+                        <input type="submit" value="Sign out" />
+                        <input type="hidden" name="_csrf" value="{{token}}" />
+                </form>-->
+            </nav>
+        </header>
         <section class="main-container" >
             <h1 id="home">Most Commented Genres</h1>
             <div id="piechart">
@@ -40,9 +94,20 @@
                 </ngx-charts-pie-chart>
             </div>
 
+            <div *ngIf="registered">
+                <h1 id="recommendations">Recommendations for you</h1>
+                <div class="box">
+                    <a *ngFor="let film of recommendations" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                    <p *ngIf="isEmpty(recommendations)" >There are no recommendations for you yet</p>
+                </div>
+                
+                <button (click)="loadMoreRecommendations('indexRecommendations')" id='btnRecommendation' class='btnSubmit'>More Films</button>
+                <div *ngIf="loaderRecommendations" class="lds-dual-ring overlay"></div>
+            </div>
+
             <h1 id="trending">Trending Now</h1>
             <div class="box">
-                    <a *ngFor="let film of trending" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
+                <a *ngFor="let film of trending" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
             </div>
 
             <button (click)="loadMore('indexTrending')" id='btnTrending' class='btnSubmit'>More Films</button>
