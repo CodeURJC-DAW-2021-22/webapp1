@@ -47,7 +47,8 @@ export class ProfileComponent {
                     this.user = this.userComments.user;
                     this.comments = this.userComments.comments.content;
                     this.account = false;
-                }
+                },
+                error => console.log(error)
             );
         }
     }

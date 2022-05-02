@@ -50,7 +50,7 @@ export class EditProfile {
           formData.append("imageFile", image);
           this.userService.editImage(this.user.id, formData).subscribe(
             _ => this.afterUploadImage(),
-            _ => alert('Error uploading user image: ')
+            _ => alert('Error uploading user image')
           );
         } else {
           this.afterUploadImage();

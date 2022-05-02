@@ -36,8 +36,8 @@ export class EditPassword {
         formData.append("oldPassword", this.password);
         formData.append("newPassword", this.newPassword);
         this.userService.editPassword(this.user.id, formData).subscribe(
-            response => this.router.navigate(['/account']),
-            error => alert('Error updating password')
+            _ => this.router.navigate(['/account']),
+            _ => alert('Wrong password')
         )
     }
 

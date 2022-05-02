@@ -22,8 +22,14 @@ export class CommentService {
 
     editComment(comment: Comment, note: string, stars: number){
         return this.httpClient.put(BASE_URL + '/' + comment.id, {note: note, stars: stars}, { withCredentials: true }).subscribe(
-            response => this.router.navigate(['/account']),
-            error => this.handleError(error)
+            _ => this.router.navigate(['/account']),
+            error => {
+				if (error.status == 403) {
+					alert('You cannot edit this comment');
+				} else {
+					this.handleError(error);
+				}
+			}
         )
     }
 

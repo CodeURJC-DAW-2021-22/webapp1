@@ -163,7 +163,7 @@ export class MenuComponent implements OnInit {
 
         this.service.moreFilmsRecommendations(value).subscribe(
             response => this.insertFilms(response, index),
-            error => this.loaderRecommendations = false
+            _ => this.loaderRecommendations = false
         );
     }
 

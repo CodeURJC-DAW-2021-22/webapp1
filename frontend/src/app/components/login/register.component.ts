@@ -24,8 +24,8 @@ export class RegisterComponent {
         formData.append('password', this.password);
         
         this.userService.register(formData).subscribe(
-            response => this.router.navigate(['/login']),
-            error => alert("Username already exists")
+            _ => this.router.navigate(['/login']),
+            _ => alert("Username already exists")
         );
     }
 
