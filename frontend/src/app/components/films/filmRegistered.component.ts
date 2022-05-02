@@ -3,6 +3,8 @@ import { Comment } from "src/app/models/comment.model";
 import { Film } from "src/app/models/film.model";
 import { FilmComments } from "src/app/models/rest/filmComments.model";
 import { User } from "src/app/models/user.model";
+import { LoginService } from "src/app/services/login.service";
+import { Router } from "@angular/router";
 
 @Component({
     templateUrl: './filmRegistered.component.html',
@@ -21,6 +23,13 @@ export class FilmRegisteredComponent implements OnInit {
     
     ngOnInit(): void {
         throw new Error("Method not implemented.");
+    }
+
+    constructor(private router: Router, private loginService: LoginService){}
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 
 }

@@ -1,10 +1,10 @@
 import {Genre} from "./genre.model";
 
 export interface Film {
-    id: number;
+    id?: number;
     title: string;
     releaseDate: Date;
-    averageStars: number;
+    averageStars?: number;
     minAge: string;
     genre: Genre;
     duration: number;
@@ -12,5 +12,5 @@ export interface Film {
     director: string;
     plot: string;
     image: boolean;
-    similar: Array<Film>;
+    similar?: Array<Film>;
 }

@@ -75,6 +75,10 @@ export class MenuAdmin implements OnInit {
         return this.service.downloadImage(film);
     }
 
+    goToPostFilm(){
+        this.router.navigate(['/addFilm']);
+    }
+
     loadChart() {
         this.service.getChartData().subscribe(
             response => this.data = [

@@ -23,13 +23,10 @@ export class LoginService {
                 this.userComments = response as UserComments;
                 this.user = this.userComments.user;
                 this.logged = true;
-
-                if (this.isLogged()) {
-                    if (this.isAdmin()) {
-                        this.router.navigate(['/menuAdmin']);
-                    } else {
-                        this.router.navigate(['/menuRegistered']);
-                    }
+                if (this.isAdmin()) {
+                    this.router.navigate(['/menuAdmin']);
+                } else {
+                    this.router.navigate(['/menuRegistered']);
                 }
             },
             error => {

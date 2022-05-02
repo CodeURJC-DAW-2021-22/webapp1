@@ -16,17 +16,19 @@ export class FilmUnregisteredComponent implements OnInit {
     filmComments!: FilmComments;
     film!: Film;
     comments!: Comment[];
-    similar!: Film[];
+    similar: Film[] | undefined;
 
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService) {
     }
 
     ngOnInit(): void {
         const id = this.activatedRouter.snapshot.params['id'];
-        this.update(id);
+        if (id){
+            this.update(id);
+        }
     }
 
-    update(id: number) {
+    update(id: number | undefined) {
         this.service.getFilm(id).subscribe(
             response => {
                 this.filmComments = response;
@@ -38,8 +40,6 @@ export class FilmUnregisteredComponent implements OnInit {
         );
 
     }
-
-
 
     filmImage(film: Film) {
         return this.service.downloadImage(film);

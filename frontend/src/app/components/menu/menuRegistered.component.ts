@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Film } from "src/app/models/film.model";
 import { FilmsList } from "src/app/models/rest/filmsList.model";
 import { Page } from "src/app/models/rest/page.model";
@@ -51,7 +52,7 @@ export class MenuRegistered implements OnInit {
 
     data: any[] = [];
 
-    constructor(private service: FilmsService, private loginService: LoginService) { }
+    constructor(private router: Router, private service: FilmsService, private loginService: LoginService) { }
 
     ngOnInit() {
         this.service.getMenu().subscribe(
@@ -60,6 +61,11 @@ export class MenuRegistered implements OnInit {
         );
 
         this.loadChart();
+    }
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 
     update(response:FilmsList) {
