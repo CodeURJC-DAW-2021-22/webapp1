@@ -16,7 +16,7 @@
         </nav>
         <nav class="sub-nav">
             <input [(ngModel)]="fieldText" type="text" name="query" placeholder="Search...">
-            <button [routerLink]="['/searchFilms', fieldText]">
+            <button (click)="update(fieldText)" [routerLink]="['/searchFilms', fieldText]">
                 <i class="fas fa-search sub-nav-logo"></i>
             </button>
             <a *ngIf="unregistered" [routerLink]="['/login']">Login</a>

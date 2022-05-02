@@ -26,7 +26,10 @@ export class EditProfile {
         }
 
         this.userService.getMe().subscribe(
-            response => this.user = response.user
+            response => {
+                this.user = response.user;
+                this.email = this.user.email;
+            }
         );
     }
 

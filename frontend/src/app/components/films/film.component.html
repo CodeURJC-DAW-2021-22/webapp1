@@ -43,8 +43,7 @@
                                 <button [routerLink]="['/editFilm', film.id]" class="button" id="boton">Edit film</button>
                                 <button (click)="deleteFilm()" class="button" id="boton">Eliminate</button>
                             </div>
-                            <!--<div class="stars rateyo" data-rateyo-rating="{{film.averageStars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>-->
-                            <br>
+                            <p><b>Average: </b>{{film.averageStars}} / 5</p>
                             <p><b>Release date: </b>{{film.releaseDate}}</p>
                             <p><b>Minimum age: </b>{{film.minAge}}</p>
                             <p><b>Genre: </b>{{film.genre}}</p>
@@ -61,14 +60,15 @@
                             <div *ngFor="let comment of comments">
                                 <a [routerLink]="['/profile', comment.user.id]"><b>{{comment.user.name}}</b></a>
                                 <p>{{comment.note}}</p>
-                                <!--<div class="stars rateyo" data-rateyo-rating="{{comment.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div> -->
+                                <p><b>Rate: </b>{{comment.stars}} / 5</p>
                                 <button *ngIf="admin" (click)="deleteComment(comment)" class="button btnSubmit2" id="boton">Eliminate</button>
                                 <br>
                             </div>
-                            <button *ngIf="registered" [routerLink]="['/addComment', film.id]" class="col-12 button2" type="button">Add comment</button>
-                            <br>
 
                             <p *ngIf="comments.length == 0">There are no asserts yet</p>
+
+                            <button *ngIf="registered" [routerLink]="['/addComment', film.id]" class="col-12 button2" type="button">Add comment</button>
+                            <br>
 
                             <div *ngIf="comments.length != 0" class="center"><button (click)="loadMoreComments()" id='btnComment' class='btnSubmit2'>More Comments</button></div>
                             <div *ngIf="loader" class="lds-dual-ring overlay"></div>

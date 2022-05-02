@@ -23,6 +23,10 @@ export class AddFilm {
     constructor(private loginService: LoginService, private router: Router,
         private activatedRoute: ActivatedRoute, private filmService: FilmsService) {
         
+        if (!this.loginService.isLogged()) {
+            this.router.navigate(['/login']);
+        }
+
         const id = this.activatedRoute.snapshot.params['id'];
 
         if (id) {

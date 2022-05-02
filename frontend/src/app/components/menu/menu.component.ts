@@ -3,7 +3,6 @@ import { Router } from "@angular/router";
 import { Film } from "src/app/models/film.model";
 import { FilmsList } from "src/app/models/rest/filmsList.model";
 import { Page } from "src/app/models/rest/page.model";
-import { User } from "src/app/models/user.model";
 import { FilmsService } from "src/app/services/film.service";
 import { LoginService } from "src/app/services/login.service";
 

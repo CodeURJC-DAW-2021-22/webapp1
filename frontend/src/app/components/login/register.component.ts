@@ -13,6 +13,8 @@ export class RegisterComponent {
     email!:  string;
     password!:  string;
 
+    passVisible: boolean= false;
+
     constructor(private router: Router, private userService: UserService) { }
 
     register(){
@@ -25,5 +27,13 @@ export class RegisterComponent {
             response => this.router.navigate(['/login']),
             error => alert("Username already exists")
         );
+    }
+
+    showPassword(){
+        if (this.passVisible == true) {
+            this.passVisible = false;
+        } else {
+            this.passVisible = true;
+        }
     }
 }

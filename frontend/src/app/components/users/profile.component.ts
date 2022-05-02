@@ -36,14 +36,7 @@ export class ProfileComponent {
         let currentUser = this.loginService.currentUser();
         
         if (!id) {
-            this.userService.getMe().subscribe(
-                response => {
-                    this.userComments = response;
-                    this.user = this.userComments.user;
-                    this.comments = this.userComments.comments.content;
-                    this.account = true;
-                }
-            );
+            this.update();
         } else {
             if (currentUser && currentUser.id == id) {
                 this.router.navigate(['/account']);
@@ -54,19 +47,20 @@ export class ProfileComponent {
                     this.user = this.userComments.user;
                     this.comments = this.userComments.comments.content;
                     this.account = false;
-
-                    /*this.userService.followers(id, 0).subscribe(
-                        response => {
-                            let contains: boolean = response.content.includes(this.user);
-
-                            if (contains) {
-                                this.followBtn = "Unfollow";
-                            }
-                        }
-                    );*/
                 }
             );
         }
+    }
+
+    update() {
+        this.userService.getMe().subscribe(
+            response => {
+                this.userComments = response;
+                this.user = this.userComments.user;
+                this.comments = this.userComments.comments.content;
+                this.account = true;
+            }
+        );
     }
 
     profileImage() {
@@ -74,7 +68,9 @@ export class ProfileComponent {
     }
 
     removeComment(id: number) {
-        this.commentService.deleteComment(id);
+        this.commentService.deleteComment(id).subscribe(
+            _ => this.update()
+        );
     }
 
     moreComments() {

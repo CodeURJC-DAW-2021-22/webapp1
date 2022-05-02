@@ -91,7 +91,7 @@
 					<div class="row">
 						<div class="row">
 							<div class="col comment">
-								<a [routerLink]="['/filmRegistered', comment.film.id]">
+								<a [routerLink]="['/films', comment.film.id]">
 									<p><b>{{comment.film.title}}</b></p>
 								</a>
 							</div>
@@ -99,7 +99,7 @@
 						<div class="row">
 							<div class="col">
 								<p style="color: black;">{{comment.note}}</p>
-								<!--<div class="stars rateyo" data-rateyo-rating="{{comment.film.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>-->	
+								<p style="color: black;"><b>Rate: </b>{{comment.stars}} / 5</p>	
 								<br>
 							</div>
 						</div>

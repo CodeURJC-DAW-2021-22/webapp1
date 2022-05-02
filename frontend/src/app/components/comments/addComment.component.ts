@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Film } from "src/app/models/film.model";
-import { User } from "src/app/models/user.model";
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommentService } from "src/app/services/comment.service";
 import { FilmsService } from "src/app/services/film.service";

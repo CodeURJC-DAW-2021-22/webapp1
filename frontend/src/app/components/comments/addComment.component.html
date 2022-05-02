@@ -42,8 +42,7 @@
 								<p *ngIf="newComment"><b>Add your comment</b></p>
 								<p *ngIf="!newComment"><b>Edit your comment</b></p>
 								<div class="col-md-12">
-									<textarea [(ngModel)]="note" name="note" placeholder="Comment"
-										rows=5 cols=48>{{note}}</textarea>
+									<textarea [(ngModel)]="note" name="note" placeholder="Comment" rows=5 cols=48>{{note}}</textarea>
 									<p>Stars</p>
 									<select [(ngModel)]="stars" name="stars" class="form-select" placeholder="Stars" required>
 										<option selected>{{stars}}</option>

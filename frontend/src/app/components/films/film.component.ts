@@ -65,7 +65,9 @@ export class FilmComponent implements OnInit {
     }
 
     deleteComment(comment: Comment) {
-        this.commentService.deleteComment(comment.id);
+        this.commentService.deleteComment(comment.id).subscribe(
+            _ => this.update(this.film.id)
+        )
     }
 
     filmImage(film: Film) {

@@ -17,9 +17,7 @@ export class CommentService {
     }
 
     deleteComment(id: number){
-        return this.httpClient.delete(BASE_URL + '/' + id, { withCredentials: true }).subscribe(
-            error => this.handleError(error)
-        )
+        return this.httpClient.delete(BASE_URL + '/' + id, { withCredentials: true });
     }
 
     editComment(comment: Comment, note: string, stars: number){
