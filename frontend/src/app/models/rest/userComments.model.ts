@@ -4,5 +4,5 @@ import { Page } from "./page.model";
 
 export interface UserComments {
     user: User;
-    commets: Page<Comment>
+    comments: Page<Comment>
 }

@@ -2,7 +2,6 @@ import { RouterModule } from '@angular/router';
 
 // Comments
 import { AddComment } from './components/comments/addComment.component';
-import { EditComment } from './components/comments/editComment.component';
 
 // Films
 import { AddFilm } from './components/films/addFilm.component';
@@ -29,7 +28,7 @@ import { ProfileComponent } from './components/users/profile.component';
 const appRoutes = [
     // Comments
     { path: 'film/:idFilm/addComment', component: AddComment },
-    { path: 'editComment/:idComment', component: EditComment },
+    { path: 'editComment/:idComment', component: AddComment },
 
     // Films
     { path: 'addFilm', component: AddFilm },
@@ -49,9 +48,10 @@ const appRoutes = [
     // Users
     { path: 'editPassword', component: EditPassword },
     { path: 'editProfile', component: EditProfile },
-    { path: 'followers', component: FollowersComponent },
-    { path: 'following', component: FollowingComponent },
+    { path: 'followers/:id', component: FollowersComponent },
+    { path: 'following/:id', component: FollowingComponent },
     { path: 'profile/:id', component: ProfileComponent },
+    { path: 'account', component: ProfileComponent },
     
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }
 ]

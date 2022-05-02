@@ -19,7 +19,7 @@
 				<button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
 					<i class="fas fa-search sub-nav-logo"></i>
 				</button>
-				<a [routerLink]="['/profile']">Account</a>
+				<a [routerLink]="['/account']">Account</a>
 			</form>
 		</nav>
     </header>
@@ -28,32 +28,31 @@
 		<div class="row">
 			<div class="col-md-4">
 				<div class="profile-img">
-					<img src="/{{user.id}}/imageProfile">
+					<img [src]="profileImage()">
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="row">
 					<div class="profile-head">
-						<h1>Profile</h1>
+						<h1 *ngIf="account" style="color: black;">Profile</h1>
+						<h1 *ngIf="!account">{{user.name}}</h1>
 					</div>
 				</div>
 				<div class="row">
-						<div class="col-md-2 followers"><a href="/followers/{{user.id}}">{{user.followersCount}} Followers</a></div>
-						<div class="col-md-2 followers"><a href="/following/{{user.id}}">{{user.followingCount}} Following</a></div>
+						<div class="col-md-3 followers"><a [routerLink]="['/followers', user.id]">{{user.followersCount}} Followers</a></div>
+						<div class="col-md-3 followers"><a [routerLink]="['/following', user.id]">{{user.followingCount}} Following</a></div>
 				</div>
 			</div>
 			<div class="col-md-2">
-				<button class="profile-edit-btn" (click)="'/editProfile/{{user.id}}'">Edit Profile</button>
+				<button *ngIf="account" class="profile-edit-btn" [routerLink]="['/editProfile']">Edit Profile</button>
+				<button *ngIf="!account" class="profile-edit-btn" (click)="follow()">{{followBtn}}</button>
 			</div>
 		</div>
-		<div class="row">
+		<div *ngIf="account" class="row">
 			<div class="col-md-4">
 				<div class="profile-work">
 					<br>
-					<form action="/logout" method="post">
-						<button type="submit" class="profile-edit-btn">Sign out</button>
-						<input type="hidden" name="_csrf" value="{{token}}" />
-					</form>
+						<button (click)="logOut()" class="profile-edit-btn">Sign out</button>
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -65,7 +64,7 @@
 						<div class="row">
 							<div class="row">
 								<div class="col-md-6">
-									<label>Name</label>
+									<label style="color:rgb(37, 37, 37);">Name</label>
 								</div>
 								<div class="col-md-6">
 									<p>{{user.name}}</p>
@@ -73,7 +72,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
-									<label>Email</label>
+									<label style="color:rgb(37, 37, 37);">Email</label>
 								</div>
 								<div class="col-md-6">
 									<p>{{user.email}}</p>
@@ -95,35 +94,33 @@
 						<div class="row">
 							<div class="row">
 								<div class="col comment">
-										<a href="/filmRegistered/{{comment.film.id}}">
+										<a [routerLink]="['/filmRegistered', comment.film.id]">
 											<p><b>{{comment.film.title}}</b></p>
 										</a>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col">
-									<p>{{comment.note}}</p>
-									<!--<div class="stars rateyo" data-rateyo-rating="{{film.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
+									<p style="color: black;">{{comment.note}}</p>
+									<!--<div class="stars rateyo" data-rateyo-rating="{{comment.film.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
 									-->	<p></p>
 								</div>
 							</div>
-							<div class="row">
+							<div *ngIf="account" class="row">
 								<div class="col-md-3">
-									<button class="profile-edit-btn"><a href="/editComment/{{comment.id}}">Edit Comment</a></button>
+									<button class="profile-edit-btn" [routerLink]="['/editComment', comment.id]">Edit Comment</button>
 								</div>
 								<div class="col-md-1">
-									<button class="btn"><a href="/removeComment/{{comment.id}}"><img src="/Images/delete.png" width="20px"></a></button>
+									<button class="btn"><a (click)="removeComment(comment.id)"><img src="/assets/Images/delete.png" width="20px"></a></button>
 								</div>
 							</div>
 						</div>
 						<br>
 					</div>
-						<p *ngIf="comments!=null">There are no asserts yet</p>
+					<p *ngIf="comments.length == 0" style="color: black;">There are no asserts yet</p>
 					
-					<div id="moreCommentsProfile"></div>
-					<button id='btnCommentProfile' class='btnSubmit'>More Comments</button>
-					<div id="loaderCommentProfile" class="lds-dual-ring hidden overlay"></div>
-
+					<button (click)="moreComments()" id='btnCommentProfile' class='btnSubmit'>More Comments</button>
+					<div *ngIf="loader" class="lds-dual-ring overlay"></div>
 			</div>
 		</div>
 	</div>
