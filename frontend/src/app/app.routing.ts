@@ -5,7 +5,7 @@ import { AddComment } from './components/comments/addComment.component';
 
 // Films
 import { AddFilm } from './components/films/addFilm.component';
-import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
+import { FilmComponent } from './components/films/film.component';
 import { SearchFilmsComponent } from './components/films/searchFilms.component';
 
 // Login
@@ -24,13 +24,13 @@ import { ProfileComponent } from './components/users/profile.component';
 
 const appRoutes = [
     // Comments
-    { path: 'film/:idFilm/addComment', component: AddComment },
+    { path: 'addComment/:idFilm', component: AddComment },
     { path: 'editComment/:idComment', component: AddComment },
 
     // Films
     { path: 'addFilm', component: AddFilm },
     { path: 'editFilm/:id', component: AddFilm },
-    { path: 'films/:id', component: FilmUnregisteredComponent },
+    { path: 'films/:id', component: FilmComponent },
     { path: 'searchFilms/:query', component: SearchFilmsComponent },
 
     // Login

@@ -1,7 +1,7 @@
 <div class="bodyBig">
 	<header>
 		<div class="AdviceMeLogo">
-			<a id="logo" [routerLink]="['/']" fragment="home"><img src="assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+			<a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
 		</div>
 		<nav class="main-nav">
 			<a [routerLink]="['/']" fragment="home">Home</a>
@@ -14,16 +14,12 @@
 			<a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
 		</nav>
 		<nav class="sub-nav">
-			<form action="/searchFilms">
-				<input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-				<button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-					<i class="fas fa-search sub-nav-logo"></i>
-				</button>
-				<a href="/addFilm">Post Film</a>
-			</form>
-			<form action="/logout" method="post">
-				<input type="submit" value="Sign out" />
-			</form>
+			<input [(ngModel)]="fieldText" type="text" name="query" placeholder="Search...">
+			<button [routerLink]="['/searchFilms', fieldText]">
+				<i class="fas fa-search sub-nav-logo"></i>
+			</button>
+			<a [routerLink]="['/addFilm']">Post Film</a>
+			<button (click)="logout()" value="Sign out">Sign out</button>
 		</nav>
 	</header>
 

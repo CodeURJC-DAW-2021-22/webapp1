@@ -1,8 +1,7 @@
 <div class="bodyBig">
-    <header *ngIf="unregistered">
+    <header>
         <div class="AdviceMeLogo">
-            <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png"
-                    alt="Logo Image"></a>
+            <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
         </div>
         <nav class="main-nav">
             <a [routerLink]="['/']" fragment="home">Home</a>
@@ -15,13 +14,14 @@
             <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
         </nav>
         <nav class="sub-nav">
-            <form action="/searchFilms">
-                <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-                    <i class="fas fa-search sub-nav-logo"></i>
-                </button>
-                <a [routerLink]="['/login']">Login</a>
-            </form>
+            <input [(ngModel)]="fieldText" type="text" name="query" placeholder="Search...">
+            <button [routerLink]="['/searchFilms', fieldText]">
+                <i class="fas fa-search sub-nav-logo"></i>
+            </button>
+            <a *ngIf="unregistered" [routerLink]="['/login']">Login</a>
+            <a *ngIf="registered" [routerLink]="['/account']">Account</a>
+            <a *ngIf="admin" [routerLink]="['/addFilm']">Post Film</a>
+            <button *ngIf="admin" (click)="logout()" value="Sign out">Sign out</button>
         </nav>
     </header>
 

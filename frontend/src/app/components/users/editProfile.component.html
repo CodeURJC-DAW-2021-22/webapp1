@@ -3,7 +3,7 @@
 		<div class="AdviceMeLogo">
 			<a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
 		</div>
-		<nav id="navPrincipal" class="main-nav">
+		<nav class="main-nav">
 			<a [routerLink]="['/']" fragment="home">Home</a>
 			<a [routerLink]="['/']" fragment="action">Action</a>
 			<a [routerLink]="['/']" fragment="adventure">Adventure</a>
@@ -14,13 +14,11 @@
 			<a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
 		</nav>
 		<nav class="sub-nav">
-			<form action="/searchFilms">
-				<input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-				<button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-					<i class="fas fa-search sub-nav-logo"></i>
-				</button>
-				<a [routerLink]="['/profile']">Account</a>
-			</form>
+			<input [(ngModel)]="fieldText" type="text" name="query" placeholder="Search...">
+			<button [routerLink]="['/searchFilms', fieldText]">
+				<i class="fas fa-search sub-nav-logo"></i>
+			</button>
+			<a [routerLink]="['/account']">Account</a>
 		</nav>
 	</header>
 

@@ -6,15 +6,14 @@ import { FilmsService } from "src/app/services/film.service";
 import { CommentService } from "src/app/services/comment.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from "src/app/services/login.service";
-import { User } from "src/app/models/user.model";
 
 @Component({
-    templateUrl: './filmUnregistered.component.html',
+    templateUrl: './film.component.html',
     styleUrls: ['../../../assets/css/appFilm.component.css', '../../../assets/css/themeFilm.component.css',
         '../../../assets/css/jquery.rateyo.component.css', '../../../assets/css/loadingButton.component.css',]
 })
 
-export class FilmUnregisteredComponent implements OnInit {
+export class FilmComponent implements OnInit {
 
     filmComments!: FilmComments;
     film!: Film;
@@ -88,5 +87,10 @@ export class FilmUnregisteredComponent implements OnInit {
                 this.loader = false;
             }
         )
+    }
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 }

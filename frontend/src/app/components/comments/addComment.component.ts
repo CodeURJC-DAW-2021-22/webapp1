@@ -22,6 +22,7 @@ export class AddComment implements OnInit {
     note: string = "";
     stars: number = 0;
     
+    fieldText: String = "";
 
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: CommentService,
         private filmService: FilmsService, private loginService: LoginService) {

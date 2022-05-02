@@ -1,6 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { UserComments } from "src/app/models/rest/userComments.model";
+import { Router } from "@angular/router";
 import { User } from "src/app/models/user.model";
 import { LoginService } from "src/app/services/login.service";
 import { UserService } from "src/app/services/user.service";

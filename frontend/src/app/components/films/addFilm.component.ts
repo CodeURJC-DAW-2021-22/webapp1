@@ -79,5 +79,6 @@ export class AddFilm {
 
     logout() {
         this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 }

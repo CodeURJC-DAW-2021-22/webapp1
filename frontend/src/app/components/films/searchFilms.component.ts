@@ -69,4 +69,9 @@ export class SearchFilmsComponent implements OnInit {
 
         this.loaderMore = false;
     }
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
+    }
 }
