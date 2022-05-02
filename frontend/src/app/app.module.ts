@@ -10,7 +10,6 @@ import { routing } from './app.routing';
 
 // Comments
 import { AddComment } from './components/comments/addComment.component';
-import { EditComment } from './components/comments/editComment.component';
 
 // Films
 import { AddFilm } from './components/films/addFilm.component';
@@ -37,7 +36,7 @@ import { ProfileComponent } from './components/users/profile.component';
 
 @NgModule({
   declarations: [AppComponent, 
-    AddComment, EditComment,
+    AddComment,
     AddFilm, EditFilm, FilmFormComponent, FilmAdminComponent, FilmRegisteredComponent, FilmUnregisteredComponent, SearchFilmsComponent,
     LoginComponent, RegisterComponent,
     MenuComponent, 

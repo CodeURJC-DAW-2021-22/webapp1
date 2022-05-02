@@ -17,7 +17,9 @@ export class FilmAdminComponent implements OnInit {
     filmComments!: FilmComments;
     film!: Film;
     comments!: Comment[];
-    similar!: Film[];
+    similar: Film[] | undefined;
+
+    fieldText: String = "";
     
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService) { }
     
@@ -26,7 +28,7 @@ export class FilmAdminComponent implements OnInit {
         this.update(id);
     }
 
-    update(id: number) {
+    update(id: number | undefined) {
         this.service.getFilm(id).subscribe(
             response => {
                 this.filmComments = response;

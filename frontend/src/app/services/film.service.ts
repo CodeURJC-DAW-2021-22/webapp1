@@ -41,14 +41,14 @@ export class FilmsService {
 		}
 	}
 
-	deleteFilm(id: number) {
+	deleteFilm(id: number | undefined) {
 		this.httpClient.delete(BASE_URL + '/' + id).subscribe(
 			response => this.router.navigate(['/menuAdmin']),
 			error => this.handleError(error)
 		);
 	}
 
-	addComment(id: number, note: string, stars: number) {
+	addComment(id: number | undefined, note: string, stars: number) {
 		return this.httpClient.post(BASE_URL + '/' + id + '/comments', { note: note, stars: stars }, { withCredentials: true }).subscribe(
 			response => this.router.navigate(['/filmRegistered/', id]),
 			error => {
@@ -79,7 +79,7 @@ export class FilmsService {
 		return film.image ? '/api/films/' + film.id + '/image' : '/assets/images/no_image.png';
 	}
 
-	moreComments(page: number, id: number) {
+	moreComments(page: number, id: number | undefined) {
 		return this.httpClient.get(BASE_URL + id + '/comments?page=' + page).pipe(
 		) as Observable<Page<Comment>>;
 	}

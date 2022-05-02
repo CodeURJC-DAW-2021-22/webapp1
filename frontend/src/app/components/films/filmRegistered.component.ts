@@ -18,9 +18,11 @@ export class FilmRegisteredComponent implements OnInit {
     filmComments!: FilmComments;
     film!: Film;
     comments!: Comment[];
-    similar!: Film[];
+    similar: Film[] | undefined;
     visible: boolean = true;
     user: User | undefined;
+
+    fieldText: String = "";
 
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService) { }
     
@@ -30,7 +32,7 @@ export class FilmRegisteredComponent implements OnInit {
         this.update(id);
     }
 
-    update(id: number) {
+    update(id: number | undefined) {
         this.service.getFilm(id).subscribe(
             response => {
                 this.filmComments = response;

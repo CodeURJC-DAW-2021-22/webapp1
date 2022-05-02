@@ -19,7 +19,7 @@ export class FilmUnregisteredComponent implements OnInit {
     filmComments!: FilmComments;
     film!: Film;
     comments: Comment[] = [];
-    similar!: Film[];
+    similar: Film[] | undefined;
     user: User | undefined;
 
     admin: boolean = false;
@@ -28,6 +28,8 @@ export class FilmUnregisteredComponent implements OnInit {
 
     loader: boolean = false;
     page: number = 0;
+
+    fieldText: String = "";
 
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private commentService: CommentService, private service: FilmsService, private loginService: LoginService) {
         if (this.loginService.isLogged()) {
