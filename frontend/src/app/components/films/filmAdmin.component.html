@@ -23,7 +23,6 @@
 			</form>
 			<form action="/logout" method="post">
 					<input type="submit" value="Sign out" />
-					<input type="hidden" name="_csrf" value="{{token}}" />
 			</form>
 		</nav>
     </header>
@@ -35,16 +34,17 @@
 					<div class="col">
 						<div class="container">
 							<div>
-									<img src="/{{film.id}}/image" style="width:100%">
+								<img [src]="filmImage(film)">
 							</div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="card card-body">
 								<h1 class="card-title display-4"> {{film.title}} </h1>
-								<div class="row">
+
+								<div ngIf class="row">
 									<button (click)="'/editFilm/{{film.id}}'" class="button" id="boton">Edit film</button>
-									<button (click)="'/removeFilm/{{film.id}}'" class="button" id="boton">Eliminate</button>
+									<a (click)="deleteFilm(film)"><button class="button" id="boton">Eliminate</button></a>
 								</div>
 								<!--<div class="stars rateyo" data-rateyo-rating="{{film.averageStars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
                                 -->	<br>
@@ -69,7 +69,7 @@
                                     <p></p>
                                 </div>
     
-                                <p *ngIf="comments != null">There are no asserts yet</p>
+                                <p *ngIf="comments == null">There are no asserts yet</p>
     
                                 <div id="moreComments"></div>
       							<div class="center"><button id='btnComment' class='btnSubmit2'>More Comments</button></div>
@@ -84,8 +84,8 @@
 					<div class="row">
 						<h3 class="font-weight-bold">More like this</h3>
 						<div class="box">
-							<div class="box" *ngFor="let film of similar">
-                                <a href="/filmAdmin/{{film.id}}"><img src="/{{film.id}}/image" alt=""></a>
+							<div class="box">
+                                <a *ngFor="let film of similar" (click)="update(film.id)" [routerLink]="['/filmAdmin', film.id]"><img [src]="filmImage(film)"></a>
                             </div>
 						</div>
 						<br>

@@ -18,7 +18,7 @@
                 <button type="submit">
                     <i class="fas fa-search sub-nav-logo"></i>
                 </button>
-                    <a href="/profile/{{user.id}}">Account</a>
+				<a (click)="account()">Account</a>
             </form>
         </nav>
     </header>
@@ -30,7 +30,7 @@
 					<div class="col">
 						<div class="container">
 							<div>
-								<img src="/{{film.id}}/image" style="width:100%">
+								<img [src]="filmImage(film)">
 							</div>
 						</div>
 					</div>
@@ -39,14 +39,17 @@
 								<h1 class="card-title display-4"> {{film.title}} </h1>
 								<div class="stars" id="rateYo"></div>
 								<br>
-							<form action="/addComment/{{film.id}}" method="post">
+							<form action="/film/{{film.id}}/addComment" method="post">
 								<div class="form-content">
-									<p><b>Add you comment</b></p>
+									<p *ngIf="newComment"><b>Add you comment</b></p>
+									<p *ngIf="!newComment"><b>Edit your comment</b></p>
 									<div class="col-md-12">
-										<textarea name="note" placeholder="Comment" rows=5 cols=52></textarea>
-										<select name="stars" class="form-select" placeholder="Stars" required>
-											<option selected>Stars</option>
-											<option>0</option>
+										<textarea [(ngModel)]="note" *ngIf="newComment" name="note" placeholder="Comment" rows=5 cols=52></textarea>
+										<textarea [(ngModel)]="note" *ngIf="!newComment" name="note" placeholder="Comment" rows=5 cols=52>{{note}}</textarea>
+										<p>Stars</p>
+										<select [(ngModel)]="stars" name="stars" class="form-select" placeholder="Stars" required>
+											<option *ngIf="newComment" selected>0</option>
+											<option *ngIf="!newComment" selected>{{stars}}</option>
 											<option>1</option>
 											<option>2</option>
 											<option>3</option>
@@ -55,9 +58,8 @@
 										</select>
 									</div>
 									<div class="center">
-										<button class="col-12 button" type="submit">Confirm</button>
+										<button (click)="save()" col-12 type="submit">Confirm</button>
 									</div>
-									<input type="hidden" name="_csrf" value="{{token}}" />
 								</div>
 							</form>
 						</div>
@@ -66,5 +68,4 @@
 			</div>
 		</section>	
 	</main>
-
 </div>

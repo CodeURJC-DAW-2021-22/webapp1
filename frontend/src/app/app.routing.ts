@@ -25,18 +25,17 @@ import { EditProfile } from './components/users/editProfile.component';
 import { FollowersComponent } from './components/users/followers.component';
 import { FollowingComponent } from './components/users/following.component';
 import { ProfileComponent } from './components/users/profile.component';
-import { WatchProfileComponent } from './components/users/watchProfile.component';
 
 const appRoutes = [
     // Comments
-    { path: 'addComment', component: AddComment },
-    { path: 'editComment', component: EditComment },
+    { path: 'film/:idFilm/addComment', component: AddComment },
+    { path: 'editComment/:idComment', component: EditComment },
 
     // Films
     { path: 'addFilm', component: AddFilm },
     { path: 'editFilm', component: EditFilm },
-    { path: 'filmAdmin', component: FilmAdminComponent },
-    { path: 'filmRegistered', component: FilmRegisteredComponent },
+    { path: 'filmAdmin/:id', component: FilmAdminComponent },
+    { path: 'filmRegistered/:id', component: FilmRegisteredComponent },
     { path: 'films/:id', component: FilmUnregisteredComponent },
     { path: 'searchFilms/:query', component: SearchFilmsComponent },
 
@@ -52,8 +51,7 @@ const appRoutes = [
     { path: 'editProfile', component: EditProfile },
     { path: 'followers', component: FollowersComponent },
     { path: 'following', component: FollowingComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'watchProfile', component: WatchProfileComponent },
+    { path: 'profile/:id', component: ProfileComponent },
     
     { path: '', redirectTo: 'adviceMe', pathMatch: 'full' }
 ]

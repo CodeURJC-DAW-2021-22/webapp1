@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
     horror: Film[] = [];
     scifi: Film[] = [];
 
-    user!: User;
+    user: User | undefined;
     fieldText: String = "";
 
     // Spinners
@@ -78,7 +78,7 @@ export class MenuComponent implements OnInit {
             response => this.update(response),
             error => console.log(error)
         );
-
+        this.user = this.loginService.currentUser();
         this.loadChart();
     }
 
@@ -170,6 +170,11 @@ export class MenuComponent implements OnInit {
             response => this.insertFilms(response, index),
             error => this.loaderRecommendations = false
         );
+    }
+
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 
     insertFilms(response: Page<Film>, index: String) {
