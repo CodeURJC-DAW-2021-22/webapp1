@@ -39,8 +39,8 @@
 					</div>
 				</div>
 				<div class="row">
-						<div class="col-md-3 followers"><a [routerLink]="['/followers', user.id]">{{user.followersCount}} Followers</a></div>
-						<div class="col-md-3 followers"><a [routerLink]="['/following', user.id]">{{user.followingCount}} Following</a></div>
+					<div class="col-md-3 followers"><a [routerLink]="['/followers', user.id]">{{user.followersCount}} Followers</a></div>
+					<div class="col-md-3 followers"><a [routerLink]="['/following', user.id]">{{user.followingCount}} Following</a></div>
 				</div>
 			</div>
 			<div class="col-md-2">
@@ -52,7 +52,7 @@
 			<div class="col-md-4">
 				<div class="profile-work">
 					<br>
-						<button (click)="logOut()" class="profile-edit-btn">Sign out</button>
+					<button (click)="logOut()" class="profile-edit-btn">Sign out</button>
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -89,40 +89,38 @@
 				<div class="row seccion">
 					<p>Comments</p>
 				</div>
-
-					<div *ngFor="let comment of comments">
+				<div *ngFor="let comment of comments">
+					<div class="row">
 						<div class="row">
-							<div class="row">
-								<div class="col comment">
-										<a [routerLink]="['/filmRegistered', comment.film.id]">
-											<p><b>{{comment.film.title}}</b></p>
-										</a>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col">
-									<p style="color: black;">{{comment.note}}</p>
-									<!--<div class="stars rateyo" data-rateyo-rating="{{comment.film.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>
-									-->	<p></p>
-								</div>
-							</div>
-							<div *ngIf="account" class="row">
-								<div class="col-md-3">
-									<button class="profile-edit-btn" [routerLink]="['/editComment', comment.id]">Edit Comment</button>
-								</div>
-								<div class="col-md-1">
-									<button class="btn"><a (click)="removeComment(comment.id)"><img src="/assets/Images/delete.png" width="20px"></a></button>
-								</div>
+							<div class="col comment">
+								<a [routerLink]="['/filmRegistered', comment.film.id]">
+									<p><b>{{comment.film.title}}</b></p>
+								</a>
 							</div>
 						</div>
-						<br>
+						<div class="row">
+							<div class="col">
+								<p style="color: black;">{{comment.note}}</p>
+								<!--<div class="stars rateyo" data-rateyo-rating="{{comment.film.stars}}" data-rateyo-num-stars="5" data-rateyo-read-only="true"></div>-->	
+								<br>
+							</div>
+						</div>
+						<div *ngIf="account" class="row">
+							<div class="col-md-3">
+								<button class="profile-edit-btn" [routerLink]="['/editComment', comment.id]">Edit Comment</button>
+							</div>
+							<div class="col-md-1">
+								<button class="btn"><a (click)="removeComment(comment.id)"><img src="/assets/Images/delete.png" width="20px"></a></button>
+							</div>
+						</div>
 					</div>
-					<p *ngIf="comments.length == 0" style="color: black;">There are no asserts yet</p>
-					
-					<button (click)="moreComments()" id='btnCommentProfile' class='btnSubmit'>More Comments</button>
-					<div *ngIf="loader" class="lds-dual-ring overlay"></div>
+					<br>
+				</div>
+				<p *ngIf="comments.length == 0" style="color: black;">There are no asserts yet</p>
+				
+				<button (click)="moreComments()" id='btnCommentProfile' class='btnSubmit'>More Comments</button>
+				<div *ngIf="loader" class="lds-dual-ring overlay"></div>
 			</div>
 		</div>
 	</div>
-
 </div>

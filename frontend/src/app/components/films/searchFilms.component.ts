@@ -21,7 +21,6 @@ export class SearchFilmsComponent implements OnInit {
     loaderMore: boolean = false;
 
     fieldText: String = "";
-    token: any;
 
     constructor(private router: Router,  private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService){ 
         if (this.loginService.isLogged()){
@@ -42,7 +41,7 @@ export class SearchFilmsComponent implements OnInit {
 
     update(query: String) {
         this.service.searchFilm(query, this.index).subscribe(
-            response => this.films=response.content,
+            response => this.films = response.content,
             error => console.log(error)
         );
     }
@@ -66,8 +65,8 @@ export class SearchFilmsComponent implements OnInit {
             response.content.forEach( (film) => {
                 this.films.push(film);
             });
-        }        
+        }
+
         this.loaderMore = false;
     }
-
 }

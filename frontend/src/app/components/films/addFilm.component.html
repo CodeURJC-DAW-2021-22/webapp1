@@ -1,5 +1,5 @@
 <div class="bodyBig">
-    <header>
+	<header>
 		<div class="AdviceMeLogo">
 			<a id="logo" [routerLink]="['/']" fragment="home"><img src="assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
 		</div>
@@ -22,17 +22,16 @@
 				<a href="/addFilm">Post Film</a>
 			</form>
 			<form action="/logout" method="post">
-					<input type="submit" value="Sign out" />
+				<input type="submit" value="Sign out" />
 			</form>
 		</nav>
-    </header>
+	</header>
 
-
-    <div class="container">
-        <div class="form">
-            <div class="note">
-                <p>Post film</p>
-            </div>			
+	<div class="container">
+		<div class="form">
+			<div class="note">
+				<p>Post film</p>
+			</div>
 			<div class="form-content">
 				<div class="row">
 					<!--FRONT PAGE-->
@@ -41,7 +40,7 @@
 						<input #file type="file" name="imageField" accept=".png, .jpg, .jpeg" required>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="form-group">
 						<input [(ngModel)]="film.title" type="text" name="title" class="form-control" placeholder="Film name" required>
@@ -61,7 +60,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<select [(ngModel)]="film.minAge" name="minAge" class="form-select"required>
+							<select [(ngModel)]="film.minAge" name="minAge" class="form-select" required>
 								<option selected>{{film.minAge}}</option>
 								<option>A (All people)</option>
 								<option>7 (Not suitable for people under 7)</option>
@@ -72,7 +71,7 @@
 						</div>
 						<div class="form-group">
 							<select [(ngModel)]="film.genre" name="genre" class="form-select" required>
-								<option selected>Genre</option>  
+								<option selected>{{film.genre}}</option>
 								<option>ACTION</option>
 								<option>ANIMATION</option>
 								<option>ADVENTURE</option>
@@ -93,9 +92,9 @@
 					</div>
 				</div>
 				<div class="center">
-					<button (click)="save()" class="btnSubmit">Post</button>
+					<button (click)="save()" class="btnSubmit">Save</button>
 				</div>
 			</div>
-        </div>
-    </div>
+		</div>
+	</div>
 </div>

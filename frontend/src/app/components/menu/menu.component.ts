@@ -14,13 +14,12 @@ import { LoginService } from "src/app/services/login.service";
 
 export class MenuComponent implements OnInit {
 
-    // ESTE SE BORRARÁ
-    token: any;
-
     // Control of headers
     admin: boolean = false;
     registered: boolean = false;
     unregistered: boolean = false;
+
+    fieldText: String = "";
 
     // Template elements
     filmsList!: FilmsList;
@@ -33,9 +32,6 @@ export class MenuComponent implements OnInit {
     drama: Film[] = [];
     horror: Film[] = [];
     scifi: Film[] = [];
-
-    user: User | undefined;
-    fieldText: String = "";
 
     // Spinners
     loaderRecommendations: boolean = false;
@@ -78,13 +74,8 @@ export class MenuComponent implements OnInit {
             response => this.update(response),
             error => console.log(error)
         );
-        this.user = this.loginService.currentUser();
-        this.loadChart();
-    }
 
-    logout(){
-        this.loginService.logOut();
-        this.router.navigate(['/']);
+        this.loadChart();
     }
 
     update(response:FilmsList) {
@@ -302,7 +293,8 @@ export class MenuComponent implements OnInit {
         }
     }
 
-    isEmpty(list: Film[]) {
-        return list.length == 0;
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
     }
 }

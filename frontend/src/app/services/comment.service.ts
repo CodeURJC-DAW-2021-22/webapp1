@@ -13,7 +13,7 @@ export class CommentService {
 
     getComment(id: number){
         return this.httpClient.get(BASE_URL + '/' + id).pipe(
-            ) as Observable<Comment>;
+        ) as Observable<Comment>;
     }
 
     deleteComment(id: number){
@@ -24,7 +24,7 @@ export class CommentService {
 
     editComment(comment: Comment, note: string, stars: number){
         return this.httpClient.put(BASE_URL + '/' + comment.id, {note: note, stars: stars}, { withCredentials: true }).subscribe(
-            response => this.router.navigate(['/profile']), // añadir id del usuario
+            response => this.router.navigate(['/account']),
             error => this.handleError(error)
         )
     }
@@ -34,5 +34,4 @@ export class CommentService {
 		console.error(error);
 		return throwError("Server error (" + error.status + "): " + error.text())
 	}
-
 }

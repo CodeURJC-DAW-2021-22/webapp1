@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Comment } from "src/app/models/comment.model";
 import { UserComments } from "src/app/models/rest/userComments.model";
 import { User } from "src/app/models/user.model";
+import { CommentService } from "src/app/services/comment.service";
 import { LoginService } from "src/app/services/login.service";
 import { UserService } from "src/app/services/user.service";
 
@@ -24,7 +25,7 @@ export class ProfileComponent {
 
     fieldText: String = "";
 
-    constructor(private loginService: LoginService, private userService: UserService, private router: Router, 
+    constructor(private loginService: LoginService, private userService: UserService, private commentService: CommentService, private router: Router, 
         private activatedRouter: ActivatedRoute) {
 
         if (!this.loginService.isLogged()) {
@@ -73,7 +74,7 @@ export class ProfileComponent {
     }
 
     removeComment(id: number) {
-        //this.commentService.delete();
+        this.commentService.deleteComment(id);
     }
 
     moreComments() {

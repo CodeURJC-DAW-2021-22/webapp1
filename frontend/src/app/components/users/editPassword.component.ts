@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { UserComments } from "src/app/models/rest/userComments.model";
 import { User } from "src/app/models/user.model";
 import { LoginService } from "src/app/services/login.service";
 import { UserService } from "src/app/services/user.service";
@@ -14,25 +13,21 @@ export class EditPassword {
 
     user!: User;
 
-    userComments!: UserComments;
     password!: string;
     newPassword!: string; 
 
     fieldText: string = "";
+
     passVisible: boolean = false;
     newPassVisible: boolean = false;
 
     constructor(private userService: UserService, private activatedRouter: ActivatedRoute, private router: Router, private loginService: LoginService) {
-
         if (!this.loginService.isLogged()) {
             this.router.navigate(['/login']);
         }
 
         this.userService.getMe().subscribe(
-            response => {
-                this.userComments = response;
-                this.user = this.userComments.user;
-            }
+            response => this.user = response.user
         );
     }
 

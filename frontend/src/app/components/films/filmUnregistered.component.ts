@@ -20,24 +20,24 @@ export class FilmUnregisteredComponent implements OnInit {
     film!: Film;
     comments: Comment[] = [];
     similar: Film[] | undefined;
-    user: User | undefined;
+
+    loader: boolean = false;
+    page: number = 0;
 
     admin: boolean = false;
     registered: boolean = false;
     unregistered: boolean = false;
 
-    loader: boolean = false;
-    page: number = 0;
-
     fieldText: String = "";
 
-    constructor(private router: Router, private activatedRouter: ActivatedRoute, private commentService: CommentService, private service: FilmsService, private loginService: LoginService) {
+    constructor(private router: Router, private activatedRouter: ActivatedRoute, private commentService: CommentService, 
+        private service: FilmsService, private loginService: LoginService) {
+
         if (this.loginService.isLogged()) {
             if (this.loginService.isAdmin()) {
                 this.admin = true;
             } else {
                 this.registered = true;
-                this.user = this.loginService.currentUser();
             }
         } else {
             this.unregistered = true;
@@ -46,9 +46,7 @@ export class FilmUnregisteredComponent implements OnInit {
 
     ngOnInit(): void {
         const id = this.activatedRouter.snapshot.params['id'];
-        if (id){
-            this.update(id);
-        }
+        this.update(id);
     }
 
     update(id: number | undefined) {
@@ -63,21 +61,16 @@ export class FilmUnregisteredComponent implements OnInit {
         );
     }
 
-    deleteFilm(film: Film) {
-        this.service.deleteFilm(film.id);
+    deleteFilm() {
+        this.service.deleteFilm(this.film.id);
     }
 
     deleteComment(comment: Comment) {
         this.commentService.deleteComment(comment.id);
-        this.router.navigate(['/filmAdmin', comment.film.id]);
     }
 
     filmImage(film: Film) {
         return this.service.downloadImage(film);
-    }
-
-    account() {
-        this.router.navigate(['/profile/', this.user?.id]);
     }
 
     loadMoreComments() {
@@ -96,5 +89,4 @@ export class FilmUnregisteredComponent implements OnInit {
             }
         )
     }
-
 }

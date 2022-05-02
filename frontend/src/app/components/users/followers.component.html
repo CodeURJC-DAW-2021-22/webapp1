@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		
-		<button (click)="followers()" id='btnFollowers' class='btnSubmit'>More Followers</button>
+		<button *ngIf="followers.length != 0" (click)="followers()" id='btnFollowers' class='btnSubmit'>More Followers</button>
 		<div *ngIf="loader" class="lds-dual-ring overlay"></div>
 	</div>
 </div>

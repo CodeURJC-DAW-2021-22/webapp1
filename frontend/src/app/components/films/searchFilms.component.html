@@ -24,55 +24,6 @@
             </form>
             <form action="/logout" method="post">
                     <input type="submit" value="Sign out" />
-                    <input type="hidden" name="_csrf" value="{{token}}" />
-            </form>
-        </nav>
-    </header>
-	<header *ngIf="registered">
-        <div class="AdviceMeLogo">
-            <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-        </div>
-        <nav id="navPrincipal" class="main-nav">
-            <a [routerLink]="['/']" fragment="home">Home</a>
-            <a [routerLink]="['/']" fragment="action">Action</a>
-            <a [routerLink]="['/']" fragment="adventure">Adventure</a>
-            <a [routerLink]="['/']" fragment="animation">Animation</a>
-            <a [routerLink]="['/']" fragment="comedy">Comedy</a>
-            <a [routerLink]="['/']" fragment="drama">Drama</a>
-            <a [routerLink]="['/']" fragment="horror">Horror</a>
-            <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
-        </nav>
-        <nav class="sub-nav">
-            <form action="/searchFilms">
-                <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-                    <i class="fas fa-search sub-nav-logo"></i>
-                </button>
-                <a [routerLink]="['/profile']">Account</a>
-            </form>
-        </nav>
-    </header>
-	<header *ngIf="unregistered">
-        <div class="AdviceMeLogo">
-            <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-        </div>
-        <nav class="main-nav">
-            <a [routerLink]="['/']" fragment="home">Home</a>
-            <a [routerLink]="['/']" fragment="action">Action</a>
-            <a [routerLink]="['/']" fragment="adventure">Adventure</a>
-            <a [routerLink]="['/']" fragment="animation">Animation</a>
-            <a [routerLink]="['/']" fragment="comedy">Comedy</a>
-            <a [routerLink]="['/']" fragment="drama">Drama</a>
-            <a [routerLink]="['/']" fragment="horror">Horror</a>
-            <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
-        </nav>
-        <nav class="sub-nav">
-            <form action="/searchFilms">
-                <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                <button (click)="update(fieldText)" [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-                    <i class="fas fa-search sub-nav-logo"></i>
-                </button>
-                <a [routerLink]="['/login']">Login</a>
             </form>
         </nav>
     </header>
@@ -80,46 +31,18 @@
     <!-- MAIN CONTAINER -->
     <section class="main-container" >
       <h1 id="results">Results</h1>
-
-
-      		<div *ngIf="admin">
+      		<div>
                 <div class="box">
                     <a *ngFor="let film of films" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
                 </div>
 			
-                <p *ngIf="!films">Nothing found...</p>
+                <p *ngIf="films.length == 0">Nothing found...</p>
 
-			    <div *ngIf="films">
-	      			<button (click)="loadMore()" id='btnSearchAdmin' class='btnSubmit'>More Films</button>
-	     			<div *ngIf="loaderMore" id="loaderSearchAdmin" class="lds-dual-ring overlay"></div>
+			    <div *ngIf="films.length != 0">
+	      			<button (click)="loadMore()" id='btnSearch' class='btnSubmit'>More Films</button>
+	     			<div *ngIf="loaderMore" class="lds-dual-ring overlay"></div>
                 </div>
             </div>
-      		
-            <div *ngIf="registered">
-                <div class="box">
-                    <a *ngFor="let film of films" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
-                </div>
-
-				<p *ngIf="!films">Nothing found...</p>
-				
-				<div *ngIf="films">
-      				<button (click)="loadMore()" id='btnSearchRegistered' class='btnSubmit'>More Films</button>
-     				<div *ngIf="loaderMore" id="loaderSearchRegistered" class="lds-dual-ring overlay"></div>
-                </div>
-            </div>
-
-            <div *ngIf="unregistered">
-                <div class="box">
-                    <a *ngFor="let film of films" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
-                </div>
-
-                <p *ngIf="!films">Nothing found...</p>
-			
-                <div *ngIf="films">
-                    <button (click)="loadMore()" id='btnSearchUnregistered' class='btnSubmit'>More Films</button>
-                    <div *ngIf="loaderMore" id="loaderSearchUnregistered" class="lds-dual-ring overlay"></div>
-                </div>
-      	    </div>
     </section> 
   </div>
 </div>

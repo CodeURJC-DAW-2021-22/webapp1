@@ -23,10 +23,7 @@ export class LoginService {
                 this.userComments = response as UserComments;
                 this.user = this.userComments.user;
                 this.logged = true;
-
-                if (this.isLogged()) {
-                    this.router.navigate(['/adviceMe']);
-                }
+                this.router.navigate(['/']);
             },
             error => {
                 if (error.status != 404) {
@@ -38,16 +35,14 @@ export class LoginService {
 
     logIn(username: string, password: string) {
         return this.http.post(BASE_URL + "/login", { username: username, password: password }, { withCredentials: true }).subscribe(
-            response => {
-                this.reqIsLogged();
-            },
+            response => this.reqIsLogged(),
             error => alert("Wrong credentials")
         );
     }
 
     logOut() {
-        return this.http.post(BASE_URL + '/logout', { withCredentials: true })
-            .subscribe((resp: any) => {
+        return this.http.post(BASE_URL + '/logout', { withCredentials: true }).subscribe(
+            (resp: any) => {
                 this.logged = false;
                 this.user = undefined;
                 this.userComments = undefined;

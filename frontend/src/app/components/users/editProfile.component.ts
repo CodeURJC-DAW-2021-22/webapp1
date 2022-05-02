@@ -42,6 +42,7 @@ export class EditProfile {
 
     uploadImage() {
         const image = this.file.nativeElement.files[0];
+        
         if (image) {
           let formData = new FormData();
           formData.append("imageFile", image);

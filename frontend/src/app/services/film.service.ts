@@ -43,14 +43,14 @@ export class FilmsService {
 
 	deleteFilm(id: number | undefined) {
 		this.httpClient.delete(BASE_URL + '/' + id).subscribe(
-			response => this.router.navigate(['/menuAdmin']),
+			response => this.router.navigate(['/']),
 			error => this.handleError(error)
 		);
 	}
 
 	addComment(id: number | undefined, note: string, stars: number) {
 		return this.httpClient.post(BASE_URL + '/' + id + '/comments', { note: note, stars: stars }, { withCredentials: true }).subscribe(
-			response => this.router.navigate(['/filmRegistered/', id]),
+			response => this.router.navigate(['/films', id]),
 			error => {
 				if (error.status == 403) {
 					alert('You have already commented in this film.');
@@ -109,5 +109,4 @@ export class FilmsService {
 		console.error(error);
 		return throwError("Server error (" + error.status + "): " + error.text())
 	}
-
 }

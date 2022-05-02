@@ -14,51 +14,58 @@ import { LoginService } from "src/app/services/login.service";
 
 export class AddComment implements OnInit {
 
-    film!: Film;
-    user: User | undefined;
-    comment!: Comment;
-    note!: string;
-    stars!: number; 
     newComment!: boolean;
+
+    film!: Film;
+    comment!: Comment;
     
-    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: CommentService, private filmService: FilmsService, private loginService: LoginService) {
+    note: string = "";
+    stars: number = 0;
+    
+
+    constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: CommentService,
+        private filmService: FilmsService, private loginService: LoginService) {
+
+        if (!this.loginService.isLogged()) {
+            this.router.navigate(['/login']);
+        }
     }
 
     ngOnInit(): void {
         const idFilm = this.activatedRouter.snapshot.params['idFilm'];
         const idComment = this.activatedRouter.snapshot.params['idComment'];
-        this.user = this.loginService.currentUser();
-        if(idComment){
+
+        if (idComment) {
             this.service.getComment(idComment).subscribe(
-                response => this.comment = response,
+                response => {
+                    this.comment = response;
+                    this.film = this.comment.film;
+                    this.note = this.comment.note;
+                    this.stars = this.comment.stars;
+                },
                 error => console.log(error)
             )
+
             this.newComment = false;
         } else {
             this.filmService.getFilm(idFilm).subscribe(
                 response => this.film = response.film,
                 error => console.log(error)
             )
+            
             this.newComment = true;
         }
     }
 
-    filmImage(film: Film) {
-        return this.filmService.downloadImage(film);
+    filmImage() {
+        return this.filmService.downloadImage(this.film);
     }
 
-    //addComment, editComment
-
-    save(){
-        if(this.newComment){
+    save() {
+        if (this.newComment) {
             this.filmService.addComment(this.film.id, this.note, this.stars);
         } else {
             this.service.editComment(this.comment, this.note, this.stars);
         }
     }
-
-    account(){
-        this.router.navigate(['/profile/', this.user?.id]);
-    }
-    
 }

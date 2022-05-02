@@ -1,27 +1,27 @@
 <div class="bodyBig">
-    <header>
-        <div class="AdviceMeLogo">
-            <a id="logo" href="/menuRegistered#home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-        </div>
-        <nav id="navPrincipal" class="main-nav">
-            <a href="/menuRegistered#home">Home</a>
-            <a href="/menuRegistered#action">Action</a>
-            <a href="/menuRegistered#adventure">Adventure</a>
-            <a href="/menuRegistered#comedy">Comedy</a>
-            <a href="/menuRegistered#drama">Drama</a>
-            <a href="/menuRegistered#horror">Horror</a>
-            <a href="/menuRegistered#scienceFiction">Science Fiction</a>
-        </nav>
-        <nav class="sub-nav">
-            <form action="/searchFilms">
-                <input type="text" name="query" placeholder="Search...">
-                <button type="submit">
-                    <i class="fas fa-search sub-nav-logo"></i>
-                </button>
-				<a (click)="account()">Account</a>
-            </form>
-        </nav>
-    </header>
+	<header>
+		<div class="AdviceMeLogo">
+			<a id="logo" href="/menuRegistered#home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
+		</div>
+		<nav id="navPrincipal" class="main-nav">
+			<a href="/menuRegistered#home">Home</a>
+			<a href="/menuRegistered#action">Action</a>
+			<a href="/menuRegistered#adventure">Adventure</a>
+			<a href="/menuRegistered#comedy">Comedy</a>
+			<a href="/menuRegistered#drama">Drama</a>
+			<a href="/menuRegistered#horror">Horror</a>
+			<a href="/menuRegistered#scienceFiction">Science Fiction</a>
+		</nav>
+		<nav class="sub-nav">
+			<form action="/searchFilms">
+				<input type="text" name="query" placeholder="Search...">
+				<button type="submit">
+					<i class="fas fa-search sub-nav-logo"></i>
+				</button>
+				<a [routerLink]="['/account']">Account</a>
+			</form>
+		</nav>
+	</header>
 
 	<main role="main">
 		<section class="bg-gray200 pt-5 pb-5">
@@ -30,42 +30,40 @@
 					<div class="col">
 						<div class="container">
 							<div>
-								<img [src]="filmImage(film)">
+								<img [src]="filmImage()">
 							</div>
 						</div>
 					</div>
 					<div class="col">
 						<div class="card card-body">
-								<h1 class="card-title display-4"> {{film.title}} </h1>
-								<div class="stars" id="rateYo"></div>
-								<br>
-							<form action="/film/{{film.id}}/addComment" method="post">
-								<div class="form-content">
-									<p *ngIf="newComment"><b>Add you comment</b></p>
-									<p *ngIf="!newComment"><b>Edit your comment</b></p>
-									<div class="col-md-12">
-										<textarea [(ngModel)]="note" *ngIf="newComment" name="note" placeholder="Comment" rows=5 cols=52></textarea>
-										<textarea [(ngModel)]="note" *ngIf="!newComment" name="note" placeholder="Comment" rows=5 cols=52>{{note}}</textarea>
-										<p>Stars</p>
-										<select [(ngModel)]="stars" name="stars" class="form-select" placeholder="Stars" required>
-											<option *ngIf="newComment" selected>0</option>
-											<option *ngIf="!newComment" selected>{{stars}}</option>
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
-									<div class="center">
-										<button (click)="save()" col-12 type="submit">Confirm</button>
-									</div>
+							<h1 class="card-title display-4"> {{film.title}} </h1>
+							<div class="stars" id="rateYo"></div>
+							<br>
+							<div class="form-content">
+								<p *ngIf="newComment"><b>Add your comment</b></p>
+								<p *ngIf="!newComment"><b>Edit your comment</b></p>
+								<div class="col-md-12">
+									<textarea [(ngModel)]="note" name="note" placeholder="Comment"
+										rows=5 cols=52>{{note}}</textarea>
+									<p>Stars</p>
+									<select [(ngModel)]="stars" name="stars" class="form-select" placeholder="Stars" required>
+										<option selected>{{stars}}</option>
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
 								</div>
-							</form>
+								<div class="center">
+									<button (click)="save()" col-12>Confirm</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>	
+		</section>
 	</main>
 </div>

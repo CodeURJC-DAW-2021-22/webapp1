@@ -52,9 +52,9 @@ export class UserService {
 
     editPassword(id: number, formData: FormData) {
         return this.httpClient.patch(BASE_URL + '/' + id + '/password', formData, { withCredentials: true })
-        .pipe(
-            catchError(error => this.handleError(error))
-        );
+            .pipe(
+                catchError(error => this.handleError(error))
+            );
     }
 
     followers(id: number, page: number) {

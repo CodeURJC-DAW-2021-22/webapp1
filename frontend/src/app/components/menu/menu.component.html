@@ -1,6 +1,6 @@
 <div class="bodyBig">
     <div class="wrapper">
-        <header *ngIf="unregistered">
+        <header>
             <div class="AdviceMeLogo">
                 <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
             </div>
@@ -15,65 +15,14 @@
                 <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
             </nav>
             <nav class="sub-nav">
-                <form action="/searchFilms">
-                    <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                    <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-                        <i class="fas fa-search sub-nav-logo"></i>
-                    </button>
-                    <a [routerLink]="['/login']">Login</a>
-                </form>
-            </nav>
-        </header>
-        <header *ngIf="registered">
-            <div class="AdviceMeLogo">
-                <a id="logo" [routerLink]="['/']" fragment="home"><img src="/assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-            </div>
-            <nav id="navPrincipal" class="main-nav">
-                <a [routerLink]="['/']" fragment="home">Home</a>
-                <a [routerLink]="['/']" fragment="action">Action</a>
-                <a [routerLink]="['/']" fragment="adventure">Adventure</a>
-                <a [routerLink]="['/']" fragment="animation">Animation</a>
-                <a [routerLink]="['/']" fragment="comedy">Comedy</a>
-                <a [routerLink]="['/']" fragment="drama">Drama</a>
-                <a [routerLink]="['/']" fragment="horror">Horror</a>
-                <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
-            </nav>
-            <nav class="sub-nav">
-                <form action="/searchFilms">
-                    <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                    <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-                        <i class="fas fa-search sub-nav-logo"></i>
-                    </button>
-                    <a [routerLink]="['/profile']">Account</a>
-                </form>
-            </nav>
-        </header>
-        <header *ngIf="admin">
-            <div class="AdviceMeLogo">
-                <a id="logo" [routerLink]="['/']" fragment="home"><img src="assets/Images/AdviceMe Logo.png" alt="Logo Image"></a>
-            </div>
-            <nav class="main-nav">
-                <a [routerLink]="['/']" fragment="home">Home</a>
-                <a [routerLink]="['/']" fragment="action">Action</a>
-                <a [routerLink]="['/']" fragment="adventure">Adventure</a>
-                <a [routerLink]="['/']" fragment="animation">Animation</a>
-                <a [routerLink]="['/']" fragment="comedy">Comedy</a>
-                <a [routerLink]="['/']" fragment="drama">Drama</a>
-                <a [routerLink]="['/']" fragment="horror">Horror</a>
-                <a [routerLink]="['/']" fragment="scienceFiction">Science Fiction</a>
-            </nav>
-            <nav class="sub-nav">
-                <form action="/searchFilms">
-                    <input type="text" name="query" [(ngModel)]="fieldText" placeholder="Search...">
-                    <button [routerLink]="['/searchFilms/' + fieldText]" type="submit">
-                        <i class="fas fa-search sub-nav-logo"></i>
-                    </button>
-                    <a href="/addFilm">Post Film</a>
-                </form>
-                <form action="/logout" method="post">
-                        <input type="submit" value="Sign out" />
-                        <input type="hidden" name="_csrf" value="{{token}}" />
-                </form>
+                <input [(ngModel)]="fieldText" type="text" name="query" placeholder="Search...">
+                <button [routerLink]="['/searchFilms', fieldText]">
+                    <i class="fas fa-search sub-nav-logo"></i>
+                </button>
+                <a *ngIf="unregistered" [routerLink]="['/login']">Login</a>
+                <a *ngIf="registered" [routerLink]="['/profile']">Account</a>
+                <a *ngIf="admin" [routerLink]="['/addFilm']">Post Film</a>
+                <input *ngIf="admin" (click)="logout()" value="Sign out"/>
             </nav>
         </header>
         
@@ -96,10 +45,10 @@
                 <h1 id="recommendations">Recommendations for you</h1>
                 <div class="box">
                     <a *ngFor="let film of recommendations" [routerLink]="['/films', film.id]"><img [src]="filmImage(film)"></a>
-                    <p *ngIf="isEmpty(recommendations)" >There are no recommendations for you yet</p>
+                    <p *ngIf="recommendations.length == 0" >There are no recommendations for you yet</p>
                 </div>
                 
-                <button (click)="loadMoreRecommendations('indexRecommendations')" id='btnRecommendation' class='btnSubmit'>More Films</button>
+                <button *ngIf="recommendations.length != 0" (click)="loadMoreRecommendations('indexRecommendations')" id='btnRecommendation' class='btnSubmit'>More Films</button>
                 <div *ngIf="loaderRecommendations" class="lds-dual-ring overlay"></div>
             </div>
 
@@ -169,5 +118,4 @@
             <div *ngIf="loaderScifi" class="lds-dual-ring overlay"></div>
         </section>
     </div>
-
 </div>

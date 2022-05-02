@@ -13,10 +13,6 @@ import { AddComment } from './components/comments/addComment.component';
 
 // Films
 import { AddFilm } from './components/films/addFilm.component';
-import { EditFilm } from './components/films/editFilm.component';
-import { FilmFormComponent } from './components/films/filmForm.component';
-import { FilmAdminComponent } from './components/films/filmAdmin.component';
-import { FilmRegisteredComponent } from './components/films/filmRegistered.component';
 import { FilmUnregisteredComponent } from './components/films/filmUnregistered.component';
 import { SearchFilmsComponent } from './components/films/searchFilms.component';
 
@@ -37,7 +33,7 @@ import { ProfileComponent } from './components/users/profile.component';
 @NgModule({
   declarations: [AppComponent, 
     AddComment,
-    AddFilm, EditFilm, FilmFormComponent, FilmAdminComponent, FilmRegisteredComponent, FilmUnregisteredComponent, SearchFilmsComponent,
+    AddFilm, FilmUnregisteredComponent, SearchFilmsComponent,
     LoginComponent, RegisterComponent,
     MenuComponent, 
     EditPassword, EditProfile, FollowersComponent, FollowingComponent, ProfileComponent],
