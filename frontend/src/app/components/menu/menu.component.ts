@@ -82,6 +82,11 @@ export class MenuComponent implements OnInit {
         this.loadChart();
     }
 
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
+    }
+
     update(response:FilmsList) {
         this.filmsList = response;
         
@@ -170,11 +175,6 @@ export class MenuComponent implements OnInit {
             response => this.insertFilms(response, index),
             error => this.loaderRecommendations = false
         );
-    }
-
-    logout(){
-        this.loginService.logOut();
-        this.router.navigate(['/']);
     }
 
     insertFilms(response: Page<Film>, index: String) {

@@ -50,4 +50,9 @@ export class FilmRegisteredComponent implements OnInit {
         this.router.navigate(['/profile/', this.user?.id]);
     }
 
+    logout(){
+        this.loginService.logOut();
+        this.router.navigate(['/']);
+    }
+
 }

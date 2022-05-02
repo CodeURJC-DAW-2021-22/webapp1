@@ -44,10 +44,12 @@ export class FilmUnregisteredComponent implements OnInit {
 
     ngOnInit(): void {
         const id = this.activatedRouter.snapshot.params['id'];
-        this.update(id);
+        if (id){
+            this.update(id);
+        }
     }
 
-    update(id: number) {
+    update(id: number | undefined) {
         this.service.getFilm(id).subscribe(
             response => {
                 this.filmComments = response;

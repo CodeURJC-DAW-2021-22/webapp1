@@ -21,26 +21,23 @@ export class FilmsService {
 		) as Observable<FilmsList>;
 	}
 
-	getFilm(id: number): Observable<FilmComments> {
-		return this.httpClient.get(BASE_URL + '/' + id).pipe(
-		) as Observable<FilmComments>;
-	}
+	getFilm(id: number | undefined): Observable<FilmComments>{
+        return this.httpClient.get(BASE_URL + '/' + id).pipe(
+        ) as Observable<FilmComments>;
+    }
 
 	getChartData(): Observable<number[]> {
 		return this.httpClient.get(BASE_URL + '/comments/number').pipe(
 		) as Observable<number[]>;
 	}
 
-	addFilm(film: Film) {
+    addFilm(film: Film): Observable<Film> {
 		if (!film.id) {
-			return this.httpClient.post(BASE_URL, film)
-				.pipe(
-					catchError(error => this.handleError(error))
-				);
+			return this.httpClient.post(BASE_URL + '/', film).pipe(
+			) as Observable<Film>;
 		} else {
-			return this.httpClient.put(BASE_URL + film.id, film).pipe(
-				catchError(error => this.handleError(error))
-			);
+			return this.httpClient.put(BASE_URL + '/' + film.id, film).pipe(
+			) as Observable<Film>;
 		}
 	}
 
@@ -62,6 +59,20 @@ export class FilmsService {
 				}
 			}
 		)
+	}
+	
+	uploadImage(film: Film, formData: FormData) {
+		return this.httpClient.post(BASE_URL + '/' + film.id + '/image', formData)
+		.pipe(
+			catchError(error => this.handleError(error))
+		);
+	}
+
+	editImage(film: Film, formData: FormData) {
+		return this.httpClient.put(BASE_URL + '/' + film.id + '/image', formData)
+		.pipe(
+			catchError(error => this.handleError(error))
+		);
 	}
 
 	downloadImage(film: Film) {
