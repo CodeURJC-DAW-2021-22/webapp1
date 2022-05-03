@@ -1,5 +1,7 @@
 # Advice.me 
 
+**Video**: https://www.youtube.com/watch?v=Dg0di2HXpzY
+
 # Phase 0
 
 ## Members 
@@ -400,7 +402,7 @@ In order to execute the dockerized app you should follow the next steps:
 6.	When the app is running, open any browser and search "https://localhost:8443".
 
 ## Instructions for constructing the docker image
-In order to create de docker image you should follow the next steps:
+In order to create the docker image you should follow the next steps:
 1.	Install Docker Desktop.
 2.	Create and account on Dockerhub.
 3.	Open any shell of type "bash".
@@ -547,3 +549,148 @@ Vanesa was the responsible of the most part of AjaxRestController and FilmRestCo
 | #3            | [FilmRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/FilmRestController.java)     | 
 | #4            | [AjaxRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/AjaxRestController.java)     | 
 | #5            | [UserRestController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/restController/UserRestController.java)     | 
+
+
+# Phase 4
+## Instructions for developer environment
+In order to execute the SPA application you should follow the next steps:
+1.	Install Docker Desktop.
+2.	Create and account on Dockerhub.
+3.	Open any shell of type "bash".
+4.	Clone this repository using the command "git clone https://github.com/CodeURJC-DAW-2021-22/webapp1.git".
+5.	Use command "cd" until you get to the folder "Docker".
+6.	Execute the command "./create_image.sh DockerhubUsername/codeurjc-daw-2021-22-webapp1".
+7.	Execute the command "docker-compose up" on the shell.
+8.	When the app is running, open any browser and search "https://localhost:8443/new/". 
+
+## SPA Classes and Templates Diagram
+
+![diagram](ImagesPhase3/SPAdiagram.png)
+
+## Group members participation
+### María Esteban Sánchez
+#### Textual description:
+María implemented the diferent screens for the films and unified the in one, also, she made all the functionalities, like adding comments or delenting the film as well as the components. Moreover she created and implemented the comment service and implemented some functions in the film service.
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | Implementation of filmUnregistered | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/023dce2f31a81c5894df3ce7b95513697d0116eb | 
+| #2            | Implementation of filmRegistered | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/4256725282f7784d00ddc824775ffb892c22e7aa | 
+| #3            | Union of all the film screens | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/45d7e4a9d1beb9e88c9f74efe429d9d2581c6e8d | 
+| #4            | Implementation of addComment and editComment | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/11858bb3b9778ed704e404183bfac1556366e719 | 
+| #5            | Implementation of deleteComment and load moreComments | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/778613e22dfc6256a0e04d09d06fe85a50c97fe7 | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [CommentServiceComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/services/comment.service.ts)     | 
+| #2            | [AddCommentComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/comments/addComment.component.ts)     | 
+| #3            | [AddComponent.html](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/comments/addComment.component.html)     | 
+| #4            | [FilmComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/films/film.component.ts)     | 
+| #5            | [FilmComponent.html](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/films/film.component.html)     | 
+
+### Miguel Regato Herrero
+#### Textual description:
+Miguel created the user service and also the most part of the HTML and TypeScript files of users components.
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | User Service					   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/6b3ec1da7b8d99fcbb3e539f0c985aaa0f08412a | 
+| #2            | Edit Password Component			   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/7da48db2ca7d221a2e6421b26e24eb00d37feea4 | 
+| #3            | Edit Profile Component		   	   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/7da96b86d3d12c0d5ff7abc7eb83922fe3ffb0a0 | 
+| #4            | Followers Component				   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/4ac5ee5e391fb6c35c4b326406d098776cc39977 | 
+| #5            | Following Component				   | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/5833d2add8cb45157cc205dfe943275698a07c67 | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [UserServiceComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/services/user.service.ts)     | 
+| #2            | [EditPasswordComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/users/editPassword.component.ts)     | 
+| #3            | [EditProfileComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/users/editProfile.component.ts)     | 
+| #4            | [FollowersComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/users/followers.component.ts)     | 
+| #5            | [FollowingComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/users/following.component.ts)     | 
+
+### Juan Carlos Moreno García
+#### Textual description: Juan Carlos reimplemented the chart using the ngx-charts angular library. Moreover, he finished the user service, implemented the profile component, fixed important errors and refactored all the components.
+
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | ng-bootstrap added and chart using ngx-charts	 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/451ccf586132ffa5225fa57ebe6deae7ed1f4375 | 
+| #2            | UserService implemented					 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/d13412c557a91f432285d2efc1d7c7c916da06b3 | 
+| #3            | profile implemented					 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/092fa144a5bc791d6e36f309fd9854f27a9727cc | 
+| #4            | Some important changes					 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/0788a2980a9e80881bd8c4f6cb2d168349ce86c9 | 
+| #5            | Header unified and some errors fixed		 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/ca2fe35b76f75ceb272bbce05ff9435c81c67cbb | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [menu.component](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/menu/menu.component.html)     | 
+| #2            | [user.service](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/services/user.service.ts)     | 
+| #3            | [profile.component](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/users/profile.component.ts)     | 
+| #4            | [login.service](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/services/login.service.ts)     | 
+| #5            | [profile.component.html](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/users/profile.component.html)     | 
+
+### Héctor Fernández Martínez
+#### Textual description:
+Hector made components such as postfilm, login and register user. He was in charge the application SPA.
+
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | Post Film							 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/37f933eb207aee811e45a23cc3f60084adade723 | 
+| #2            | Register User						 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/a449c2866be82fc2b4529f97103acc05e2e5855d | 
+| #3            | Login User and Login Service				 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/28bcdbe566a647cca4710c86c8f61bff575db9c7 | 
+| #4            | SPAController						 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/97bfbd57ff3a54458d323d601b711394baa68569 | 
+| #5            | Create_image						 | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/200f1ecb2fc7980a62cade491859bec44ac1e1d8 | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [Login](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/login/login.component.ts)     | 
+| #2            | [Register](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/login/register.component.ts)     | 
+| #3            | [AddFilm](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/films/addFilm.component.ts)     | 
+| #4            | [Create_image](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/docker/create_image.sh)     | 
+| #5            | [SPAController](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/backend/src/main/java/app/controller/SPAController.java)     | 
+
+### Vanesa Reina Hernández
+#### Textual description:
+Vanesa created the html templates for the application, as well as their components and entity interfaces, she conected the API backend with the fronted. Moreover, she did the different menus with their functionalities (loadMore buttons and different links), unify them in only one menu, create the showPassword function in typeScript and the search films function and page.
+
+
+#### The five most important commits:
+
+| Commit number | Description                                      | Link                                                                                            |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| #1            | Different templates and Components | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/e9980d6f1cbe33e39edabfde47d05fb084e34d2d | 
+| #2            | Show password function, changed headers and watchProfile template| https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/8c7c0135a27ad7db88488c8ee3f8b1c35708821b | 
+| #3            | Unification of menus | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/3bb397adfa731f7a347a6930e5e0ffb17dde4fdd | 
+| #4            | MenuAdmin and MenuRegistered with loadMore buttons | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/de92cc446deb59cd0d78f14bbcc7800c9bf74caf | 
+| #5            | SearchgFilms function | https://github.com/CodeURJC-DAW-2021-22/webapp1/commit/29a9f77ca1d5fb2d12a11571d04355c701d6abde | 
+
+
+#### The five most participated files:
+
+| Commit number | File               |
+| ------------- | ------------------ |
+| #1            | [MenuComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/menu/menu.component.ts)     | 
+| #2            | [SearchFilmsComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/films/searchFilms.component.ts )     | 
+| #3            | [FilmServiceComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/services/film.service.ts )     | 
+| #4            | [EditPasswordComponent](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/users/editPassword.component.ts )     | 
+| #5            | [MenuComponent.html](https://github.com/CodeURJC-DAW-2021-22/webapp1/blob/main/frontend/src/app/components/menu/menu.component.html)     |
