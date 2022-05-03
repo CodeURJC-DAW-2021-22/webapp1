@@ -4,7 +4,7 @@ import { Film } from "src/app/models/film.model";
 import { FilmComments } from "src/app/models/rest/filmComments.model";
 import { FilmsService } from "src/app/services/film.service";
 import { CommentService } from "src/app/services/comment.service";
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LoginService } from "src/app/services/login.service";
 
 @Component({
@@ -29,18 +29,19 @@ export class FilmComponent implements OnInit {
 
     fieldText: String = "";
 
-    constructor(private router: Router, private activatedRouter: ActivatedRoute, private commentService: CommentService, 
+    constructor(private activatedRouter: ActivatedRoute, private commentService: CommentService, 
         private service: FilmsService, private loginService: LoginService) {
 
-        if (this.loginService.isLogged()) {
-            if (this.loginService.isAdmin()) {
-                this.admin = true;
-            } else {
-                this.registered = true;
-            }
-        } else {
-            this.unregistered = true;
-        }
+        this.loginService.isLogged().subscribe(
+            response => {
+                if (response.user.roles.indexOf('ADMIN') !== -1) {
+                    this.admin = true;
+                } else {
+                    this.registered = true;
+                }
+            },
+            _ => this.unregistered = true
+        )
     }
 
     ngOnInit(): void {
@@ -93,6 +94,5 @@ export class FilmComponent implements OnInit {
 
     logout(){
         this.loginService.logOut();
-        this.router.navigate(['/']);
     }
 }

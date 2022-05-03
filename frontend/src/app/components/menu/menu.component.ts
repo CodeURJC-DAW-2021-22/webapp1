@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { Film } from "src/app/models/film.model";
 import { FilmsList } from "src/app/models/rest/filmsList.model";
 import { Page } from "src/app/models/rest/page.model";
@@ -56,16 +55,17 @@ export class MenuComponent implements OnInit {
 
     data: any[] = [];
 
-    constructor(private router: Router, private service: FilmsService, private loginService: LoginService) {
-        if (this.loginService.isLogged()){
-            if (this.loginService.isAdmin()) {
-                this.admin = true;
-            } else {
-                this.registered = true;
-            }
-        } else {
-            this.unregistered = true;
-        }        
+    constructor(private service: FilmsService, private loginService: LoginService) {
+        this.loginService.isLogged().subscribe(
+            response => {
+                if (response.user.roles.indexOf('ADMIN') !== -1) {
+                    this.admin = true;
+                } else {
+                    this.registered = true;
+                }
+            },
+            _ => this.unregistered = true
+        )    
     }
 
     ngOnInit() {
@@ -292,8 +292,9 @@ export class MenuComponent implements OnInit {
         }
     }
 
-    logout(){
+    logout() {
+        this.admin = false;
+        this.unregistered = true;
         this.loginService.logOut();
-        this.router.navigate(['/']);
     }
 }

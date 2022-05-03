@@ -20,10 +20,10 @@ export class EditProfile {
     fieldText: String = "";
 
     constructor(private userService: UserService, private router: Router, private loginService: LoginService) {
-
-        if (!this.loginService.isLogged()) {
-            this.router.navigate(['/login']);
-        }
+        this.loginService.isLogged().subscribe(
+            _ => _,
+            _ => this.router.navigate(['/login'])
+        )
 
         this.userService.getMe().subscribe(
             response => {

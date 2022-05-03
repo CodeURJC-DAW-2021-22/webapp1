@@ -22,10 +22,15 @@ export class AddFilm {
 
     constructor(private loginService: LoginService, private router: Router,
         private activatedRoute: ActivatedRoute, private filmService: FilmsService) {
-        
-        if (!this.loginService.isLogged()) {
-            this.router.navigate(['/login']);
-        }
+
+        this.loginService.isLogged().subscribe(
+            response => {
+                if (!(response.user.roles.indexOf('ADMIN') !== -1)) {
+                    this.router.navigate(['/login']);
+                }
+            },
+            _ => this.router.navigate(['/login'])
+        )
 
         const id = this.activatedRoute.snapshot.params['id'];
 
@@ -83,6 +88,5 @@ export class AddFilm {
 
     logout() {
         this.loginService.logOut();
-        this.router.navigate(['/']);
     }
 }

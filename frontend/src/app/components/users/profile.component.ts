@@ -28,9 +28,10 @@ export class ProfileComponent {
     constructor(private loginService: LoginService, private userService: UserService, private commentService: CommentService, private router: Router, 
         private activatedRouter: ActivatedRoute) {
 
-        if (!this.loginService.isLogged()) {
-            this.router.navigate(['/login']);
-        }
+        this.loginService.isLogged().subscribe(
+            _ => _,
+            _ => this.router.navigate(['/login'])
+        )
 
         const id = this.activatedRouter.snapshot.params['id'];
         let currentUser = this.loginService.currentUser();
@@ -95,7 +96,6 @@ export class ProfileComponent {
 
     logOut() {
         this.loginService.logOut();
-        this.router.navigate(['/']);
     }
 
     follow() {

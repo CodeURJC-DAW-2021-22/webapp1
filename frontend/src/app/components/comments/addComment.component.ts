@@ -26,9 +26,10 @@ export class AddComment implements OnInit {
     constructor(private router: Router, private activatedRouter: ActivatedRoute, private service: CommentService,
         private filmService: FilmsService, private loginService: LoginService) {
 
-        if (!this.loginService.isLogged()) {
-            this.router.navigate(['/login']);
-        }
+        this.loginService.isLogged().subscribe(
+            _ => _,
+            _ => this.router.navigate(['/login'])
+        )
     }
 
     ngOnInit(): void {

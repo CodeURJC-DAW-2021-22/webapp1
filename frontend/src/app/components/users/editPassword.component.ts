@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { User } from "src/app/models/user.model";
 import { LoginService } from "src/app/services/login.service";
 import { UserService } from "src/app/services/user.service";
@@ -21,10 +21,11 @@ export class EditPassword {
     passVisible: boolean = false;
     newPassVisible: boolean = false;
 
-    constructor(private userService: UserService, private activatedRouter: ActivatedRoute, private router: Router, private loginService: LoginService) {
-        if (!this.loginService.isLogged()) {
-            this.router.navigate(['/login']);
-        }
+    constructor(private userService: UserService, private router: Router, private loginService: LoginService) {
+        this.loginService.isLogged().subscribe(
+            _ => _,
+            _ => this.router.navigate(['/login'])
+        )
 
         this.userService.getMe().subscribe(
             response => this.user = response.user

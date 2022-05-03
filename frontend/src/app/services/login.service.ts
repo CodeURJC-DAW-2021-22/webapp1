@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
-import { UserComments } from '../models/rest/userComments.model';
 import { Router } from '@angular/router';
+import { UserService } from "src/app/services/user.service";
+import { Observable } from 'rxjs';
+import { UserComments } from '../models/rest/userComments.model';
 
 const BASE_URL = '/api/auth';
 
@@ -10,47 +12,37 @@ const BASE_URL = '/api/auth';
 export class LoginService {
 
     logged!: boolean;
-    userComments: UserComments | undefined;
     user: User | undefined;
 
-    constructor(private http: HttpClient, private router: Router) {
-        this.reqIsLogged();
-    }
-
-    reqIsLogged() {
-        return this.http.get('/api/users/me', { withCredentials: true }).subscribe(
+    constructor(private http: HttpClient, private router: Router, private userService: UserService) {
+        this.userService.getMe().subscribe(
             response => {
-                this.userComments = response as UserComments;
-                this.user = this.userComments.user;
+                this.user = response.user;
                 this.logged = true;
-                this.router.navigate(['/']);
             },
-            error => {
-                if (error.status != 404) {
-                    console.error('Error when asking if logged: ' + JSON.stringify(error));
-                }
-            }
+            error => console.log(error)
         );
     }
 
     logIn(username: string, password: string) {
         return this.http.post(BASE_URL + "/login", { username: username, password: password }, { withCredentials: true }).subscribe(
-            response => this.reqIsLogged(),
-            error => alert("Wrong credentials")
+            _ => this.router.navigate(['/']),
+            _ => alert("Wrong credentials")
         );
     }
 
     logOut() {
         return this.http.post(BASE_URL + '/logout', { withCredentials: true }).subscribe(
-            (resp: any) => {
+            _ => {
                 this.logged = false;
                 this.user = undefined;
-                this.userComments = undefined;
+                this.router.navigate(['/']);
             });
     }
 
     isLogged() {
-        return this.logged;
+        return this.userService.getMe().pipe(
+        ) as Observable<UserComments>;
     }
 
     isAdmin() {

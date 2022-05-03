@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Film } from "src/app/models/film.model";
 import { Page } from "src/app/models/rest/page.model";
 import { FilmsService } from "src/app/services/film.service";
@@ -22,16 +22,17 @@ export class SearchFilmsComponent implements OnInit {
 
     fieldText: String = "";
 
-    constructor(private router: Router,  private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService){ 
-        if (this.loginService.isLogged()){
-            if (this.loginService.isAdmin()) {
-                this.admin = true;
-            } else {
-                this.registered = true;
-            }
-        } else {
-            this.unregistered = true;
-        }        
+    constructor(private activatedRouter: ActivatedRoute, private service: FilmsService, private loginService: LoginService){ 
+        this.loginService.isLogged().subscribe(
+            response => {
+                if (response.user.roles.indexOf('ADMIN') !== -1) {
+                    this.admin = true;
+                } else {
+                    this.registered = true;
+                }
+            },
+            _ => this.unregistered = true
+        )        
     }
     
     ngOnInit(): void {
@@ -72,6 +73,5 @@ export class SearchFilmsComponent implements OnInit {
 
     logout(){
         this.loginService.logOut();
-        this.router.navigate(['/']);
     }
 }

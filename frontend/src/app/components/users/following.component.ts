@@ -20,9 +20,10 @@ export class FollowingComponent {
     fieldText: String = "";
 
     constructor(private userService: UserService, private loginService: LoginService, private router: Router, private activatedRouter: ActivatedRoute) {
-        if (!this.loginService.isLogged()) {
-            this.router.navigate(['/login']);
-        }
+        this.loginService.isLogged().subscribe(
+            _ => _,
+            _ => this.router.navigate(['/login'])
+        )
 
         this.userService.getUser(this.activatedRouter.snapshot.params['id']).subscribe(
             response => {
